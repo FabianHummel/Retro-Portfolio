@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+	font-family: 'bitmirror';
+	src: url('/font/BitMirror.ttf');
+}
+
+@layer components {
+	
+}
+
+body {
+	@apply bg-white text-black lowercase;
+}
+
+svg.svgline * {
+	@apply animate-scroll
+}
