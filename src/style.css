@@ -4,7 +4,11 @@
 
 @font-face {
 	font-family: 'bitmirror';
-	src: url('/font/BitMirror.ttf');
+	src: url('/font/bitmirror.woff2') format('woff2'),
+		 url('/font/bitmirror.woff') format('woff');
+	font-weight: normal;
+	font-style: italic;
+	font-display: swap;
 }
 
 @layer components {
