@@ -5,7 +5,7 @@ export const TypedText : Component<{ children: string, onIntersect?: boolean, de
 
 	const [intersectionObserver] = createViewportObserver()
 
-	let interval;
+	let interval : number;
 	let i = 0;
 	const [text, setText] = createSignal("");
 

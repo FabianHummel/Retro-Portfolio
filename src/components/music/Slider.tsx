@@ -31,12 +31,16 @@ export const Slider: Component<{ signal: Signal<number>, onChange: () => void }>
 		});
 	})
 
-	return (
-		<div ref={slider} class="w-full h-full flex items-center relative my-auto cursor-pointer select-none">
-			<div class="h-[10px] bg-black" style={`width: ${props.signal[0]() * 100}%`}></div>
-			<div class="h-[10px] bg-gray" style={`width: ${(1 - props.signal[0]()) * 100}%`}></div>
+    function step(max: number, incr: number) {
+        return Math.ceil(props.signal[0]() * max / incr) * incr
+    }
 
-			<div class="absolute top-7 -translate-x-1/2 -translate-y-1/2" style={`left: ${props.signal[0]() * 100}%`}>
+    return (
+        <div ref={slider} class="w-full h-full flex items-center relative my-auto cursor-pointer select-none">
+            <div class="h-[10px] bg-black" style={`width: ${ step(100, 5) }%`} />
+            <div class="h-[10px] bg-gray" style={`width: ${ 100 - step(100, 5) }%`} />
+
+            <div class="absolute -translate-x-1/2" style={`left: ${ step(100, 5) }%`}>
 				<PixelImage src="img/music/knob.png" w={5} h={5} scale={3} />
 			</div>
 		</div>

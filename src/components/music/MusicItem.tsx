@@ -19,7 +19,7 @@ export interface MusicItemProps {
 	setVolume?: Setter<number>;
 }
 
-export const MusicItem : Component<{ data: MusicItemProps, decoration: JSXElement[] }> = (props) => {
+export const MusicItem : Component<{ data: MusicItemProps }> = (props) => {
 
 	let storedVolume : number;
 
@@ -70,7 +70,7 @@ export const MusicItem : Component<{ data: MusicItemProps, decoration: JSXElemen
 	}
 
 	return (
-		<section class="relative py-5 pl-36 pr-24 grid grid-cols-[2fr,3fr] grid-rows-[1fr,1fr] gap-x-20">
+		<section class="relative py-5 pr-24 pl-36 grid grid-cols-[2fr,3fr] grid-rows-[1fr,1fr] gap-x-20">
 			{/* text */}
 			<div class="row-start-1">
 				<h2 class="text-l">
@@ -101,12 +101,8 @@ export const MusicItem : Component<{ data: MusicItemProps, decoration: JSXElemen
 				<Spectrum data={data} />
 			</div>
 
-			{/* extra styling */}
-			<For each={props.decoration}>
-				{(element) => (
-					<>{element}</>
-				)}
-			</For>
+			{/* decoration */}
+			<div class="absolute left-16 bottom-0 w-1 h-full bg-gray -translate-x-1/2" />
 		</section>
 	)
 }

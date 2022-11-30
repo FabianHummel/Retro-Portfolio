@@ -1,5 +1,5 @@
 import { Component } from "solid-js";
-import { Project } from "../components/projects/Project";
+import { Chapter } from "../components/Chapter";
 import { ChapterText, DownArrow, SVGCircle, SVGLine, VerticalLine } from "../components/Styling";
 import { TypedText } from "../components/TypedText";
 
@@ -27,7 +27,7 @@ const Projects: Component = () => {
 			</div>
 		</section>
 
-		<Project title="> Sky's Horizon" text={[
+		<Chapter title="> Sky's Horizon" text={[
 			"Sky's Horizon features a unique, yet challenging storyline with unlimited, procedurally generated planets to explore, each with its own distinct materials and tons of new foreign flora and fauna. Right from the start you will be facing extreme conditions and other dangers to look out for, so prepare for an outrageous adventure.",
 
 			"The first ideas I had for this game were a few years ago, but I never really got around to actually making it. It's a first person story-told game with a focus on exploration and survival. I was unsure about whether I make it in Unity or Minecraft, but I decided to go with vanilla Minecraft because I have lots of experience with datapack development. For the actual coding I use Sandstone, a TypeScript framework that helps me with the development process.",
@@ -39,7 +39,7 @@ const Projects: Component = () => {
 			<DownArrow top={80} />
 		]} />
 
-		<Project title="> Heast Messenger" text={[
+		<Chapter title="> Heast Messenger" text={[
 			"Heast Messenger is a community-driven messenger service with latest security standards in mind, written 100% in Java and Kotlin. We want to have the benefits of quickly writing a message to a relative, but also having a fun place to hang out with your gaming-friends. Heast Messenger is not built to focus on one specific group of people, but rather being a place for everyone to connect with each other.",
 
 			"The idea for this project came to me and a friend of mine when we were looking on how to create online networks in Java. We first thought of creating a multiplayer game, but then we decided to create a messenger service instead. We started with a simple JavaFX application, hooked it up with a MySQL database and started working on the backend."
@@ -51,7 +51,7 @@ const Projects: Component = () => {
 			<DownArrow top={40} />,
 		]} />
 
-		<Project title="> Table Tennis" text={[
+		<Chapter title="> Table Tennis" text={[
 			"Inspired by Twini-Golf by Polymars, this project is a work in progress Table Tennis game made in SDL2 C++. It features a minimal game style and it is possible to play against the computer or your friend in a locally hosted game. Custom game modes like fireball or hyperspeed spice up the gameplay and make it more fun to play.",
 
 			"I used this project as a way to learn C++. Because I like hooking up the learning process with a simple project, I decided to start working on this minimalistic Table Tennis game. I started with the basics of C++ and SDL2, then I added some basic game mechanics. I'm still unsure about whether I'll stick with C++ or rather switch to a more modern language like Rust, because I honestly don't like the way C++ is written."
@@ -63,7 +63,7 @@ const Projects: Component = () => {
 			<DownArrow top={50} />,
 		]} />
 
-		<Project title="~ White World ~" text={[
+		<Chapter title="~ White World ~" text={[
 			"A White World is an adventorous retro game about a seemingly lonely seaman. Complete quests in a storyline-driven world full of fun things to explore.",
 
 			"The idea for this game came to me not a long time ago - I only started working recently on it, when the motivation for other projects wasn't quite there. I've always wanted to make a game in that iconic retro-pokemon-like style, I honestly find it absolutely gorgeous.",

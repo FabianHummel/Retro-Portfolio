@@ -6,7 +6,15 @@ function genSpectrum(): Array<number> {
 
 const MusicList : Array<MusicItemProps> = [
 	{
-		title: "1. Digital Overcome",
+		title: "1. Fresh Hands",
+		song: "music/fresh-hands.wav",
+		length: 79,
+		spectrum: genSpectrum(),
+		description: ""
+	},
+
+	{
+		title: "2. Digital Overcome",
 		song: "music/digital-overcome.wav",
 		length: 64,
 		spectrum: genSpectrum(),
@@ -14,31 +22,7 @@ const MusicList : Array<MusicItemProps> = [
 	},
 
 	{
-		title: "2. G-Forces",
-		song: "music/g-forces.wav",
-		length: 185,
-		spectrum: genSpectrum(),
-		description: ""
-	},
-
-	{
-		title: "3. Dreaming's End",
-		song: "music/dreamings-end.wav",
-		length: 102,
-		spectrum: genSpectrum(),
-		description: ""
-	},
-
-	{
-		title: "4. Fresh Hands",
-		song: "music/fresh-hands.wav",
-		length: 41,
-		spectrum: genSpectrum(),
-		description: ""
-	},
-
-	{
-		title: "5. Wasteland",
+		title: "3. Wasteland",
 		song: "music/wasteland.wav",
 		length: 144,
 		spectrum: genSpectrum(),
@@ -46,9 +30,25 @@ const MusicList : Array<MusicItemProps> = [
 	},
 
 	{
-		title: "6. Below Zero",
+		title: "4. G-Forces",
+		song: "music/g-forces.wav",
+		length: 185,
+		spectrum: genSpectrum(),
+		description: ""
+	},
+
+	{
+		title: "5. Below Zero",
 		song: "music/below-zero.wav",
 		length: 210,
+		spectrum: genSpectrum(),
+		description: ""
+	},
+
+	{
+		title: "6. Dreaming's End",
+		song: "music/dreamings-end.wav",
+		length: 102,
 		spectrum: genSpectrum(),
 		description: ""
 	},

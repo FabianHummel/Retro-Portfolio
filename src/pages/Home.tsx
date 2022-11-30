@@ -4,6 +4,7 @@ import { Graphics } from "../components/home/Graphics";
 import { ChapterText, DownArrow, SVGCircle, SVGLine, VerticalLine } from "../components/Styling";
 import { PixelImage } from "../components/PixelImage";
 import { TypedText } from "../components/TypedText";
+import { Chapter } from "../components/Chapter";
 
 const Home: Component = () => {
 	return <>
@@ -69,21 +70,75 @@ const Home: Component = () => {
 
 		<section class="relative py-36 flex flex-col gap-5 justify-center items-center">
 			<h1 class="font-main text-l">
-				~ Stories about my career ~
+				~ More about me ~
 			</h1>
 
-			<p class="font-main text-s">
-				Read them in my blog!
-			</p>
-
 			<div class="absolute left-16 top-0 w-1 h-28 bg-gray -translate-x-1/2" />
-
 			<div class={`absolute left-16 top-28 w-4 h-4 fill-gray -translate-x-1/2`}>
 				<svg viewBox="0 0 16 16" stroke="none" xmlns="http://www.w3.org/2000/svg">
 					<circle cx="8" cy="8" r="8" />
 				</svg>
 			</div>
+
+			<div class="absolute left-16 bottom-0 w-1 h-28 bg-gray -translate-x-1/2" />
+			<div class={`absolute left-16 bottom-28 w-4 h-4 fill-gray -translate-x-1/2`}>
+				<svg viewBox="0 0 16 16" stroke="none" xmlns="http://www.w3.org/2000/svg">
+					<circle cx="8" cy="8" r="8" />
+				</svg>
+			</div>
 		</section>
+
+		<Chapter title="My approach to learning new things" text={[
+			"During the last few years I have created several projects and tried something new with each of them. When learning a new language for example, I always try to build something small around it to train practical use right from the start.",
+
+			"When I get to create the project, I often already have a rough idea what of what I want it to be about. It's then only up to planning and writing the code. If my motivation is high enough, I will finish the project, but if not, I will just leave it as it is and move on to the next project - even though I am not proud of that.",
+		]} decoration={[
+			<ChapterText text="0.4 Learning" />,
+			<VerticalLine />,
+			<SVGCircle top={90} />,
+			<SVGLine top={30} height={170} />,
+			<DownArrow top={5} />
+		]} />
+
+		<Chapter title="How I got to (web)design" text={[
+			"It all started with my first few WMC (web & mobile computing) classes in first grade of college. According to my teacher, we are only supposed to learn HTML and some CSS layout properties so we could make proper functional websites...",
+
+			"But I was never happy with handing over \"unfinished looking\" websites for my assignments. It was that moment when I started looking at webdesigners' portfolios and ideas. I read through modern UI pricinciples and how to make well structured, good looking user interfaces. This helped me a lot in understanding how the design affects the user experience and that it's important to make the consumer feel comfortable with the product.",
+		]} decoration={[
+			<ChapterText text="0.5 Design" />,
+			<VerticalLine />,
+			<SVGCircle top={30} />,
+			<SVGLine top={40} height={200} />,
+			<DownArrow top={80} />
+		]} />
+
+		<Chapter title="About my portfolio" text={[
+			"I am talking about the website you are currently on, obviously. This isn't my first portfolio, but it's the first one I'm actually kinda proud of. I tried a lot of different ideas and layouts, but none of them felt right. Sometimes I would get stuck on a single page for days, trying to make it look good or having to deal with the struggles of making it responsive.",
+
+			"Eventually, I decided to go with a simple, minimalistic design based on my (not anywhere near finished) game. As you can see, i went with a black-and-white theme that absolutely destroys your eyes if you look at it for too long - I'm sorry...",
+
+			"For the nerds out there: I made this website using Solid.JS and TailwindCSS. Yes, I refuse to use React! The full source code is available on my GitHub page."
+		]} decoration={[
+			<ChapterText text="0.6 Portfolio" />,
+			<VerticalLine />,
+			<SVGCircle top={30} />,
+			<SVGLine top={40} height={200} />,
+			<DownArrow top={90} />
+		]} />
+
+		<Chapter title="The profile picture" text={[
+			"If we remind ourselves of the design chapter from before, you might remember that I learned a lot about UI design. Well, making user interfaces isn't the only thing I started doing. Experimenting with illustrations and logos is also something I enjoy doing ever since.",
+
+			"So I started making my own avatars. And boy, did I make a lot of them. They got simpler and simpler over time, but not in a bad way. The latest version of it is the one you see on the top of this page.",
+
+			"Dragons. Those majestic creatures have always been my favorite. I love their shape, I can let my creativity run wild with them. My latest one is actually based on the logo from LLVM, the compiler framework for the C family and other languages."
+		]} decoration={[
+			<ChapterText text="0.7 My avatar" />,
+			<VerticalLine />,
+			<SVGCircle top={80} />,
+			<SVGLine top={30} height={200} />,
+			<DownArrow top={30} />
+		]} />
 	</>
 }
 
