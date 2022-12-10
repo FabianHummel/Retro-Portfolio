@@ -1,13 +1,13 @@
 /* @refresh reload */
 import './style.css';
 import { render } from 'solid-js/web';
-import { Router } from '@solidjs/router';
+import { hashIntegration, Router } from '@solidjs/router';
 
 import App from './App';
 
 render(
 	() => (
-		<Router  >
+		<Router source={hashIntegration()} >
 			<App />
 		</Router>
 	),
