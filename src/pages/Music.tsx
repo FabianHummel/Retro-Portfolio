@@ -3,7 +3,6 @@ import { MusicItem, MusicItemProps } from "../components/music/MusicItem";
 import { ChapterText, DownArrow, SVGCircle, SVGLine, VerticalLine } from "../components/Styling";
 import { TypedText } from "../components/TypedText";
 import MusicList from "../data/Music";
-import { Chapters } from "../components/Chapters";
 import { Chapter } from "../components/Chapter";
 
 export let [song, setSong]: Signal<MusicItemProps> = createSignal(null);
@@ -43,18 +42,18 @@ export const resume = () => {
 const Music: Component = () => {
 	return <>
 		<section class="relative pt-52 pb-36 flex flex-col gap-5 justify-center items-center">
-			<h1 class="font-main text-l">
+			<h1 class="title text-l">
 				<TypedText>
 					~ Music I made ~
 				</TypedText>
 			</h1>
 
-			<p class="font-main text-s max-w-sm text-center">
+			<p class="title text-s max-w-sm text-center">
 				Use headphones for the best experience - Enjoy!
 			</p>
 
-			<div class="absolute left-16 bottom-0 w-1 h-40 bg-gray -translate-x-1/2" />
-			<div class={`absolute left-16 bottom-40 w-4 h-4 fill-gray -translate-x-1/2`}>
+			<div class="styling left-16 bottom-0 w-1 h-40 bg-gray" />
+			<div class="styling left-16 bottom-40 w-4 h-4">
 				<svg viewBox="0 0 16 16" stroke="none" xmlns="http://www.w3.org/2000/svg">
 					<circle cx="8" cy="8" r="8" />
 				</svg>

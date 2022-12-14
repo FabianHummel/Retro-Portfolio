@@ -1,9 +1,9 @@
 import { Component, For, JSXElement } from "solid-js";
 import { TypedText } from "./TypedText";
 
-export const Chapter: Component<{ title: string, text: string[], decoration?: JSXElement[] }> = (props) => {
+export const Chapter: Component<{ title: string, text: string[], decoration?: JSXElement[], graphics?: JSXElement }> = (props) => {
 	return (
-		<section class="relative py-10 pl-36 pr-24 grid grid-cols-[1fr] grid-rows-[6rem,auto] gap-x-20">
+		<section class="content grid grid-cols-[1fr] grid-rows-[auto,auto] md:grid-rows-[6rem,auto] gap-10 md:gap-x-20 md:gap-y-0">
 			{/* text */}
 			<div class="row-start-1">
 				<h2 class="text-l">
@@ -20,10 +20,17 @@ export const Chapter: Component<{ title: string, text: string[], decoration?: JS
 				</For>
 			</div>
 
+			{/* graphics */}
+			{ props.graphics ?
+				<div class="md:row-start-2 flex flex-col justify-center items-center gap-5">
+					{ props.graphics }
+				</div>
+			: null }
+
 			{/* extra styling */}
 			<For each={props.decoration}>
 				{(element) => (
-					<>{element}</>
+					element
 				)}
 			</For>
 		</section>

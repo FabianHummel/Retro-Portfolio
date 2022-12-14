@@ -15,10 +15,30 @@
 	
 }
 
+* {
+	@apply font-main;
+}
+
 body {
 	@apply bg-white text-black lowercase;
 }
 
 svg.svgline * {
-	@apply animate-scroll
+	@apply animate-scroll;
+}
+
+p {
+	@apply text-s text-justify md:text-left;
+}
+
+.styling {
+	@apply absolute hidden md:block text-s text-gray fill-gray stroke-gray -translate-x-1/2;
+}
+
+.title {
+	@apply text-center px-5;
+}
+
+.content {
+	@apply relative py-10 pl-6 md:pl-36 pr-6 md:pr-24;
 }

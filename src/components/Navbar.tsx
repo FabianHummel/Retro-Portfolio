@@ -17,14 +17,14 @@ export const Navbar : Component = () => {
 	}
 
 	return (
-		<nav ref={navbar} class="z-10 w-full h-32 fixed grid grid-cols-[0.5fr_1fr_0.5fr] grid-rows-[1fr] place-items-center bg-white border-b-black transition-[border-bottom-width]">
-			<div class="w-full h-28 flex">
+		<nav ref={navbar} class="z-10 w-full h-32 fixed grid grid-cols-[auto,1fr] sm:grid-cols-[0.5fr_1fr_0.5fr] grid-rows-[1fr] place-items-center bg-white border-b-black transition-[border-bottom-width]">
+			<div class="w-full h-24 md:h-28 flex">
 				<Link href="/" class="mx-5 fill-black">
 					<Logo />
 				</Link>
 			</div>
-			<h1 class="font-main text-l text-center">~ Fabian Hummel ~</h1>
-			<div class="w-full px-10 gap-7 flex justify-end items-center">
+			<h1 class="hidden sm:block font-main text-m md:text-l text-center">~ Fabian Hummel ~</h1>
+			<div class="w-full px-5 sm:px-10 gap-7 flex justify-end items-center">
 				<Link href="/projects">
 					<PixelImage src="img/Projects.png" w={12} h={12} scale={3} />
 				</Link>
