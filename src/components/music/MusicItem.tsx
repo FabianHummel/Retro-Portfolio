@@ -1,4 +1,4 @@
-import { Accessor, Component, createSignal, For, JSXElement, Setter } from "solid-js";
+import { Accessor, Component, createSignal, Setter } from "solid-js";
 import { song, playing, setPlaying, pause, resume, setSong, play, setVolume, isThisSong } from "../../pages/Music";
 import { PixelImage } from "../PixelImage";
 import { TypedText } from "../TypedText";
@@ -19,7 +19,7 @@ export interface MusicItemProps {
 	setVolume?: Setter<number>;
 }
 
-export const MusicItem : Component<{ data: MusicItemProps }> = (props) => {
+export const MusicItem : Component<{ data: MusicItemProps, index: number }> = (props) => {
 
 	let storedVolume : number;
 
@@ -35,11 +35,9 @@ export const MusicItem : Component<{ data: MusicItemProps }> = (props) => {
 	const togglePlay = () => {
 		if (isThisSong(data)) {
 			if (playing !== undefined && playing()) {
-				setPlaying(false);
 				pause();
 				console.log(data.title, 'paused');
 			} else {
-				setPlaying(true);
 				volumeChange();
 				resume();
 				console.log(data.title, 'resumed');
@@ -47,7 +45,6 @@ export const MusicItem : Component<{ data: MusicItemProps }> = (props) => {
 		} else {
 			setSong(data);
 			volumeChange();
-			setPlaying(true);
 			play();
 			console.log(data.title, 'playing');
 		}
@@ -75,7 +72,7 @@ export const MusicItem : Component<{ data: MusicItemProps }> = (props) => {
 			<div class="row-start-1">
 				<h2 class="text-l">
 					<TypedText>
-						{data.title}
+						{`${props.index+1}. ${data.title}`}
 					</TypedText>
 				</h2>
 			</div>

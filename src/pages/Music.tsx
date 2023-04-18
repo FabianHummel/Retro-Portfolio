@@ -1,4 +1,4 @@
-import { Component, createSignal, For, Signal } from "solid-js";
+import { Component, createSignal, For, onCleanup, onMount, Signal } from "solid-js";
 import { MusicItem, MusicItemProps } from "../components/music/MusicItem";
 import { ChapterText, DownArrow, SVGCircle, SVGLine, VerticalLine } from "../components/Styling";
 import { TypedText } from "../components/TypedText";
@@ -27,19 +27,53 @@ export const setVolume = (volume: number) => {
 
 export const pause = () => {
 	song().setPlaytime(player.currentTime);
+	setPlaying(false);
 	player.pause();
 	clearInterval(intervalID);
 }
 
 export const resume = () => {
 	player.currentTime = song().getPlaytime();
+	setPlaying(true);
 	player.play();
 	intervalID = setInterval(() => {
 		song().setPlaytime(player.currentTime);
 	}, 200)
 }
 
+export const toggle = () => {
+	if (playing()) {
+		pause();
+	} else {
+		resume();
+	}
+}
+
 const Music: Component = () => {
+
+	const togglePlay = (e: KeyboardEvent) => {
+		if (e.code == "Space") {
+			e.preventDefault();
+			toggle();
+		}
+	}
+
+	onMount(() => {
+		new Image().src = "img/music/pause.png";
+		new Image().src = "img/music/play.png";
+		new Image().src = "img/music/muted.png";
+		new Image().src = "img/music/silent.png";
+		new Image().src = "img/music/loud.png";
+		new Image().src = "img/music/knob.png";
+
+		// on spacebar press toggle play/pause
+		document.addEventListener('keydown', togglePlay)
+	})
+
+	onCleanup(() => {
+		document.removeEventListener('keydown', togglePlay);
+	})
+
 	return <>
 		<section class="relative pt-52 pb-36 flex flex-col gap-5 justify-center items-center">
 			<h1 class="title text-l">
@@ -59,16 +93,6 @@ const Music: Component = () => {
 				</svg>
 			</div>
 		</section>
-
-		{/* <section class="relative pr-24 pl-36">
-			<Chapters title="Chapters on this page" chapters={[
-				{ title: "How I got to making music", section: "0.1", link: "" },
-				{ title: "Music for games", section: "0.2", link: "" },
-				{ title: "My very own 'Spotify'", section: "0.3", link: "" },
-			]} />
-
-			<div class="absolute left-16 bottom-0 w-1 h-full bg-gray -translate-x-1/2" />
-		</section> */}
 
 		<Chapter title="How I got to making music" text={[
 			"It all started with 10 year old me playing the first notes on my new guitar. Ever since, I loved creating my own melodies. When I got older, I more and more fell in love with synthwave music. I wanted to create my own music in that style, but I was very uncreative and inexperienced at that time.",
@@ -101,8 +125,19 @@ const Music: Component = () => {
 		]} />
 
 		<For each={MusicList}>
-			{(music) => <MusicItem data={music} />}
+			{(music, index) =>
+				<MusicItem data={music} index={index()} />
+			}
 		</For>
+
+		<section class="relative h-20">
+			<div class="styling left-16 top-0 w-1 h-8 bg-gray" />
+			<div class="styling left-16 top-8 w-4 h-4">
+				<svg viewBox="0 0 16 16" stroke="none" xmlns="http://www.w3.org/2000/svg">
+					<circle cx="8" cy="8" r="8" />
+				</svg>
+			</div>
+		</section>
 	</>
 }
 

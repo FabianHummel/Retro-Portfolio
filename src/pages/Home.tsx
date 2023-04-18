@@ -1,6 +1,6 @@
 import { Component } from "solid-js";
 import { Graphics } from "../components/home/Graphics";
-import Styling, { ChapterText, DownArrow, SVGCircle, SVGLine, VerticalLine } from "../components/Styling";
+import { ChapterText, DownArrow, SVGCircle, SVGLine, VerticalLine } from "../components/Styling";
 import { PixelImage } from "../components/PixelImage";
 import { TypedText } from "../components/TypedText";
 import { Chapter } from "../components/Chapter";

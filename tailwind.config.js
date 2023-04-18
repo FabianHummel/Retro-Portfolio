@@ -1,5 +1,3 @@
-const { default: plugin } = require("tailwindcss");
-
 module.exports = {
 	mode: 'jit',
 	content: [
@@ -24,12 +22,18 @@ module.exports = {
 					'0%': { 'transform': 'rotate(-10deg) translateY(3px) translateX(-3px)' },
 					'50%': { 'transform': 'rotate(0deg) translateY(0px)' },
 					'100%': { 'transform': 'rotate(10deg) translateY(3px) translateX(3px)' }
-				}
+				},
+
+				'spin': {
+					'0%': { 'transform': 'rotate(0deg)' },
+					'100%': { 'transform': 'rotate(360deg)' }
+				},
 			},
 			animation: {
 				'push': 'push 2s ease infinite',
 				'scroll': 'svglinescroll 1s linear infinite',
-				'playing': 'musicplaying 0.6s linear infinite alternate'
+				'playing': 'musicplaying 0.6s linear infinite alternate',
+				'spin': 'spin 45s linear infinite'
 			}
 		},
 		fontFamily: {

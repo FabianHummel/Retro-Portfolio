@@ -2,6 +2,7 @@ import { lazy } from "solid-js";
 import { Routes, Route } from "@solidjs/router";
 import { Navbar } from "./components/Navbar";
 import { Limiter } from "./components/Limiter";
+import { Footer } from "./components/Footer";
 const Home = lazy(() => import("./pages/Home"));
 const Projects = lazy(() => import("./pages/Projects"));
 const Music = lazy(() => import("./pages/Music"));
@@ -30,5 +31,6 @@ export default function App() {
 				<Route path="/music" component={Music} />
 			</Routes>
 		</Limiter>
+		<Footer/>
 	</>
 };

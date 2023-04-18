@@ -1,13 +1,14 @@
-import { Component, createSignal, onMount } from "solid-js";
+import { Component, createSignal, onMount, useContext } from "solid-js";
 import { createViewportObserver } from '@solid-primitives/intersection-observer';
 
-export const TypedText : Component<{ children: string, onIntersect?: boolean, delay?: number, offset?: number }> = (props) => {
+export const TypedText: Component<{ children: string, onIntersect?: boolean, delay?: number, offset?: number }> = (props) => {
 
 	const [intersectionObserver] = createViewportObserver()
 
-	let interval : number;
+	let interval: number;
 	let i = 0;
 	const [text, setText] = createSignal("");
+
 
 	const increment = () => {
 		if (i < props.children.length) {
@@ -17,11 +18,11 @@ export const TypedText : Component<{ children: string, onIntersect?: boolean, de
 
 	const startAnimation = () => {
 		clearInterval(interval)
-		interval = setInterval(increment, props.delay ?? 75);
+		interval = setInterval(increment, props.delay ?? 50);
 	}
 
 	if (!props.onIntersect) {
-		onMount(() => {		
+		onMount(() => {
 			setTimeout(() => {
 				startAnimation();
 			}, props.offset * 1000 ?? 0)
@@ -38,6 +39,6 @@ export const TypedText : Component<{ children: string, onIntersect?: boolean, de
 					i = 0;
 				}
 			}
-		}}>{ text() || <br/> }</span>
+		}}>{text() || <br />}</span>
 	</>
 }
