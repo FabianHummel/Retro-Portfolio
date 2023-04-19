@@ -1,5 +1,5 @@
 import { Component, For, JSXElement } from "solid-js";
-import { TypedText } from "./TypedText";
+import { TypedText } from "@components/shared/TypedText";
 
 export const Chapter: Component<{ title: string, text: string[], decoration?: JSXElement[], graphics?: JSXElement }> = (props) => {
 	return (
@@ -21,11 +21,11 @@ export const Chapter: Component<{ title: string, text: string[], decoration?: JS
 			</div>
 
 			{/* graphics */}
-			{ props.graphics ?
+			{props.graphics ?
 				<div class="md:row-start-2 flex flex-col justify-center items-center gap-5">
-					{ props.graphics }
+					{props.graphics}
 				</div>
-			: null }
+				: null}
 
 			{/* extra styling */}
 			<For each={props.decoration}>

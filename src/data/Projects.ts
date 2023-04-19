@@ -1,4 +1,4 @@
-import { ProjectItemProps } from "../components/projects/Project";
+import { ProjectItemProps } from "@components/projects/Project";
 
 export function genHeight(): number {
 	return Math.random() * 100 + 100
@@ -21,7 +21,7 @@ const ProjectList: Array<ProjectItemProps> = [
 			name: "docs",
 			url: "https://heast.gitbook.io/docs/"
 		}],
-		tags: ["C#", "Avalonia", "DotNetty", "MySQL"]
+		tags: ["C#", "Avalonia", "DotNetty", "MySQL", "PostgreSQL", "Cassandra"]
 	},
 
 	{

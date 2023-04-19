@@ -1,6 +1,6 @@
 import { Component } from "solid-js";
-import { PixelImage } from "./PixelImage";
-import { Logo } from "./Logo";
+import { PixelImage } from "@components/shared/PixelImage";
+import { Logo } from "@components/shared/Logo";
 
 export const Footer: Component = () => {
 	return (

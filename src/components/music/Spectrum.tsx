@@ -1,10 +1,10 @@
 import { Component, For, onMount } from "solid-js";
-import { mouseDown } from "../../App";
-import { player, isThisSong } from "../../pages/Music";
-import { MusicItemProps } from "./MusicItem";
+import { mouseDown } from "@src/App";
+import { player, isThisSong } from "@pages/Songs";
+import { MusicItemProps } from "@components/music/Music";
 
-export const Spectrum : Component<{ data: MusicItemProps }> = (props) => {
-	let spectrum : HTMLDivElement;
+export const Spectrum: Component<{ data: MusicItemProps }> = (props) => {
+	let spectrum: HTMLDivElement;
 
 	const onSpectrumClick = (clientX: number) => {
 		if (isThisSong(props.data)) {
@@ -21,7 +21,7 @@ export const Spectrum : Component<{ data: MusicItemProps }> = (props) => {
 			if (mouseDown) {
 				onSpectrumClick(e.clientX);
 			}
-		}); 
+		});
 		spectrum.addEventListener('touchmove', (e) => {
 			if (mouseDown) {
 				onSpectrumClick(e.touches[0].clientX);
@@ -34,12 +34,10 @@ export const Spectrum : Component<{ data: MusicItemProps }> = (props) => {
 
 	return (
 		<div ref={spectrum} class="w-full h-full flex justify-evenly items-center cursor-pointer">
-			<For each={ props.data.spectrum }>
-				{ (item, index) =>
-					<div style={`height: ${item * 50 + 50}%;`} class={`w-[3px] transition-colors duration-300 ${
-						index() % 2 === 0 ? "hidden 2xl:block" : "block"
-					} ${
-						props.data.getPlaytime() / props.data.length <= index() / props.data.spectrum.length ? "bg-gray" : "bg-black"}
+			<For each={props.data.spectrum}>
+				{(item, index) =>
+					<div style={`height: ${item * 50 + 50}%;`} class={`w-[3px] transition-colors duration-300 ${index() % 2 === 0 ? "hidden 2xl:block" : "block"
+						} ${props.data.getPlaytime() / props.data.length <= index() / props.data.spectrum.length ? "bg-gray" : "bg-black"}
 					`}></div>
 				}
 			</For>

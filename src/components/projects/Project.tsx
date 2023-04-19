@@ -1,6 +1,6 @@
 import { Component, For, JSXElement } from "solid-js";
-import { TypedText } from "../TypedText";
-import { PixelImage } from "../PixelImage";
+import { TypedText } from "@components/shared/TypedText";
+import { PixelImage } from "@components/shared/PixelImage";
 
 export interface ProjectItemProps {
 	image?: string;
@@ -60,7 +60,18 @@ export const Project: Component<{ project: ProjectItemProps, decoration?: JSXEle
 						}
 					</>}
 				</For>
-				<div class="h-[3px] flex-1 mx-4 bg-black hidden md:block" />
+				<div class="min-w-[14rem] mx-4 hidden md:grid grid-rows-[30px,0,30px] grid-cols-[2fr,1fr] flex-1 items-center">
+					<p class="col-span-2 text-s text-gray row-start-1 leading-none">{
+						`${props.project.title} ${".".repeat(3)}${[...Array(10)].map(() => Math.round(Math.random())).join('')}`
+					}</p>
+					<div class="row-start-2 border-b-[3px] border-b-black" />
+					<div class="row-start-2 border-b-[3px] border-b-black border-dashed" />
+					<p class="col-span-2 text-s text-gray row-start-3 text-right leading-none">
+						{`${"/".repeat(Math.random() * 5 + 3)}`}{props.project.links.map(link => {
+							return <>&nbsp<a class="hover:text-black duration-100" href={link.url}>{link.name}</a></>
+						})}
+					</p>
+				</div>
 			</div>
 
 			{/* extra styling */}

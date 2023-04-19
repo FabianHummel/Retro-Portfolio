@@ -1,11 +1,11 @@
 import { lazy } from "solid-js";
 import { Routes, Route } from "@solidjs/router";
-import { Navbar } from "./components/Navbar";
-import { Limiter } from "./components/Limiter";
-import { Footer } from "./components/Footer";
-const Home = lazy(() => import("./pages/Home"));
-const Projects = lazy(() => import("./pages/Projects"));
-const Music = lazy(() => import("./pages/Music"));
+import { Navbar } from "@components/shared/Navbar";
+import { Limiter } from "@components/shared/Limiter";
+import { Footer } from "@components/shared/Footer";
+const Home = lazy(() => import("@pages/Home"));
+const Projects = lazy(() => import("@pages/Projects"));
+const Songs = lazy(() => import("@pages/Songs"));
 
 export let mouseDown = false;
 
@@ -28,9 +28,9 @@ export default function App() {
 			<Routes>
 				<Route path="/" component={Home} />
 				<Route path="/projects" component={Projects} />
-				<Route path="/music" component={Music} />
+				<Route path="/music" component={Songs} />
 			</Routes>
 		</Limiter>
-		<Footer/>
+		<Footer />
 	</>
 };

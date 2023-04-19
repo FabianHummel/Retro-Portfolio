@@ -1,9 +1,9 @@
 import { Component, createSignal, For, onCleanup, onMount, Signal } from "solid-js";
-import { MusicItem, MusicItemProps } from "../components/music/MusicItem";
-import { ChapterText, DownArrow, SVGCircle, SVGLine, VerticalLine } from "../components/Styling";
-import { TypedText } from "../components/TypedText";
-import MusicList from "../data/Music";
-import { Chapter } from "../components/Chapter";
+import { Music, MusicItemProps } from "@components/music/Music";
+import { ChapterText, DownArrow, SVGCircle, SVGLine, VerticalLine } from "@components/shared/Styling";
+import { TypedText } from "@components/shared/TypedText";
+import MusicList from "@data/Music";
+import { Chapter } from "@components/shared/Chapter";
 
 export let [song, setSong]: Signal<MusicItemProps> = createSignal(null);
 export let [playing, setPlaying]: Signal<boolean> = createSignal(null);
@@ -29,14 +29,14 @@ export const pause = () => {
 	song().setPlaytime(player.currentTime);
 	setPlaying(false);
 	player.pause();
-	clearInterval(intervalID);
+	window.clearInterval(intervalID);
 }
 
 export const resume = () => {
 	player.currentTime = song().getPlaytime();
 	setPlaying(true);
 	player.play();
-	intervalID = setInterval(() => {
+	intervalID = window.setInterval(() => {
 		song().setPlaytime(player.currentTime);
 	}, 200)
 }
@@ -49,7 +49,7 @@ export const toggle = () => {
 	}
 }
 
-const Music: Component = () => {
+const Songs: Component = () => {
 
 	const togglePlay = (e: KeyboardEvent) => {
 		if (e.code == "Space") {
@@ -126,7 +126,7 @@ const Music: Component = () => {
 
 		<For each={MusicList}>
 			{(music, index) =>
-				<MusicItem data={music} index={index()} />
+				<Music data={music} index={index()} />
 			}
 		</For>
 
@@ -141,4 +141,4 @@ const Music: Component = () => {
 	</>
 }
 
-export default Music
+export default Songs

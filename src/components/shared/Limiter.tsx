@@ -1,4 +1,4 @@
-import { Component, JSX, JSXElement } from "solid-js";
+import { Component, JSX } from "solid-js";
 
 export const Limiter : Component<JSX.BaseHTMLAttributes<HTMLBaseElement>> = (props) => {
 	return (

@@ -1,9 +1,9 @@
 import { Accessor, Component, createSignal, Setter } from "solid-js";
-import { song, playing, setPlaying, pause, resume, setSong, play, setVolume, isThisSong } from "../../pages/Music";
-import { PixelImage } from "../PixelImage";
-import { TypedText } from "../TypedText";
-import { Slider } from "./Slider";
-import { Spectrum } from "./Spectrum";
+import { song, playing, setPlaying, pause, resume, setSong, play, setVolume, isThisSong } from "@pages/Songs";
+import { PixelImage } from "@components/shared/PixelImage";
+import { TypedText } from "@components/shared/TypedText";
+import { Slider } from "@components/music/Slider";
+import { Spectrum } from "@components/music/Spectrum";
 
 export interface MusicItemProps {
 	title: string;
@@ -19,9 +19,9 @@ export interface MusicItemProps {
 	setVolume?: Setter<number>;
 }
 
-export const MusicItem : Component<{ data: MusicItemProps, index: number }> = (props) => {
+export const Music: Component<{ data: MusicItemProps, index: number }> = (props) => {
 
-	let storedVolume : number;
+	let storedVolume: number;
 
 	const data = props.data;
 	[data.getPlaytime, data.setPlaytime] = createSignal(
@@ -72,24 +72,24 @@ export const MusicItem : Component<{ data: MusicItemProps, index: number }> = (p
 			<div class="row-start-1">
 				<h2 class="text-l">
 					<TypedText>
-						{`${props.index+1}. ${data.title}`}
+						{`${props.index + 1}. ${data.title}`}
 					</TypedText>
 				</h2>
 			</div>
 			<div class="row-start-2 flex gap-10 md:px-5">
 				<button onClick={() => { togglePlay() }}>
-					{ playing() && song() == data ?
-						<PixelImage src="img/music/pause.png" w={5} h={5} scale={4} alt={ "Pause the song" } /> :
-						<PixelImage src="img/music/play.png" w={5} h={5} scale={4} alt={ "Play the song" } />
+					{playing() && song() == data ?
+						<PixelImage src="img/music/pause.png" w={5} h={5} scale={4} alt={"Pause the song"} /> :
+						<PixelImage src="img/music/play.png" w={5} h={5} scale={4} alt={"Play the song"} />
 					}
 				</button>
 				<button onClick={() => { toggleMute() }}>
-					{ data.getVolume() == 0 ? 
-						<PixelImage src="img/music/muted.png" w={10} h={8} scale={3} alt={ "Muted" } /> :
+					{data.getVolume() == 0 ?
+						<PixelImage src="img/music/muted.png" w={10} h={8} scale={3} alt={"Muted"} /> :
 
-					  data.getVolume() < 0.5 ?
-					  	<PixelImage src="img/music/silent.png" w={10} h={8} scale={3} alt={ "Playing" } /> :
-					  	<PixelImage src="img/music/loud.png" w={10} h={8} scale={3} alt={ "Playing" } />
+						data.getVolume() < 0.5 ?
+							<PixelImage src="img/music/silent.png" w={10} h={8} scale={3} alt={"Playing"} /> :
+							<PixelImage src="img/music/loud.png" w={10} h={8} scale={3} alt={"Playing"} />
 					}
 				</button>
 				<Slider signal={[data.getVolume, data.setVolume]} onChange={volumeChange} />

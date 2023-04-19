@@ -1,5 +1,5 @@
 import { Component, For, JSX } from "solid-js"
-import { PixelImage } from "./PixelImage"
+import { PixelImage } from "@components/shared/PixelImage"
 
 export const Styling: Component<{ children: JSX.Element[] }> = (props) => {
 	return <>

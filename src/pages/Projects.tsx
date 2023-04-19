@@ -1,8 +1,8 @@
 import { Component, For } from "solid-js";
-import { ChapterText, DownArrow, SVGCircle, SVGLine, VerticalLine } from "../components/Styling";
-import { TypedText } from "../components/TypedText";
-import ProjectList, { genHeight } from "../data/Projects";
-import { Project } from "../components/projects/Project";
+import { ChapterText, DownArrow, SVGCircle, SVGLine, VerticalLine } from "@components/shared/Styling";
+import { TypedText } from "@components/shared/TypedText";
+import ProjectList, { genHeight } from "@data/Projects";
+import { Project } from "@components/projects/Project";
 
 const Projects: Component = () => {
 	return <>

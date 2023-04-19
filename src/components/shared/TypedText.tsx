@@ -1,4 +1,4 @@
-import { Component, createSignal, onMount, useContext } from "solid-js";
+import { Component, createSignal, onMount } from "solid-js";
 import { createViewportObserver } from '@solid-primitives/intersection-observer';
 
 export const TypedText: Component<{ children: string, onIntersect?: boolean, delay?: number, offset?: number }> = (props) => {
@@ -17,8 +17,8 @@ export const TypedText: Component<{ children: string, onIntersect?: boolean, del
 	}
 
 	const startAnimation = () => {
-		clearInterval(interval)
-		interval = setInterval(increment, props.delay ?? 50);
+		window.clearInterval(interval)
+		interval = window.setInterval(increment, props.delay ?? 50);
 	}
 
 	if (!props.onIntersect) {

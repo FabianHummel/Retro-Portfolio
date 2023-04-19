@@ -1,5 +1,5 @@
 import { Component } from "solid-js";
-import { PixelImage } from "../PixelImage";
+import { PixelImage } from "@components/shared/PixelImage";
 
 export const Graphics: Component<{ image: string, text: string }> = (props) => {
 	return <>

@@ -1,9 +1,9 @@
 import { Component } from "solid-js";
-import { Graphics } from "../components/home/Graphics";
-import { ChapterText, DownArrow, SVGCircle, SVGLine, VerticalLine } from "../components/Styling";
-import { PixelImage } from "../components/PixelImage";
-import { TypedText } from "../components/TypedText";
-import { Chapter } from "../components/Chapter";
+import { Graphics } from "@components/home/Graphics";
+import { ChapterText, DownArrow, SVGCircle, SVGLine, VerticalLine } from "@components/shared/Styling";
+import { PixelImage } from "@components/shared/PixelImage";
+import { TypedText } from "@components/shared/TypedText";
+import { Chapter } from "@components/shared/Chapter";
 
 const Home: Component = () => {
 	return <>

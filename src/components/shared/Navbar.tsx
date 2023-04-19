@@ -1,12 +1,12 @@
 import { Link } from "@solidjs/router";
 import { Component } from "solid-js";
-import { playing } from "../pages/Music";
-import { Logo } from "./Logo";
-import { PixelImage } from "./PixelImage";
+import { playing } from "@pages/Songs";
+import { Logo } from "@components/shared/Logo";
+import { PixelImage } from "@components/shared/PixelImage";
 
-export const Navbar : Component = () => {
+export const Navbar: Component = () => {
 
-	let navbar : HTMLElement;
+	let navbar: HTMLElement;
 
 	onscroll = () => {
 		if (window.scrollY > 0) {
@@ -28,10 +28,10 @@ export const Navbar : Component = () => {
 				<Link href="/projects">
 					<PixelImage src="img/Projects.png" w={12} h={12} scale={3} />
 				</Link>
-				<div class={`${ playing() ? "animate-playing" : null }`}>
-				<Link href="/music">
-					<PixelImage src="img/Music.png" w={12} h={12} scale={3} />
-				</Link>
+				<div class={`${playing() ? "animate-playing" : null}`}>
+					<Link href="/music">
+						<PixelImage src="img/Music.png" w={12} h={12} scale={3} />
+					</Link>
 				</div>
 				<Link href="https://github.com/FabianHummel">
 					<PixelImage src="img/GitHub.png" w={12} h={12} scale={3} />
