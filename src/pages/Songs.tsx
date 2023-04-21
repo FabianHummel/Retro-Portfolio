@@ -49,14 +49,19 @@ export const toggle = () => {
 	}
 }
 
-const Songs: Component = () => {
-
-	const togglePlay = (e: KeyboardEvent) => {
-		if (e.code == "Space") {
-			e.preventDefault();
+const togglePlay = (e: KeyboardEvent) => {
+	if (e.code == "Space") {
+		e.preventDefault();
+		if (song() !== null) {
 			toggle();
 		}
 	}
+}
+
+// on spacebar press toggle play/pause
+document.addEventListener('keydown', togglePlay);
+
+const Songs: Component = () => {
 
 	onMount(() => {
 		new Image().src = "img/music/pause.png";
@@ -65,13 +70,6 @@ const Songs: Component = () => {
 		new Image().src = "img/music/silent.png";
 		new Image().src = "img/music/loud.png";
 		new Image().src = "img/music/knob.png";
-
-		// on spacebar press toggle play/pause
-		document.addEventListener('keydown', togglePlay)
-	})
-
-	onCleanup(() => {
-		document.removeEventListener('keydown', togglePlay);
 	})
 
 	return <>

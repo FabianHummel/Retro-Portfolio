@@ -21,8 +21,8 @@ body {
 }
 
 footer {
-	background: url('img/footer/Foreground.png') repeat-x bottom,
-			    url('img/footer/Background.png') repeat-x bottom;
+	background: url('/img/footer/Foreground.png') repeat-x bottom,
+			    url('/img/footer/Background.png') repeat-x bottom;
 	background-size: auto 16rem, 
 					 auto 16rem;
 	image-rendering: pixelated
