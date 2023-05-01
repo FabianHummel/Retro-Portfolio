@@ -3,6 +3,8 @@ import { Component } from "solid-js";
 import { playing } from "@pages/Songs";
 import { Logo } from "@components/shared/Logo";
 import { PixelImage } from "@components/shared/PixelImage";
+import { height } from "@components/home/Game";
+import { active } from "@components/home/Password";
 
 export const Navbar: Component = () => {
 
@@ -14,10 +16,16 @@ export const Navbar: Component = () => {
 		} else {
 			navbar.classList.remove("border-b-2");
 		}
+
+		if (active() && window.scrollY < height()) {
+			navbar.classList.add("-translate-y-full")
+		} else {
+			navbar.classList.remove("-translate-y-full")
+		}
 	}
 
 	return (
-		<nav ref={navbar} class="z-10 w-full h-32 fixed grid grid-cols-[auto,1fr] sm:grid-cols-[0.5fr_1fr_0.5fr] grid-rows-[1fr] place-items-center bg-white border-b-black transition-[border-bottom-width]">
+		<nav ref={navbar} class="z-10 w-full h-32 fixed grid grid-cols-[auto,1fr] sm:grid-cols-[0.5fr_1fr_0.5fr] grid-rows-[1fr] place-items-center bg-white border-b-black transition-[border-bottom-width,transform]">
 			<div class="w-full h-24 md:h-28 flex">
 				<Link href="/" class="mx-5 fill-black">
 					<Logo />

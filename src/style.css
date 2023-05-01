@@ -12,12 +12,32 @@
 	font-display: swap;
 }
 
+/* width */
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: rgb(217, 217, 217); 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: rgb(40, 40, 40); 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: rgb(40, 40, 40); 
+}
+
 * {
 	@apply font-main;
 }
 
 body {
-	@apply bg-white text-black lowercase;
+	@apply bg-white text-black lowercase overflow-x-hidden;
 }
 
 footer {

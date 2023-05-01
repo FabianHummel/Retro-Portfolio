@@ -4,9 +4,14 @@ import { ChapterText, DownArrow, SVGCircle, SVGLine, VerticalLine } from "@compo
 import { PixelImage } from "@components/shared/PixelImage";
 import { TypedText } from "@components/shared/TypedText";
 import { Chapter } from "@components/shared/Chapter";
+import { Game } from "@components/home/Game";
+import { Password } from "@components/home/Password";
 
 const Home: Component = () => {
 	return <>
+		<Password />
+		<Game />
+
 		<section class="relative h-screen flex flex-col justify-center items-center">
 			<h1 class="font-main text-l text-center">
 				<TypedText>
