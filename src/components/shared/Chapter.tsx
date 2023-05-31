@@ -6,11 +6,11 @@ export const Chapter: Component<{ title: string, text: string[], decoration?: JS
 		<section class="content grid grid-cols-[1fr] grid-rows-[auto,auto] md:grid-rows-[6rem,auto] gap-10 md:gap-x-20 md:gap-y-0">
 			{/* text */}
 			<div class="row-start-1">
-				<h2 class="text-l">
+				<h1>
 					<TypedText onIntersect>
 						{props.title}
 					</TypedText>
-				</h2>
+				</h1>
 			</div>
 			<div class="row-start-2 flex flex-col gap-10">
 				<For each={props.text}>

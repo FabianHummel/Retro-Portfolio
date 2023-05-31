@@ -1,6 +1,7 @@
 import { Component, For, JSXElement } from "solid-js";
 import { TypedText } from "@components/shared/TypedText";
 import { PixelImage } from "@components/shared/PixelImage";
+import { Tag } from "./Tag";
 
 export interface ProjectItemProps {
 	image?: string;
@@ -32,7 +33,7 @@ export const Project: Component<{ project: ProjectItemProps, decoration?: JSXEle
 				: null} */}
 
 				{/* date */}
-				<p class="row-start-2 text-s pl-8 align-top leading-normal">
+				<p class="row-start-2 pl-8 align-top leading-normal">
 					{`Creation date: ${dateTimeFormat.format(new Date(props.project.createDate))}`}
 				</p>
 			</div>
@@ -50,17 +51,13 @@ export const Project: Component<{ project: ProjectItemProps, decoration?: JSXEle
 			<div class="my-6 flex flex-row flex-wrap gap-y-4 items-center">
 				<For each={props.project.tags}>
 					{(tag, index) => <>
-						<span class="text-s flex">
-							<PixelImage src="img/projects/tags/tag-left.png" w={2} h={6} scale={5} />
-							<p class="top-0 left-0 h-full bg-black text-white text-center leading-tight"> {tag} </p>
-							<PixelImage src="img/projects/tags/tag-right.png" w={2} h={6} scale={5} />
-						</span>
+						<Tag tag={tag} />
 						{index() < props.project.tags.length - 1 &&
-							<div class="w-[4px] h-[4px] mx-4 bg-black" />
+							<div class="w-[6px] h-[6px] mx-4 bg-black" />
 						}
 					</>}
 				</For>
-				<div class="min-w-[14rem] mx-4 hidden md:grid grid-rows-[30px,0,30px] grid-cols-[2fr,1fr] flex-1 items-center">
+				<div class="min-w-[14rem] ml-6 hidden md:grid grid-rows-[30px,0,30px] grid-cols-[2fr,1fr] flex-1 items-center">
 					<p class="col-span-2 text-s text-gray row-start-1 leading-none">{
 						`${props.project.title} ${".".repeat(3)}${[...Array(10)].map(() => Math.round(Math.random())).join('')}`
 					}</p>

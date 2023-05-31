@@ -1,0 +1,28 @@
+article :is(h1) {
+	@apply w-full mb-6 border-b-black border-b-2;
+}
+
+article :is(h2) {
+	@apply mt-8;
+}
+
+article :is(p, pre, ul) {
+	@apply mb-4;
+}
+
+article :is(pre > code) {
+	overflow: unset !important;
+}
+
+article :is(pre) {
+	text-transform: none;
+	overflow: auto;
+}
+
+article :is(a) {
+	@apply underline;
+}
+
+article :is(pre > pre) {
+	@apply mb-0;
+}

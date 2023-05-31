@@ -6,6 +6,7 @@ import { TypedText } from "@components/shared/TypedText";
 import { Chapter } from "@components/shared/Chapter";
 import { Game } from "@components/home/Game";
 import { Password } from "@components/home/Password";
+import { Footer } from "@components/shared/Footer";
 
 const Home: Component = () => {
 	return <>
@@ -13,13 +14,13 @@ const Home: Component = () => {
 		<Game />
 
 		<section class="relative h-screen flex flex-col justify-center items-center">
-			<h1 class="font-main text-l text-center">
+			<h1 class="text-center">
 				<TypedText>
 					Hello visitor!
 				</TypedText>
 			</h1>
 
-			<h1 class="font-main text-l text-center">
+			<h1 class="text-center">
 				<TypedText offset={1.5}>
 					This is my portfolio.
 				</TypedText>
@@ -73,7 +74,7 @@ const Home: Component = () => {
 		} />
 
 		<section class="relative py-20 md:py-36 flex flex-col gap-5 justify-center items-center">
-			<h1 class="font-main text-l text-center">
+			<h1 class="text-center">
 				~ More about me ~
 			</h1>
 

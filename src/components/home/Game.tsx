@@ -1,6 +1,6 @@
 import { active } from "@components/home/Password";
 import { Component, Show, createEffect } from "solid-js";
-import { start } from "portfolio-game"
+// import { start } from "portfolio-game"
 
 export const height = () => gameRef.clientHeight
 
@@ -16,7 +16,7 @@ export const Game: Component<{}> = () => {
 		console.log("initialize game");
 		console.log(document.getElementById('game'));
 		
-		start();
+		// start();
 	}
 
 	return (

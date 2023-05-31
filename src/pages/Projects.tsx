@@ -3,17 +3,18 @@ import { ChapterText, DownArrow, SVGCircle, SVGLine, VerticalLine } from "@compo
 import { TypedText } from "@components/shared/TypedText";
 import ProjectList, { genHeight } from "@data/Projects";
 import { Project } from "@components/projects/Project";
+import { Footer } from "@components/shared/Footer";
 
 const Projects: Component = () => {
 	return <>
 		<section class="relative pt-52 pb-36 flex flex-col gap-5 justify-center items-center">
-			<h1 class="title text-l">
+			<h1 class="title">
 				<TypedText>
 					My personal projects
 				</TypedText>
 			</h1>
 
-			<p class="title text-s max-w-lg">
+			<p class="title max-w-lg">
 				A list of projects I created over the last couple of years.
 			</p>
 

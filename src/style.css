@@ -15,6 +15,7 @@
 /* width */
 ::-webkit-scrollbar {
 	width: 10px;
+	height: 5px;
 }
 
 /* Track */
@@ -24,7 +25,7 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-	background: rgb(40, 40, 40); 
+	background: rgb(40, 40, 40);
 }
 
 /* Handle on hover */
@@ -37,7 +38,7 @@
 }
 
 body {
-	@apply bg-white text-black lowercase overflow-x-hidden;
+	@apply bg-white text-black lowercase;
 }
 
 footer {
@@ -60,12 +61,52 @@ svg.svgline * {
 	@apply animate-scroll;
 }
 
-p {
+h1 {
+	@apply text-l;
+}
+
+h2 {
+	@apply text-m;
+}
+
+h3, h4, h5, h6 {
+	@apply text-s;
+}
+
+p, li {
 	@apply text-s text-justify md:text-left;
 }
 
+li {
+	@apply list-outside ml-5;
+	list-style-type: square;
+	margin-left: 1.5rem;
+}
+
+pre {
+	@apply p-2 bg-light rounded !important;
+}
+
+pre code {
+	background: none !important;
+}
+
+pre * {	
+	font-family: monospace;
+	font-size: 1rem;
+}
+
+code * {
+	line-height: 1.2rem;
+}
+
+aside > * {
+	border-left: none !important;
+}
+
 .styling {
-	@apply absolute hidden md:block text-s text-gray fill-gray stroke-gray -translate-x-1/2;
+	@apply absolute hidden md:block text-s text-gray 
+		   fill-gray stroke-gray -translate-x-1/2;
 }
 
 .title {
@@ -74,4 +115,12 @@ p {
 
 .content {
 	@apply relative py-10 pl-6 md:pl-36 pr-6 md:pr-24;
+}
+
+.projects-tag {
+	@apply ml-0 px-2 text-white leading-none;
+	border-image-source: url('/img/Tag.png');
+	border-image-slice: 1 fill;
+	border-width: 6px;
+	image-rendering: pixelated;
 }

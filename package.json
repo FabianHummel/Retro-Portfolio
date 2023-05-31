@@ -20,10 +20,13 @@
 	},
 	"dependencies": {
 		"@solid-primitives/intersection-observer": "^2.0.1",
-		"@solidjs/router": "^0.4.2",
+		"@solidjs/router": "^0.8.2",
 		"esbuild": "^0.14.53",
 		"flag-icons": "^6.6.4",
+		"highlight.js": "^11.8.0",
 		"path": "^0.12.7",
-		"solid-js": "^1.4.7"
+		"solid-js": "^1.7.5",
+		"solid-markdown": "^1.2.2",
+		"solid-styled-components": "^0.28.5"
 	}
 }

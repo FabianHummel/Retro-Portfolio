@@ -4,9 +4,7 @@ import { Logo } from "@components/shared/Logo";
 
 export const Footer: Component = () => {
 	return (
-		<footer class="relative px-10 lg:px-20 pt-10 md:pt-20 pb-48
-					   border-t-2 border-t-black
-					   grid grid-cols-[1fr] lg:grid-cols-[1fr,30rem] md:grid-cols-[1fr,20rem]">
+		<footer class="relative px-10 lg:px-20 pt-10 md:pt-20 pb-48 border-t-2 border-t-black grid grid-cols-[1fr] lg:grid-cols-[1fr,30rem] md:grid-cols-[1fr,20rem]">
 
 			<div class="flex flex-row gap-x-5 items-center justify-center md:justify-start">
 				<div class="h-16 fill-black hidden md:block">

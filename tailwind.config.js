@@ -1,3 +1,5 @@
+const plugin = require('tailwindcss/plugin')
+
 module.exports = {
 	mode: 'jit',
 	content: [
@@ -5,6 +7,14 @@ module.exports = {
 		'./src/**/*.{js,ts,jsx,tsx,css,md,mdx,html,json,scss}',
 	],
 	darkMode: 'class',
+	plugins: [
+		plugin(function ({ addVariant }) {
+			[
+				addVariant('not-last', '&:not(:last-child)'),
+				addVariant('not-first', '&:not(:first-child)')
+			]
+		})
+	],
 	theme: {
 		extend: {
 			keyframes: {
@@ -41,10 +51,10 @@ module.exports = {
 				},
 
 				'firstkeyscale': {
-					'0%': { 
+					'0%': {
 						'width': '0px',
 					},
-					'100%': { 
+					'100%': {
 						'width': '64px',
 					}
 				},
@@ -89,8 +99,9 @@ module.exports = {
 		},
 		colors: {
 			'white': 'rgb(245, 245, 245)',
-			'gray': 'rgb(217, 217, 217)',
+			'gray': 'rgb(205, 205, 205)',
 			'black': 'rgb(40, 40, 40)',
+			'light': 'rgb(235, 235, 235)',
 		},
 		fontSize: {
 			'l': '2.3rem',

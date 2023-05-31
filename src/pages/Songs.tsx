@@ -4,6 +4,7 @@ import { ChapterText, DownArrow, SVGCircle, SVGLine, VerticalLine } from "@compo
 import { TypedText } from "@components/shared/TypedText";
 import MusicList from "@data/Music";
 import { Chapter } from "@components/shared/Chapter";
+import { Footer } from "@components/shared/Footer";
 
 export let [song, setSong]: Signal<MusicItemProps> = createSignal(null);
 export let [playing, setPlaying]: Signal<boolean> = createSignal(null);
@@ -74,14 +75,14 @@ const Songs: Component = () => {
 
 	return <>
 		<section class="relative pt-52 pb-36 flex flex-col gap-5 justify-center items-center">
-			<h1 class="title text-l">
+			<h1 class="title">
 				<TypedText>
 					~ Music I made ~
 				</TypedText>
 			</h1>
 
-			<p class="title text-s max-w-sm text-center">
-				Use headphones for the best experience - Enjoy!
+			<p class="title">
+				Use headphones for the best <br /> experience - Enjoy!
 			</p>
 
 			<div class="styling left-16 bottom-0 w-1 h-40 bg-gray" />
