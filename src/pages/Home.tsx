@@ -1,19 +1,13 @@
-import { Component } from "solid-js";
+import { Component, onMount } from "solid-js";
 import { Graphics } from "@components/home/Graphics";
 import { ChapterText, DownArrow, SVGCircle, SVGLine, VerticalLine } from "@components/shared/Styling";
 import { PixelImage } from "@components/shared/PixelImage";
 import { TypedText } from "@components/shared/TypedText";
 import { Chapter } from "@components/shared/Chapter";
-import { Game } from "@components/home/Game";
-import { Password } from "@components/home/Password";
-import { Footer } from "@components/shared/Footer";
 
 const Home: Component = () => {
 	return <>
-		<Password />
-		<Game />
-
-		<section class="relative h-screen flex flex-col justify-center items-center">
+		<section id="home-section" class="relative h-screen flex flex-col justify-center items-center">
 			<h1 class="text-center">
 				<TypedText>
 					Hello visitor!

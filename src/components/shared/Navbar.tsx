@@ -12,9 +12,11 @@ export const Navbar: Component = () => {
 
 	onscroll = () => {
 		if (window.scrollY > 0) {
-			navbar.classList.add("border-b-2");
+			navbar.classList.add("border-b-black");
+			navbar.classList.remove("border-b-white");
 		} else {
-			navbar.classList.remove("border-b-2");
+			navbar.classList.add("border-b-white");
+			navbar.classList.remove("border-b-black");
 		}
 
 		if (active() && window.scrollY < height()) {
@@ -25,7 +27,7 @@ export const Navbar: Component = () => {
 	}
 
 	return (
-		<nav ref={navbar} class="z-10 w-full h-32 fixed grid grid-cols-[auto,1fr] sm:grid-cols-[0.5fr_1fr_0.5fr] grid-rows-[1fr] place-items-center bg-white border-b-black transition-[border-bottom-width,transform]">
+		<nav ref={navbar} class="z-50 w-full h-[var(--navbar-height)] fixed grid grid-cols-[auto,1fr] sm:grid-cols-[0.5fr_1fr_0.5fr] grid-rows-[1fr] place-items-center bg-white border-b-2 border-b-white transition-[border-bottom-color,transform]">
 			<div class="w-full h-24 md:h-28 flex">
 				<Link href="/" class="mx-5 fill-black">
 					<Logo />

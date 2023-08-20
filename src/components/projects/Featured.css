@@ -1,0 +1,66 @@
+@font-face {
+	font-family: 'spectral';
+	src: url("/font/Spectral-Regular") format("truetype");
+	font-weight: normal;
+}
+
+@font-face {
+	font-family: 'spectral';
+	src: url("/font/Spectral-Bold") format("truetype");
+	font-weight: bolder;
+}
+
+@font-face {
+	font-family: 'spectral';
+	src: url("/font/Spectral-Italic") format("truetype");
+	font-weight: normal;
+	font-style: italic;
+}
+
+#featured-section {
+	@apply pt-[var(--navbar-height)]
+}
+
+#featured-section * {
+	font-family: 'spectral';
+	text-transform: initial;
+}
+
+#featured-section::before {
+	content: '';
+	@apply absolute inset-0 -z-10;
+
+	background-image: url('/img/projects/featured.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center var(--navbar-height);
+
+	-webkit-mask-image: linear-gradient(to bottom, #000000A0 0%, #00000040 70%, #00000000 90%);
+    mask-image: linear-gradient(to bottom, #000000A0 0%, #00000040 70%, #00000000 90%);
+}
+
+#featured-text * {
+	margin-bottom: 1rem;
+}
+
+#featured-title {
+	font-variant: small-caps;
+}
+
+#featured-subtitle {
+	text-align: left;
+}
+
+#featured-links * {
+	text-transform: capitalize;
+}
+
+#featured-links *:not(:last-child)::after {
+	content: '·';
+	margin-left: 1rem;
+}
+
+#featured-links::before, #featured-links::after {
+	content: '';
+	@apply flex-1 border-b-2 border-b-black;
+}

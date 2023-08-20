@@ -59,7 +59,7 @@ const ProjectList: Array<ProjectItemProps> = [
 	},
 
 	{
-		image: "img/projects/skys-horizon.png",
+		image: "img/projects/skys-horizon.svg",
 		title: "Sky's Horizon",
 		createDate: "2022-06-25",
 		description: [

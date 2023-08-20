@@ -33,6 +33,10 @@
 	background: rgb(40, 40, 40); 
 }
 
+:root {
+	--navbar-height: 8rem;
+}
+
 * {
 	@apply font-main;
 }
@@ -56,6 +60,39 @@ footer td {
 footer td:hover, footer td:focus-within {
 	transform: translateX(6px);
 }
+
+/* #home-section > * {
+	z-index: 10;
+}
+
+#home-section::before {
+	position: absolute;
+	z-index: 0;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	content: '';
+	background-position-y: 8rem;
+	background-size: auto 20rem;
+	image-rendering: pixelated
+}
+
+#home-section::after {
+	position: absolute;
+	z-index: 20;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	content: '';
+	background: url('/img/home/Vines.gif') no-repeat top,
+				url('/img/home/Birds.gif') no-repeat top;
+	background-size: auto 18rem,
+					 auto 18rem;
+	background-position-y: 8rem;
+	image-rendering: pixelated
+} */
 
 svg.svgline * {
 	@apply animate-scroll;
