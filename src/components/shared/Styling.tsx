@@ -40,7 +40,7 @@ export const SVGCircle: Component<{ top: number }> = (props) => {
 export const SVGLine: Component<{ top: number, height: number }> = (props) => {
 	return (
 		<div class="styling left-12 w-1" style={`top: ${props.top}%;`}>
-			<svg class="svgline" width="4" height={props.height} viewBox={`0 0 4 ${props.height}`} fill="none" xmlns="http://www.w3.org/2000/svg">
+			<svg class="animate-scroll" width="4" height={props.height} viewBox={`0 0 4 ${props.height}`} fill="none" xmlns="http://www.w3.org/2000/svg">
 				<line x1="0" y1="0" x2="0" y2={props.height} stroke-width="8" stroke-dasharray="8 8"/>
 			</svg>
 		</div>

@@ -3,37 +3,46 @@ import { Routes, Route } from "@solidjs/router";
 import { Navbar } from "@components/shared/Navbar";
 import { Limiter } from "@components/shared/Limiter";
 import { Footer } from "@components/shared/Footer";
+import { Loading } from "@components/shared/Loading";
+import { Songplayer } from "@components/music/Songplayer";
 
 const Home = lazy(() => import("@pages/Home"));
 const Projects = lazy(() => import("@pages/Projects"));
 const Songs = lazy(() => import("@pages/Songs"));
 const Book = lazy(() => import("@pages/Book"));
+const Github = lazy(() => import("@pages/Github"));
 
 export let mouseDown = false;
 
 ['mousedown', 'touchstart'].forEach((event) => {
-	document.addEventListener(event, () => {
-		mouseDown = true
-	})
+    document.addEventListener(event, () => {
+        mouseDown = true
+    })
 });
 
 ['mouseup', 'touchend'].forEach((event) => {
-	document.addEventListener(event, () => {
-		mouseDown = false
-	})
+    document.addEventListener(event, () => {
+        mouseDown = false
+    })
 });
 
 export default function App() {
-	return <>
-		<Navbar />
-		<Limiter>
-			<Routes>
-				<Route path="/" component={Home} />
-				<Route path="/projects" component={Projects} />
-				<Route path="/music" component={Songs} />
-				<Route path="/book" component={Book} />
-			</Routes>
-		</Limiter>
-		<Footer />
-	</>
+    return <>
+        <Loading>
+            <Songplayer>
+                <Navbar />
+                <Limiter>
+                    <Routes>
+                        <Route path="/" component={Home} />
+                        <Route path="/projects" component={Projects} />
+                        <Route path="/music" component={Songs} />
+                        <Route path="/book/" component={Book} />
+                        <Route path="/book/*chapter" component={Book} />
+                        <Route path="/github" component={Github} />
+                    </Routes>
+                </Limiter>
+                <Footer />
+            </Songplayer>
+        </Loading>
+    </>
 };

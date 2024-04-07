@@ -1,6 +1,6 @@
 import { PixelImage } from "@components/shared/PixelImage";
-import { Article, Articles, Entry as EntryProps } from "@data/Book";
-import { setIndex } from "@pages/Book";
+import { Entry as EntryProps, getArticleHref } from "@data/Book";
+import { Link } from "@solidjs/router";
 import { Component, For, Show, createSignal } from "solid-js";
 
 export const Entry: Component<{ entry: EntryProps }> = ({ entry }) => {
@@ -13,10 +13,9 @@ export const Entry: Component<{ entry: EntryProps }> = ({ entry }) => {
 				? <>
 					<div class="flex justify-between items-center cursor-pointer">
 						<header class="text-black flex-1" onClick={() => {
-							setIndex(Articles.indexOf(entry));
 							setOpen(true);
 						}}>
-							{entry.title}
+							<Link href={`/book/${getArticleHref(entry)}`}>{entry.title}</Link>
 						</header>
 						{entry.children &&
 							<PixelImage src={open() ? "/img/book/Retract.png" : "/img/book/Expand.png"} alt="Open/Close Section" w={5} h={5} scale={3} onClick={() =>

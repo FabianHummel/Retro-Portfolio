@@ -1,4 +1,5 @@
 use wasm_bindgen::prelude::*;
+use web_sys::window;
 
 #[wasm_bindgen]
 pub fn start() {
@@ -15,4 +16,10 @@ pub fn start() {
         .unwrap()
         .dyn_into::<web_sys::CanvasRenderingContext2d>()
         .unwrap();
+
+    context.begin_path();
+    context.rect(20.0, 20.0, 150.0, 100.0);
+    context.set_fill_style(&"red".into());
+    context.fill();
+    context.stroke();
 }

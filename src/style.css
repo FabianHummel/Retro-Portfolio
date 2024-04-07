@@ -3,69 +3,69 @@
 @tailwind utilities;
 
 @font-face {
-	font-family: 'bitmirror';
-	src: url('/font/bitmirror.woff2') format('woff2'),
-		 url('/font/bitmirror.woff') format('woff'),
-		 url("/font/bitmirror.ttf") format("truetype"),
-		 url("/font/bitmirror.eot?") format("eot");
-	font-weight: normal;
-	font-display: swap;
+    font-family: 'bitmirror';
+    src: url('/font/bitmirror.woff2') format('woff2'),
+        url('/font/bitmirror.woff') format('woff'),
+        url("/font/bitmirror.ttf") format("truetype");
+    font-weight: normal;
+    font-display: swap;
 }
 
 /* width */
 ::-webkit-scrollbar {
-	width: 10px;
-	height: 5px;
+    width: 10px;
+    height: 5px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-	background: rgb(217, 217, 217); 
+    background: rgb(217, 217, 217);
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-	background: rgb(40, 40, 40);
+    background: rgb(40, 40, 40);
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-	background: rgb(40, 40, 40); 
+    background: rgb(40, 40, 40);
 }
 
 :root {
-	--navbar-height: 8rem;
+    --navbar-height: 8rem;
 }
 
 * {
-	@apply font-main;
+    @apply font-main;
 }
 
 body {
-	@apply bg-white text-black lowercase;
+    @apply bg-white text-black lowercase;
 }
 
 footer {
-	background: url('/img/footer/Foreground.png') repeat-x bottom,
-			    url('/img/footer/Background.png') repeat-x bottom;
-	background-size: auto 16rem, 
-					 auto 16rem;
-	image-rendering: pixelated
+    background: url('/img/footer/Foreground.png') repeat-x bottom,
+        url('/img/footer/Background.png') repeat-x bottom;
+    background-size: auto 16rem,
+        auto 16rem;
+    image-rendering: pixelated
 }
 
 footer td {
-	transition: transform 0.1s steps(2, end);
+    transition: transform 0.1s steps(2, end);
 }
 
-footer td:hover, footer td:focus-within {
-	transform: translateX(6px);
+footer td:hover,
+footer td:focus-within {
+    transform: translateX(6px);
 }
 
-/* #home-section > * {
-	z-index: 10;
+#home-section>* {
+    z-index: 10;
 }
 
-#home-section::before {
+/* #home-section::before {
 	position: absolute;
 	z-index: 0;
 	top: 0;
@@ -73,8 +73,8 @@ footer td:hover, footer td:focus-within {
 	width: 100%;
 	height: 100%;
 	content: '';
-	background-position-y: 8rem;
-	background-size: auto 20rem;
+	background: url('/img/home/Skyline.png') no-repeat center;
+	background-size: cover;
 	image-rendering: pixelated
 }
 
@@ -94,70 +94,119 @@ footer td:hover, footer td:focus-within {
 	image-rendering: pixelated
 } */
 
-svg.svgline * {
-	@apply animate-scroll;
-}
-
 h1 {
-	@apply text-l;
+    @apply text-l;
 }
 
 h2 {
-	@apply text-m;
+    @apply text-m;
 }
 
-h3, h4, h5, h6 {
-	@apply text-s;
+h3,
+h4,
+h5,
+h6,
+p,
+li {
+    @apply text-s;
 }
 
-p, li {
-	@apply text-s text-justify md:text-left;
+p,
+li {
+    @apply text-justify md:text-left;
 }
 
 li {
-	@apply list-outside ml-5;
-	list-style-type: square;
-	margin-left: 1.5rem;
+    @apply list-outside ml-5;
+    list-style-type: square;
+    margin-left: 1.5rem;
 }
 
 pre {
-	@apply p-2 bg-light rounded !important;
+    @apply p-2 bg-light rounded !important;
 }
 
 pre code {
-	background: none !important;
+    background: none !important;
 }
 
-pre * {	
-	font-family: monospace;
-	font-size: 1rem;
+pre * {
+    font-family: monospace;
+    font-size: 1rem;
 }
 
 code * {
-	line-height: 1.2rem;
+    line-height: 1.2rem;
 }
 
-aside > * {
-	border-left: none !important;
+aside>* {
+    border-left: none !important;
+}
+
+.disabled {
+    @apply opacity-50 pointer-events-none;
 }
 
 .styling {
-	@apply absolute hidden md:block text-s text-gray 
-		   fill-gray stroke-gray -translate-x-1/2;
+    @apply absolute hidden md:block text-s text-gray fill-gray stroke-gray -translate-x-1/2;
 }
 
 .title {
-	@apply text-center px-5;
+    @apply text-center px-5;
 }
 
 .content {
-	@apply relative py-10 pl-6 md:pl-36 pr-6 md:pr-24;
+    @apply relative py-10 pl-6 md:pl-36 pr-6 md:pr-24;
 }
 
 .projects-tag {
-	@apply ml-0 px-2 text-white leading-none;
-	border-image-source: url('/img/Tag.png');
-	border-image-slice: 1 fill;
-	border-width: 6px;
-	image-rendering: pixelated;
+    @apply ml-0 px-2 text-white leading-none;
+    border-image-source: url('/img/Tag.png');
+    border-image-slice: 1 fill;
+    border-width: 6px;
+    image-rendering: pixelated;
+}
+
+#loading-screen:not(.loaded) {
+    overflow: hidden;
+}
+
+#loading-container {
+    transition: opacity 300ms ease;
+    opacity: 1;
+}
+
+#loading-screen.loaded #loading-container {
+    opacity: 0;
+}
+
+#loading-bar {
+    @apply p-[6px];
+    border-image-source: url('/img/Loading.png');
+    border-image-slice: 1 fill;
+    border-width: 6px;
+    image-rendering: pixelated;
+}
+
+#loading-items {
+    @apply h-[18px] w-[18px];
+    background-image: url('/img/Loading Bar.png');
+    background-repeat: repeat-x;
+    background-position: left center;
+    background-size: contain;
+    image-rendering: pixelated;
+    transition: width 100ms ease-out;
+}
+
+#song-player {
+    transition: transform 0.2s steps(4, end);
+    transform: translateY(100%);
+}
+
+#song-player.open {
+    transform: translateY(0);
+}
+
+#song-player.open #song-player-toggle {
+    display: none;
 }

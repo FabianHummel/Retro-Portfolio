@@ -3,7 +3,7 @@ import "./Featured.css";
 
 export const Featured : Component<{}> = () => {
     return (
-        <section id="featured-section" class="content h-screen">
+        <section id="featured-section" class="content h-[54rem]">
             <main class="h-full max-w-md mx-auto flex flex-col gap-6">
                 <img src="/img/projects/skys-horizon.svg" alt="Sky's Horizon Logo" class="mt-20" />
                 <div id="featured-text" class="mt-16">
@@ -14,7 +14,7 @@ export const Featured : Component<{}> = () => {
                         <em>Venture through foreign tales, research advanced technology, seek friendship with the unknown.</em>
                     </p>
                 </div>
-                <div id="featured-links" class="mt-16 flex gap-4 items-center justify-center">
+                <div id="featured-links" class="mt-16 flex items-center justify-center">
                     <a href="">Homepage</a>
                     <a href="">Github</a>
                     <a href="">Steam</a>

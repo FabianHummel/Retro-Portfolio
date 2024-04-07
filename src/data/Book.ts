@@ -52,9 +52,11 @@ const filterArticles = (entry: Entry): entry is Article => 'path' in entry;
 
 const getArticles = (article: Article): Article[] => {
 	const articles = article.children?.filter(filterArticles).flatMap(getArticles) ?? [];
-  return [article, ...articles];
+	return [article, ...articles];
 };
 
 export const Articles = Entries
 	.filter(filterArticles)
-	.flatMap((e) => getArticles(e))
+	.flatMap((e) => getArticles(e));
+
+export const getArticleHref = (article: Article) => article.path.replace('.md', '');

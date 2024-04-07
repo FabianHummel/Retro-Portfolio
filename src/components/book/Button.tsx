@@ -1,9 +1,9 @@
-import { Articles } from "@data/Book";
-import { setIndex } from "@pages/Book";
+import { Article, Articles, getArticleHref } from "@data/Book";
+import { Link } from "@solidjs/router";
 import { Component, JSX, splitProps } from "solid-js";
 
-interface ButtonProps extends JSX.HTMLAttributes<HTMLDivElement> {
-	index: number
+interface ButtonProps extends JSX.HTMLAttributes<HTMLAnchorElement> {
+	article: Article
 }
 
 export const Button: Component<ButtonProps> = (props) => {
@@ -16,13 +16,11 @@ export const Button: Component<ButtonProps> = (props) => {
 		image-rendering: pixelated;
 	`
 
-	const [{ index }, other] = splitProps(props, ["index"])
-	const entry = Articles[index]
+	const [{ article }, other] = splitProps(props, ["article"])
 
 	return (
-		<p {...other} style={style} class="flex-1 p-6 text-m h-3 grid content-center cursor-pointer leading-none" onClick={() =>
-			setIndex(index)}>
-			{entry.title}
-		</p>
+		<Link href={`/book/${getArticleHref(article)}`} {...other} style={`${style}`} class={`flex-1 p-6 text-m h-3 grid content-center cursor-pointer leading-none ${other.class}`}>
+			{article.title}
+		</Link>
 	)
 }
