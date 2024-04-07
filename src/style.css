@@ -200,7 +200,7 @@ aside>* {
 
 #song-player {
     transition: transform 0.2s steps(4, end);
-    transform: translateY(100%);
+    transform: translateY(110%);
 }
 
 #song-player.open {
@@ -208,5 +208,9 @@ aside>* {
 }
 
 #song-player.open #song-player-toggle {
+    display: none;
+}
+
+#playback-progress div:nth-child(2) {
     display: none;
 }

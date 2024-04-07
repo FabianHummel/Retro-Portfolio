@@ -1,8 +1,8 @@
-import { Component, onMount, Signal } from "solid-js";
+import { Component, createMemo, onMount, Signal } from "solid-js";
 import { mouseDown } from "@src/App";
 import { PixelImage } from "@components/shared/PixelImage";
 
-export const Slider: Component<{ signal?: Signal<number>, onChange: (value: number) => void }> = (props) => {
+export const Slider: Component<{ signal?: Signal<number>, onChange?: (value: number) => void, step?: number, range: number }> = (props) => {
     let slider: HTMLDivElement;
 
     const onSliderHandle = (clientX: number) => {
@@ -10,9 +10,9 @@ export const Slider: Component<{ signal?: Signal<number>, onChange: (value: numb
 
         const rect = slider.getBoundingClientRect();
         const x = clientX - rect.left - 4;
-        const volume = Math.min(Math.max(x / slider.clientWidth, 0), 1);
-        props.onChange(volume);
-        props.signal[1](volume);
+        const value = Math.min(props.range, Math.max(0, x / rect.width * props.range));
+        props.onChange?.(value);
+        props.signal[1](value);
     }
 
     onMount(() => {
@@ -31,18 +31,28 @@ export const Slider: Component<{ signal?: Signal<number>, onChange: (value: numb
         });
     })
 
-    function step(max: number, incr: number) {
-        return Math.ceil(props.signal[0]() * max / incr) * incr
+    function step(value: number, incr: number) {
+        return Math.ceil(value / incr) * incr;
     }
+
+    const percent = createMemo(() => {
+        if (!props.signal) return 0;
+
+        let v = props.signal[0]() / props.range * 100;
+        if (props.step) {
+            v = step(v, props.step * 100);
+        }
+        return v;
+    })
 
     return (
         <div ref={slider} class="w-full h-full flex items-center relative my-auto cursor-pointer select-none" classList={{
             "disabled": !props.signal
         }}>
-            <div class="h-[10px] bg-black" style={`width: ${step(100, 5)}%`} />
-            <div class="h-[10px] bg-gray" style={`width: ${100 - step(100, 5)}%`} />
+            <div class="h-[10px] bg-black" style={`width: ${percent()}%`} />
+            <div class="h-[10px] bg-gray" style={`width: ${100 - percent()}%`} />
 
-            <div class="absolute -translate-x-1/2" style={`left: ${step(100, 5)}%`}>
+            <div class="absolute -translate-x-1/2" style={`left: ${percent()}%`}>
                 <PixelImage src="img/music/knob.png" w={5} h={5} scale={3} />
             </div>
         </div>

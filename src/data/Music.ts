@@ -1,4 +1,4 @@
-import { MusicItemProps } from "@components/shared/Songplayer";
+import { MusicItemProps } from "@components/music/Songplayer";
 
 function genSpectrum(): Array<number> {
     return Array.from({ length: 100 }, () => Math.random());

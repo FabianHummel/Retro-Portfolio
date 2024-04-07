@@ -9,8 +9,6 @@ export const Music: Component<{ data: MusicItemProps, index: number }> = (props)
 
     const { song, playing, pause, resume, setSong, play, setVolume, isThisSong } = useSongplayer();
 
-    let storedVolume: number;
-
     const data = props.data;
     [data.getPlaytime, data.setPlaytime] = createSignal(
         data.getPlaytime !== undefined ? data.getPlaytime() : 0
@@ -46,10 +44,10 @@ export const Music: Component<{ data: MusicItemProps, index: number }> = (props)
 
     const toggleMute = () => {
         if (data.getVolume() !== 0) {
-            storedVolume = data.getVolume();
+            props.data.storedVolume = data.getVolume();
             data.setVolume(0);
         } else {
-            data.setVolume(storedVolume);
+            data.setVolume(props.data.storedVolume);
         }
         volumeChange(data.getVolume());
     }
@@ -66,21 +64,22 @@ export const Music: Component<{ data: MusicItemProps, index: number }> = (props)
             </div>
             <div class="row-start-2 flex gap-10 md:px-5">
                 <button onClick={() => { togglePlay() }}>
-                    {playing() && song() == data ?
-                        <PixelImage src="/img/music/pause.png" w={5} h={5} scale={4} alt={"Pause the song"} /> :
-                        <PixelImage src="/img/music/play.png" w={5} h={5} scale={4} alt={"Play the song"} />
-                    }
+                    <PixelImage src={
+                        playing() && song() == data ?
+                            "/img/music/pause.png" :
+                            "/img/music/play.png"
+                    } w={5} h={5} scale={4} alt={"Toggle song playback"} />
                 </button>
                 <button onClick={() => { toggleMute() }}>
-                    {data.getVolume() == 0 ?
-                        <PixelImage src="/img/music/muted.png" w={10} h={8} scale={3} alt={"Muted"} /> :
-
-                        data.getVolume() < 0.5 ?
-                            <PixelImage src="/img/music/silent.png" w={10} h={8} scale={3} alt={"Playing"} /> :
-                            <PixelImage src="/img/music/loud.png" w={10} h={8} scale={3} alt={"Playing"} />
-                    }
+                    <PixelImage src={
+                        data.getVolume() == 0 ?
+                            "/img/music/muted.png" :
+                            data.getVolume() < 0.5 ?
+                                "/img/music/silent.png" :
+                                "/img/music/loud.png"
+                    } w={10} h={8} scale={3} alt={"Volume indicator"} />
                 </button>
-                <Slider signal={[data.getVolume, data.setVolume]} onChange={volumeChange} />
+                <Slider signal={[data.getVolume, data.setVolume]} step={0.05} onChange={volumeChange} range={1} />
             </div>
             <div class="md:row-span-2 py-5 gap-5 h-28 my-auto">
                 <Spectrum data={data} />
