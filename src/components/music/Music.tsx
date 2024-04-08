@@ -1,4 +1,4 @@
-import { Component, createSignal } from "solid-js";
+import { Component, createSignal, onMount } from "solid-js";
 import { PixelImage } from "@components/shared/PixelImage";
 import { TypedText } from "@components/shared/TypedText";
 import { Slider } from "@components/music/Slider";
@@ -10,13 +10,16 @@ export const Music: Component<{ data: MusicItemProps, index: number }> = (props)
     const { song, playing, pause, resume, setSong, play, setVolume, isThisSong } = useSongplayer();
 
     const data = props.data;
-    [data.getPlaytime, data.setPlaytime] = createSignal(
-        data.getPlaytime !== undefined ? data.getPlaytime() : 0
-    );
 
-    [data.getVolume, data.setVolume] = createSignal(
-        data.getVolume !== undefined ? data.getVolume() : 0.5
-    );
+    if (!data.getPlaytime || !data.setPlaytime)
+        [data.getPlaytime, data.setPlaytime] = createSignal(
+            data.getPlaytime !== undefined ? data.getPlaytime() : 0
+        );
+
+    if (!data.getVolume || !data.setVolume)
+        [data.getVolume, data.setVolume] = createSignal(
+            data.getVolume !== undefined ? data.getVolume() : 0.5
+        );
 
     const togglePlay = () => {
         if (isThisSong(data)) {
