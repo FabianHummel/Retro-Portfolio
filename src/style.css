@@ -40,6 +40,14 @@
     @apply font-main;
 }
 
+*[hidden] {
+    display: none !important;
+}
+
+a {
+    cursor: pointer !important;
+}
+
 body {
     @apply bg-white text-black lowercase;
 }
@@ -213,4 +221,35 @@ aside>* {
 
 #playback-progress div:nth-child(2) {
     display: none;
+}
+
+.book-button {
+    border-image-source: url('/img/book/Link Background.png');
+    border-image-slice: 3;
+    border-width: 1rem;
+    border-style: solid;
+    border-image-repeat: stretch;
+    image-rendering: pixelated;
+}
+
+#github-section {
+    display: grid;
+    grid-template-columns: minmax(250px, 300px) 3fr;
+    grid-template-areas: "profile repositories" "profile repositories";
+}
+
+.github-repository {
+    @apply grow shrink p-4 relative;
+    flex-basis: 500px;
+    border-image-source: url('/img/github/Repository Background.png');
+    border-image-slice: 3 fill;
+    border-width: 1rem;
+    border-style: solid;
+    border-image-repeat: stretch;
+    image-rendering: pixelated;
+}
+
+.github-repository:hover {
+    filter: drop-shadow(10px 10px 0px rgb(217, 217, 217));
+    transform: translateY(-4px);
 }

@@ -1,7 +1,7 @@
 import { Component, For, JSXElement } from "solid-js";
 import { TypedText } from "@components/shared/TypedText";
 import { PixelImage } from "@components/shared/PixelImage";
-import { Tag } from "./Tag";
+import { Tag } from "../shared/Tag";
 
 export interface ProjectItemProps {
 	image?: string;

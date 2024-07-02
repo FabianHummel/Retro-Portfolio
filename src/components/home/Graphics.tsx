@@ -1,7 +1,7 @@
 import { Component } from "solid-js";
 import { PixelImage } from "@components/shared/PixelImage";
 
-export const Graphics: Component<{ image: string, text: string }> = (props) => {
+export const Graphics: Component<{ image: string, text?: string }> = (props) => {
 	return <>
 		<div class="relative w-60 h-60">
 			<div class="absolute w-full h-full stroke-gray">
@@ -12,7 +12,7 @@ export const Graphics: Component<{ image: string, text: string }> = (props) => {
 			} />
 		</div>
 
-		<p class="text-gray text-s rotate-[-7.5deg] max-w-[15rem]">
+		<p class="text-gray text-s rotate-[-7.5deg] max-w-[15rem]" hidden={!props.text}>
 			<span class="ml-20 inline-block rotate-180">
 				<PixelImage src="img/Continue Light.png" w={5} h={6} scale={3} alt="Continue" />
 			</span>
