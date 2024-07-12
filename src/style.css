@@ -253,3 +253,82 @@ aside>* {
     filter: drop-shadow(10px 10px 0px rgb(217, 217, 217));
     transform: translateY(-4px);
 }
+
+@keyframes shiny-text-animation {
+    0% {
+        background-position: 0 0;
+    }
+
+    100% {
+        background-position: -400% 0;
+    }
+}
+
+.shiny-background {
+    width: fit-content;
+    background: linear-gradient(-45deg, rgb(40,40,40) 30%, #fff 50%, rgb(40,40,40) 70%);
+    background-size: 400% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    animation: shiny-text-animation 7s infinite linear;
+}
+
+@font-face {
+    font-family: 'heast-messenger';
+    src: url('/font/heast-messenger.woff2') format('woff2'),
+        url('/font/heast-messenger.woff') format('woff'),
+        url("/font/heast-messenger.ttf") format("truetype");
+    font-weight: normal;
+    font-display: swap;
+}
+
+#heast-messenger .description * {
+    text-transform: initial;
+    font-family: 'heast-messenger', serif;
+    font-size: 1.3rem;
+}
+
+@font-face {
+    font-family: 'table-tennis';
+    src: url('/font/table-tennis.woff2') format('woff2'),
+    url('/font/table-tennis.woff') format('woff'),
+    url("/font/table-tennis.ttf") format("truetype");
+    font-weight: normal;
+    font-display: swap;
+}
+
+#table-tennis .description * {
+    text-transform: initial;
+    font-family: 'table-tennis', serif;
+    font-size: 1.3rem;
+}
+
+@font-face {
+    font-family: 'a-white-world';
+    src: url('/font/bitmirror.woff2') format('woff2'),
+    url('/font/bitmirror.woff') format('woff'),
+    url("/font/bitmirror.ttf") format("truetype");
+    font-weight: normal;
+    font-display: swap;
+}
+
+#a-white-world .description * {
+    font-family: 'a-white-world', serif;
+}
+
+@font-face {
+    font-family: 'skys-horizon';
+    src: url('/font/skys-horizon.woff2') format('woff2'),
+    url('/font/skys-horizon.woff') format('woff'),
+    url("/font/skys-horizon.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+#skys-horizon .description * {
+    text-transform: initial;
+    font-family: 'skys-horizon', serif;
+    font-size: 1.3rem;
+}

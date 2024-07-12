@@ -5,34 +5,56 @@ import {PixelImage} from "@components/shared/PixelImage";
 
 const username = "FabianHummel";
 const endpoint = "https://api.github.com/users";
+const closeFriendsNames = ["m-ue-d", "LambdaSpg", "atomeniuc", "Gipfel"];
 
-async function fetchUser(name: string) {
-    const response = await fetch(`${endpoint}/${name}`);
-    return await response.json();
+const lastUpdated = new Date(window.localStorage.getItem("github-last-updated"));
+
+if (lastUpdated && new Date().getTime() - lastUpdated.getTime() < 1000 * 60 * 60) {
+    console.log("Using cached data.");
+    var userCache = JSON.parse(window.localStorage.getItem("github-user")!);
+    var reposCache = JSON.parse(window.localStorage.getItem("github-repos")!);
+    var friendsCache = JSON.parse(window.localStorage.getItem("github-friends")!);
+    var starredCache = JSON.parse(window.localStorage.getItem("github-starred")!);
+} else {
+    console.log("Fetching new data.");
+    window.localStorage.setItem("github-last-updated", new Date().toISOString());
+}
+
+async function fetchUser() {
+    const response = await fetch(`${endpoint}/${username}`);
+    const data = await response.json();
+    window.localStorage.setItem("github-user", JSON.stringify(data));
+    return data;
 }
 
 async function fetchRepos() {
     const response = await fetch(`${endpoint}/${username}/repos`);
-    return await response.json();
+    const data = await response.json();
+    window.localStorage.setItem("github-repos", JSON.stringify(data));
+    return data;
 }
 
 async function fetchFriends() {
     const response = await fetch(`${endpoint}/${username}/following`);
-    return await response.json();
+    const data = await response.json();
+    window.localStorage.setItem("github-friends", JSON.stringify(data));
+    return data;
 }
 
 async function fetchStarred() {
     const response = await fetch(`${endpoint}/${username}/starred`);
-    return await response.json();
+    const data = await response.json();
+    window.localStorage.setItem("github-starred", JSON.stringify(data));
+    return data;
 }
 
-let user = await fetchUser(username);
-let repos = await fetchRepos();
+let user = userCache || await fetchUser();
+let repos = reposCache || await fetchRepos();
 repos = repos.filter(r => !r.fork);
-let friends = await fetchFriends();
-let starred = await fetchStarred();
+let friends = friendsCache || await fetchFriends();
+let starred = starredCache || await fetchStarred();
 
-const closeFriends = await Promise.all(["m-ue-d", "lambdaspg", "atomeniuc", "gipfel"].map(async f => await fetchUser(f)));
+let closeFriends = friends.filter((f: any) => closeFriendsNames.includes(f.login));
 
 const Github: Component = () => {
     let repositoryContainerRef!: HTMLDivElement;

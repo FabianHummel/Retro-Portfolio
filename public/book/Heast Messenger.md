@@ -1,3 +1,5 @@
+[//]: # (VITE_GENERATION_INDEX: 0)
+
 # Heast Messenger
 
 Heast is a secure, community-driven messenger service written fully in dotNet/C#. 
@@ -8,4 +10,4 @@ We first thought of creating a multiplayer game, but then we decided to create a
 
 The project is fully documented on our [gitbook page](https://heast.gitbook.io/docs/)
 
-![Screenshot](book/heast-messenger/screenshot.png)
+![Screenshot](Heast%20Messenger/screenshot.png)

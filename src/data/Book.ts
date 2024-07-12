@@ -1,3 +1,5 @@
+import {BookEntries} from "@src/generated/book-entries";
+
 export interface Heading {
 	title: string;
 	children?: Array<Entry>;
@@ -11,43 +13,6 @@ export interface Article {
 
 export type Entry = Heading | Article;
 
-export const Entries: Array<Entry> = [
-	{
-		title: "Projects",
-		path: "projects.md",
-		children: [
-			{
-				title: "Heast Messenger",
-				path: "heast-messenger.md",
-				children: [
-					{
-						title: "Security Layers",
-						path: "heast-messenger/security-layers.md"
-					}
-				],
-			},
-			{
-				title: "Table Tennis",
-				path: "table-tennis.md",
-				children: [
-					{
-						title: "ECS",
-						path: "table-tennis/ecs.md"
-					}
-				],
-			}
-		]
-	},
-	{
-		title: "Blog",
-		path: "blog.md"
-	},
-	{
-		title: "Random stuff",
-		path: "misc.md"
-	}
-]
-
 const filterArticles = (entry: Entry): entry is Article => 'path' in entry;
 
 const getArticles = (article: Article): Article[] => {
@@ -55,8 +20,8 @@ const getArticles = (article: Article): Article[] => {
 	return [article, ...articles];
 };
 
-export const Articles = Entries
+export const Articles = BookEntries
 	.filter(filterArticles)
 	.flatMap((e) => getArticles(e));
 
-export const getArticleHref = (article: Article) => article.path.replace('.md', '');
+export const getArticleHref = (article: Article) => article.path.replace(/\.md$/, '');

@@ -1,7 +1,8 @@
-import { Component, JSX, createSignal, onMount, createContext, useContext } from "solid-js";
+import {Component, JSX, createSignal, onMount, createContext, useContext, Setter} from "solid-js";
 
 interface LoadingContextProps {
     load(...pool: string[]): void;
+    startLoading(): Setter<number>;
 }
 
 export const LoadingContext = createContext<LoadingContextProps>();
@@ -67,8 +68,14 @@ export const Loading: Component<{ children: JSX.Element }> = (props) => {
         }
     }
 
+    function startLoading() {
+        setProgress(0);
+        setLoaded(false);
+        return setProgress;
+    }
+
     return (
-        <LoadingContext.Provider value={{ load }}>
+        <LoadingContext.Provider value={{ load, startLoading }}>
             <section ref={loadingScreen} class="h-screen" id="loading-screen" classList={{
                 "loaded": loaded()
             }}>

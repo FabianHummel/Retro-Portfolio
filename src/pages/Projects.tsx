@@ -12,12 +12,13 @@ const Projects: Component = () => {
 
     const { load } = useLoading();
 
-    load(
+    load(...[
         "/img/projects/featured.png",
         "/img/projects/heast-messenger.png",
-        "/img/projects/skys-horizon.svg",
-        "/img/projects/table-tennis.png",
-    );
+        "/img/projects/heast-icon.png",
+        "/img/projects/skys-horizon.png",
+        "/img/projects/table-tennis.png"
+    ]);
 
     return <>
         <Password />

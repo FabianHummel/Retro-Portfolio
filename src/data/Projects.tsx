@@ -6,9 +6,11 @@ export function genHeight(): number {
 
 const ProjectList: Array<ProjectItemProps> = [
 	{
-		image: "img/projects/heast-messenger.png",
+		logo: "/img/projects/heast-messenger.png",
 		title: "Heast Messenger",
+		id: "Heast Messenger",
 		createDate: "2022-06-22",
+		bookLink: "/book/Heast Messenger",
 		description: [
 			"Heast Messenger is a community-driven messenger service with latest security standards in mind, written 100% in dotNET C#. We want to have the benefits of quickly writing a message to a relative, but also having a fun place to hang out with your gaming-friends. Heast Messenger is not built to focus on one specific group of people, but rather being a place for everyone to connect with each other.",
 
@@ -21,13 +23,18 @@ const ProjectList: Array<ProjectItemProps> = [
 			name: "docs",
 			url: "https://heast.gitbook.io/docs/"
 		}],
-		tags: ["C#", "Avalonia", "DotNetty", "MySQL", "PostgreSQL", "Cassandra"]
+		tags: ["C#", "Avalonia", "DotNetty", "MySQL", "PostgreSQL"],
+		custom: [
+			<img src="/img/projects/heast-icon.png" class="absolute -z-10 rotate-6 w-[200px] xl:w-[400px] top-8 xl:-top-20 right-8 invisible md:visible" />
+		]
 	},
 
 	{
-		image: "img/projects/table-tennis.png",
+		logo: "/img/projects/table-tennis.png",
 		title: "Table Tennis",
+		id: "Table Tennis",
 		createDate: "2022-04-19",
+		bookLink: "/book/Table Tennis",
 		description: [
 			"Inspired by Twini-Golf by Polymars, this project is a work in progress Table Tennis game made in SDL2 C++. It features a minimal game style and it is possible to play against the computer or your friend in a locally hosted game. Custom game modes like fireball or hyperspeed spice up the gameplay and make it more fun to play.",
 
@@ -37,13 +44,15 @@ const ProjectList: Array<ProjectItemProps> = [
 			name: "github",
 			url: "https://github.com/FabianHummel/CPP-TableTennis-Game"
 		}],
-		tags: ["C++", "SDL2"]
+		tags: ["C++", "SDL2"],
 	},
 
 	{
-		image: "img/projects/white-world.png",
+		logo: "/img/projects/white-world.png",
 		title: "A White World",
+		id: "a-white-world",
 		createDate: "2022-09-18",
+		bookLink: "/book/a-white-world",
 		description: [
 			"A White World is an adventorous retro game about a seemingly lonely sailor. Complete quests in a storyline-driven world full of fun things to explore.",
 
@@ -59,9 +68,11 @@ const ProjectList: Array<ProjectItemProps> = [
 	},
 
 	{
-		image: "img/projects/skys-horizon.svg",
+		logo: "/img/projects/skys-horizon.png",
 		title: "Sky's Horizon",
+		id: "skys-horizon",
 		createDate: "2022-06-25",
+		bookLink: "/book/skys-horizon",
 		description: [
 			"Sky's Horizon features a unique, yet challenging storyline with unlimited, procedurally generated planets to explore, each with its own distinct materials and tons of new foreign flora and fauna. Right from the start you will be facing extreme conditions and other dangers to look out for, so prepare for an outrageous adventure.",
 

@@ -1,15 +1,17 @@
 import { Component, For, JSXElement } from "solid-js";
-import { TypedText } from "@components/shared/TypedText";
-import { PixelImage } from "@components/shared/PixelImage";
 import { Tag } from "../shared/Tag";
+import {Link} from "@solidjs/router";
 
 export interface ProjectItemProps {
-	image?: string;
+	logo: string;
 	title: string;
+	id: string;
 	createDate: string;
 	description: string[];
+	bookLink?: string;
 	links: Array<{ name: "github" | "demo" | "docs"; url: string }>;
 	tags: string[];
+	custom?: JSXElement | JSXElement[]
 }
 
 export const Project: Component<{ project: ProjectItemProps, decoration?: JSXElement[] }> = (props) => {
@@ -17,15 +19,11 @@ export const Project: Component<{ project: ProjectItemProps, decoration?: JSXEle
 	let dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', day: '2-digit' });
 
 	return (
-		<section class="content grid grid-cols-[1fr] grid-rows-[auto,auto] md:gap-x-20">
+		<section id={props.project.id} class="content grid grid-cols-[1fr] grid-rows-[auto,auto] md:gap-x-20 relative">
 			{/* text */}
-			<div class="row-start-1 mb-8 grid grid-cols-[auto,auto] grid-rows-[auto,auto]">
+			<div class="row-start-1 mb-8">
 				{/* title */}
-				<h2 class="text-l">
-					<TypedText onIntersect>
-						{`> ${props.project.title}`}
-					</TypedText>
-				</h2>
+				<img src={props.project.logo} class="h-48 mx-auto" />
 
 				{/* image */}
 				{/* {props.project.image ?
@@ -33,13 +31,20 @@ export const Project: Component<{ project: ProjectItemProps, decoration?: JSXEle
 				: null} */}
 
 				{/* date */}
-				<p class="row-start-2 pl-8 align-top leading-normal">
+				<p class="row-start-2 align-top leading-normal">
 					{`Creation date: ${dateTimeFormat.format(new Date(props.project.createDate))}`}
 				</p>
+
+				{/* book link */}
+				<div class="shiny-background">
+					<Link href={props.project.bookLink}>
+						<p>Read the book</p>
+					</Link>
+				</div>
 			</div>
 
 			{/* description */}
-			<div class="flex flex-col gap-10">
+			<div class="description flex flex-col gap-10">
 				<For each={props.project.description}>
 					{(paragraph) => (
 						<p class="text-s"> {paragraph} </p>
@@ -73,6 +78,13 @@ export const Project: Component<{ project: ProjectItemProps, decoration?: JSXEle
 
 			{/* extra styling */}
 			<For each={props.decoration}>
+				{(element) => (
+					element
+				)}
+			</For>
+
+			{/* custom */}
+			<For each={Array.of(props.project.custom).flat()}>
 				{(element) => (
 					element
 				)}
