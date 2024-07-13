@@ -164,7 +164,7 @@ aside>* {
 }
 
 .content {
-    @apply relative py-10 pl-6 md:pl-36 pr-6 md:pr-24;
+    @apply relative py-10 pl-6 md:pl-36 pr-6 md:pr-36;
 }
 
 .projects-tag {
@@ -233,7 +233,6 @@ aside>* {
 }
 
 #github-section {
-    display: grid;
     grid-template-columns: minmax(250px, 300px) 3fr;
     grid-template-areas: "profile repositories" "profile repositories";
 }

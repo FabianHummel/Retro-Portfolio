@@ -8,8 +8,8 @@ export interface MusicItemProps {
     song: string;
     spectrum: Array<number>;
     length: number;
-    storedVolume: number;
-    storedGlobalVolume: number;
+    storedVolume?: number;
+    storedGlobalVolume?: number;
 
     getPlaytime?: Accessor<number>;
     setPlaytime?: Setter<number>;

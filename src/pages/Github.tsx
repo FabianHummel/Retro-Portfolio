@@ -84,9 +84,9 @@ const Github: Component = () => {
             </p>
         </section>
 
-        <section id="github-section" class="relative p-36 pt-0 md:pr-24 gap-16">
-            <div class="sticky top-[200px]">
-                <div class="relative w-full aspect-square mb-8">
+        <section id="github-section" class="relative block lg:grid p-12 lg:p-36 pt-0 md:pr-24 gap-16">
+            <div class="block lg:sticky top-[200px]">
+                <div class="relative w-full aspect-square mb-8 mx-auto max-w-xs lg:max-w-none">
                     <div class="absolute w-full h-full stroke-gray">
                         <svg class="animate-spin" viewBox="0 0 256 256" fill="none" overflow="visible"
                              xmlns="http://www.w3.org/2000/svg">
@@ -106,7 +106,7 @@ const Github: Component = () => {
                 </a>
 
                 <h1 class="mt-14 mb-4"><TypedText>Close friends</TypedText></h1>
-                <ul class="flex flex-col gap-4 m-0 p-0">
+                <ul class="flex flex-col gap-4 m-0 p-0 mb-16">
                     <For each={closeFriends}>
                         {(friend) => {
                             return (

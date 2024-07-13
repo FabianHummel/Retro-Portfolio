@@ -17,7 +17,6 @@ function addRecursively(result: any, target: string) {
 		if (file.endsWith(".md") && file !== '404.md') {
 			const firstLine = fs.readFileSync(path.resolve(__dirname, './public/book/', target, file), 'utf-8').split('\n')[0];
 			const VITE_GENERATION_INDEX = firstLine.match(/VITE_GENERATION_INDEX: (\d+)/)?.[1] || -1;
-			console.log(file, VITE_GENERATION_INDEX);
 
 			const folder = file.replace(/\.md$/, '');
 			if (!result[folder]) {
@@ -30,7 +29,7 @@ function addRecursively(result: any, target: string) {
 
 	return Object.entries(result).reduce((acc, [key, value]) => {
 		acc.push({
-			title: key,
+			title: key.split(/-/).map((word) => word.charAt(0).toUpperCase() + word.slice(1)).join(' '),
 			...value as Entry,
 		});
 		return acc;

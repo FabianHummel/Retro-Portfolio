@@ -62,7 +62,8 @@ const Book: Component = () => {
 						<>
 							<SolidMarkdown children={article()} transformImageUri={(src, alt) => {
 								if (src.startsWith("http")) return src;
-								return `/book/${src}`;
+								// if (src.startsWith("/public")) return "/book" + src;
+								return "/book/" + Articles[index()].path.substring(0, Articles[index()].path.lastIndexOf("/")) + "/" + src;
 							}} />
 
 							<div class="grid grid-cols-[1fr,1fr] gap-x-6 mt-8">

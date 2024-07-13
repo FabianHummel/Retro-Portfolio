@@ -35,7 +35,7 @@ export const Navbar: Component = () => {
                     <Logo />
                 </Link>
             </div>
-            <h1 class="hidden sm:block font-main text-m md:text-l text-center">~ Fabian Hummel ~</h1>
+            <h1 class="hidden sm:block font-main text-m md:text-l text-center whitespace-nowrap">~ Fabian Hummel ~</h1>
             <div class="w-full px-5 sm:px-10 gap-7 flex justify-end items-center">
                 <Link href="/book">
                     <PixelImage src="img/Book.png" w={13} h={13} scale={3} />

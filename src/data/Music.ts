@@ -6,9 +6,23 @@ function genSpectrum(): Array<number> {
 
 const MusicList: Array<MusicItemProps> = [
     {
+        title: "City Rider",
+        song: "music/city-rider.wav",
+        length: 82,
+        spectrum: genSpectrum(),
+        description: ""
+    },
+    {
+        title: "Digital Overcome",
+        song: "music/digital-overcome.wav",
+        length: 93,
+        spectrum: genSpectrum(),
+        description: ""
+    },
+    {
         title: "Fresh Hands",
         song: "music/fresh-hands.wav",
-        length: 79,
+        length: 58,
         spectrum: genSpectrum(),
         description: ""
     },
@@ -19,15 +33,6 @@ const MusicList: Array<MusicItemProps> = [
         spectrum: genSpectrum(),
         description: ""
     },
-
-    {
-        title: "Digital Overcome",
-        song: "music/digital-overcome.wav",
-        length: 64,
-        spectrum: genSpectrum(),
-        description: ""
-    },
-
     {
         title: "Kuehlschrank",
         song: "music/kuehlschrank.wav",
