@@ -37,7 +37,7 @@ export const Spectrum: Component<{ data: MusicItemProps }> = (props) => {
         <div ref={spectrum} class="w-full h-full flex justify-evenly items-center cursor-pointer">
             <For each={props.data.spectrum}>
                 {(item, index) =>
-                    <div style={`height: ${item * 50 + 50}%;`} class={`w-[3px] transition-colors duration-300 ${index() % 2 === 0 ? "hidden 2xl:block" : "block"
+                    <div style={`height: ${item * 100}%;`} class={`w-[3px] transition-colors duration-300 ${index() % 2 === 0 ? "hidden 2xl:block" : "block"
                         } ${props.data.getPlaytime() / props.data.length <= index() / props.data.spectrum.length ? "bg-gray" : "bg-black"}
 					`}></div>
                 }

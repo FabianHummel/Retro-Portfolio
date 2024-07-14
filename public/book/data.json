@@ -1,0 +1,42 @@
+{
+  "My Projects": {
+  },
+
+  "Sky's Horizon": {
+    "path": "skys-horizon",
+    "children": {
+      "Minecraft": {
+        "path": "minecraft"
+      },
+      "Unity": {
+        "path": "unity"
+      },
+      "Back to Minecraft": {
+        "path": "back-to-minecraft"
+      },
+      "Godot": {
+        "path": "godot"
+      }
+    }
+  },
+
+  "Heast Messenger": {
+    "path": "heast-messenger",
+    "children": {
+      "Security Layers": {
+        "path": "security-layers"
+      }
+    }
+  },
+
+  "A White World": {
+    "path": "a-white-world"
+  },
+
+  "Table Tennis": {
+    "path": "table-tennis"
+  },
+
+  "Other Stuff": {
+  }
+}
