@@ -1,10 +1,9 @@
 import { Component, For } from "solid-js";
-import { Music } from "@components/music/Music";
+import Music from "@components/music/Music";
 import { ChapterText, DownArrow, SVGCircle, SVGLine, VerticalLine } from "@components/shared/Styling";
 import { TypedText } from "@components/shared/TypedText";
 import { Chapter } from "@components/shared/Chapter";
 import useLoading from "@components/shared/Loading";
-import Book from "@pages/Book";
 import {MusicItemProps} from "@components/music/Songplayer";
 
 const music = await fetch("/music/data.json").then(async res => await res.json() as MusicItemProps[]);

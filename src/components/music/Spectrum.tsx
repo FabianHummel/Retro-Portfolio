@@ -1,19 +1,23 @@
-import { Component, For, onMount } from "solid-js";
-import { mouseDown } from "@src/App";
-import useSongplayer, { MusicItemProps } from "@components/music/Songplayer";
+import {For, onMount} from "solid-js";
+import {mouseDown} from "@src/App";
+import useSongplayer, {MusicItemProps} from "@components/music/Songplayer";
 
-export const Spectrum: Component<{ data: MusicItemProps }> = (props) => {
+interface SpectrumProps {
+    data: MusicItemProps;
+    onChange?: (time: number) => void;
+}
+
+export default function Spectrum(props: SpectrumProps) {
     let spectrum: HTMLDivElement;
 
-    const { isThisSong, player } = useSongplayer();
+    const { isThisSong, playtime } = useSongplayer();
 
-    const onSpectrumClick = (clientX: number) => {
+    function onSpectrumClick(clientX: number) {
         if (isThisSong(props.data)) {
             const rect = spectrum.getBoundingClientRect();
             const x = clientX - rect.left;
             const time = x / spectrum.clientWidth * props.data.length;
-            player().currentTime = time;
-            props.data.setPlaytime(time);
+            props.onChange?.(time);
         }
     }
 
@@ -34,12 +38,15 @@ export const Spectrum: Component<{ data: MusicItemProps }> = (props) => {
     })
 
     return (
-        <div ref={spectrum} class="w-full h-full flex justify-evenly items-center cursor-pointer">
+        <div ref={spectrum} class={`w-full h-full flex justify-evenly items-center
+            ${isThisSong(props.data) ? "cursor-pointer" : "cursor-not-allowed"}
+        `}>
             <For each={props.data.spectrum}>
                 {(item, index) =>
-                    <div style={`height: ${item * 100}%;`} class={`w-[3px] transition-colors duration-300 ${index() % 2 === 0 ? "hidden 2xl:block" : "block"
-                        } ${props.data.getPlaytime() / props.data.length <= index() / props.data.spectrum.length ? "bg-gray" : "bg-black"}
-					`}></div>
+                    <div style={`height: ${item * 100}%;`} class={`w-[3px] transition-colors duration-300
+                        ${index() % 2 === 0 ? "hidden 2xl:block" : "block"} 
+                        ${isThisSong(props.data) && playtime() / props.data.length > index() / props.data.spectrum.length ? "bg-black" : "bg-gray"}
+                    `} />
                 }
             </For>
         </div>

@@ -2,7 +2,14 @@ import { Component, createMemo, onMount, Signal } from "solid-js";
 import { mouseDown } from "@src/App";
 import { PixelImage } from "@components/shared/PixelImage";
 
-export const Slider: Component<{ signal?: Signal<number>, onChange?: (value: number) => void, step?: number, range: number }> = (props) => {
+interface SliderProps {
+    signal?: Signal<number>,
+    onChange(value: number): void,
+    step?: number,
+    range: number
+}
+
+export default function Slider(props: SliderProps) {
     let slider: HTMLDivElement;
 
     const onSliderHandle = (clientX: number) => {

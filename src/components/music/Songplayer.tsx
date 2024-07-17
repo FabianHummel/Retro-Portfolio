@@ -1,6 +1,17 @@
 import { PixelImage } from "@components/shared/PixelImage";
-import { Accessor, createContext, createSignal, ParentProps, Setter, Signal, useContext } from "solid-js";
-import { Slider } from "./Slider";
+import {
+    Accessor,
+    createContext,
+    createEffect,
+    createSignal,
+    on, onCleanup, onMount,
+    ParentProps,
+    Setter,
+    Signal,
+    useContext
+} from "solid-js";
+import Slider from "./Slider";
+import VolumeIcon from "@components/music/VolumeIcon";
 
 export interface MusicItemProps {
     title: string;
@@ -8,14 +19,7 @@ export interface MusicItemProps {
     song: string;
     spectrum: Array<number>;
     length: number;
-    storedVolume?: number;
-    storedGlobalVolume?: number;
-
-    getPlaytime?: Accessor<number>;
-    setPlaytime?: Setter<number>;
-
-    getVolume?: Accessor<number>;
-    setVolume?: Setter<number>;
+    volume?: number;
 }
 
 interface SongplayerContextProps {
@@ -23,16 +27,15 @@ interface SongplayerContextProps {
     setSong: Setter<MusicItemProps>;
     playing: Accessor<boolean>;
     setPlaying: Setter<boolean>;
+    playtime: Accessor<number>;
+    setPlaytime: (time: number) => void;
 
-    isThisSong: (data: MusicItemProps) => boolean;
-    play: () => void;
-    pause: () => void;
-    resume: () => void;
-    toggle: () => void;
-    setVolume: (volume: number) => void;
-    togglePlay: (e: KeyboardEvent) => void;
-
-    player: () => HTMLAudioElement;
+    isThisSong(data: MusicItemProps): boolean;
+    play(): void;
+    pause(): void;
+    resume(): void;
+    toggle(): void;
+    updateVolume(): void;
 }
 
 const SongplayerContext = createContext<SongplayerContextProps>({} as SongplayerContextProps);
@@ -46,42 +49,77 @@ export function Songplayer(props: ParentProps) {
     const [song, setSong]: Signal<MusicItemProps> = createSignal(null);
     const [playing, setPlaying]: Signal<boolean> = createSignal(null);
     const [open, setOpen] = createSignal<boolean>(null);
-    const [volume, setVolume] = createSignal(0.5);
+    const [master, setMaster] = createSignal(0.75);
+    const [playtime, setPlaytime] = createSignal(0);
+    let storedMaster = master();
 
     let player!: HTMLAudioElement;
 
-    let intervalID: number;
+    let frame: number;
 
-    const isThisSong = (data: MusicItemProps) => {
+    onMount(() => {
+        frame = requestAnimationFrame(handleUpdate);
+
+        document.addEventListener('keypress', function(event) {
+            if (event.code == "Space" || event.code == "MediaPlayPause") {
+                event.preventDefault();
+                if (song() !== null) {
+                    togglePlay();
+                }
+            }
+            if (event.code == "MediaTrackNext") {
+                // TODO: play next song
+            }
+            if (event.code == "MediaTrackPrevious") {
+                // TODO: play previous song
+            }
+        });
+    });
+
+    onCleanup(() => {
+        cancelAnimationFrame(frame);
+    });
+
+    createEffect(on(master, () => {
+        updateVolume();
+    }));
+
+    createEffect(on(song, () => {
+        setPlaytime(0);
+    }));
+
+    function handleUpdate() {
+        setPlaytime(player.currentTime);
+        frame = requestAnimationFrame(handleUpdate);
+    }
+
+    function isThisSong (data: MusicItemProps) {
         return song != undefined && song() != null && song() == data;
     }
 
-    const play = () => {
+    function play () {
         player.src = song().song;
+        updateVolume();
         resume();
     }
 
-    const setPlayerVolume = (volume: number) => {
-        player.volume = song().getVolume() * volume;
+    function updateVolume() {
+        player.volume = (song()?.volume ?? 0.75) * master();
     }
 
-    const pause = () => {
-        song().setPlaytime(player.currentTime);
+    function pause () {
+        setPlaytime(player.currentTime);
         setPlaying(false);
         player.pause();
-        window.clearInterval(intervalID);
     }
 
-    const resume = () => {
-        player.currentTime = song().getPlaytime();
+    function resume () {
+        player.currentTime = playtime();
         setPlaying(true);
         player.play();
-        intervalID = window.setInterval(() => {
-            song().setPlaytime(player.currentTime);
-        }, 200)
     }
 
-    const toggle = () => {
+    function togglePlay () {
         if (playing()) {
             pause();
         } else {
@@ -89,27 +127,18 @@ export function Songplayer(props: ParentProps) {
         }
     }
 
-    const togglePlay = (e: KeyboardEvent) => {
-        if (e.code == "Space") {
-            e.preventDefault();
-            if (song() !== null) {
-                toggle();
-            }
-        }
-    }
-
-    const toggleMute = () => {
-        if (volume() !== 0) {
-            song().storedGlobalVolume = volume();
-            setVolume(0);
+    function toggleMute () {
+        if (master() !== 0) {
+            storedMaster = master();
+            setMaster(0);
         } else {
-            setVolume(song().storedGlobalVolume);
+            setMaster(storedMaster);
         }
-        setPlayerVolume(volume());
     }
 
-    // on spacebar press toggle play/pause
-    document.addEventListener('keydown', togglePlay);
+    function handleMasterVolumeChanged(value: number) {
+        setMaster(value);
+    }
 
     return (
         <SongplayerContext.Provider value={{
@@ -121,10 +150,13 @@ export function Songplayer(props: ParentProps) {
             play,
             pause,
             resume,
-            toggle,
-            setVolume: setPlayerVolume,
-            togglePlay,
-            player: () => player
+            toggle: togglePlay,
+            updateVolume,
+            playtime,
+            setPlaytime: function (time: number) {
+                setPlaytime(time);
+                player.currentTime = time;
+            },
         }}>
             <audio ref={player} class="hidden" loop></audio>
             {props.children}
@@ -138,7 +170,7 @@ export function Songplayer(props: ParentProps) {
                 </div>
 
                 <div class="flex align-middle gap-4 justify-start">
-                    <button onClick={toggle}>
+                    <button onClick={togglePlay}>
                         <PixelImage src={
                             playing() ?
                                 "/img/music/pause.png" :
@@ -155,17 +187,11 @@ export function Songplayer(props: ParentProps) {
 
                 <div class="flex align-middle gap-4 md:gap-12 justify-end">
                     <button onClick={() => { toggleMute() }}>
-                        <PixelImage src={
-                            volume() == 0 ?
-                                "/img/music/muted.png" :
-                                volume() < 0.5 ?
-                                    "/img/music/silent.png" :
-                                    "/img/music/loud.png"
-                        } w={10} h={8} scale={3} alt={"Volume indicator"} />
+                        <VolumeIcon volume={master()} />
                     </button>
 
                     <div class="w-24 md:w-56">
-                        <Slider signal={[volume, setVolume]} step={0.05} onChange={setPlayerVolume} range={1} />
+                        <Slider signal={[master, setMaster]} step={0.05} onChange={handleMasterVolumeChanged} range={1} />
                     </div>
 
                     <button onClick={() => setOpen(false)}>
@@ -174,7 +200,7 @@ export function Songplayer(props: ParentProps) {
                 </div>
 
                 <div id="playback-progress" class="absolute -top-[5px] left-0 right-0">
-                    <Slider signal={[song().getPlaytime, song().setPlaytime]} range={song().length} onChange={value => {
+                    <Slider signal={[playtime, setPlaytime]} range={song().length} onChange={value => {
                         player.currentTime = value;
                     }} />
                 </div>
