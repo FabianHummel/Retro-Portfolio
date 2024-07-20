@@ -3,8 +3,6 @@ import { ChapterText, DownArrow, SVGCircle, SVGLine, VerticalLine } from "@compo
 import { TypedText } from "@components/shared/TypedText";
 import ProjectList, { genHeight } from "@data/Projects";
 import { Project } from "@components/projects/Project";
-import { Game } from "@components/home/Game";
-import { Password } from "@components/home/Password";
 import { Featured } from "@components/projects/Featured";
 import useLoading from "@components/shared/Loading";
 
@@ -21,9 +19,6 @@ const Projects: Component = () => {
     ]);
 
     return <>
-        <Password />
-        <Game />
-
         <Featured />
 
         <section class="relative pt-52 pb-36 flex flex-col gap-5 justify-center items-center">

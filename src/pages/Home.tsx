@@ -1,4 +1,4 @@
-import { Component } from "solid-js";
+import {Component, onMount} from "solid-js";
 import { Graphics } from "@components/home/Graphics";
 import { ChapterText, DownArrow, SVGCircle, SVGLine, VerticalLine } from "@components/shared/Styling";
 import { PixelImage } from "@components/shared/PixelImage";
@@ -21,16 +21,16 @@ const Home: Component = () => {
             </h1>
 
             <div class="mt-20 animate-push">
-                <PixelImage src="img/Continue.png" w={5} h={6} scale={5} alt="Continue" />
+                <PixelImage src="img/Continue.png" w={5} h={6} scale={5} alt="Continue"/>
             </div>
 
-            <div class="styling left-16 bottom-0 w-1 h-40 bg-gray" />
+            <div class="styling left-16 bottom-0 w-1 h-40 bg-gray"/>
             <div class="styling left-5 bottom-8" style="writing-mode: tb-rl; transform: rotate(-180deg);">
                 0.1 Welcome
             </div>
             <div class="styling left-16 bottom-40 w-4 h-4">
                 <svg viewBox="0 0 16 16" stroke="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="8" cy="8" r="8" />
+                    <circle cx="8" cy="8" r="8"/>
                 </svg>
             </div>
         </section>

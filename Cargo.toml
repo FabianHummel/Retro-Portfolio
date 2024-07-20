@@ -1,24 +1,19 @@
 [package]
-name = "portfolio-game"
+name = "pixel-globe"
 version = "0.1.0"
-authors = ["Fabian Hummel hum22501@spengergasse.at"]
-description = "A wasm game for my portfolio"
+authors = ["Fabian Hummel fabianhummel22501@gmail.com"]
+description = "A pixel globe for my portfolio"
 license = "MIT/Apache-2.0"
 edition = "2021"
+
+[profile.wasm-release]
+inherits = "release"
+opt-level = "s"
+strip = "debuginfo"
 
 [lib]
 crate-type = ["cdylib"]
 
 [dependencies]
-wasm-bindgen = "0.2.84"
-js-sys = "0.3.61"
-
-[dependencies.web-sys]
-version = "0.3.4"
-features = [
-  'CanvasRenderingContext2d',
-  'Document',
-  'Element',
-  'HtmlCanvasElement',
-  'Window',
-]
+bevy = { version = "0.14", features = ["dynamic_linking"] }
+wasm-bindgen = { version = "0.2.92" }

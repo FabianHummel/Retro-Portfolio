@@ -28,10 +28,10 @@
         "fontverter": "^2.0.0",
         "highlight.js": "^11.8.0",
         "path": "^0.12.7",
-        "portfolio-game": "file:pkg",
         "solid-js": "^1.7.5",
         "solid-markdown": "^1.2.2",
         "solid-styled-components": "^0.28.5",
-        "tailwind-merge": "^1.14.0"
+        "tailwind-merge": "^1.14.0",
+        "pixel-globe": "file:pkg"
     }
 }

@@ -2,8 +2,6 @@ import { Link } from "@solidjs/router";
 import { Component } from "solid-js";
 import { Logo } from "@components/shared/Logo";
 import { PixelImage } from "@components/shared/PixelImage";
-import { height } from "@components/home/Game";
-import { active } from "@components/home/Password";
 import useSongplayer from "@components/music/Songplayer";
 
 export const Navbar: Component = () => {
@@ -19,12 +17,6 @@ export const Navbar: Component = () => {
         } else {
             navbar.classList.add("border-b-white");
             navbar.classList.remove("border-b-black");
-        }
-
-        if (active() && window.scrollY < height()) {
-            navbar.classList.add("-translate-y-full")
-        } else {
-            navbar.classList.remove("-translate-y-full")
         }
     }
 

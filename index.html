@@ -14,6 +14,15 @@
 
 	<div id="root" class="font-main"></div>
 
+	<div class="absolute top-[8rem] left-0 right-0 bottom-0">
+		<canvas id="pixel-globe" class="select-none pointer-events-none" style="outline: unset"></canvas>
+	</div>
+
+	<script type="module">
+		import { start } from 'pixel-globe/pixel_globe'
+		start()
+	</script>
+
 	<script src="/src/index.tsx" type="module"></script>
 </body>
 
