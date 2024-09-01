@@ -43,7 +43,7 @@ export default function Spectrum(props: SpectrumProps) {
         `}>
             <For each={props.data.spectrum}>
                 {(item, index) =>
-                    <div style={`height: ${item * 100}%;`} class={`w-[3px] transition-colors duration-300
+                    <div style={`height: ${item * 100}%;`} class={`min-h-[3px] w-[3px] transition-colors duration-300
                         ${index() % 2 === 0 ? "hidden 2xl:block" : "block"} 
                         ${isThisSong(props.data) && playtime() / props.data.length > index() / props.data.spectrum.length ? "bg-black" : "bg-gray"}
                     `} />
