@@ -1,22 +1,96 @@
-import {Component, onMount} from "solid-js";
+import {Component, onCleanup, onMount} from "solid-js";
 import { Graphics } from "@components/home/Graphics";
 import { ChapterText, DownArrow, SVGCircle, SVGLine, VerticalLine } from "@components/shared/Styling";
 import { PixelImage } from "@components/shared/PixelImage";
 import { TypedText } from "@components/shared/TypedText";
 import { Chapter } from "@components/shared/Chapter";
+import * as THREE from 'three';
+import Globe, {GlobeInstance} from "globe.gl";
+import {OutputPass} from "three/examples/jsm/postprocessing/OutputPass";
+import {DotScreenPass} from "three/examples/jsm/postprocessing/DotScreenPass";
+import {ShaderPass} from "three/examples/jsm/postprocessing/ShaderPass";
 
 const Home: Component = () => {
+
+    // let globe: GlobeInstance;
+    //
+    // onMount(() => {
+    //     globe = Globe()
+    //         .globeImageUrl('globe/water.png')
+    //         .backgroundColor('#00000000')
+    //         .showAtmosphere(false)
+    //         (document.getElementById('pixel-globe'))
+    //
+    //     globe.controls().enableZoom = false;
+    //     globe.controls().autoRotate = true;
+    //     globe.controls().autoRotateSpeed = -1;
+    //
+    //     const composer = globe.postProcessingComposer()
+    //     const scene = globe.scene();
+    //     const camera = globe.camera();
+    //
+    //     const dotScreenPass = new DotScreenPass(new THREE.Vector2(0, 0), 0.5, 0.2);
+    //     composer.addPass( dotScreenPass );
+    //
+    //     // const starsPass = new ShaderPass( {
+    //     //     name: 'stars',
+    //     //
+    //     //     uniforms: {
+    //     //         u_resolution: { value: new THREE.Vector2() },
+    //     //         u_time: { value: 0 }
+    //     //     },
+    //     //
+    //     //     vertexShader: `
+    //     //         void main() {
+    //     //             gl_Position = vec4(position, 1.0);
+    //     //         }
+    //     //     `,
+    //     //
+    //     //     fragmentShader: `
+    //     //         uniform vec2 u_resolution;
+    //     //         uniform float u_time;
+    //     //
+    //     //         void main() {
+    //     //             vec2 uv = gl_FragCoord.xy / u_resolution;
+    //     //             vec3 color = vec3(0.0);
+    //     //
+    //     //             float stars = 0.0;
+    //     //             for (float i = 0.0; i < 100.0; i++) {
+    //     //                 float x = fract(sin(i) * 1000.0);
+    //     //                 float y = fract(cos(i) * 1000.0);
+    //     //                 float d = distance(uv, vec2(x, y));
+    //     //                 stars += step(0.01, d);
+    //     //             }
+    //     //
+    //     //             color = vec3(stars);
+    //     //
+    //     //             gl_FragColor = vec4(color, 1.0);
+    //     //         }
+    //     //     `,
+    //     // } );
+    //     // composer.addPass( starsPass );
+    //
+    //     const outputPass = new OutputPass();
+    //     composer.addPass( outputPass );
+    // });
+    //
+    // onCleanup(() => {
+    //     globe._destructor();
+    // });
+
     return <>
-        <section id="home-section" class="relative h-screen flex flex-col justify-center items-center">
-            <h1 class="text-center">
+        <section id="home-section" class="relative h-screen flex flex-col justify-center items-center select-none">
+            <div id="pixel-globe" />
+
+            <h1 class="text-center bg-white">
                 <TypedText>
-                    Hello visitor!
+                    &nbsp;Hello visitor!&nbsp;
                 </TypedText>
             </h1>
 
-            <h1 class="text-center">
+            <h1 class="text-center bg-white">
                 <TypedText offset={1.5}>
-                    This is my portfolio.
+                    &nbsp;This is my portfolio.&nbsp;
                 </TypedText>
             </h1>
 
