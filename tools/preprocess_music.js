@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const publicDir = '/Users/fabian/Documents/Projects/Web/Portfolio/public';
+const publicDir = 'C:\\Users\\zzzdr\\WebstormProjects\\Retro-Portfolio\\public';
 
 const dataJson = JSON.parse(fs.readFileSync(`${publicDir}/music/data.json`, 'utf8'));
 

@@ -12,6 +12,7 @@ const Projects: Component = () => {
 
     load(...[
         "/img/projects/featured.png",
+        "/img/projects/amethyst.png",
         "/img/projects/heast-messenger.png",
         "/img/projects/heast-icon.png",
         "/img/projects/skys-horizon.png",

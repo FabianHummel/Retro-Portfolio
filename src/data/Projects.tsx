@@ -6,6 +6,21 @@ export function genHeight(): number {
 
 const ProjectList: Array<ProjectItemProps> = [
 	{
+		logo: "/img/projects/amethyst.png",
+		title: "Amethyst",
+		id: "amethyst",
+		createDate: "2024-03-12",
+		description: [
+			"Amethyst is a modern, high-level compiled language for all your Minecraft datapack / resourcepack needs. It translates high level DSL code into Minecraft's command syntax, making it easier to write and maintain complex datapacks. Amethyst aims for optimal performance and great integration with existing Minecraft features.",
+		],
+		links: [{
+			name: "github",
+			url: "https://github.com/FabianHummel/Amethyst-Compiler"
+		}],
+		tags: ["C#", "ANTLR", "Minecraft"]
+	},
+	
+	{
 		logo: "/img/projects/heast-messenger.png",
 		title: "Heast Messenger",
 		id: "heast-messenger",

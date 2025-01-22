@@ -1,4 +1,4 @@
-import { Component, For, JSXElement } from "solid-js";
+import {Component, For, JSXElement, Show} from "solid-js";
 import { Tag } from "../shared/Tag";
 import {Link} from "@solidjs/router";
 
@@ -36,11 +36,13 @@ export const Project: Component<{ project: ProjectItemProps, decoration?: JSXEle
 				</p>
 
 				{/* book link */}
-				<div class="shiny-background">
-					<Link href={props.project.bookLink}>
-						<p>Read the book</p>
-					</Link>
-				</div>
+				<Show when={props.project.bookLink}>
+					<div class="shiny-background">
+						<Link href={props.project.bookLink}>
+							<p>Read the book</p>
+						</Link>
+					</div>
+				</Show>
 			</div>
 
 			{/* description */}
