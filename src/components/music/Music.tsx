@@ -74,6 +74,10 @@ export default function Music(props: MusicProps) {
                         playing() && song() == props.data ?
                             "/img/music/pause.png" :
                             "/img/music/play.png"
+                    } darkSrc={
+                        playing() && song() == props.data ?
+                            "/img/music/pause Dark.png" :
+                            "/img/music/play Dark.png"
                     } w={5} h={5} scale={4} alt={"Toggle song playback"} />
                 </button>
                 <button onClick={() => { toggleMute() }}>
@@ -88,7 +92,7 @@ export default function Music(props: MusicProps) {
             </div>
 
             {/* decoration */}
-            <div class="styling absolute left-16 bottom-0 w-1 h-full bg-gray -translate-x-1/2" />
+            <div class="styling absolute left-16 bottom-0 w-1 h-full bg-gray dark:bg-darkgray -translate-x-1/2" />
         </section>
     )
 }

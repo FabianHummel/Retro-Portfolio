@@ -79,7 +79,7 @@ export const Loading: Component<{ children: JSX.Element }> = (props) => {
             <section ref={loadingScreen} class="h-screen" id="loading-screen" classList={{
                 "loaded": loaded()
             }}>
-                <div id="loading-container" class="select-none pointer-events-none absolute inset-0 z-50 h-full bg-white flex flex-col gap-2 items-center justify-center">
+                <div id="loading-container" class="select-none pointer-events-none absolute inset-0 z-50 h-full bg-white dark:bg-dark flex flex-col gap-2 items-center justify-center">
                     <h1>Loading{".".repeat(dots())}</h1>
                     <div id="loading-bar" class="w-[200px]">
                         <div id="loading-items" style={`width:${Math.floor(progress() * 10) * 18}px;`} />

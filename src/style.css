@@ -19,17 +19,17 @@
 
 /* Track */
 ::-webkit-scrollbar-track {
-    background: rgb(217, 217, 217);
+    @apply bg-white dark:bg-dark;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: rgb(40, 40, 40);
+    @apply bg-black dark:bg-gray;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: rgb(40, 40, 40);
+    @apply bg-dark dark:bg-black;
 }
 
 :root {
@@ -49,14 +49,10 @@ a {
 }
 
 body {
-    @apply bg-white text-black lowercase;
+    @apply bg-white dark:bg-dark text-black dark:text-gray lowercase;
 }
 
 footer {
-    background: url('/img/footer/Foreground.png') repeat-x bottom,
-        url('/img/footer/Background.png') repeat-x bottom;
-    background-size: auto 16rem,
-        auto 16rem;
     image-rendering: pixelated
 }
 
@@ -131,7 +127,7 @@ li {
 }
 
 pre {
-    @apply p-2 bg-light rounded !important;
+    @apply p-2 bg-light dark:bg-black rounded !important;
 }
 
 pre code {
@@ -156,7 +152,7 @@ aside>* {
 }
 
 .styling {
-    @apply absolute hidden md:block text-s text-gray fill-gray stroke-gray -translate-x-1/2;
+    @apply absolute hidden md:block text-s text-gray dark:text-darkgray fill-gray dark:fill-darkgray stroke-gray dark:stroke-darkgray -translate-x-1/2;
 }
 
 .title {
@@ -168,8 +164,7 @@ aside>* {
 }
 
 .projects-tag {
-    @apply ml-0 px-2 text-white leading-none;
-    border-image-source: url('/img/Tag.png');
+    @apply ml-0 px-2 text-white dark:text-black leading-none;
     border-image-slice: 1 fill;
     border-width: 6px;
     image-rendering: pixelated;
@@ -224,7 +219,6 @@ aside>* {
 }
 
 .book-button {
-    border-image-source: url('/img/book/Link Background.png');
     border-image-slice: 3;
     border-width: 1rem;
     border-style: solid;
@@ -240,7 +234,6 @@ aside>* {
 .github-repository {
     @apply grow shrink p-4 relative;
     flex-basis: 500px;
-    border-image-source: url('/img/github/Repository Background.png');
     border-image-slice: 3 fill;
     border-width: 1rem;
     border-style: solid;
@@ -249,7 +242,7 @@ aside>* {
 }
 
 .github-repository:hover {
-    filter: drop-shadow(10px 10px 0px rgb(217, 217, 217));
+    @apply drop-shadow-[10px_10px_0px_#d9d9d9] dark:drop-shadow-[10px_10px_0px_#282828];
     transform: translateY(-4px);
 }
 

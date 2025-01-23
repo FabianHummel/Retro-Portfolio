@@ -1,4 +1,5 @@
 import {PixelImage} from "@components/shared/PixelImage";
+import {theme} from "@src/App";
 
 interface VolumeIconProps {
     volume: number;
@@ -12,6 +13,12 @@ export default function VolumeIcon(props: VolumeIconProps) {
             : props.volume < 0.5
                 ? "/img/music/silent.png"
                 : "/img/music/loud.png"
+        } darkSrc={
+            props.volume == 0
+                ? "/img/music/muted Dark.png"
+            : props.volume < 0.5
+                ? "/img/music/silent Dark.png"
+                : "/img/music/loud Dark.png"
         } />
     )
 }

@@ -1,9 +1,11 @@
 import {Component, For, JSXElement, Show} from "solid-js";
 import { Tag } from "../shared/Tag";
 import {Link} from "@solidjs/router";
+import {theme} from "@src/App";
 
 export interface ProjectItemProps {
 	logo: string;
+	darkLogo?: string;
 	title: string;
 	id: string;
 	createDate: string;
@@ -23,7 +25,7 @@ export const Project: Component<{ project: ProjectItemProps, decoration?: JSXEle
 			{/* text */}
 			<div class="row-start-1 mb-8">
 				{/* title */}
-				<img src={props.project.logo} class="h-48 mx-auto" />
+				<img src={(theme() === "light" || !props.project.darkLogo) ? props.project.logo : props.project.darkLogo} class="h-48 mx-auto" />
 
 				{/* image */}
 				{/* {props.project.image ?
@@ -60,17 +62,17 @@ export const Project: Component<{ project: ProjectItemProps, decoration?: JSXEle
 					{(tag, index) => <>
 						<Tag tag={tag} />
 						{index() < props.project.tags.length - 1 &&
-							<div class="w-[6px] h-[6px] mx-4 bg-black" />
+							<div class="w-[6px] h-[6px] mx-4 bg-black dark:bg-gray" />
 						}
 					</>}
 				</For>
 				<div class="min-w-[14rem] ml-6 hidden md:grid grid-rows-[30px,0,30px] grid-cols-[2fr,1fr] flex-1 items-center">
-					<p class="col-span-2 text-s text-gray row-start-1 leading-none">{
+					<p class="col-span-2 text-s text-gray dark:text-darkgray row-start-1 leading-none">{
 						`${props.project.title} ${".".repeat(3)}${[...Array(10)].map(() => Math.round(Math.random())).join('')}`
 					}</p>
 					<div class="row-start-2 border-b-[3px] border-b-black" />
 					<div class="row-start-2 border-b-[3px] border-b-black border-dashed" />
-					<p class="col-span-2 text-s text-gray row-start-3 text-right leading-none">
+					<p class="col-span-2 text-s text-gray dark:text-darkgray row-start-3 text-right leading-none">
 						{`${"/".repeat(Math.random() * 5 + 3)}`}{props.project.links.map(link => {
 							return <>&nbsp<a class="hover:text-black duration-100" href={link.url}>{link.name}</a></>
 						})}

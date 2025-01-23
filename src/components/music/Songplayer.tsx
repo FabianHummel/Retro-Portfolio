@@ -160,12 +160,12 @@ export function Songplayer(props: ParentProps) {
         }}>
             <audio ref={player} class="hidden" loop></audio>
             {props.children}
-            <div id="song-player" class="fixed z-10 bottom-0 left-0 right-0 h-16 bg-white border-t-2 border-t-black px-6 py-4 grid grid-cols-[1fr,1fr] sm:grid-cols-[1fr,1fr,1fr] align-middle" classList={{
+            <div id="song-player" class="fixed z-10 bottom-0 left-0 right-0 h-16 bg-white dark:bg-dark border-t-2 border-t-black px-6 py-4 grid grid-cols-[1fr,1fr] sm:grid-cols-[1fr,1fr,1fr] align-middle" classList={{
                 'open': song() !== null && open() === null || song() !== null && open()
             }}> {song() !== null && <>
-                <div id="song-player-toggle" class="absolute right-[0.75rem] -top-10 w-12 h-10 bg-white border-x-2 border-t-2 border-black grid place-content-center" onClick={() => setOpen(true)}>
+                <div id="song-player-toggle" class="absolute right-[0.75rem] -top-10 w-12 h-10 bg-white dark:bg-dark border-x-2 border-t-2 border-black dark:border-black grid place-content-center" onClick={() => setOpen(true)}>
                     <div class="-mt-2">
-                        <PixelImage src="/img/music/open.png" w={5} h={5} scale={4} alt={"Open the player"} />
+                        <PixelImage src="/img/music/open.png" darkSrc="/img/music/open Dark.png" w={5} h={5} scale={4} alt={"Open the player"} />
                     </div>
                 </div>
 
@@ -175,6 +175,10 @@ export function Songplayer(props: ParentProps) {
                             playing() ?
                                 "/img/music/pause.png" :
                                 "/img/music/play.png"
+                        } darkSrc={
+                            playing() ?
+                                "/img/music/pause Dark.png" :
+                                "/img/music/play Dark.png"
                         } w={5} h={5} scale={4} alt={"Toggle song playback"} />
                     </button>
                 </div>
@@ -195,7 +199,7 @@ export function Songplayer(props: ParentProps) {
                     </div>
 
                     <button onClick={() => setOpen(false)}>
-                        <PixelImage src="/img/music/close.png" w={5} h={5} scale={4} alt={"Close the player"} />
+                        <PixelImage src="/img/music/close.png" darkSrc="/img/music/close Dark.png" w={5} h={5} scale={4} alt={"Close the player"} />
                     </button>
                 </div>
 

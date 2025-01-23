@@ -2,6 +2,7 @@ import {Component, createSignal, For, onCleanup, onMount} from "solid-js";
 import {TypedText} from "@components/shared/TypedText";
 import {Tag} from "@components/shared/Tag";
 import {PixelImage} from "@components/shared/PixelImage";
+import {theme} from "@src/App";
 
 const username = "FabianHummel";
 const endpoint = "https://api.github.com/users";
@@ -133,11 +134,13 @@ const Github: Component = () => {
                 <div class="flex flex-wrap gap-8">
                     <For each={repos}>
                         {(repo) => (
-                            <div class="github-repository">
+                            <div class="github-repository" style={`border-image-source: url('${
+                                theme() === "light" ? "/img/github/Repository Background.png" : "/img/github/Repository Background Dark.png"
+                            }');`}>
                                 <button title="Copy clone link" class="absolute top-4 right-4" onClick={() => {
                                     navigator.clipboard.writeText(repo.ssh_url);
                                     alert("Copied to clipboard!");
-                                }}><PixelImage src={"/img/github/Clone.png"} w={5} h={5} scale={3}/></button>
+                                }}><PixelImage src={"/img/github/Clone.png"} darkSrc={"/img/github/Clone Dark.png"} w={5} h={5} scale={3}/></button>
                                 <h2 class="underline"><a href={repo.html_url}>{repo.name}</a></h2>
                                 <p>{repo.description}</p>
                                 <div hidden={!repo.language} class="items-start flex flex-col mt-4">

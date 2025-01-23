@@ -56,11 +56,11 @@ export default function Slider(props: SliderProps) {
         <div ref={slider} class="w-full h-full flex items-center relative my-auto cursor-pointer select-none" classList={{
             "disabled": !props.signal
         }}>
-            <div class="h-[10px] bg-black" style={`width: ${percent()}%`} />
-            <div class="h-[10px] bg-gray" style={`width: ${100 - percent()}%`} />
+            <div class="h-[10px] bg-black dark:bg-gray" style={`width: ${percent()}%`} />
+            <div class="h-[10px] bg-gray dark:bg-darkgray" style={`width: ${100 - percent()}%`} />
 
             <div class="absolute -translate-x-1/2" style={`left: ${percent()}%`}>
-                <PixelImage src="img/music/knob.png" w={5} h={5} scale={3} />
+                <PixelImage src="img/music/knob.png" darkSrc="img/music/knob Dark.png" w={5} h={5} scale={3} />
             </div>
         </div>
     )

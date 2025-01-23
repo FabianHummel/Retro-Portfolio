@@ -1,6 +1,7 @@
 [//]: # (VITE_GENERATION_INDEX: 0)
 
-![Sky's Horizon](skys-horizon/logo.png)
+![Sky's Horizon](skys-horizon/logo.png?theme=light)
+![Sky's Horizon](skys-horizon/logo-dark.png?theme=dark)
 
 Sky's Horizon is one of my few dream games of my life, and has been hunting me since the last few years. I have been going through so many ideas and concepts, but none of them seemed to be the right one.
 

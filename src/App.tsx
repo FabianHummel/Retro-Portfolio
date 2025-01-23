@@ -1,4 +1,4 @@
-import { lazy } from "solid-js";
+import {createSignal, lazy, onMount} from "solid-js";
 import { Routes, Route } from "@solidjs/router";
 import { Navbar } from "@components/shared/Navbar";
 import { Limiter } from "@components/shared/Limiter";
@@ -14,6 +14,8 @@ const Github = lazy(() => import("@pages/Github"));
 
 export let mouseDown = false;
 
+export const [theme, setTheme] = createSignal<string>(localStorage.theme);
+
 ['mousedown', 'touchstart'].forEach((event) => {
     document.addEventListener(event, () => {
         mouseDown = true
@@ -27,6 +29,13 @@ export let mouseDown = false;
 });
 
 export default function App() {
+
+    onMount(() => {
+        const theme = localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        console.log(theme ? 'dark' : 'light');
+        setTheme(theme ? 'dark' : 'light');
+    });
+
     return <>
         <Loading>
             <Songplayer>

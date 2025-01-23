@@ -1,12 +1,13 @@
 import { TypedText } from "@components/shared/TypedText";
 import { Entry } from "@components/book/Entry";
 import SolidMarkdown from "solid-markdown";
-import {Component, For, createResource, createSignal, createEffect, onMount, Suspense} from "solid-js";
+import {Component, For, createResource, createSignal, createEffect, onMount, Suspense, Show} from "solid-js";
 import { Button } from "@components/book/Button";
 import hljs from 'highlight.js';
 import 'highlight.js/styles/atom-one-light.css';
 import { useParams } from "@solidjs/router";
 import {Entries} from "@solid-primitives/keyed";
+import {theme} from "@src/App";
 
 export interface Entry {
 	path?: string;
@@ -92,11 +93,18 @@ const Book: Component = () => {
 				<main class="max-w-[1000px] mx-auto">
 					{!article.loading &&
 						<>
-							<SolidMarkdown children={article()} transformImageUri={(src, alt) => {
-								if (src.startsWith("http")) return src;
-								// if (src.startsWith("/public")) return "/book" + src;
-								return "/book/" + articles[index()].path.substring(0, articles[index()].path.lastIndexOf("/")) + "/" + src;
-							}} />
+							<Show when={theme()} keyed>
+								{ theme => (
+									<SolidMarkdown children={article()} transformImageUri={(src, alt) => {
+										if (theme === "dark" && src.endsWith("?theme=light")) return "/book/blank.png";
+										if (theme === "light" && src.endsWith("?theme=dark")) return "/book/blank.png";
+
+										if (src.startsWith("http")) return src;
+										// if (src.startsWith("/public")) return "/book" + src;
+										return "/book/" + articles[index()].path.substring(0, articles[index()].path.lastIndexOf("/")) + "/" + src;
+									}} />
+								) }
+							</Show>
 
 							<div class="grid grid-cols-[1fr,1fr] gap-x-6 mt-8">
 								{articles[index() - 1] && <Button title={articles[index() - 1].title} article={articles[index() - 1]} class="col-start-1" />}

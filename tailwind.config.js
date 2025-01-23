@@ -100,8 +100,10 @@ module.exports = {
 		colors: {
 			'white': 'rgb(245, 245, 245)',
 			'gray': 'rgb(205, 205, 205)',
+			'darkgray': 'rgb(90, 90, 90)',
 			'black': 'rgb(40, 40, 40)',
 			'light': 'rgb(235, 235, 235)',
+			'dark': 'rgb(20, 20, 20)',
 		},
 		fontSize: {
 			'l': '2.3rem',

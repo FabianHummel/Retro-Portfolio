@@ -14,11 +14,17 @@ const Songs: Component = () => {
 
     load(
         "/img/music/pause.png",
+        "/img/music/pause Dark.png",
         "/img/music/play.png",
+        "/img/music/play Dark.png",
         "/img/music/muted.png",
+        "/img/music/muted Dark.png",
         "/img/music/silent.png",
+        "/img/music/silent Dark.png",
         "/img/music/loud.png",
+        "/img/music/loud Dark.png",
         "/img/music/knob.png",
+        "/img/music/knob Dark.png",
     );
 
     return <>
@@ -33,7 +39,7 @@ const Songs: Component = () => {
                 Use headphones for the best <br /> experience - Enjoy!
             </p>
 
-            <div class="styling left-16 bottom-0 w-1 h-40 bg-gray" />
+            <div class="styling left-16 bottom-0 w-1 h-40 bg-gray dark:bg-darkgray" />
             <div class="styling left-16 bottom-40 w-4 h-4">
                 <svg viewBox="0 0 16 16" stroke="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="8" cy="8" r="8" />
@@ -78,7 +84,7 @@ const Songs: Component = () => {
         </For>
 
         <section class="relative h-20">
-            <div class="styling left-16 top-0 w-1 h-8 bg-gray" />
+            <div class="styling left-16 top-0 w-1 h-8 bg-gray dark:bg-darkgray" />
             <div class="styling left-16 top-8 w-4 h-4">
                 <svg viewBox="0 0 16 16" stroke="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="8" cy="8" r="8" />

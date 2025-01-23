@@ -15,7 +15,7 @@ export default Styling
 
 export const VerticalLine: Component<{}> = () => {
 	return (
-		<div class="styling left-16 w-1 h-full bg-gray"></div>
+		<div class="styling left-16 w-1 h-full bg-gray dark:bg-darkgray"></div>
 	)
 }
 
@@ -50,7 +50,9 @@ export const SVGLine: Component<{ top: number, height: number }> = (props) => {
 export const DownArrow: Component<{ top: number }> = (props) => {
 	return (
 		<div class="styling left-20" style={`top: ${props.top}%;`}>
-			<PixelImage src="img/Continue Light.png" w={5} h={6} scale={3} />
+			<svg style="scale: 3" class="fill-gray dark:fill-darkgray" xmlns="http://www.w3.org/2000/svg" width="5" height="6" viewBox="0 0 5 6">
+				<polygon points="5 3 5 4 4 4 4 5 3 5 3 6 2 6 2 5 1 5 1 4 0 4 0 3 2 3 2 0 3 0 3 3 5 3" stroke-width="0" />
+			</svg>
 		</div>
 	)
 }

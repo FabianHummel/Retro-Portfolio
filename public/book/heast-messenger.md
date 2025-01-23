@@ -1,5 +1,7 @@
 [//]: # (VITE_GENERATION_INDEX: 1)
 
+![Heast Messenger](heast-messenger/logo.png)
+
 # Heast Messenger
 
 Heast is a secure, community-driven messenger service written fully in dotNet/C#. 

@@ -76,5 +76,5 @@
 
 #featured-links::before, #featured-links::after {
 	content: '';
-	@apply flex-1 border-b-2 border-b-black;
+	@apply flex-1 border-b-2 border-b-black dark:border-b-gray;
 }

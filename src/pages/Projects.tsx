@@ -33,7 +33,7 @@ const Projects: Component = () => {
                 A list of projects I created over the last couple of years.
             </p>
 
-            <div class="styling left-16 bottom-0 w-1 h-40 bg-gray" />
+            <div class="styling left-16 bottom-0 w-1 h-40 bg-gray dark:bg-darkgray" />
             <div class="styling left-5 bottom-8" style={`writing-mode: tb-rl; transform: rotate(-180deg);`}>
                 0.1 Projects
             </div>
@@ -58,7 +58,7 @@ const Projects: Component = () => {
         </For>
 
         <section class="relative h-20">
-            <div class="styling left-16 top-0 w-1 h-4 bg-gray" />
+            <div class="styling left-16 top-0 w-1 h-4 bg-gray dark:bg-darkgray" />
             <div class="styling left-16 top-4 w-4 h-4">
                 <svg viewBox="0 0 16 16" stroke="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="8" cy="8" r="8" />

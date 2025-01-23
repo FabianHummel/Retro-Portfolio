@@ -82,23 +82,27 @@ const Home: Component = () => {
         <section id="home-section" class="relative h-screen flex flex-col justify-center items-center select-none">
             <div id="pixel-globe" />
 
-            <h1 class="text-center bg-white">
+            <h1 class="text-center bg-white dark:bg-dark">
                 <TypedText>
                     &nbsp;Hello visitor!&nbsp;
                 </TypedText>
             </h1>
 
-            <h1 class="text-center bg-white">
+            <h1 class="text-center bg-white dark:bg-dark">
                 <TypedText offset={1.5}>
                     &nbsp;This is my portfolio.&nbsp;
                 </TypedText>
             </h1>
 
             <div class="mt-20 animate-push">
-                <PixelImage src="img/Continue.png" w={5} h={6} scale={5} alt="Continue"/>
+                <svg style="scale: 5" class="fill-dark dark:fill-gray" xmlns="http://www.w3.org/2000/svg"
+                     width="5" height="6" viewBox="0 0 5 6">
+                    <polygon points="5 3 5 4 4 4 4 5 3 5 3 6 2 6 2 5 1 5 1 4 0 4 0 3 2 3 2 0 3 0 3 3 5 3"
+                             stroke-width="0"/>
+                </svg>
             </div>
 
-            <div class="styling left-16 bottom-0 w-1 h-40 bg-gray"/>
+            <div class="styling left-16 bottom-0 w-1 h-40 bg-gray dark:bg-darkgray"/>
             <div class="styling left-5 bottom-8" style="writing-mode: tb-rl; transform: rotate(-180deg);">
                 0.1 Welcome
             </div>
@@ -146,14 +150,14 @@ const Home: Component = () => {
                 ~ More about me ~
             </h1>
 
-            <div class="styling left-16 top-0 w-1 h-28 bg-gray" />
+            <div class="styling left-16 top-0 w-1 h-28 bg-gray dark:bg-darkgray" />
             <div class="styling left-16 top-28 w-4 h-4">
                 <svg viewBox="0 0 16 16" stroke="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="8" cy="8" r="8" />
                 </svg>
             </div>
 
-            <div class="styling left-16 bottom-0 w-1 h-28 bg-gray" />
+            <div class="styling left-16 bottom-0 w-1 h-28 bg-gray dark:bg-darkgray" />
             <div class="styling left-16 bottom-28 w-4 h-4">
                 <svg viewBox="0 0 16 16" stroke="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="8" cy="8" r="8" />
