@@ -1,5 +1,3 @@
-[//]: # (VITE_GENERATION_INDEX: 4)
-
 
 # ~ A White World ~
 

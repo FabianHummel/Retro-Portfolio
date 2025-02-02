@@ -16,26 +16,28 @@ export const Entry: Component<{
 		<div class="text-m pl-6 border-l-2 border-l-gray">
 			{props.entry.path
 				? <>
-					<div class="flex justify-between items-center cursor-pointer">
-						<header class="text-black dark:text-gray flex-1" onClick={() => {
-							setOpen(true);
-						}}>
-							<Link href={`/book/${props.entry.path}`}>{props.title}</Link>
-						</header>
-						{props.entry.children &&
-							<PixelImage src={
-								open()
-									? "/img/book/Retract.png"
-									: "/img/book/Expand.png"}
-								darkSrc={
+					<Link href={`/book/${props.entry.path}`}>
+						<div class="flex justify-between items-center cursor-pointer">
+							<header class="text-black dark:text-gray flex-1" onClick={() => {
+								setOpen(true);
+							}}>
+								{props.title}
+							</header>
+							{props.entry.children &&
+								<PixelImage src={
 									open()
-										? "/img/book/Retract Dark.png"
-										: "/img/book/Expand Dark.png"
-								}
-								alt="Open/Close Section" w={5} h={5} scale={3} onClick={() =>
-								setOpen(!open())} />
-						}
-					</div>
+										? "/img/book/Retract.png"
+										: "/img/book/Expand.png"}
+									darkSrc={
+										open()
+											? "/img/book/Retract Dark.png"
+											: "/img/book/Expand Dark.png"
+									}
+									alt="Open/Close Section" w={5} h={5} scale={3} onClick={() =>
+									setOpen(!open())} />
+							}
+						</div>
+					</Link>
 					{props.entry.children &&
 						<Show when={open()}>
 							<Entries of={props.entry.children}>

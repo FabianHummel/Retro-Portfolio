@@ -3,40 +3,58 @@
   },
 
   "Sky's Horizon": {
-    "path": "skys-horizon",
+    "path": "skys-horizon.md",
     "children": {
       "Minecraft": {
-        "path": "minecraft"
+        "path": "minecraft.md"
       },
       "Unity": {
-        "path": "unity"
+        "path": "unity.md"
       },
       "Back to Minecraft": {
-        "path": "back-to-minecraft"
+        "path": "back-to-minecraft.md"
       },
       "Godot": {
-        "path": "godot"
+        "path": "godot.md"
       }
     }
   },
 
   "Heast Messenger": {
-    "path": "heast-messenger",
+    "path": "heast-messenger.md",
     "children": {
       "Security Layers": {
-        "path": "security-layers"
+        "path": "security-layers.md"
       }
     }
   },
 
   "A White World": {
-    "path": "a-white-world"
+    "path": "a-white-world.md"
   },
 
   "Table Tennis": {
-    "path": "table-tennis"
+    "path": "table-tennis.md"
+  },
+
+  "Squavy": {
+    "path": "squavy.md",
+    "children": {
+      "Business Plan": {
+        "path": "business-plan.pdf"
+      }
+    }
   },
 
   "Other Stuff": {
+  },
+
+  "Running Heurigen": {
+    "path": "running-heurigen.md",
+    "children": {
+      "Business Plan": {
+        "path": "business-plan.pdf"
+      }
+    }
   }
 }

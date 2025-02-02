@@ -25,7 +25,7 @@ export const TypedText: Component<{ children: string, onIntersect?: boolean, del
 		onMount(() => {
 			setTimeout(() => {
 				startAnimation();
-			}, props.offset * 1000 ?? 0)
+			}, props.offset * 1000)
 		})
 	}
 

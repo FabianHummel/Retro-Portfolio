@@ -46,7 +46,7 @@ export const Footer: Component = () => {
 						<td><a href="https://github.com/Heast-Messenger/Heast/tree/master" target="_blank">Heast Msg</a></td>
 					</tr>
 					<tr>
-						<td class="text-gray">LinkedIn</td>
+						<td class="text-gray dark:text-darkgray">LinkedIn</td>
 					</tr>
 				</tbody>
 			</table>

@@ -1,5 +1,3 @@
-[//]: # (VITE_GENERATION_INDEX: 1)
-
 # Attempt Nr. 2: Unity
 
 This one didn't last very long.

@@ -1,5 +1,3 @@
-[//]: # (VITE_GENERATION_INDEX: 1)
-
 ![Heast Messenger](heast-messenger/logo.png)
 
 # Heast Messenger

@@ -32,7 +32,6 @@ export default function App() {
 
     onMount(() => {
         const theme = localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches);
-        console.log(theme ? 'dark' : 'light');
         setTheme(theme ? 'dark' : 'light');
     });
 

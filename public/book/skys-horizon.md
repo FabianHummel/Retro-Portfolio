@@ -1,5 +1,3 @@
-[//]: # (VITE_GENERATION_INDEX: 0)
-
 ![Sky's Horizon](skys-horizon/logo.png?theme=light)
 ![Sky's Horizon](skys-horizon/logo-dark.png?theme=dark)
 

@@ -1,5 +1,3 @@
-[//]: # (VITE_GENERATION_INDEX: 2)
-
 # Attempt Nr. 3: Back to Minecraft
 
 ![Screenshot](back-to-minecraft-screenshot.png)

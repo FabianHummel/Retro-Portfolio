@@ -1,5 +1,3 @@
-[//]: # (VITE_GENERATION_INDEX: 0)
-
 # Attempt Nr. 1: Minecraft
 
 ![Screenshot](minecraft-screenshot.jpg)

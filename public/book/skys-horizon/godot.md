@@ -1,5 +1,3 @@
-[//]: # (VITE_GENERATION_INDEX: 3)
-
 # Attempt Nr. 4: Godot
 
 ![Screenshot](godot-screenshot.png)
