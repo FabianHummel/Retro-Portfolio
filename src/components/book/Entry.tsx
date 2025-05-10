@@ -1,7 +1,7 @@
 import { PixelImage } from "@components/shared/PixelImage";
 import { Link } from "@solidjs/router";
-import { Component, For, Show, createSignal } from "solid-js";
-import {Entry as EntryData} from "@pages/Book";
+import {Component, Show, createSignal, onMount, createEffect} from "solid-js";
+import {articles, Entry as EntryData, openedArticleIndex} from "@pages/Book";
 import {Entries} from "@solid-primitives/keyed";
 
 export const Entry: Component<{
@@ -12,32 +12,44 @@ export const Entry: Component<{
 
 	const [open, setOpen] = createSignal(false);
 
+	onMount(() => {
+		setOpen(window.localStorage.getItem("book:" + props.entry.path) === "true");
+	});
+
+	createEffect(() => {
+		window.localStorage.setItem("book:" + props.entry.path, open() ? "true" : "false");
+	});
+
 	return (
-		<div class="text-m pl-6 border-l-2 border-l-gray">
+		<div class="text-m ml-3 border-l-[3px] border-l-gray dark:border-l-darkgray">
 			{props.entry.path
 				? <>
-					<Link href={`/book/${props.entry.path}`}>
-						<div class="flex justify-between items-center cursor-pointer">
-							<header class="text-black dark:text-gray flex-1" onClick={() => {
+					<div class="flex justify-between items-center gap-2 pl-3" classList={{
+						"bg-light dark:bg-black": articles[openedArticleIndex()].path === props.entry.path,
+					}}>
+						<Link href={`/book/${props.entry.path}`} class={"flex-1"}>
+							<header class="text-black dark:text-gray" onClick={() => {
 								setOpen(true);
 							}}>
 								{props.title}
 							</header>
-							{props.entry.children &&
+						</Link>
+						{props.entry.children &&
+							<div class={"p-2 cursor-pointer"}>
 								<PixelImage src={
 									open()
 										? "/img/book/Retract.png"
 										: "/img/book/Expand.png"}
-									darkSrc={
-										open()
-											? "/img/book/Retract Dark.png"
-											: "/img/book/Expand Dark.png"
-									}
-									alt="Open/Close Section" w={5} h={5} scale={3} onClick={() =>
+											darkSrc={
+												open()
+													? "/img/book/Retract Dark.png"
+													: "/img/book/Expand Dark.png"
+											}
+											alt="Open/Close Section" w={5} h={5} scale={3} onClick={() =>
 									setOpen(!open())} />
-							}
-						</div>
-					</Link>
+							</div>
+						}
+					</div>
 					{props.entry.children &&
 						<Show when={open()}>
 							<Entries of={props.entry.children}>

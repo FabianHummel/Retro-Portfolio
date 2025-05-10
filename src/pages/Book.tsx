@@ -13,6 +13,7 @@ import { getDocument, GlobalWorkerOptions } from "pdfjs-dist";
 import * as pdfjsViewer from "pdfjs-dist/web/pdf_viewer.mjs";
 import "pdfjs-dist/web/pdf_viewer.css";
 import worker from "pdfjs-dist/build/pdf.worker.mjs?raw";
+import {PixelImage} from "@components/shared/PixelImage";
 
 // var HOSTED_VIEWER_ORIGINS = ['null', 'http://mozilla.github.io', 'https://mozilla.github.io'];
 
@@ -35,7 +36,7 @@ const book = await fetch("/book/data.json").then(async res => await res.json() a
 	return transform(book);
 });
 
-const articles = (function flatten(book: Book) {
+export const articles = (function flatten(book: Book) {
 	return Object.entries(book).reduce((acc, [title, entry]) => {
 		if (entry.path) acc.push({
 			title: title,
@@ -45,6 +46,8 @@ const articles = (function flatten(book: Book) {
 		return acc;
 	}, []);
 })(book);
+
+export const [openedArticleIndex, setOpenedArticleIndex] = createSignal(0);
 
 GlobalWorkerOptions.workerSrc = URL.createObjectURL(new Blob([worker], {type: "application/javascript"}));
 
@@ -93,9 +96,9 @@ const Book: Component = () => {
 	let section: HTMLDivElement;
 	let pdfContainer: HTMLDivElement;
 
-	const [index, setIndex] = createSignal(0);
-	const [article] = createResource(index, fetchArticle);
-	const [pdf] = createResource(index, fetchPdf);
+	const [article] = createResource(openedArticleIndex, fetchArticle);
+	const [pdf] = createResource(openedArticleIndex, fetchPdf);
+	const [mobileSidebarVisible, setMobileSidebarVisible] = createSignal(false);
 
 	createEffect(() => {
 		if (params.chapter) {
@@ -104,20 +107,21 @@ const Book: Component = () => {
 				console.warn("Article " + decodeURIComponent(params.chapter) + " not found.");
 				return;
 			}
-			setIndex(indexByPath);
+			setOpenedArticleIndex(indexByPath);
 		}
 	});
 
-	createEffect(on(index, () => {
+	createEffect(on(openedArticleIndex, () => {
 		pdfViewer?.cleanup();
 	}));
 
-	createEffect(on([article, theme], ([article]) => {
+	createEffect(on([article, theme], () => {
 		hljs.highlightAll();
 	}));
 
 	createEffect(on([article, pdf], () => {
 		window.scrollTo(0, section.clientHeight - 128);
+		setMobileSidebarVisible(false);
 	}));
 
 	createEffect(on(pdf, pdfDocument => {
@@ -147,16 +151,31 @@ const Book: Component = () => {
 			</p>
 		</section>
 
-		<section class="relative py-10 pl-6 pr-6 md:pr-24 grid md:grid-cols-[25rem,auto] gap-x-8">
-			<div class="border-r-gray md:border-r-2">
-				<aside class="sticky top-36 self-start pr-8 hidden md:block">
-					<Suspense fallback="Loading...">
-						<Entries of={book}>
-							{(title, entry) => <Entry title={title} entry={entry()} index={index()} />}
-						</Entries>
-					</Suspense>
-				</aside>
+		<section class="relative py-10 pl-6 pr-6 lg:pr-24 grid lg:grid-cols-[25rem,auto] gap-x-8">
+			<div class="fixed top-[var(--navbar-height)] lg:hidden m-4" onClick={() => setMobileSidebarVisible(true)}>
+				<PixelImage src={"/img/book/Menu.png"} darkSrc={"/img/book/Menu Dark.png"} w={16} h={16} scale={3}/>
 			</div>
+			<Show when={mobileSidebarVisible()} fallback={
+				<div class="border-r-gray lg:border-r-2">
+					<aside class="sticky top-36 self-start pr-8 hidden lg:block">
+						<Suspense fallback="Loading...">
+							<Entries of={book}>
+								{(title, entry) => <Entry title={title} entry={entry()} index={openedArticleIndex()}/>}
+							</Entries>
+						</Suspense>
+					</aside>
+				</div>
+			}>
+				<div class="fixed top-[var(--navbar-height)] lg:hidden w-full h-[calc(100%-var(--navbar-height))] bg-white dark:bg-dark z-50 overflow-scroll no-body-scroll">
+					<aside class="w-full h-full pr-2">
+						<Suspense fallback="Loading...">
+							<Entries of={book}>
+								{(title, entry) => <Entry title={title} entry={entry()} index={openedArticleIndex()}/>}
+							</Entries>
+						</Suspense>
+					</aside>
+				</div>
+			</Show>
 			<article class="overflow-auto">
 				<main class="max-w-[1000px] mx-auto">
 					{ article.loading ? (
@@ -173,7 +192,7 @@ const Book: Component = () => {
 
 									if (src.startsWith("http")) return src;
 									// if (src.startsWith("/public")) return "/book" + src;
-									const directory = articles[index()].path;
+									const directory = articles[openedArticleIndex()].path;
 									return "/book/" + directory.substring(0, directory.lastIndexOf("/") + 1) + src;
 								}}/>
 							</>}
@@ -188,13 +207,13 @@ const Book: Component = () => {
 						</div>
 					</div>
 
-					{ index() !== undefined && (
+					{ openedArticleIndex() !== undefined && (
 						<div class="grid grid-cols-[1fr,1fr] gap-x-6 mt-8">
-							{articles[index() - 1] &&
-								<Button title={articles[index() - 1].title} article={articles[index() - 1]}
+							{articles[openedArticleIndex() - 1] &&
+								<Button title={articles[openedArticleIndex() - 1].title} article={articles[openedArticleIndex() - 1]}
 										class="col-start-1"/>}
-							{articles[index() + 1] &&
-								<Button title={articles[index() + 1].title} article={articles[index() + 1]}
+							{articles[openedArticleIndex() + 1] &&
+								<Button title={articles[openedArticleIndex() + 1].title} article={articles[openedArticleIndex() + 1]}
 										class="col-start-2"/>}
 						</div>
 					)}

@@ -131,10 +131,10 @@ const Github: Component = () => {
                     <span class="text-gray">{'=-'.repeat(repositoryContainerWidth() / 30 / 100 * 25)}</span>
                 </h1>
 
-                <div class="flex flex-wrap gap-8">
+                <div class="grid gap-4 [grid-template-columns:repeat(auto-fill,minmax(500px,1fr))]">
                     <For each={repos}>
                         {(repo) => (
-                            <div class="github-repository" style={`border-image-source: url('${
+                            <div class="w-full github-repository" style={`border-image-source: url('${
                                 theme() === "light" ? "/img/github/Repository Background.png" : "/img/github/Repository Background Dark.png"
                             }');`}>
                                 <button title="Copy clone link" class="absolute top-4 right-4" onClick={() => {

@@ -36,6 +36,10 @@
     --navbar-height: 8rem;
 }
 
+:root:has(.no-body-scroll) {
+    overflow-y: hidden;
+}
+
 * {
     @apply font-main;
 }

@@ -1,6 +1,6 @@
-import { Component, createMemo, onMount, Signal } from "solid-js";
-import { mouseDown } from "@src/App";
+import {createMemo, onCleanup, onMount, Signal} from "solid-js";
 import { PixelImage } from "@components/shared/PixelImage";
+import interact from "interactjs";
 
 interface SliderProps {
     signal?: Signal<number>,
@@ -11,6 +11,7 @@ interface SliderProps {
 
 export default function Slider(props: SliderProps) {
     let slider: HTMLDivElement;
+    let interactInstance: any;
 
     const onSliderHandle = (clientX: number) => {
         if (!props.signal) return;
@@ -23,20 +24,21 @@ export default function Slider(props: SliderProps) {
     }
 
     onMount(() => {
-        slider.addEventListener('mousemove', (e) => {
-            if (mouseDown) {
-                onSliderHandle(e.clientX);
-            }
-        });
-        slider.addEventListener('touchmove', (e) => {
-            if (mouseDown) {
-                onSliderHandle(e.touches[0].clientX);
-            }
-        });
-        slider.addEventListener('click', (e) => {
-            onSliderHandle(e.clientX);
-        });
-    })
+        interactInstance = interact(slider)
+            .draggable({
+                onmove: (event) => {
+                    onSliderHandle(event.clientX);
+                }
+            })
+            .styleCursor(false)
+            .on(["tap", "click"], (event) => {
+                onSliderHandle(event.clientX);
+            })
+    });
+
+    onCleanup(() => {
+        interactInstance.unset();
+    });
 
     function step(value: number, incr: number) {
         return Math.ceil(value / incr) * incr;
@@ -53,7 +55,7 @@ export default function Slider(props: SliderProps) {
     })
 
     return (
-        <div ref={slider} class="w-full h-full flex items-center relative my-auto cursor-pointer select-none" classList={{
+        <div ref={slider} class="w-full h-full flex items-center relative my-auto cursor-pointer select-none touch-none" classList={{
             "disabled": !props.signal
         }}>
             <div class="h-[10px] bg-black dark:bg-gray" style={`width: ${percent()}%`} />

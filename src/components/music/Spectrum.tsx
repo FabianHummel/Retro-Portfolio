@@ -1,6 +1,7 @@
-import {For, onMount} from "solid-js";
+import {For, onCleanup, onMount} from "solid-js";
 import {mouseDown, theme} from "@src/App";
 import useSongplayer, {MusicItemProps} from "@components/music/Songplayer";
+import interact from "interactjs";
 
 interface SpectrumProps {
     data: MusicItemProps;
@@ -9,6 +10,7 @@ interface SpectrumProps {
 
 export default function Spectrum(props: SpectrumProps) {
     let spectrum: HTMLDivElement;
+    let interactInstance: any;
 
     const { isThisSong, playtime } = useSongplayer();
 
@@ -22,23 +24,24 @@ export default function Spectrum(props: SpectrumProps) {
     }
 
     onMount(() => {
-        spectrum.addEventListener('mousemove', (e) => {
-            if (mouseDown) {
-                onSpectrumClick(e.clientX);
-            }
-        });
-        spectrum.addEventListener('touchmove', (e) => {
-            if (mouseDown) {
-                onSpectrumClick(e.touches[0].clientX);
-            }
-        });
-        spectrum.addEventListener('click', (e) => {
-            onSpectrumClick(e.clientX);
-        });
-    })
+        interactInstance = interact(spectrum)
+            .draggable({
+                onmove: (event) => {
+                    onSpectrumClick(event.clientX);
+                }
+            })
+            .styleCursor(false)
+            .on(["tap", "click"], (event) => {
+                onSpectrumClick(event.clientX);
+            })
+    });
+
+    onCleanup(() => {
+        interactInstance.unset();
+    });
 
     return (
-        <div ref={spectrum} class={`w-full h-full flex justify-evenly items-center
+        <div ref={spectrum} class={`w-full h-full flex justify-evenly items-center touch-none
             ${isThisSong(props.data) ? "cursor-pointer" : "cursor-not-allowed"}
         `}>
             <For each={props.data.spectrum}>

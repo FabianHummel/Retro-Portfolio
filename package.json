@@ -36,6 +36,7 @@
         "solid-markdown": "^1.2.2",
         "solid-styled-components": "^0.28.5",
         "tailwind-merge": "^1.14.0",
-        "three": "^0.167.0"
+        "three": "^0.167.0",
+        "interactjs": "^1.10.27"
     }
 }

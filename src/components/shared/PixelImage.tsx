@@ -8,7 +8,7 @@ interface PixelImageProps extends JSX.ImgHTMLAttributes<HTMLImageElement> {
 export const PixelImage: Component<PixelImageProps> = (props) => {
     const [local, other] = splitProps(props, ["w", "h", "scale", "src", "darkSrc"])
     return (
-        <img {...other} src={(theme() === "light" || !local.darkSrc) ? local.src : local.darkSrc} class="pixel aspect-square" draggable={false} style={`
+        <img {...other} src={(theme() === "light" || !local.darkSrc) ? local.src : local.darkSrc} class={"pixel aspect-square " + other.class} draggable={false} style={`
 			min-width: ${local.w * local.scale}px;
 			min-height: ${local.h * local.scale}px;
 			width: ${local.w * local.scale}px;
