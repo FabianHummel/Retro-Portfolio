@@ -11,7 +11,7 @@ const Projects: Component = () => {
     const { load } = useLoading();
 
     load(...[
-        "/img/projects/featured.png",
+        "/img/projects/featured.jpg",
         "/img/projects/amethyst.png",
         "/img/projects/heast-messenger.png",
         "/img/projects/heast-icon.png",

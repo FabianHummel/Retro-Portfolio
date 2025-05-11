@@ -1,13 +1,16 @@
 article :is(h1) {
 	@apply w-full mb-6 border-b-black border-b-2;
+	font-size: 2em;
 }
 
 article :is(h2) {
 	@apply mt-8;
+	font-size: 1.5em;
 }
 
 article :is(p, pre, ul) {
 	@apply mb-4;
+	font-size: 1.125em;
 }
 
 article :is(pre > code) {
@@ -17,6 +20,7 @@ article :is(pre > code) {
 article :is(pre) {
 	text-transform: none;
 	overflow: auto;
+	line-height: unset;
 }
 
 article :is(a) {
@@ -25,4 +29,22 @@ article :is(a) {
 
 article :is(pre > pre) {
 	@apply mb-0;
+}
+
+article .smooth-font *:not(pre, code, code *) {
+	font-weight: normal !important;
+	@apply font-spectral normal-case;
+	line-height: 2em;
+}
+
+article .smooth-font :is(h1) {
+	@apply pb-6 mb-12;
+}
+
+article .smooth-font :is(h2) {
+	@apply mt-14 mb-4;
+}
+
+article .smooth-font :is(p, ul) {
+	@apply mb-8;
 }

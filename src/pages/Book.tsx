@@ -14,6 +14,9 @@ import * as pdfjsViewer from "pdfjs-dist/web/pdf_viewer.mjs";
 import "pdfjs-dist/web/pdf_viewer.css";
 import worker from "pdfjs-dist/build/pdf.worker.mjs?raw";
 import {PixelImage} from "@components/shared/PixelImage";
+import Sidebar from "@components/book/Sidebar";
+import createLocalStorageSignal from "@components/shared/LocalStorageSignal";
+import {debug} from "node:util";
 
 // var HOSTED_VIEWER_ORIGINS = ['null', 'http://mozilla.github.io', 'https://mozilla.github.io'];
 
@@ -26,7 +29,7 @@ export interface Book {
 	[p: string]: Entry
 }
 
-const book = await fetch("/book/data.json").then(async res => await res.json() as Book).then(book => {
+export const book = await fetch("/book/data.json").then(async res => await res.json() as Book).then(book => {
 	const transform = (book: Book, path?: string): Book => Object.fromEntries(Object.entries(book).map(([title, entry]) => {
 		if (entry.path) entry.path = path ? path.substring(0, path.lastIndexOf(".")) + "/" + entry.path : entry.path;
 		if (entry.children) entry.children = transform(entry.children, entry.path);
@@ -48,6 +51,9 @@ export const articles = (function flatten(book: Book) {
 })(book);
 
 export const [openedArticleIndex, setOpenedArticleIndex] = createSignal(0);
+
+export const [bookFontSize, setBookFontSize] = createLocalStorageSignal("book:font-size", 1);
+export const [smoothBookFont, setSmoothBookFont] = createLocalStorageSignal("book:smooth-font", true);
 
 GlobalWorkerOptions.workerSrc = URL.createObjectURL(new Blob([worker], {type: "application/javascript"}));
 
@@ -153,48 +159,48 @@ const Book: Component = () => {
 
 		<section class="relative py-10 pl-6 pr-6 lg:pr-24 grid lg:grid-cols-[25rem,auto] gap-x-8">
 			<div class="fixed top-[var(--navbar-height)] lg:hidden m-4" onClick={() => setMobileSidebarVisible(true)}>
-				<PixelImage src={"/img/book/Menu.png"} darkSrc={"/img/book/Menu Dark.png"} w={16} h={16} scale={3}/>
+				<PixelImage src={"/img/book/Menu.png"} darkSrc={"/img/book/Menu Dark.png"} w={12} h={12} scale={5}/>
 			</div>
 			<Show when={mobileSidebarVisible()} fallback={
 				<div class="border-r-gray lg:border-r-2">
-					<aside class="sticky top-36 self-start pr-8 hidden lg:block">
-						<Suspense fallback="Loading...">
-							<Entries of={book}>
-								{(title, entry) => <Entry title={title} entry={entry()} index={openedArticleIndex()}/>}
-							</Entries>
-						</Suspense>
-					</aside>
+					<Sidebar class="sticky top-36 self-start pr-8 hidden lg:block" />
 				</div>
 			}>
-				<div class="fixed top-[var(--navbar-height)] lg:hidden w-full h-[calc(100%-var(--navbar-height))] bg-white dark:bg-dark z-50 overflow-scroll no-body-scroll">
-					<aside class="w-full h-full pr-2">
-						<Suspense fallback="Loading...">
-							<Entries of={book}>
-								{(title, entry) => <Entry title={title} entry={entry()} index={openedArticleIndex()}/>}
-							</Entries>
-						</Suspense>
-					</aside>
+				<div class="fixed top-[var(--navbar-height)] lg:hidden w-full h-[calc(100%-var(--navbar-height))] bg-white dark:bg-dark z-10 overflow-scroll no-body-scroll">
+					<Sidebar class="w-full h-full pr-2" />
+				</div>
+
+				<div class="fixed top-[var(--navbar-height)] lg:hidden m-4 z-20"
+					 onClick={() => setMobileSidebarVisible(false)}>
+					<PixelImage src={"/img/book/Close.png"} darkSrc={"/img/book/Close Dark.png"} w={5} h={5} scale={5}/>
 				</div>
 			</Show>
 			<article class="overflow-auto">
 				<main class="max-w-[1000px] mx-auto">
-					{ article.loading ? (
+					{article.loading ? (
 						<p>Loading...</p>
 					) : (
 						<Show when={theme()} keyed>
-							{ theme => <>
+							{theme => <>
 								<style>
-									{theme === "light" ? light : dark}
+									{(theme === "light" ? light : dark) + `\n
+									.article-content {
+										font-size: ${bookFontSize()}em;
+									}
+									`}
 								</style>
-								<SolidMarkdown children={article()} transformImageUri={(src, alt) => {
-									if (theme === "dark" && src.endsWith("?theme=light")) return "/book/blank.png";
-									if (theme === "light" && src.endsWith("?theme=dark")) return "/book/blank.png";
+								<SolidMarkdown
+									class={"article-content " + (smoothBookFont() ? "smooth-font" : "")}
+									children={article()}
+									transformImageUri={(src, alt) => {
+										if (theme === "dark" && src.endsWith("?theme=light")) return "/book/blank.png";
+										if (theme === "light" && src.endsWith("?theme=dark")) return "/book/blank.png";
 
-									if (src.startsWith("http")) return src;
-									// if (src.startsWith("/public")) return "/book" + src;
-									const directory = articles[openedArticleIndex()].path;
-									return "/book/" + directory.substring(0, directory.lastIndexOf("/") + 1) + src;
-								}}/>
+										if (src.startsWith("http")) return src;
+										// if (src.startsWith("/public")) return "/book" + src;
+										const directory = articles[openedArticleIndex()].path;
+										return "/book/" + directory.substring(0, directory.lastIndexOf("/") + 1) + src;
+									}}/>
 							</>}
 						</Show>
 					) }

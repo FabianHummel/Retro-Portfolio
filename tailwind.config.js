@@ -96,6 +96,7 @@ module.exports = {
 		},
 		fontFamily: {
 			'main': ["bitmirror", "sans-serif"],
+			'spectral': ["spectral", "serif"],
 		},
 		colors: {
 			'white': 'rgb(245, 245, 245)',
