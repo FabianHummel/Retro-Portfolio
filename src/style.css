@@ -329,7 +329,7 @@ aside>* {
 }
 
 @font-face {
-    font-family: 'a-white-world';
+    font-family: 'a-sailors-tale';
     src: url('/font/bitmirror.woff2') format('woff2'),
     url('/font/bitmirror.woff') format('woff'),
     url("/font/bitmirror.ttf") format("truetype");
@@ -337,8 +337,8 @@ aside>* {
     font-display: swap;
 }
 
-#a-white-world .description * {
-    font-family: 'a-white-world', serif;
+#a-sailors-tale .description * {
+    font-family: 'a-sailors-tale', serif;
 }
 
 @font-face {

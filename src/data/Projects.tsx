@@ -63,14 +63,14 @@ const ProjectList: Array<ProjectItemProps> = [
 	},
 
 	{
-		logo: "/img/projects/white-world.png",
-		darkLogo: "/img/projects/white-world-dark.png",
-		title: "A White World",
-		id: "a-white-world",
+		logo: "/img/projects/a-sailors-tale.png",
+		darkLogo: "/img/projects/a-sailors-tale-dark.png",
+		title: "A Sailor's Tale",
+		id: "a-sailors-tale",
 		createDate: "2022-09-18",
-		bookLink: "/book/a-white-world",
+		bookLink: "/book/a-sailors-tale",
 		description: [
-			"A White World is an adventorous retro game about a seemingly lonely sailor. Complete quests in a storyline-driven world full of fun things to explore.",
+			"A Sailor's Tale is an adventorous retro game about a seemingly lonely sailor. Complete quests in a storyline-driven world full of fun things to explore.",
 
 			"The idea for this game came to me not a long time ago - I only started working recently on it, when the motivation for other projects wasn't quite there. I've always wanted to make a game in that iconic retro-pokemon-like style, I honestly find it absolutely gorgeous.",
 
@@ -78,7 +78,7 @@ const ProjectList: Array<ProjectItemProps> = [
 		],
 		links: [{
 			name: "github",
-			url: "https://github.com/FabianHummel/A-White-World"
+			url: "https://github.com/FabianHummel/A-Sailors-Tale"
 		}],
 		tags: ["C#", "Raylib"]
 	},
