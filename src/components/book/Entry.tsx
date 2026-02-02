@@ -1,72 +1,100 @@
 import { PixelImage } from "@components/shared/PixelImage";
-import { articles, type IEntry, openedArticleIndex } from "@pages/Book";
+import { BookContext, type IEntry } from "@pages/Book";
 import { Entries } from "@solid-primitives/keyed";
 import { A } from "@solidjs/router";
-import { type Component, createEffect, createSignal, onMount, Show } from "solid-js";
+import { clsx } from "clsx";
+import { type Component, createEffect, createSignal, type JSX, onMount, Show, splitProps, useContext } from "solid-js";
 
-export const Entry: Component<{
-    title: string,
-    entry: IEntry,
-    index: number,
-}> = (props) => {
+export interface EntryProps extends JSX.HTMLAttributes<HTMLDivElement> {
+    title: string;
+    entry: IEntry;
+    index: number;
+}
+
+export const Entry: Component<EntryProps> = (props) => {
+    const [local, other] = splitProps(props, ["title", "entry", "index"])
     const [open, setOpen] = createSignal(false);
 
+    const { articles, currentArticleIndex, findArticleSequentially, closeMobileSidebar } = useContext(BookContext);
+
     onMount(() => {
-        setOpen(window.localStorage.getItem(`book:${props.entry.path}`) === "true");
+        setOpen(window.localStorage.getItem(`book:${local.entry.path}`) === "true");
     });
 
     createEffect(() => {
-        window.localStorage.setItem(`book:${props.entry.path}`, open() ? "true" : "false");
+        window.localStorage.setItem(`book:${local.entry.path}`, open() ? "true" : "false");
     });
 
+    const nextArticle = findArticleSequentially(1);
+
     return (
-        <div class="text-m ml-3 border-l-[3px] border-l-gray dark:border-l-darkgray">
-            {props.entry.path
-                ? <>
-                    <div class="flex justify-between items-center gap-2 pl-3" classList={{
-                        "bg-light dark:bg-black": articles()[openedArticleIndex()].path === props.entry.path,
-                    }}>
-                        <A href={`/book/${props.entry.path}`} class={"flex-1"}>
-                            <button type="button" onClick={() => {
-                                setOpen(true);
-                            }}>
-                                <p class="text-black dark:text-gray">
-                                    {props.title}
-                                </p>
-                            </button>
+        <div {...other} class={clsx("text-m ml-3 border-l-[3px] border-l-gray dark:border-l-darkgray", props.class)}>
+            <Show when={local.entry.path} fallback={
+                <header class="text-gray dark:text-darkgray pt-4">
+                    {local.title}
+                </header>
+            }>
+                <div class="flex justify-between items-center gap-2 pl-3" classList={{
+                    "bg-light dark:bg-black": articles()[currentArticleIndex()].path === local.entry.path,
+                }}>
+                    <Show when={nextArticle} fallback={(
+                        <p class="text-gray dark:text-darkgray">
+                            {local.title}
+                        </p>
+                    )}>
+                        <A href={local.entry.hasContent ? `/book/${local.entry.path}` : nextArticle.path} class={"flex-1"} onClick={() => {
+                            setOpen(true);
+                            closeMobileSidebar();
+                        }}>
+                            <p class="text-black dark:text-gray">
+                                {local.title}
+                            </p>
                         </A>
-                        {props.entry.children &&
-                            <div class={"p-2 cursor-pointer"}>
-                                <PixelImage src={
+                    </Show>
+
+                    <Show when={local.entry.isDownloadable}>
+                        <button type="button" class="p-2" onClick={() => {
+                            const a = document.createElement("a");
+                            a.download = local.title;
+                            a.href = `${window.location.origin}/book/${local.entry.path}`;
+                            a.click();
+                        }}>
+                            <PixelImage
+                                src="/img/book/Download.png"
+                                darkSrc="/img/book/Download Dark.png"
+                                alt="Download article"
+                                w={5} h={7} scale={3} />
+                        </button>
+                    </Show>
+
+                    <Show when={local.entry.children}>
+                        <button type="button" class="p-2" onClick={() =>
+                            setOpen(!open())
+                        }>
+                            <PixelImage src={
+                                open()
+                                    ? "/img/book/Retract.png"
+                                    : "/img/book/Expand.png"}
+                                darkSrc={
                                     open()
-                                        ? "/img/book/Retract.png"
-                                        : "/img/book/Expand.png"}
-                                    darkSrc={
-                                        open()
-                                            ? "/img/book/Retract Dark.png"
-                                            : "/img/book/Expand Dark.png"
-                                    }
-                                    alt="Open/Close Section" w={5} h={5} scale={3} onClick={() =>
-                                        setOpen(!open())} />
-                            </div>
-                        }
-                    </div>
-                    {props.entry.children &&
-                        <Show when={open()}>
-                            <Entries of={props.entry.children}>
-                                {(title, entry) => (
-                                    <Entry title={title} entry={entry()} index={props.index} />
-                                )}
-                            </Entries>
-                        </Show>
-                    }
-                </>
-                : (
-                    <header class="text-gray dark:text-darkgray pt-4">
-                        {props.title}
-                    </header>
-                )
-            }
+                                        ? "/img/book/Retract Dark.png"
+                                        : "/img/book/Expand Dark.png"
+                                }
+                                alt="Open/Close Section" w={5} h={5} scale={3} />
+                        </button>
+                    </Show>
+                </div>
+
+                <Show when={local.entry.children}>
+                    <Show when={open()}>
+                        <Entries of={local.entry.children}>
+                            {(title, entry) => (
+                                <Entry title={title} entry={entry()} index={local.index} />
+                            )}
+                        </Entries>
+                    </Show>
+                </Show>
+            </Show>
         </div>
     )
 }

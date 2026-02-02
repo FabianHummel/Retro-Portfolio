@@ -21,10 +21,15 @@ import createLocalStorageSignal from "@components/shared/LocalStorageSignal";
 import { PixelImage } from "@components/shared/PixelImage";
 import { Entries } from "@solid-primitives/keyed";
 import worker from "pdfjs-dist/build/pdf.worker.mjs?raw";
+import type { Accessor, Setter } from "solid-js";
+import { createContext } from "solid-js";
+import { onCleanup } from "solid-js";
 
 export interface IEntry {
     path?: string;
     children?: IBook;
+    hasContent: boolean;
+    isDownloadable: boolean;
 }
 
 export interface IBook {
@@ -32,19 +37,30 @@ export interface IBook {
 }
 
 export interface IArticle {
-    title: string,
-    path: string,
+    title: string;
+    path: string;
+    hasContent: boolean;
 }
 
 GlobalWorkerOptions.workerSrc = URL.createObjectURL(
     new Blob([worker], { type: "application/javascript" }),
 );
 
-export const [openedArticleIndex, setOpenedArticleIndex] = createSignal(0);
+export interface BookContextProps {
+    currentArticleIndex: Accessor<number>;
+    setCurrentArticleIndex: Setter<number>;
+    articles: Accessor<IArticle[]>;
+    findArticleSequentially: (direction: number) => IArticle;
+    closeMobileSidebar: VoidFunction;
+}
 
-export const [articles, setArticles] = createSignal<IArticle[]>([]);
+export const BookContext = createContext<BookContextProps>();
 
 const Book: Component = () => {
+    const [currentArticleIndex, setCurrentArticleIndex] = createSignal(0);
+
+    const [articles, setArticles] = createSignal<IArticle[]>([]);
+
     const { startLoading } = useLoading();
     let complete: VoidFunction;
 
@@ -72,8 +88,9 @@ const Book: Component = () => {
         })
         .then(function transform(book: IBook, path?: string): IBook {
             return Object.fromEntries(Object.entries(book).map(([title, entry]) => {
+                entry.hasContent = entry.path?.includes('.') ?? false;
                 entry.path = path
-                    ? `${path.substring(0, path.lastIndexOf("."))}/${entry.path}`
+                    ? `${path.includes('.') ? path.substring(0, path.lastIndexOf(".")) : path}/${entry.path}`
                     : entry.path;
                 if (entry.children) {
                     entry.children = transform(entry.children, entry.path);
@@ -88,8 +105,12 @@ const Book: Component = () => {
         });
 
     function flattenBook(book: IBook) {
-        return Object.entries(book).reduce((acc, [title, entry]) => {
-            acc.push({ title, path: entry.path });
+        return Object.entries(book).reduce<IArticle[]>((acc, [title, entry]) => {
+            acc.push({
+                title,
+                path: entry.path,
+                hasContent: entry.hasContent
+            });
             if (entry.children) {
                 acc.push(...flattenBook(entry.children))
             };
@@ -132,26 +153,26 @@ const Book: Component = () => {
     const params = useParams();
     let pdfContainer: HTMLDivElement;
 
-    const [article] = createResource(openedArticleIndex, fetchArticle);
-    const [pdf] = createResource(openedArticleIndex, fetchPdf);
+    const [article] = createResource(currentArticleIndex, fetchArticle);
+    const [pdf] = createResource(currentArticleIndex, fetchPdf);
 
     createEffect(() => {
-        if (!params.chapter) {
-            return;
+        if (articles().length > 0 && !params.chapter) {
+            setCurrentArticleIndex(1);
         }
 
         const indexByPath = articles().findIndex(article =>
             article.path === decodeURIComponent(params.chapter));
 
         if (indexByPath > 0) {
-            setOpenedArticleIndex(indexByPath);
+            setCurrentArticleIndex(indexByPath);
             return;
         }
 
         console.warn(`Article ${decodeURIComponent(params.chapter)} not found.`);
     });
 
-    createEffect(on(openedArticleIndex, () => {
+    createEffect(on(currentArticleIndex, () => {
         pdfViewer?.cleanup();
     }));
 
@@ -177,16 +198,71 @@ const Book: Component = () => {
         pdfLinkService.setViewer(pdfViewer);
     });
 
-    return <>
+    function findArticleSequentially(direction: number) {
+        let i = currentArticleIndex();
+        while (true) {
+            i += direction;
+            if (i < 0 || i > articles().length) {
+                return undefined;
+            }
+            const article = articles()[i];
+            if (article.hasContent) {
+                return article;
+            }
+        }
+    }
+
+    let scrollContainer!: HTMLDivElement;
+    let sidebarContainer!: HTMLDivElement;
+
+    onMount(() => {
+        scrollContainer.scrollLeft = sidebarContainer.clientWidth;
+
+        scrollContainer.addEventListener("scroll", handleNavigationScroll);
+    });
+
+    onCleanup(() => {
+        scrollContainer.removeEventListener("scroll", handleNavigationScroll);
+    });
+
+    const [articleOpacity, setArticleOpacity] = createSignal(1.0);
+
+    function handleNavigationScroll() {
+        if (scrollContainer.scrollWidth > scrollContainer.clientWidth) {
+            setArticleOpacity(scrollContainer.scrollLeft / sidebarContainer.clientWidth / 2.0 + 0.5);
+            const mobileSidebarVisible = scrollContainer.scrollLeft < sidebarContainer.clientWidth / 2.0;
+            scrollContainer.classList.toggle("mobile-sidebar-visible", mobileSidebarVisible);
+        }
+        else {
+            setArticleOpacity(1.0);
+            scrollContainer.classList.remove("mobile-sidebar-visible");
+        }
+    }
+
+    function closeMobileSidebar() {
+        scrollContainer.scrollTo({
+            behavior: "smooth",
+            top: 0,
+            left: sidebarContainer.clientWidth
+        });
+    }
+
+    return <BookContext.Provider value={{
+        currentArticleIndex,
+        setCurrentArticleIndex,
+        articles,
+        findArticleSequentially,
+        closeMobileSidebar
+    }}>
         {/* hide footer */}
         <style>{`footer { display: none !important; }`}</style>
 
         {/* article font size */}
         <style>{`.article-content { font-size: ${bookFontSize()}em; }`}</style>
 
-        <section class="pt-[var(--navbar-height)] h-screen py-10 px-6 grid lg:grid-cols-[25rem,auto] gap-x-8 overflow-auto">
-            <div class="border-r-gray lg:border-r-2">
-                <aside class="sticky top-0 self-start pr-8 hidden lg:block">
+        <section ref={scrollContainer} class="h-screen pt-[var(--navbar-height)] py-10 max-lg:pb-4 lg:px-6 grid grid-cols-[22rem,100vw] lg:grid-cols-[25rem,auto] gap-1 lg:gap-x-8 overflow-auto snap-x snap-mandatory">
+            <div ref={sidebarContainer} class="border-r-gray border-r-2 max-lg:px-3 snap-start">
+                <aside class="sticky top-0 self-start max-lg:pr-3 lg:pr-8">
                     <div class="flex flex-row pt-4 gap-2">
                         <button type="button" class="cursor-pointer" onClick={() => setSmoothBookFont(!smoothBookFont())}>
                             {smoothBookFont() ? (
@@ -212,12 +288,16 @@ const Book: Component = () => {
                     </div>
 
                     <Entries of={book()}>
-                        {(title, entry) => <Entry title={title} entry={entry()} index={openedArticleIndex()} />}
+                        {(title, entry) => <Entry
+                            title={title}
+                            entry={entry()}
+                            index={currentArticleIndex()}
+                            class="!ml-0" />}
                     </Entries>
                 </aside>
             </div>
 
-            <article>
+            <article class="max-lg:px-6 snap-start" style={`opacity: ${articleOpacity()};`}>
                 <main class="max-w-[800px] mx-auto">
                     {article.loading ? (
                         <p>Loading...</p>
@@ -234,7 +314,7 @@ const Book: Component = () => {
 
                                     if (src.startsWith("http")) return src;
                                     // if (src.startsWith("/public")) return "/book" + src;
-                                    const directory = articles()[openedArticleIndex()].path;
+                                    const directory = articles()[currentArticleIndex()].path;
                                     const path = directory.substring(
                                         0,
                                         directory.lastIndexOf("/") + 1,
@@ -256,20 +336,16 @@ const Book: Component = () => {
                         </div>
                     </div>
 
-                    {openedArticleIndex() !== undefined && (
+                    {currentArticleIndex() !== undefined && (
                         <div class="grid grid-cols-[1fr,1fr] gap-x-6 mt-8">
-                            {articles()[openedArticleIndex() - 1] && (
-                                <Button article={articles()[openedArticleIndex() - 1]} class="col-start-1" />
-                            )}
-                            {articles()[openedArticleIndex() + 1] && (
-                                <Button article={articles()[openedArticleIndex() + 1]} class="col-start-2" />
-                            )}
+                            <Button article={findArticleSequentially(-1)} class="col-start-1" />
+                            <Button article={findArticleSequentially(1)} class="col-start-2" />
                         </div>
                     )}
                 </main>
             </article>
         </section>
-    </>;
+    </BookContext.Provider>;
 };
 
 export default Book;

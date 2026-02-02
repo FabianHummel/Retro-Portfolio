@@ -1,60 +1,65 @@
 {
-  "My Projects": {
-  },
-
-  "Sky's Horizon": {
-    "path": "skys-horizon.md",
-    "children": {
-      "Minecraft": {
-        "path": "minecraft.md"
-      },
-      "Unity": {
-        "path": "unity.md"
-      },
-      "Back to Minecraft": {
-        "path": "back-to-minecraft.md"
-      },
-      "Godot": {
-        "path": "godot.md"
-      }
+    "My Projects": {},
+    "Sky's Horizon": {
+        "path": "skys-horizon.md",
+        "children": {
+            "History": {
+                "path": "history",
+                "children": {
+                    "1. Minecraft": {
+                        "path": "minecraft.md"
+                    },
+                    "2. Unity": {
+                        "path": "unity.md"
+                    },
+                    "3. Back to Minecraft": {
+                        "path": "back-to-minecraft.md"
+                    },
+                    "4. Godot": {
+                        "path": "godot.md"
+                    },
+                    "5. Minecraft - Again?": {
+                        "path": "minecraft-again.md"
+                    }
+                }
+            },
+            "Devlogs": {
+                "path": "devlogs",
+                "children": {}
+            }
+        }
+    },
+    "Heast Messenger": {
+        "path": "heast-messenger.md",
+        "children": {
+            "Security Layers": {
+                "path": "security-layers.md"
+            }
+        }
+    },
+    "A Sailor's Tale": {
+        "path": "a-sailors-tale.md"
+    },
+    "Table Tennis": {
+        "path": "table-tennis.md"
+    },
+    "Squavy": {
+        "path": "squavy.md",
+        "children": {
+            "Business Plan": {
+                "path": "business-plan.pdf",
+                "isDownloadable": true
+            }
+        }
+    },
+    "Other Stuff": {},
+    "Running Heurigen": {
+        "path": "running-heurigen.md",
+        "children": {
+            "Business Plan": {
+                "path": "business-plan.pdf",
+                "isDownloadable": true
+            }
+        }
     }
-  },
-
-  "Heast Messenger": {
-    "path": "heast-messenger.md",
-    "children": {
-      "Security Layers": {
-        "path": "security-layers.md"
-      }
-    }
-  },
-
-  "A Sailor's Tale": {
-    "path": "a-sailors-tale.md"
-  },
-
-  "Table Tennis": {
-    "path": "table-tennis.md"
-  },
-
-  "Squavy": {
-    "path": "squavy.md",
-    "children": {
-      "Business Plan": {
-        "path": "business-plan.pdf"
-      }
-    }
-  },
-
-  "Other Stuff": {
-  },
-
-  "Running Heurigen": {
-    "path": "running-heurigen.md",
-    "children": {
-      "Business Plan": {
-        "path": "business-plan.pdf"
-      }
-    }
-  }
 }

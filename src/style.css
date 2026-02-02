@@ -261,7 +261,7 @@ aside>* {
 
 .book-button {
     border-image-slice: 3;
-    border-width: 1rem;
+    border-width: 12px;
     border-style: solid;
     border-image-repeat: stretch;
     image-rendering: pixelated;
@@ -371,4 +371,19 @@ aside>* {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+}
+
+.mobile-sidebar-visible {
+    overflow-y: hidden;
+}
+
+aside {
+    overflow-y: auto;
+    height: calc(100vh - var(--navbar-height) - 1rem);
+}
+
+@media (min-width: 1024px) {
+    aside {
+        height: calc(100vh - var(--navbar-height) - 2.5rem);
+    }
 }
