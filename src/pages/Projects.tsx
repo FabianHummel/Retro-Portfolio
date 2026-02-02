@@ -1,10 +1,10 @@
-import { Component, For, onMount } from "solid-js";
+import { Featured } from "@components/projects/Featured";
+import { Project } from "@components/projects/Project";
+import useLoading from "@components/shared/Loading";
 import { ChapterText, DownArrow, SVGCircle, SVGLine, VerticalLine } from "@components/shared/Styling";
 import { TypedText } from "@components/shared/TypedText";
 import ProjectList, { genHeight } from "@data/Projects";
-import { Project } from "@components/projects/Project";
-import { Featured } from "@components/projects/Featured";
-import useLoading from "@components/shared/Loading";
+import { type Component, For } from "solid-js";
 
 const Projects: Component = () => {
 
@@ -39,6 +39,7 @@ const Projects: Component = () => {
             </div>
             <div class="styling left-16 bottom-40 w-4 h-4">
                 <svg viewBox="0 0 16 16" stroke="none" xmlns="http://www.w3.org/2000/svg">
+                    <title>design-circle</title>
                     <circle cx="8" cy="8" r="8" />
                 </svg>
             </div>

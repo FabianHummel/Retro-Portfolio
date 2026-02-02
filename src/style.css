@@ -14,8 +14,8 @@
 @font-face {
     font-family: 'spectral';
     src: url('/font/Spectral-Regular.woff2') format('woff2'),
-    url('/font/Spectral-Regular.woff') format('woff'),
-    url("/font/Spectral-Regular.ttf") format("truetype");
+        url('/font/Spectral-Regular.woff') format('woff'),
+        url("/font/Spectral-Regular.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
 }
@@ -23,8 +23,8 @@
 @font-face {
     font-family: 'spectral';
     src: url('/font/Spectral-Bold.woff2') format('woff2'),
-    url('/font/Spectral-Bold.woff') format('woff'),
-    url("/font/Spectral-Bold.ttf") format("truetype");
+        url('/font/Spectral-Bold.woff') format('woff'),
+        url("/font/Spectral-Bold.ttf") format("truetype");
     font-weight: bold;
     font-style: normal;
 }
@@ -32,8 +32,8 @@
 @font-face {
     font-family: 'spectral';
     src: url('/font/Spectral-Italic.woff2') format('woff2'),
-    url('/font/Spectral-Italic.woff') format('woff'),
-    url("/font/Spectral-Italic.ttf") format("truetype");
+        url('/font/Spectral-Italic.woff') format('woff'),
+        url("/font/Spectral-Italic.ttf") format("truetype");
     font-weight: normal;
     font-style: italic;
 }
@@ -63,6 +63,12 @@
     --navbar-height: 8rem;
 }
 
+@media (max-width: 480px) {
+    :root {
+        --navbar-height: 6rem;
+    }
+}
+
 :root:has(.no-body-scroll) {
     overflow-y: hidden;
 }
@@ -80,7 +86,11 @@ a {
 }
 
 body {
-    @apply bg-white dark:bg-dark text-black dark:text-gray lowercase;
+    @apply bg-white dark:bg-dark text-black dark:text-gray;
+}
+
+* {
+    @apply lowercase;
 }
 
 footer {
@@ -93,7 +103,7 @@ footer td {
 
 footer td:hover,
 footer td:focus-within {
-    transform: translateX(6px);
+    text-decoration: underline;
 }
 
 #home-section>* {
@@ -183,7 +193,7 @@ aside>* {
 }
 
 .styling {
-    @apply absolute hidden md:block text-s text-gray dark:text-darkgray fill-gray dark:fill-darkgray stroke-gray dark:stroke-darkgray -translate-x-1/2;
+    @apply absolute hidden lg:block text-s text-gray dark:text-darkgray fill-gray dark:fill-darkgray stroke-gray dark:stroke-darkgray -translate-x-1/2;
 }
 
 .title {
@@ -191,7 +201,7 @@ aside>* {
 }
 
 .content {
-    @apply relative py-10 pl-6 md:pl-36 pr-6 md:pr-36;
+    @apply relative py-10 px-6 md:px-12 lg:px-36;
 }
 
 .projects-tag {
@@ -289,7 +299,7 @@ aside>* {
 
 .shiny-background {
     width: fit-content;
-    background: linear-gradient(-45deg, rgb(40,40,40) 30%, #fff 50%, rgb(40,40,40) 70%);
+    background: linear-gradient(-45deg, rgb(40, 40, 40) 30%, #fff 50%, rgb(40, 40, 40) 70%);
     background-size: 400% 100%;
     background-clip: text;
     -webkit-background-clip: text;
@@ -316,8 +326,8 @@ aside>* {
 @font-face {
     font-family: 'table-tennis';
     src: url('/font/table-tennis.woff2') format('woff2'),
-    url('/font/table-tennis.woff') format('woff'),
-    url("/font/table-tennis.ttf") format("truetype");
+        url('/font/table-tennis.woff') format('woff'),
+        url("/font/table-tennis.ttf") format("truetype");
     font-weight: normal;
     font-display: swap;
 }
@@ -331,8 +341,8 @@ aside>* {
 @font-face {
     font-family: 'a-sailors-tale';
     src: url('/font/bitmirror.woff2') format('woff2'),
-    url('/font/bitmirror.woff') format('woff'),
-    url("/font/bitmirror.ttf") format("truetype");
+        url('/font/bitmirror.woff') format('woff'),
+        url("/font/bitmirror.ttf") format("truetype");
     font-weight: normal;
     font-display: swap;
 }
@@ -344,8 +354,8 @@ aside>* {
 @font-face {
     font-family: 'skys-horizon';
     src: url('/font/skys-horizon.woff2') format('woff2'),
-    url('/font/skys-horizon.woff') format('woff'),
-    url("/font/skys-horizon.ttf") format("truetype");
+        url('/font/skys-horizon.woff') format('woff'),
+        url("/font/skys-horizon.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
 }

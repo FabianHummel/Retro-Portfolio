@@ -1,10 +1,10 @@
-import {Component, createEffect, createSignal, on, onMount} from "solid-js";
+import Slider from "@components/music/Slider";
+import useSongplayer, { type MusicItemProps } from "@components/music/Songplayer";
+import Spectrum from "@components/music/Spectrum";
+import VolumeIcon from "@components/music/VolumeIcon";
 import { PixelImage } from "@components/shared/PixelImage";
 import { TypedText } from "@components/shared/TypedText";
-import Slider from "@components/music/Slider";
-import Spectrum from "@components/music/Spectrum";
-import useSongplayer, { MusicItemProps } from "@components/music/Songplayer";
-import VolumeIcon from "@components/music/VolumeIcon";
+import { createEffect, createSignal, on } from "solid-js";
 
 interface MusicProps {
     data: MusicItemProps;
@@ -14,11 +14,11 @@ interface MusicProps {
 export default function Music(props: MusicProps) {
 
     let volumeFromStorage = parseFloat(localStorage.getItem(`volume:${props.data.song}`));
-    if (isNaN(volumeFromStorage)) volumeFromStorage = undefined;
+    if (Number.isNaN(volumeFromStorage)) volumeFromStorage = undefined;
     let storedVolumeFromStorage = parseFloat(localStorage.getItem(`storedVolume:${props.data.song}`));
-    if (isNaN(storedVolumeFromStorage)) storedVolumeFromStorage = undefined;
+    if (Number.isNaN(storedVolumeFromStorage)) storedVolumeFromStorage = undefined;
 
-    const { song, playing, pause, resume, setSong, play, isThisSong, updateVolume, setPlaytime } = useSongplayer();
+    const { song, isPlaying: playing, toggle, setSong, play, isThisSong, updateVolume, setPlaytime } = useSongplayer();
 
     const [volume, setVolume] = createSignal(volumeFromStorage ?? 0.75);
     let storedVolume = storedVolumeFromStorage ?? 0.75;
@@ -29,13 +29,9 @@ export default function Music(props: MusicProps) {
         props.data.volume = volume();
     }))
 
-    function togglePlay() {
+    function handleTogglePlay() {
         if (isThisSong(props.data)) {
-            if (playing !== undefined && playing()) {
-                pause();
-            } else {
-                resume();
-            }
+            toggle();
         } else {
             setSong(props.data);
             play();
@@ -69,18 +65,18 @@ export default function Music(props: MusicProps) {
                 </h2>
             </div>
             <div class="row-start-2 flex gap-10 md:px-5">
-                <button onClick={() => { togglePlay() }}>
+                <button type="button" onClick={() => { handleTogglePlay() }}>
                     <PixelImage src={
-                        playing() && song() == props.data ?
+                        playing() && song() === props.data ?
                             "/img/music/pause.png" :
                             "/img/music/play.png"
                     } darkSrc={
-                        playing() && song() == props.data ?
+                        playing() && song() === props.data ?
                             "/img/music/pause Dark.png" :
                             "/img/music/play Dark.png"
                     } w={5} h={5} scale={4} alt={"Toggle song playback"} />
                 </button>
-                <button onClick={() => { toggleMute() }}>
+                <button type="button" onClick={() => { toggleMute() }}>
                     <VolumeIcon volume={volume()} />
                 </button>
                 <Slider signal={[volume, setVolume]} step={0.05} onChange={handleVolumeChanged} range={1} />

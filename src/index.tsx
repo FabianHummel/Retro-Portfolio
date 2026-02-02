@@ -1,15 +1,27 @@
 /* @refresh reload */
 import './style.css';
 import './markdown.css'
+import { HashRouter, Route } from '@solidjs/router';
+import { lazy } from 'solid-js';
 import { render } from 'solid-js/web';
-import { hashIntegration, Router } from '@solidjs/router';
 import App from './App';
 
+const Home = lazy(() => import("@pages/Home"));
+const Projects = lazy(() => import("@pages/Projects"));
+const Songs = lazy(() => import("@pages/Songs"));
+const Book = lazy(() => import("@pages/Book"));
+const Github = lazy(() => import("@pages/Github"));
+
 render(
-	() => (
-		<Router source={hashIntegration()} >
-			<App />
-		</Router>
-	),
-	document.getElementById('root')
+    () => (
+        <HashRouter root={App}>
+            <Route path="/" component={Home} />
+            <Route path="/projects" component={Projects} />
+            <Route path="/music" component={Songs} />
+            <Route path="/book/" component={Book} />
+            <Route path="/book/*chapter" component={Book} />
+            <Route path="/github" component={Github} />
+        </HashRouter>
+    ),
+    document.getElementById('root')
 );

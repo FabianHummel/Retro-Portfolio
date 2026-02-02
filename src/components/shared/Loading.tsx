@@ -1,8 +1,8 @@
-import {Component, JSX, createSignal, onMount, createContext, useContext, Setter} from "solid-js";
+import { type Component, createContext, createSignal, type JSX, onMount, type Setter, useContext } from "solid-js";
 
 interface LoadingContextProps {
     load(...pool: string[]): void;
-    startLoading(): Setter<number>;
+    startLoading(expectedIncreasePerSecond?: number): VoidFunction;
 }
 
 export const LoadingContext = createContext<LoadingContextProps>();
@@ -19,18 +19,18 @@ export const Loading: Component<{ children: JSX.Element }> = (props) => {
     const [loaded, setLoaded] = createSignal(true);
 
     let loadingScreen: HTMLDivElement;
-    let downloaded = new Set<string>();
+    const downloaded = new Set<string>();
 
     onMount(() => {
-        let interval = setInterval(() => {
-            let current = dots();
+        const interval = setInterval(() => {
+            const current = dots();
             if (current >= 3) setDots(0);
             else setDots(dots() + 1);
         }, 500);
 
         return (() => {
             clearInterval(interval);
-        })
+        });
     })
 
     function load(...pool: string[]) {
@@ -39,39 +39,51 @@ export const Loading: Component<{ children: JSX.Element }> = (props) => {
         setProgress(0);
         setLoaded(false);
         let total = 0;
-        for (let item of pool) {
-            if (!downloaded.has(item)) {
-                let xhr = new XMLHttpRequest();
-                xhr.open('GET', item, true);
-                xhr.responseType = 'blob';
-
-                xhr.onload = function() {
-                    if (xhr.status === 200) {
-                        downloaded.add(item);
-                        setProgress(progress() + 1 / pool.length);
-
-                        if (++total === pool.length) {
-                            setProgress(1);
-                            setLoaded(true);
-                        }
-                    }
-                }
-
-                xhr.onprogress = function(event) {
-                    if (event.lengthComputable) {
-                        setProgress(progress() + event.loaded / event.total / pool.length / 100);
-                    }
-                }
-
-                xhr.send();
+        for (const item of pool) {
+            if (downloaded.has(item)) {
+                continue;
             }
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', item, true);
+            xhr.responseType = 'blob';
+
+            xhr.onload = () => {
+                if (xhr.status === 200) {
+                    downloaded.add(item);
+                    setProgress(progress() + 1 / pool.length);
+
+                    if (++total === pool.length) {
+                        setProgress(1);
+                        setLoaded(true);
+                    }
+                }
+            }
+
+            xhr.onprogress = (event) => {
+                if (event.lengthComputable) {
+                    setProgress(progress() + event.loaded / event.total / pool.length / 100);
+                }
+            }
+
+            xhr.send();
         }
     }
 
-    function startLoading() {
+    function startLoading(expectedIncreasePerSecond?: number) {
         setProgress(0);
         setLoaded(false);
-        return setProgress;
+
+        const interval = expectedIncreasePerSecond && setInterval(() => {
+            const newProgress = Math.min(1.0, progress() + expectedIncreasePerSecond / 4.0);
+            setProgress(newProgress);
+        }, 250);
+
+        return () => {
+            setProgress(1.0);
+            setLoaded(true);
+            clearInterval(interval);
+        };
     }
 
     return (

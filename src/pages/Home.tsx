@@ -1,83 +1,10 @@
-import {Component, onCleanup, onMount} from "solid-js";
 import { Graphics } from "@components/home/Graphics";
-import { ChapterText, DownArrow, SVGCircle, SVGLine, VerticalLine } from "@components/shared/Styling";
-import { PixelImage } from "@components/shared/PixelImage";
-import { TypedText } from "@components/shared/TypedText";
 import { Chapter } from "@components/shared/Chapter";
-import * as THREE from 'three';
-import Globe, {GlobeInstance} from "globe.gl";
-import {OutputPass} from "three/examples/jsm/postprocessing/OutputPass";
-import {DotScreenPass} from "three/examples/jsm/postprocessing/DotScreenPass";
-import {ShaderPass} from "three/examples/jsm/postprocessing/ShaderPass";
+import { ChapterText, DownArrow, SVGCircle, SVGLine, VerticalLine } from "@components/shared/Styling";
+import { TypedText } from "@components/shared/TypedText";
+import type { Component } from "solid-js";
 
 const Home: Component = () => {
-
-    // let globe: GlobeInstance;
-    //
-    // onMount(() => {
-    //     globe = Globe()
-    //         .globeImageUrl('globe/water.png')
-    //         .backgroundColor('#00000000')
-    //         .showAtmosphere(false)
-    //         (document.getElementById('pixel-globe'))
-    //
-    //     globe.controls().enableZoom = false;
-    //     globe.controls().autoRotate = true;
-    //     globe.controls().autoRotateSpeed = -1;
-    //
-    //     const composer = globe.postProcessingComposer()
-    //     const scene = globe.scene();
-    //     const camera = globe.camera();
-    //
-    //     const dotScreenPass = new DotScreenPass(new THREE.Vector2(0, 0), 0.5, 0.2);
-    //     composer.addPass( dotScreenPass );
-    //
-    //     // const starsPass = new ShaderPass( {
-    //     //     name: 'stars',
-    //     //
-    //     //     uniforms: {
-    //     //         u_resolution: { value: new THREE.Vector2() },
-    //     //         u_time: { value: 0 }
-    //     //     },
-    //     //
-    //     //     vertexShader: `
-    //     //         void main() {
-    //     //             gl_Position = vec4(position, 1.0);
-    //     //         }
-    //     //     `,
-    //     //
-    //     //     fragmentShader: `
-    //     //         uniform vec2 u_resolution;
-    //     //         uniform float u_time;
-    //     //
-    //     //         void main() {
-    //     //             vec2 uv = gl_FragCoord.xy / u_resolution;
-    //     //             vec3 color = vec3(0.0);
-    //     //
-    //     //             float stars = 0.0;
-    //     //             for (float i = 0.0; i < 100.0; i++) {
-    //     //                 float x = fract(sin(i) * 1000.0);
-    //     //                 float y = fract(cos(i) * 1000.0);
-    //     //                 float d = distance(uv, vec2(x, y));
-    //     //                 stars += step(0.01, d);
-    //     //             }
-    //     //
-    //     //             color = vec3(stars);
-    //     //
-    //     //             gl_FragColor = vec4(color, 1.0);
-    //     //         }
-    //     //     `,
-    //     // } );
-    //     // composer.addPass( starsPass );
-    //
-    //     const outputPass = new OutputPass();
-    //     composer.addPass( outputPass );
-    // });
-    //
-    // onCleanup(() => {
-    //     globe._destructor();
-    // });
-
     return <>
         <section id="home-section" class="relative h-screen flex flex-col justify-center items-center select-none">
             <div id="pixel-globe" />
@@ -96,19 +23,21 @@ const Home: Component = () => {
 
             <div class="mt-20 animate-push">
                 <svg style="scale: 5" class="fill-dark dark:fill-gray" xmlns="http://www.w3.org/2000/svg"
-                     width="5" height="6" viewBox="0 0 5 6">
+                    width="5" height="6" viewBox="0 0 5 6">
+                    <title>Scroll down...</title>
                     <polygon points="5 3 5 4 4 4 4 5 3 5 3 6 2 6 2 5 1 5 1 4 0 4 0 3 2 3 2 0 3 0 3 3 5 3"
-                             stroke-width="0"/>
+                        stroke-width="0" />
                 </svg>
             </div>
 
-            <div class="styling left-16 bottom-0 w-1 h-40 bg-gray dark:bg-darkgray"/>
+            <div class="styling left-16 bottom-0 w-1 h-40 bg-gray dark:bg-darkgray" />
             <div class="styling left-5 bottom-8" style="writing-mode: tb-rl; transform: rotate(-180deg);">
                 0.1 Welcome
             </div>
             <div class="styling left-16 bottom-40 w-4 h-4">
                 <svg viewBox="0 0 16 16" stroke="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="8" cy="8" r="8"/>
+                    <title>design-circle</title>
+                    <circle cx="8" cy="8" r="8" />
                 </svg>
             </div>
         </section>
@@ -151,18 +80,12 @@ const Home: Component = () => {
             </h1>
 
             <div class="styling left-16 top-0 w-1 h-28 bg-gray dark:bg-darkgray" />
-            <div class="styling left-16 top-28 w-4 h-4">
-                <svg viewBox="0 0 16 16" stroke="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="8" cy="8" r="8" />
-                </svg>
-            </div>
+
+            <SVGCircle class="top-28" />
 
             <div class="styling left-16 bottom-0 w-1 h-28 bg-gray dark:bg-darkgray" />
-            <div class="styling left-16 bottom-28 w-4 h-4">
-                <svg viewBox="0 0 16 16" stroke="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="8" cy="8" r="8" />
-                </svg>
-            </div>
+
+            <SVGCircle class="bottom-28" />
         </section>
 
         <Chapter title="My approach to learning new things" text={[

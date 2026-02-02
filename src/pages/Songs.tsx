@@ -4,7 +4,7 @@ import { ChapterText, DownArrow, SVGCircle, SVGLine, VerticalLine } from "@compo
 import { TypedText } from "@components/shared/TypedText";
 import { Chapter } from "@components/shared/Chapter";
 import useLoading from "@components/shared/Loading";
-import {MusicItemProps} from "@components/music/Songplayer";
+import { MusicItemProps } from "@components/music/Songplayer";
 
 const music = await fetch("/music/data.json").then(async res => await res.json() as MusicItemProps[]);
 
@@ -40,11 +40,8 @@ const Songs: Component = () => {
             </p>
 
             <div class="styling left-16 bottom-0 w-1 h-40 bg-gray dark:bg-darkgray" />
-            <div class="styling left-16 bottom-40 w-4 h-4">
-                <svg viewBox="0 0 16 16" stroke="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="8" cy="8" r="8" />
-                </svg>
-            </div>
+
+            <SVGCircle class="bottom-40" />
         </section>
 
         <Chapter title="How I got to making music" text={[
