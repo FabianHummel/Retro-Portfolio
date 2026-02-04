@@ -40,13 +40,13 @@
 
 /* width */
 ::-webkit-scrollbar {
-    width: 10px;
-    height: 5px;
+    width: 3px;
+    height: 3px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-    @apply bg-white dark:bg-dark;
+    @apply bg-gray dark:bg-darkgray;
 }
 
 /* Handle */
