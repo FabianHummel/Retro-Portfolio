@@ -2,6 +2,7 @@ import { Graphics } from "@components/home/Graphics";
 import { Chapter } from "@components/shared/Chapter";
 import { ChapterText, DownArrow, SVGCircle, SVGLine, VerticalLine } from "@components/shared/Styling";
 import { TypedText } from "@components/shared/TypedText";
+import { theme } from "@src/App";
 import type { Component } from "solid-js";
 
 const Home: Component = () => {
@@ -55,15 +56,17 @@ const Home: Component = () => {
             <SVGLine top={40} height={200} />,
             <DownArrow top={80} />
         ]} graphics={
-            <Graphics image="img/home/Profile Picture.png" text="this is my logo, you will learn about it a little later" />
+            <Graphics image="img/home/Profile Picture.png" text="this is me. More about the picture further down" />
         } />
 
         <Chapter title="> School life" text={[
-            "I ended up going to HTL Spengergasse, located in the 5th district of Vienna.",
+            <span>I ended up going to HTL <img src={theme() === "light" ? "/img/home/spengergasse-vector-logo.svg" : "/img/home/spengergasse-vector-logo-dark.svg"} alt="Spengergasse" class="inline h-7 align-sub" />, located in the Vienna's 5th district, Margareten.</span>,
 
             "Right from the start we were introduced to the basics of Java development. Because I already had experience with C# from making games, the first two years were very easy for me to follow.",
 
-            "Aside from the programming lessons, we were also teached relational databases, computer hardware, and web development."
+            "Aside from the programming lessons, we were also teached relational databases, computer hardware, and web development.",
+
+            "After five years, in 2025, I eventually graduated with a Matura and was ready for the \"real life\"."
         ]} decoration={[
             <ChapterText text="0.3 School life" />,
             <VerticalLine />,
@@ -71,7 +74,7 @@ const Home: Component = () => {
             <SVGLine top={70} height={150} />,
             <DownArrow top={40} />
         ]} graphics={
-            <Graphics image="img/home/Spengergasse GMaps.png" text="this is the college I'm currently visiting" />
+            <Graphics image="img/home/Spengergasse GMaps.png" text="this is the highschool I have been visiting" />
         } />
 
         <section class="relative py-20 md:py-36 flex flex-col gap-5 justify-center items-center">

@@ -83,6 +83,7 @@
 
 a {
     cursor: pointer !important;
+    text-decoration: underline;
 }
 
 body {

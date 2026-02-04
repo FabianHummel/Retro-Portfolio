@@ -40,7 +40,7 @@ const Projects: Component = () => {
             <SVGCircle class="bottom-40" />
         </section>
 
-        <For each={ProjectList}>
+        <For each={ProjectList()}>
             {(item, index) => <Project
                 project={item}
                 decoration={[

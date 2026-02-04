@@ -1,6 +1,6 @@
 import { A } from "@solidjs/router";
 import { theme } from "@src/App";
-import { type Component, For, type JSXElement, Show } from "solid-js";
+import { type Component, For, type JSXElement, Show, type JSX } from "solid-js";
 import { Tag } from "../shared/Tag";
 
 export interface ProjectItemProps {
@@ -9,7 +9,7 @@ export interface ProjectItemProps {
     title: string;
     id: string;
     createDate: string;
-    description: string[];
+    description: JSX.Element[];
     bookLink?: string;
     links: Array<{ name: "github" | "demo" | "docs"; url: string }>;
     tags: string[];

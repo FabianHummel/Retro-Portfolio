@@ -1,10 +1,11 @@
 import type { ProjectItemProps } from "@components/projects/Project";
+import { A } from "@solidjs/router";
 
 export function genHeight(): number {
     return Math.random() * 100 + 100
 }
 
-const ProjectList: Array<ProjectItemProps> = [
+const ProjectList: () => Array<ProjectItemProps> = () => [
     {
         logo: "/img/projects/skys-horizon.png",
         darkLogo: "/img/projects/skys-horizon-dark.png",
@@ -13,9 +14,9 @@ const ProjectList: Array<ProjectItemProps> = [
         createDate: "2022-06-25",
         bookLink: "skys-horizon.md",
         description: [
-            "Sky's Horizon features a unique, yet challenging storyline with unlimited, procedurally generated planets to explore, each with its own distinct materials and tons of new foreign flora and fauna. Right from the start you will be facing extreme conditions and other dangers to look out for, so prepare for an outrageous adventure.",
+            "Venture through foreign tales, research advanced technology, seek friendship with the unknown in the world of Sky's Horizon. You and your companion Chris stand up against the oppression of a leading institute in space exploration. However, the fight comes at high costs - Chris sacrifices his life for you to escape. Things get only worse from here after you unexpectedly crash on planet Sorax 4B, where you face extreme conditions and other dangers to look out for, so be prepared for an outrageous adventure.",
 
-            "The first ideas I had for this game were a few years ago, but I never really got around to actually making it. It's a first person story-told game with a focus on exploration and survival. I was unsure about whether I make it in Unity or Minecraft, but as neither of those engines fit my needs, I eventually decided to go with the worlds best game engine: Godot.",
+            <span>Sky's Horizon is a first person story-told game with a focus on exploration and survival. The idea for this game has been in my head for many years now, but I never really got around to actually creating it. For more in-depth information I really recommend reading the article <A href="/book/skys-horizon.md">here</A>.</span>
         ],
         links: [{
             name: "github",

@@ -21,7 +21,7 @@ export default function App(props: ParentProps) {
             <Songplayer>
                 <Navbar />
 
-                <main class="max-w-[1800px] mx-auto">{props.children}</main>
+                <main class="max-w-[1500px] mx-auto">{props.children}</main>
 
                 <Footer />
             </Songplayer>

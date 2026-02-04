@@ -1,7 +1,7 @@
-import { Component, For, JSXElement } from "solid-js";
 import { TypedText } from "@components/shared/TypedText";
+import { type Component, For, type JSX, type JSXElement } from "solid-js";
 
-export const Chapter: Component<{ title: string, text: string[], decoration?: JSXElement[], graphics?: JSXElement }> = (props) => {
+export const Chapter: Component<{ title: string, text: JSX.Element[], decoration?: JSXElement[], graphics?: JSXElement }> = (props) => {
     return (
         <section class="content grid grid-cols-[1fr] grid-rows-[auto,auto] lg:grid-rows-[6rem,auto] gap-10 md:gap-x-20 md:gap-y-0">
             {/* text */}
