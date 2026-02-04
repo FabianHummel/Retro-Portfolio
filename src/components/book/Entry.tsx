@@ -8,14 +8,13 @@ import { type Component, createEffect, createSignal, type JSX, onMount, Show, sp
 export interface EntryProps extends JSX.HTMLAttributes<HTMLDivElement> {
     title: string;
     entry: IEntry;
-    index: number;
 }
 
 export const Entry: Component<EntryProps> = (props) => {
-    const [local, other] = splitProps(props, ["title", "entry", "index"])
+    const [local, other] = splitProps(props, ["title", "entry"])
     const [open, setOpen] = createSignal(false);
 
-    const { articles, currentArticleIndex, findArticleSequentially, closeMobileSidebar } = useContext(BookContext);
+    const { currentArticleIndex, articles, findNextArticle, closeMobileSidebar } = useContext(BookContext);
 
     onMount(() => {
         setOpen(window.localStorage.getItem(`book:${local.entry.path}`) === "true");
@@ -25,7 +24,8 @@ export const Entry: Component<EntryProps> = (props) => {
         window.localStorage.setItem(`book:${local.entry.path}`, open() ? "true" : "false");
     });
 
-    const nextArticle = findArticleSequentially(1);
+    const articleIndex = articles().findIndex(a => a.path === local.entry.path);
+    const nextArticle = findNextArticle(articleIndex, 1);
 
     return (
         <div {...other} class={clsx("text-m ml-3 border-l-[3px] border-l-gray dark:border-l-darkgray", props.class)}>
@@ -35,7 +35,7 @@ export const Entry: Component<EntryProps> = (props) => {
                 </header>
             }>
                 <div class="flex justify-between items-center gap-2 pl-3" classList={{
-                    "bg-light dark:bg-black": articles()[currentArticleIndex()].path === local.entry.path,
+                    "bg-light dark:bg-black": currentArticleIndex() === articleIndex,
                 }}>
                     <Show when={nextArticle} fallback={(
                         <p class="text-gray dark:text-darkgray">
@@ -71,15 +71,9 @@ export const Entry: Component<EntryProps> = (props) => {
                         <button type="button" class="p-2" onClick={() =>
                             setOpen(!open())
                         }>
-                            <PixelImage src={
-                                open()
-                                    ? "/img/book/Retract.png"
-                                    : "/img/book/Expand.png"}
-                                darkSrc={
-                                    open()
-                                        ? "/img/book/Retract Dark.png"
-                                        : "/img/book/Expand Dark.png"
-                                }
+                            <PixelImage
+                                src={open() ? "/img/book/Retract.png" : "/img/book/Expand.png"}
+                                darkSrc={open() ? "/img/book/Retract Dark.png" : "/img/book/Expand Dark.png"}
                                 alt="Open/Close Section" w={5} h={5} scale={3} />
                         </button>
                     </Show>
@@ -89,7 +83,7 @@ export const Entry: Component<EntryProps> = (props) => {
                     <Show when={open()}>
                         <Entries of={local.entry.children}>
                             {(title, entry) => (
-                                <Entry title={title} entry={entry()} index={local.index} />
+                                <Entry title={title} entry={entry()} />
                             )}
                         </Entries>
                     </Show>

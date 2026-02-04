@@ -1,8 +1,9 @@
-import { Component } from "solid-js";
+import type { Component } from "solid-js";
 import "./Featured.css";
-import {theme} from "@src/App";
+import { A } from "@solidjs/router";
+import { theme } from "@src/App";
 
-export const Featured : Component<{}> = () => {
+export const Featured: Component = () => {
     return (
         <section id="featured-section" class="content h-[54rem]">
             <main class="h-full max-w-md mx-auto flex flex-col gap-6">
@@ -15,11 +16,12 @@ export const Featured : Component<{}> = () => {
                         <em>Venture through foreign tales, research advanced technology, seek friendship with the unknown.</em>
                     </p>
                 </div>
-                <div id="featured-links" class="mt-16 flex items-center justify-center">
-                    <a href="">Homepage</a>
-                    <a href="">Github</a>
-                    <a href="">Steam</a>
-                </div>
+
+                <A href="/book/skys-horizon.md">
+                    <p>
+                        Read the article
+                    </p>
+                </A>
             </main>
         </section>
     )
