@@ -12,7 +12,7 @@ export const Button: Component<ButtonProps> = (props) => {
 
     return (
         <Show when={local.article}>
-            <A href={`/book/${local.article.path}`} {...other} class={`book-button flex-1 px-3 py-1 text-m content-center cursor-pointer leading-none ${other.class}`}
+            <A href={`/book/${local.article.path}`} {...other} class={`book-button flex-1 px-3 py-1 text-m content-center cursor-pointer leading-none font-main no-underline ${other.class}`}
                 style={`border-image-source: url('${theme() === "light" ? "/img/book/Link Background.png" : "/img/book/Link Background Dark.png"
                     }');`}>
                 {local.article.title}

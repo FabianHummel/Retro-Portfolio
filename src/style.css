@@ -73,8 +73,11 @@
     overflow-y: hidden;
 }
 
-* {
-    @apply font-main;
+h1,
+h2,
+h3,
+h4 {
+    @apply font-main lowercase
 }
 
 *[hidden] {
@@ -83,15 +86,15 @@
 
 a {
     cursor: pointer !important;
-    text-decoration: underline;
+    text-decoration-line: underline;
 }
 
 body {
-    @apply bg-white dark:bg-dark text-black dark:text-gray;
+    @apply bg-white dark:bg-dark text-black dark:text-gray font-spectral;
 }
 
 * {
-    @apply lowercase;
+    text-transform: inherit;
 }
 
 footer {
@@ -110,35 +113,6 @@ footer td:focus-within {
 #home-section>* {
     z-index: 10;
 }
-
-/* #home-section::before {
-	position: absolute;
-	z-index: 0;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	content: '';
-	background: url('/img/home/Skyline.png') no-repeat center;
-	background-size: cover;
-	image-rendering: pixelated
-}
-
-#home-section::after {
-	position: absolute;
-	z-index: 20;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	content: '';
-	background: url('/img/home/Vines.gif') no-repeat top,
-				url('/img/home/Birds.gif') no-repeat top;
-	background-size: auto 18rem,
-					 auto 18rem;
-	background-position-y: 8rem;
-	image-rendering: pixelated
-} */
 
 h1 {
     @apply text-l;
@@ -189,12 +163,20 @@ aside>* {
     border-left: none !important;
 }
 
+aside a {
+    text-decoration-line: none;
+}
+
+.font-main {
+    text-transform: lowercase;
+}
+
 .disabled {
     @apply opacity-50 pointer-events-none;
 }
 
 .styling {
-    @apply absolute hidden lg:block text-s text-gray dark:text-darkgray fill-gray dark:fill-darkgray stroke-gray dark:stroke-darkgray -translate-x-1/2;
+    @apply font-main absolute hidden lg:block text-s text-gray dark:text-darkgray fill-gray dark:fill-darkgray stroke-gray dark:stroke-darkgray -translate-x-1/2;
 }
 
 .title {

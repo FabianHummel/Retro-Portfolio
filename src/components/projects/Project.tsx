@@ -35,13 +35,13 @@ export const Project: Component<{ project: ProjectItemProps, decoration?: JSXEle
 				: null} */}
 
                 {/* date */}
-                <p class="row-start-2 align-top leading-normal">
+                <p class="row-start-2 align-top leading-normal font-main">
                     {`Creation date: ${dateTimeFormat.format(new Date(props.project.createDate))}`}
                 </p>
 
                 {/* book link */}
                 <Show when={props.project.bookLink}>
-                    <div class="shiny-background">
+                    <div class="shiny-background font-main">
                         <A href={`/book/${props.project.bookLink}`}>
                             <p>Read the book</p>
                         </A>
@@ -59,16 +59,16 @@ export const Project: Component<{ project: ProjectItemProps, decoration?: JSXEle
             </div>
 
             {/* tags */}
-            <div class="my-6 flex flex-row flex-wrap gap-y-4 items-center">
+            <div class="my-6 flex flex-row flex-wrap gap-y-4 gap-x-4 items-center font-main">
                 <For each={props.project.tags}>
                     {(tag, index) => <>
                         <Tag tag={tag} />
                         {index() < props.project.tags.length - 1 &&
-                            <div class="w-[6px] h-[6px] mx-4 bg-black dark:bg-gray" />
+                            <div class="w-[6px] h-[6px] bg-black dark:bg-gray font-main" />
                         }
                     </>}
                 </For>
-                <div class="min-w-[14rem] ml-6 hidden md:grid grid-rows-[30px,0,30px] grid-cols-[2fr,1fr] flex-1 items-center">
+                <div class="min-w-[20rem] hidden md:grid grid-rows-[30px,0,30px] grid-cols-[2fr,1fr] flex-1 items-center">
                     <p class="col-span-2 text-s text-gray dark:text-darkgray row-start-1 leading-none">{
                         `${props.project.title} ... ${[...Array(10)].map(() => Math.round(Math.random())).join('')}`
                     }</p>

@@ -6,7 +6,7 @@ export const Chapter: Component<{ title: string, text: JSX.Element[], decoration
         <section class="content grid grid-cols-[1fr] grid-rows-[auto,auto] lg:grid-rows-[6rem,auto] gap-10 md:gap-x-20 md:gap-y-0">
             {/* text */}
             <div class="row-start-1">
-                <h1>
+                <h1 id={props.title.toLowerCase().replace(/\s/g, '-')}>
                     <TypedText onIntersect>
                         {props.title}
                     </TypedText>

@@ -1,12 +1,12 @@
-import {Component, createSignal, For, onCleanup, onMount} from "solid-js";
-import {TypedText} from "@components/shared/TypedText";
-import {Tag} from "@components/shared/Tag";
-import {PixelImage} from "@components/shared/PixelImage";
-import {theme} from "@src/App";
+import { Component, createSignal, For, onCleanup, onMount } from "solid-js";
+import { TypedText } from "@components/shared/TypedText";
+import { Tag } from "@components/shared/Tag";
+import { PixelImage } from "@components/shared/PixelImage";
+import { theme } from "@src/App";
 
 const username = "FabianHummel";
 const endpoint = "https://api.github.com/users";
-const closeFriendsNames = ["m-ue-d", "LambdaSpg", "atomeniuc", "Gipfel"];
+const closeFriendsNames = ["m-ue-d", "KonradSimlinger", "Gipfel", "PulecChristian", "atomeniuc"];
 
 const lastUpdated = new Date(window.localStorage.getItem("github-last-updated"));
 
@@ -86,17 +86,17 @@ const Github: Component = () => {
         </section>
 
         <section id="github-section" class="relative block lg:grid p-12 lg:p-36 pt-0 md:pr-24 gap-16">
-            <div class="block lg:sticky top-[200px]">
+            <div class="block lg:sticky top-[200px] font-main">
                 <div class="relative w-full aspect-square mb-8 mx-auto max-w-xs lg:max-w-none">
                     <div class="absolute w-full h-full stroke-gray">
                         <svg class="animate-spin" viewBox="0 0 256 256" fill="none" overflow="visible"
-                             xmlns="http://www.w3.org/2000/svg">
-                            <circle cx="128" cy="128" r="128" stroke-width="6" stroke-dasharray="16 15"/>
+                            xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="128" cy="128" r="128" stroke-width="6" stroke-dasharray="16 15" />
                         </svg>
                     </div>
                     <div class="absolute inset-4 bg-cover bg-center rounded-full" style={
                         `background-image: url(${user.avatar_url});`
-                    }/>
+                    } />
                 </div>
 
                 <p class="-rotate-3 text-center">~ {user.bio}</p>
@@ -114,7 +114,7 @@ const Github: Component = () => {
                                 <a href={friend.html_url}>
                                     <li class="flex items-center m-0 p-0">
                                         <img src={friend.avatar_url} alt={friend.login}
-                                             class="w-10 h-10 rounded-full"/>
+                                            class="w-10 h-10 rounded-full" />
                                         <p class="ml-4">{friend.login}</p>
                                     </li>
                                 </a>
@@ -134,17 +134,16 @@ const Github: Component = () => {
                 <div class="grid gap-4 [grid-template-columns:repeat(auto-fill,minmax(500px,1fr))]">
                     <For each={repos}>
                         {(repo) => (
-                            <div class="w-full github-repository" style={`border-image-source: url('${
-                                theme() === "light" ? "/img/github/Repository Background.png" : "/img/github/Repository Background Dark.png"
-                            }');`}>
+                            <div class="w-full github-repository" style={`border-image-source: url('${theme() === "light" ? "/img/github/Repository Background.png" : "/img/github/Repository Background Dark.png"
+                                }');`}>
                                 <button title="Copy clone link" class="absolute top-4 right-4" onClick={() => {
                                     navigator.clipboard.writeText(repo.ssh_url);
                                     alert("Copied to clipboard!");
-                                }}><PixelImage src={"/img/github/Clone.png"} darkSrc={"/img/github/Clone Dark.png"} w={5} h={5} scale={3}/></button>
+                                }}><PixelImage src={"/img/github/Clone.png"} darkSrc={"/img/github/Clone Dark.png"} w={5} h={5} scale={3} /></button>
                                 <h2 class="underline"><a href={repo.html_url}>{repo.name}</a></h2>
                                 <p>{repo.description}</p>
                                 <div hidden={!repo.language} class="items-start flex flex-col mt-4">
-                                    <Tag tag={repo.language}/>
+                                    <Tag tag={repo.language} />
                                 </div>
                             </div>
                         )}

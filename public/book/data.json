@@ -24,16 +24,34 @@
                 }
             },
             "Devlogs": {
-                "path": "devlogs",
-                "children": {}
+                "path": "devlogs"
             }
         }
     },
     "Heast Messenger": {
         "path": "heast-messenger.md",
         "children": {
-            "Security Layers": {
-                "path": "security-layers.md"
+            "History": {
+                "path": "history",
+                "children": {
+                    "Whoerld Wide Messenger": {
+                        "path": "whoerld-wide-messenger.md"
+                    },
+                    "Heast Messenger (Java)": {
+                        "path": "heast-messenger-java.md"
+                    },
+                    "Heast Messenger (C#)": {
+                        "path": "heast-messenger-cs.md"
+                    }
+                }
+            },
+            "Devlogs": {
+                "path": "devlogs",
+                "children": {
+                    "Security Layers": {
+                        "path": "security-layers.md"
+                    }
+                }
             }
         }
     },

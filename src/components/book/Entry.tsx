@@ -37,7 +37,7 @@ export const Entry: Component<EntryProps> = (props) => {
                 <div class="flex justify-between items-center gap-2 pl-3" classList={{
                     "bg-light dark:bg-black": currentArticleIndex() === articleIndex,
                 }}>
-                    <Show when={nextArticle} fallback={(
+                    <Show when={local.entry.hasContent || local.entry.children && nextArticle} fallback={(
                         <p class="text-gray dark:text-darkgray">
                             {local.title}
                         </p>

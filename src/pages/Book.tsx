@@ -264,7 +264,7 @@ const Book: Component = () => {
         <style>{`.article-content { font-size: ${bookFontSize()}em; }`}</style>
 
         <section ref={scrollContainer} class="h-[100dvh] pt-[var(--navbar-height)] py-10 max-lg:pb-4 lg:px-6 grid grid-cols-[22rem,calc(100vw-3px)] lg:grid-cols-[25rem,auto] gap-1 lg:gap-x-8 overflow-auto snap-x snap-mandatory">
-            <div ref={sidebarContainer} class="border-r-gray border-r-2 max-lg:px-3 snap-start">
+            <div ref={sidebarContainer} class="border-r-gray border-r-2 max-lg:px-3 snap-start font-main">
                 <aside class="sticky top-0 self-start max-lg:pr-3 lg:pr-8">
                     <div class="flex flex-row pt-4 gap-2">
                         <button type="button" class="cursor-pointer" onClick={() => setSmoothBookFont(!smoothBookFont())}>
