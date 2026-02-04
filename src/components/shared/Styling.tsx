@@ -24,7 +24,7 @@ export interface SVGCircleProps extends JSX.HTMLAttributes<HTMLDivElement> {
 
 export const SVGCircle: Component<SVGCircleProps> = (props) => {
     return (
-        <div {...props} class={clsx("styling left-16 w-4 h-4", props.class)} style={clsx(`top: ${props.top ?? 0}%;`, props.style)}>
+        <div {...props} class={clsx("styling left-16 w-4 h-4", props.class)} style={clsx(`top: ${props.top}%;`, props.style)}>
             <svg viewBox="0 0 16 16" stroke="none" xmlns="http://www.w3.org/2000/svg">
                 <title>Circle (design)</title>
                 <circle cx="8" cy="8" r="8" />

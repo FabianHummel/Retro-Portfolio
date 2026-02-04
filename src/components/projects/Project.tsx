@@ -27,7 +27,7 @@ export const Project: Component<{ project: ProjectItemProps, decoration?: JSXEle
                 {/* title */}
                 <img alt="Logo"
                     src={(theme() === "light" || !props.project.darkLogo) ? props.project.logo : props.project.darkLogo}
-                    class="h-48 mx-auto" />
+                    class="h-48 object-contain mx-auto" />
 
                 {/* image */}
                 {/* {props.project.image ?
@@ -42,7 +42,7 @@ export const Project: Component<{ project: ProjectItemProps, decoration?: JSXEle
                 {/* book link */}
                 <Show when={props.project.bookLink}>
                     <div class="shiny-background">
-                        <A href={props.project.bookLink}>
+                        <A href={`/book/${props.project.bookLink}`}>
                             <p>Read the book</p>
                         </A>
                     </div>

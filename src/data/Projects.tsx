@@ -1,4 +1,4 @@
-import { ProjectItemProps } from "@components/projects/Project";
+import type { ProjectItemProps } from "@components/projects/Project";
 
 export function genHeight(): number {
     return Math.random() * 100 + 100
@@ -11,7 +11,7 @@ const ProjectList: Array<ProjectItemProps> = [
         title: "Sky's Horizon",
         id: "skys-horizon",
         createDate: "2022-06-25",
-        bookLink: "/book/skys-horizon",
+        bookLink: "skys-horizon.md",
         description: [
             "Sky's Horizon features a unique, yet challenging storyline with unlimited, procedurally generated planets to explore, each with its own distinct materials and tons of new foreign flora and fauna. Right from the start you will be facing extreme conditions and other dangers to look out for, so prepare for an outrageous adventure.",
 
@@ -44,7 +44,7 @@ const ProjectList: Array<ProjectItemProps> = [
         title: "Heast Messenger",
         id: "heast-messenger",
         createDate: "2022-06-22",
-        bookLink: "/book/heast-messenger",
+        bookLink: "heast-messenger.md",
         description: [
             "Heast Messenger is a community-driven messenger service with latest security standards in mind, written 100% in dotNET C#. We want to have the benefits of quickly writing a message to a relative, but also having a fun place to hang out with your gaming-friends. Heast Messenger is not built to focus on one specific group of people, but rather being a place for everyone to connect with each other.",
 
@@ -68,7 +68,7 @@ const ProjectList: Array<ProjectItemProps> = [
         title: "Table Tennis",
         id: "table-tennis",
         createDate: "2022-04-19",
-        bookLink: "/book/table-tennis",
+        bookLink: "table-tennis.md",
         description: [
             "Inspired by Twini-Golf by Polymars, this project is a work in progress Table Tennis game made in SDL2 C++. It features a minimal game style and it is possible to play against the computer or your friend in a locally hosted game. Custom game modes like fireball or hyperspeed spice up the gameplay and make it more fun to play.",
 
@@ -87,7 +87,7 @@ const ProjectList: Array<ProjectItemProps> = [
         title: "A Sailor's Tale",
         id: "a-sailors-tale",
         createDate: "2022-09-18",
-        bookLink: "/book/a-sailors-tale",
+        bookLink: "a-sailors-tale.md",
         description: [
             "A Sailor's Tale is an adventorous retro game about a seemingly lonely sailor. Complete quests in a storyline-driven world full of fun things to explore.",
 
