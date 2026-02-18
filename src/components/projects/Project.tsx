@@ -51,11 +51,7 @@ export const Project: Component<{ project: ProjectItemProps, decoration?: JSXEle
 
             {/* description */}
             <div class="description flex flex-col gap-10">
-                <For each={props.project.description}>
-                    {(paragraph) => (
-                        <p class="text-s"> {paragraph} </p>
-                    )}
-                </For>
+                {props.project.description}
             </div>
 
             {/* tags */}

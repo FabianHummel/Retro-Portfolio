@@ -20,8 +20,8 @@ export default function Music(props: MusicProps) {
 
     const { song, isPlaying: playing, toggle, setSong, play, isThisSong, updateVolume, setPlaytime } = useSongplayer();
 
-    const [volume, setVolume] = createSignal(volumeFromStorage ?? 0.75);
-    let storedVolume = storedVolumeFromStorage ?? 0.75;
+    const [volume, setVolume] = createSignal(volumeFromStorage ?? 0.33);
+    let storedVolume = storedVolumeFromStorage ?? 0.33;
 
     createEffect(on(volume, () => {
         localStorage.setItem(`volume:${props.data.song}`, volume().toString());

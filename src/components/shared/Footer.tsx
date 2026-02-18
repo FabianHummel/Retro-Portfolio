@@ -28,10 +28,10 @@ export const Footer: Component = () => {
             </div>
 
             <table class="mt-16 md:mt-0 text-s text-center md:text-left">
-                <thead class="leading-loose underline underline-offset-4">
+                <thead class="leading-loose">
                     <tr>
-                        <th>Social</th>
-                        <th>Featured</th>
+                        <th>Social:</th>
+                        <th>Featured:</th>
                     </tr>
                 </thead>
                 <tbody class="leading-none">

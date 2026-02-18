@@ -49,7 +49,11 @@ export function Songplayer(props: ParentProps) {
     const [song, setSong]: Signal<MusicItemProps> = createSignal(null);
     const [isPlaying, setPlaying]: Signal<boolean> = createSignal(false);
     const [open, setOpen] = createSignal<boolean>(null);
-    const [master, setMaster] = createSignal(0.75);
+
+    let volumeFromStorage = parseFloat(localStorage.getItem(`master-volume`));
+    if (Number.isNaN(volumeFromStorage)) volumeFromStorage = undefined;
+
+    const [master, setMaster] = createSignal(volumeFromStorage ?? 0.33);
     const [playtime, setPlaytime] = createSignal(0);
     let storedMaster = master();
 
@@ -108,6 +112,7 @@ export function Songplayer(props: ParentProps) {
     }
 
     function handleUpdateVolume() {
+        localStorage.setItem("master-volume", master().toString());
         if (player === undefined) return;
         player.volume = (song()?.volume ?? 0.75) * master();
     }

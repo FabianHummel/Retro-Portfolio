@@ -1,16 +1,20 @@
+article * {
+    @apply font-spectral;
+    text-transform: none;
+}
+
 article :is(h1) {
     @apply w-full mb-6 border-b-black border-b-2;
-    font-size: 2em;
+    font-size: 2.7rem;
 }
 
 article :is(h2) {
     @apply mt-8;
-    font-size: 1.5em;
+    font-size: 2.3rem;
 }
 
 article :is(p, pre, ul) {
     @apply mt-4 mb-4;
-    font-size: 1.125em;
 }
 
 article :is(pre > code) {
@@ -18,33 +22,14 @@ article :is(pre > code) {
 }
 
 article :is(pre) {
-    text-transform: none;
-    overflow: auto;
-    line-height: unset;
+    @apply overflow-x-auto;
 }
 
 article :is(a) {
     @apply underline;
 }
 
-article :is(pre > pre) {
-    @apply mb-0;
-}
-
-article .smooth-font *:not(pre, code, code *) {
-    font-weight: normal !important;
-    @apply font-spectral normal-case;
-    line-height: 2em;
-}
-
-article .smooth-font :is(h1) {
-    @apply pb-6 mb-12;
-}
-
-article .smooth-font :is(h2) {
-    @apply mt-14 mb-4;
-}
-
-article .smooth-font :is(p, ul) {
-    @apply mb-8;
+article code, article code * {
+    @apply mb-0 font-mono;
+    font-size: 1rem;
 }

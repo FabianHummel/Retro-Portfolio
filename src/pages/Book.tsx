@@ -9,18 +9,16 @@ import {
     createResource,
     createSignal,
     on,
-    onMount,
-    Show
+    onMount
 } from "solid-js";
 import SolidMarkdown from "solid-markdown";
 import "pdfjs-dist/web/pdf_viewer.css";
 import { Button } from "@components/book/Button";
 import { Entry } from "@components/book/Entry";
 import useLoading from "@components/shared/Loading";
-import createLocalStorageSignal from "@components/shared/LocalStorageSignal";
-import { PixelImage } from "@components/shared/PixelImage";
 import { Entries } from "@solid-primitives/keyed";
 import worker from "pdfjs-dist/build/pdf.worker.mjs?raw";
+import { parseQueryString } from "pdfjs-dist/web/pdf_viewer.mjs";
 import type { Accessor } from "solid-js";
 import { createContext, onCleanup } from "solid-js";
 
@@ -136,15 +134,6 @@ const Book: Component = () => {
         }
     }
 
-    const [bookFontSize, setBookFontSize] = createLocalStorageSignal(
-        "book:font-size",
-        1,
-    );
-    const [smoothBookFont, setSmoothBookFont] = createLocalStorageSignal(
-        "book:smooth-font",
-        true,
-    );
-
     async function fetchArticle(index: number) {
         if (index !== -1 && !articles()[index]?.path?.endsWith(".md")) {
             return null;
@@ -251,6 +240,34 @@ const Book: Component = () => {
         });
     }
 
+    function transformImageUri(src: string): string {
+        const searchParamIndex = src.lastIndexOf('?');
+        const queryParams = parseQueryString(src.substring(searchParamIndex));
+        if (queryParams.get("theme") !== undefined && theme() !== queryParams.get("theme")) {
+            return "/book/blank.png";
+        }
+
+        if (src.startsWith("http")) return src;
+
+        const directory = articles()[currentArticleIndex()].path;
+        const path = directory.substring(0, directory.lastIndexOf("/") + 1);
+        const source = `/book/${path}${searchParamIndex === -1 ? src : src.substring(0, searchParamIndex)}`;
+
+        setTimeout(() => {
+            const img = document.querySelector<HTMLImageElement>(`img[src='${source}']`);
+            img.style.height = queryParams.get("height");
+            img.style.width = queryParams.get("width");
+            img.style.marginLeft = queryParams.get("align") === "left" ? "auto" : "";
+            img.style.marginRight = queryParams.get("align") === "right" ? "auto" : "";
+            img.style.marginInline = queryParams.get("align") === "center" ? "auto" : "";
+            for (const [key, value] of Object.entries(JSON.parse(queryParams.get("style")))) {
+                img.style[key] = value;
+            }
+        });
+
+        return source;
+    }
+
     return <BookContext.Provider value={{
         currentArticleIndex,
         articles,
@@ -260,36 +277,9 @@ const Book: Component = () => {
         {/* hide footer */}
         <style>{`footer { display: none !important; }`}</style>
 
-        {/* article font size */}
-        <style>{`.article-content { font-size: ${bookFontSize()}em; }`}</style>
-
         <section ref={scrollContainer} class="h-[100dvh] pt-[var(--navbar-height)] py-10 max-lg:pb-4 lg:px-6 grid grid-cols-[22rem,calc(100vw-3px)] lg:grid-cols-[25rem,auto] gap-1 lg:gap-x-8 overflow-auto snap-x snap-mandatory">
-            <div ref={sidebarContainer} class="border-r-gray border-r-2 max-lg:px-3 snap-start font-main">
-                <aside class="sticky top-0 self-start max-lg:pr-3 lg:pr-8">
-                    <div class="flex flex-row pt-4 gap-2">
-                        <button type="button" class="cursor-pointer" onClick={() => setSmoothBookFont(!smoothBookFont())}>
-                            {smoothBookFont() ? (
-                                <PixelImage alt="Enable pixelated font" src={"/img/book/Pixel Font.png"} darkSrc={"/img/book/Pixel Font Dark.png"} w={6} h={5} scale={5} />
-                            ) : (
-                                <img alt="Enable smooth font" src={theme() === "light" ? "/img/book/Smooth Font.svg" : "/img/book/Smooth Font Dark.svg"} width={25} height={25} />
-                            )}
-                        </button>
-
-                        <PixelImage
-                            class="cursor-pointer"
-                            onClick={() => setBookFontSize(Math.min(bookFontSize() + 0.1, 2))}
-                            src={"/img/book/Font Size Bigger.png"}
-                            darkSrc={"/img/book/Font Size Bigger Dark.png"}
-                            w={5} h={5} scale={5} />
-
-                        <PixelImage
-                            class="cursor-pointer"
-                            onClick={() => setBookFontSize(Math.max(bookFontSize() - 0.1, 0.5))}
-                            src={"/img/book/Font Size Smaller.png"}
-                            darkSrc={"/img/book/Font Size Smaller Dark.png"}
-                            w={5} h={5} scale={5} />
-                    </div>
-
+            <div ref={sidebarContainer} class="border-r-gray border-r-2 snap-start font-main">
+                <aside class="sticky top-0 self-start max-lg:px-5 lg:pr-8">
                     <Entries of={book()}>
                         {(title, entry) => <Entry
                             title={title}
@@ -304,27 +294,7 @@ const Book: Component = () => {
                     {article.loading ? (
                         <p>Loading...</p>
                     ) : (
-                        <Show when={theme()} keyed>
-                            {(theme) => <SolidMarkdown
-                                class={`article-content ${smoothBookFont() ? "smooth-font" : ""}`}
-                                children={article()}
-                                transformImageUri={(src) => {
-                                    if (theme === "dark" && src.endsWith("?theme=light"))
-                                        return "/book/blank.png";
-                                    if (theme === "light" && src.endsWith("?theme=dark"))
-                                        return "/book/blank.png";
-
-                                    if (src.startsWith("http")) return src;
-                                    // if (src.startsWith("/public")) return "/book" + src;
-                                    const directory = articles()[currentArticleIndex()].path;
-                                    const path = directory.substring(
-                                        0,
-                                        directory.lastIndexOf("/") + 1,
-                                    );
-                                    return `/book/${path}${src}`;
-                                }}
-                            />}
-                        </Show>
+                        <SolidMarkdown children={article()} transformImageUri={transformImageUri} />
                     )}
 
                     <div

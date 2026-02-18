@@ -64,6 +64,10 @@
     "Squavy": {
         "path": "squavy.md",
         "children": {
+            "Diploma Thesis": {
+                "path": "diploma-thesis.pdf",
+                "isDownloadable": true
+            },
             "Business Plan": {
                 "path": "business-plan.pdf",
                 "isDownloadable": true
@@ -71,6 +75,26 @@
         }
     },
     "Other Stuff": {},
+    "About Me": {
+        "path": "about-me",
+        "children": {
+            "Software Development": {
+                "path": "software-development.md"
+            },
+            "Leaning new things": {
+                "path": "learning-new-things.md"
+            },
+            "(Web)-Design": {
+                "path": "(web)-design.md"
+            },
+            "About my Portfolio": {
+                "path": "about-my-portfolio.md"
+            },
+            "My Profile Picture": {
+                "path": "my-profile-picture.md"
+            }
+        }
+    },
     "Running Heurigen": {
         "path": "running-heurigen.md",
         "children": {

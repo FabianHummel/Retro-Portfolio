@@ -1,4 +1,4 @@
-import { Graphics } from "@components/home/Graphics";
+import { ImageWithText } from "@components/home/Graphics";
 import { Chapter } from "@components/shared/Chapter";
 import { ChapterText, DownArrow, SVGCircle, SVGLine, VerticalLine } from "@components/shared/Styling";
 import { TypedText } from "@components/shared/TypedText";
@@ -68,11 +68,11 @@ const Home: Component = () => {
             <SVGLine top={40} height={200} />,
             <DownArrow top={80} />
         ]} graphics={
-            <Graphics image="img/home/Profile Picture.png" text="this is me. More about the picture further down" />
+            <ImageWithText image="img/home/Profile Picture.png" text={<span>this is me. More about the picture <A href="/book/about-me/my-profile-picture.md">here</A></span>} />
         } />
 
         <Chapter title="> School life" text={[
-            <span>I ended up going to HTL <img src={theme() === "light" ? "/img/home/spengergasse-vector-logo.svg" : "/img/home/spengergasse-vector-logo-dark.svg"} alt="Spengergasse" class="inline h-7 align-text-top" />, located in Vienna's 5th district, Margareten.</span>,
+            <span>I ended up going to HTL <img src={theme() === "light" ? "/img/home/spengergasse-vector-logo.svg" : "/img/home/spengergasse-vector-logo-dark.svg"} alt="Spengergasse" class="inline h-6 align-text-top" />, located in Vienna's 5th district, Margareten.</span>,
 
             <span>Right from the start we were introduced to the basics of Java development. Because I already had experience with C# from making games, the first two years were very easy for me to follow. <i>(not that the rest was particularly hard to follow as well...)</i> </span>,
 
@@ -86,88 +86,18 @@ const Home: Component = () => {
             <SVGLine top={70} height={150} />,
             <DownArrow top={40} />
         ]} graphics={
-            <Graphics image="img/home/Spengergasse GMaps.png" text="this is the highschool I have been visiting" />
+            <ImageWithText image="img/home/Spengergasse GMaps.png" text="this is the highschool I have been visiting" />
         } />
 
         <section class="relative py-20 md:py-36 flex flex-col gap-5 justify-center items-center">
             <h1 class="text-center">
-                ~ More about me ~
+                ~ More about me <A href="/book/about-me/software-development.md">Here</A> ~
             </h1>
 
             <div class="styling left-16 top-0 w-1 h-28 bg-gray dark:bg-darkgray" />
 
             <SVGCircle class="top-28" />
-
-            <div class="styling left-16 bottom-0 w-1 h-28 bg-gray dark:bg-darkgray" />
-
-            <SVGCircle class="bottom-28" />
         </section>
-
-        <Chapter title="Pofessionalism and seriousness" text={[
-            "I think maintaing a clean, structured and consistent codebase is the key for efficient and fun software development. I also see a clear relation between my way of writing code and my day-to-day habits of keeping a clean room or workplace and staying organized with my real-life tasks. The codebase is the place I essentially live and work in. If it's not tidy I get upset really fast.",
-
-            "Often, I rather tend to rewrite an entire piece of software than slowly cleaning it up for it to meet my quality standards, but I don't see this as as much of an issue, because it gives me the opportunity to learn from prior mistakes. Rewriting also sounds like much work, but many people forget that the logic is already there, just not in a shape that it's supposed to be.",
-
-            <span>This mindset really reflects on virtually all of my major projects, namely <A href="/book/squavy.md">Squavy</A>, <A href="/book/amethyst.md">Amethyst</A>, <A href="/book/heast-messenger.md">Heast Messenger</A> and <A href="/book/skys-horizon.md">Sky's Horizon</A>, which all have suffered from at least one overhaul - <i>for the good</i>.</span>,
-        ]} decoration={[
-            <ChapterText text="0.4 Pofessionalism and seriousness" />,
-            <VerticalLine />,
-            <SVGCircle top={30} />,
-            <SVGLine top={70} height={100} />,
-            <DownArrow top={20} />
-        ]} />
-
-        <Chapter title="My approach to learning new things" text={[
-            "During the last few years I have created several projects and tried something new with each of them. When learning a new language for example, I always try to build something small around it to train practical use right from the start.",
-
-            "When I get to create the project, I often already have a rough idea what of what I want it to be about. It's then only up to planning and writing the code. If my motivation is high enough, I will finish the project, but if not, I will just leave it as it is and move on to the next project - even though I am not proud of that.",
-        ]} decoration={[
-            <ChapterText text="0.5 Learning" />,
-            <VerticalLine />,
-            <SVGCircle top={90} />,
-            <SVGLine top={30} height={170} />,
-            <DownArrow top={5} />
-        ]} />
-
-        <Chapter title="How I got to (web)design" text={[
-            "It all started with my first few WMC (web & mobile computing) classes in first grade of highschool. According to my teacher, we are only supposed to learn HTML and some CSS layout properties so we could make proper functional websites...",
-
-            "But I was never happy with handing over \"unfinished looking\" websites for my assignments. It was that moment when I started looking at webdesigners' portfolios and ideas. I read through modern UI pricinciples and how to make well structured, good looking user interfaces. This helped me a lot in understanding how the design affects the user experience and that it's important to make the consumer feel comfortable with the product.",
-        ]} decoration={[
-            <ChapterText text="0.6 Design" />,
-            <VerticalLine />,
-            <SVGCircle top={30} />,
-            <SVGLine top={40} height={200} />,
-            <DownArrow top={80} />
-        ]} />
-
-        <Chapter title="About my portfolio" text={[
-            "I am talking about the website you are currently on, obviously. This isn't my first portfolio, but it's the first one I'm actually kinda proud of. I tried a lot of different ideas and layouts, but none of them felt right. Sometimes I would get stuck on a single page for days, trying to make it look good or having to deal with the struggles of making it responsive.",
-
-            "Eventually, I decided to go with a simple, minimalistic design based on my (not anywhere near finished) game. As you can see, i went with a black-and-white theme that absolutely destroys your eyes if you look at it for too long - I'm sorry...",
-
-            "For the nerds out there: I made this website using Solid.JS and TailwindCSS. Yes, I refuse to use React! The full source code is available on my GitHub page."
-        ]} decoration={[
-            <ChapterText text="0.7 Portfolio" />,
-            <VerticalLine />,
-            <SVGCircle top={30} />,
-            <SVGLine top={40} height={200} />,
-            <DownArrow top={90} />
-        ]} />
-
-        <Chapter title="The profile picture" text={[
-            "If we remind ourselves of the design chapter from before, you might remember that I learned a lot about UI design. Well, making user interfaces isn't the only thing I started doing. Experimenting with illustrations and logos is also something I enjoy doing ever since.",
-
-            "So I started making my own avatars. And boy, did I make a lot of them. They got simpler and simpler over time, but not in a bad way. The latest version of it is the one you see on the top of this page.",
-
-            "Dragons. Those majestic creatures have always been my favorite. I love their shape, I can let my creativity run wild with them. My latest one is actually based on the logo from LLVM, the compiler framework for the C family and other languages."
-        ]} decoration={[
-            <ChapterText text="0.8 My avatar" />,
-            <VerticalLine />,
-            <SVGCircle top={80} />,
-            <SVGLine top={30} height={200} />,
-            <DownArrow top={30} />
-        ]} />
     </>
 }
 

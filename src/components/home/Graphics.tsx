@@ -1,8 +1,13 @@
-import type { Component } from "solid-js";
+import type { Component, JSX } from "solid-js";
 
-export const Graphics: Component<{ image: string, text?: string }> = (props) => {
+interface ImageWithTextProps {
+    image: string;
+    text?: JSX.Element;
+}
+
+export const ImageWithText: Component<ImageWithTextProps> = (props) => {
     return <>
-        <div class="relative w-60 h-60">
+        <div class="relative size-40 sm:size-60 aspect-square">
             <div class="absolute w-full h-full stroke-gray dark:stroke-darkgray">
                 <ImageBorder />
             </div>
@@ -11,8 +16,8 @@ export const Graphics: Component<{ image: string, text?: string }> = (props) => 
             } />
         </div>
 
-        <p class="font-main text-gray dark:text-darkgray text-s rotate-[-7.5deg] max-w-[15rem]" hidden={!props.text}>
-            <span class="ml-20 inline-block rotate-180">
+        <p class="font-main text-gray dark:text-darkgray text-s rotate-[-7.5deg] max-w-48 md:max-w-64 max-md:ml-6" hidden={!props.text}>
+            <span class="ml-16 md:ml-32 inline-block rotate-90 md:rotate-180">
                 <svg style="scale: 3" class="fill-gray dark:fill-darkgray" xmlns="http://www.w3.org/2000/svg"
                     width="5" height="6" viewBox="0 0 5 6">
                     <title>Stylizied arrow</title>
@@ -26,7 +31,7 @@ export const Graphics: Component<{ image: string, text?: string }> = (props) => 
     </>
 }
 
-const ImageBorder: Component<{}> = () => {
+const ImageBorder: Component = () => {
     return (
         <svg class="animate-spin" viewBox="0 0 256 256" fill="none" overflow="visible"
             xmlns="http://www.w3.org/2000/svg">

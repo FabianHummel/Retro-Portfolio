@@ -22,7 +22,7 @@ export const Chapter: Component<{ title: string, text: JSX.Element[], decoration
 
             {/* graphics */}
             {props.graphics ?
-                <div class="md:row-start-2 flex flex-col justify-center items-center gap-5">
+                <div class="md:row-start-2 flex flex-row md:flex-col justify-center items-center gap-5">
                     {props.graphics}
                 </div>
                 : null}

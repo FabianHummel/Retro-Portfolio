@@ -18,6 +18,7 @@
         url("/font/Spectral-Regular.ttf") format("truetype");
     font-weight: normal;
     font-style: normal;
+    size-adjust: 80%;
 }
 
 @font-face {
@@ -27,6 +28,7 @@
         url("/font/Spectral-Bold.ttf") format("truetype");
     font-weight: bold;
     font-style: normal;
+    size-adjust: 80%;
 }
 
 @font-face {
@@ -36,6 +38,7 @@
         url("/font/Spectral-Italic.ttf") format("truetype");
     font-weight: normal;
     font-style: italic;
+    size-adjust: 80%;
 }
 
 /* width */
@@ -73,13 +76,6 @@
     overflow-y: hidden;
 }
 
-h1,
-h2,
-h3,
-h4 {
-    @apply font-main lowercase
-}
-
 *[hidden] {
     display: none !important;
 }
@@ -115,11 +111,11 @@ footer td:focus-within {
 }
 
 h1 {
-    @apply text-l;
+    @apply font-main lowercase text-l;
 }
 
 h2 {
-    @apply text-m;
+    @apply font-main lowercase text-m;
 }
 
 h3,
@@ -150,16 +146,11 @@ pre code {
     background: none !important;
 }
 
-pre * {
-    font-family: monospace;
-    font-size: 1rem;
-}
-
 code * {
     line-height: 1.2rem;
 }
 
-aside>* {
+aside > * {
     border-left: none !important;
 }
 
@@ -167,8 +158,12 @@ aside a {
     text-decoration-line: none;
 }
 
+hr {
+    @apply border-t-0 border-b-2 border-b-light dark:border-b-black -mb-4;
+}
+
 .font-main {
-    text-transform: lowercase;
+    @apply lowercase text-start;
 }
 
 .disabled {
@@ -300,10 +295,11 @@ aside a {
     font-display: swap;
 }
 
-#heast-messenger .description * {
+#heast-messenger .project-font {
     text-transform: initial;
     font-family: 'heast-messenger', serif;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
+    line-height: 2rem;
 }
 
 @font-face {
@@ -315,10 +311,10 @@ aside a {
     font-display: swap;
 }
 
-#table-tennis .description * {
+#table-tennis .project-font {
     text-transform: initial;
     font-family: 'table-tennis', serif;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
 }
 
 @font-face {
@@ -330,23 +326,9 @@ aside a {
     font-display: swap;
 }
 
-#a-sailors-tale .description * {
+#a-sailors-tale .project-font {
+    text-transform: lowercase;
     font-family: 'a-sailors-tale', serif;
-}
-
-@font-face {
-    font-family: 'skys-horizon';
-    src: url('/font/skys-horizon.woff2') format('woff2'),
-        url('/font/skys-horizon.woff') format('woff'),
-        url("/font/skys-horizon.ttf") format("truetype");
-    font-weight: normal;
-    font-style: normal;
-}
-
-#skys-horizon .description * {
-    text-transform: initial;
-    font-family: 'skys-horizon', serif;
-    font-size: 1.3rem;
 }
 
 #pixel-globe {
