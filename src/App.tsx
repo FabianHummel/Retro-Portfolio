@@ -1,7 +1,3 @@
-import { Songplayer } from "@components/music/Songplayer";
-import { Footer } from "@components/shared/Footer";
-import { Loading } from "@components/shared/Loading";
-import { Navbar } from "@components/shared/Navbar";
 import type { ParentProps } from "solid-js";
 import { createSignal, onMount } from "solid-js";
 
@@ -17,14 +13,8 @@ export default function App(props: ParentProps) {
     });
 
     return (
-        <Loading>
-            <Songplayer>
-                <Navbar />
-
-                <main class="max-w-[1500px] mx-auto">{props.children}</main>
-
-                <Footer />
-            </Songplayer>
-        </Loading>
+        <main class="max-w-[1500px] mx-auto">
+            {props.children}
+        </main>
     );
 }

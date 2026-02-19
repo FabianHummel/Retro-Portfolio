@@ -64,6 +64,34 @@
     "Squavy": {
         "path": "squavy.md",
         "children": {
+            "History": {
+                "path": "history",
+                "children": {
+                    "Harmony Hub": {
+                        "path": "harmony-hub.md"
+                    },
+                    "Squavy (Old)": {
+                        "path": "squavy-old.md"
+                    },
+                    "Squavy": {
+                        "path": "squavy.md"
+                    }
+                }
+            },
+            "Devlogs": {
+                "path": "devlogs",
+                "children": {
+                    "Aseprite Integration": {
+                        "path": "aseprite-integration.md"
+                    },
+                    "Synthesizer Architecture": {
+                        "path": "synthesizer-architecture.md"
+                    },
+                    "Squidge Internals": {
+                        "path": "squidge-internals.md"
+                    }
+                }
+            },
             "Diploma Thesis": {
                 "path": "diploma-thesis.pdf",
                 "isDownloadable": true

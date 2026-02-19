@@ -1,0 +1,1 @@
+# Integrating Aseprite into Vite

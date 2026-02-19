@@ -260,8 +260,11 @@ const Book: Component = () => {
             img.style.marginLeft = queryParams.get("align") === "left" ? "auto" : "";
             img.style.marginRight = queryParams.get("align") === "right" ? "auto" : "";
             img.style.marginInline = queryParams.get("align") === "center" ? "auto" : "";
-            for (const [key, value] of Object.entries(JSON.parse(queryParams.get("style")))) {
-                img.style[key] = value;
+
+            if (queryParams.has("style")) {
+                for (const [key, value] of Object.entries(JSON.parse(queryParams.get("style")))) {
+                    img.style[key] = value;
+                }
             }
         });
 

@@ -26,6 +26,26 @@ const ProjectList: () => Array<ProjectItemProps> = () => [
     },
 
     {
+        logo: "/img/projects/squavy.png",
+        title: "Squavy",
+        id: "squavy",
+        createDate: "2023-09-29",
+        bookLink: "squavy.md",
+        description: [
+            <p>Squavy is a Digital Audio Workstation (DAW) written in SolidJS/Typescript and a partially native Rust backend for realtime collaboration and audio synthesis all within the browser.</p>,
+            <p>It's probably one of my most ambitious project of all time, because it spreads over such a broad spectrum of software development, such as realtime audio synthesis, complex mathematics, realtime networking and integrating all of this into a performant web-application. During development, me and my team members have come across numerous difficulties that we had to overcome, but more about that in the articles <A href="/book/squavy.md">here</A>!</p>
+        ],
+        links: [{
+            name: "github",
+            url: "https://github.com/Squavy-DAW/Squavy"
+        }],
+        tags: ["Web", "Audio", "Rust"],
+        custom: [
+            <img alt="Heast-Hummel" src="/img/projects/squavy-icon.png" style="image-rendering: pixelated;" class="absolute -z-10 rotate-6 w-[200px] xl:w-[250px] top-8 right-8 invisible lg:visible" />
+        ]
+    },
+
+    {
         logo: "/img/projects/amethyst.png",
         title: "Amethyst",
         id: "amethyst",

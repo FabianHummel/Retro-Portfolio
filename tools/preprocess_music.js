@@ -1,17 +1,16 @@
 const fs = require('fs');
 
-const publicDir = 'C:\\Users\\zzzdr\\WebstormProjects\\Retro-Portfolio\\public';
+const publicDir = 'public';
 
 const dataJson = JSON.parse(fs.readFileSync(`${publicDir}/music/data.json`, 'utf8'));
 
 // Function to calculate the length of a song
-async function getSongLength (filePath) {
+async function getSongLength(filePath) {
     const { parseFile } = await import('music-metadata');
     try {
         const metadata = await parseFile(filePath);
         return metadata.format.duration;
     } catch (error) {
-        debugger
         console.error(`Error reading metadata for file ${filePath}:`, error);
         return 0;
     }

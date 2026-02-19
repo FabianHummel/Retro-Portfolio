@@ -1,6 +1,6 @@
 import { A } from "@solidjs/router";
 import { theme } from "@src/App";
-import { type Component, For, type JSXElement, Show, type JSX } from "solid-js";
+import { type Component, For, type JSX, type JSXElement, Show } from "solid-js";
 import { Tag } from "../shared/Tag";
 
 export interface ProjectItemProps {

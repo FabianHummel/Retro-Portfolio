@@ -159,7 +159,7 @@ aside a {
 }
 
 hr {
-    @apply border-t-0 border-b-2 border-b-light dark:border-b-black -mb-4;
+    @apply border-t-0 border-b-2 border-b-light dark:border-b-black;
 }
 
 .font-main {

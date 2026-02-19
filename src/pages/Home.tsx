@@ -18,6 +18,11 @@ const Home: Component = () => {
         return age;
     }
 
+    function scrollToHeading() {
+        const y = document.getElementById(">-about-me").getBoundingClientRect().top;
+        window.scrollTo({ top: y - 300, behavior: "smooth" });
+    }
+
     return <>
         <section id="home-section" class="relative h-screen flex flex-col justify-center items-center select-none">
             <div id="pixel-globe" />
@@ -34,14 +39,14 @@ const Home: Component = () => {
                 </TypedText>
             </h1>
 
-            <div class="mt-20 animate-push">
+            <button type="button" class="mt-20 animate-push" onClick={scrollToHeading}>
                 <svg style="scale: 5" class="fill-dark dark:fill-gray" xmlns="http://www.w3.org/2000/svg"
                     width="5" height="6" viewBox="0 0 5 6">
                     <title>Scroll down...</title>
                     <polygon points="5 3 5 4 4 4 4 5 3 5 3 6 2 6 2 5 1 5 1 4 0 4 0 3 2 3 2 0 3 0 3 3 5 3"
                         stroke-width="0" />
                 </svg>
-            </div>
+            </button>
 
             <div class="styling left-16 bottom-0 w-1 h-40 bg-gray dark:bg-darkgray" />
             <div class="styling left-5 bottom-8" style="writing-mode: tb-rl; transform: rotate(-180deg);">

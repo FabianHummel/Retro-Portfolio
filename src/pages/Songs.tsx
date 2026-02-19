@@ -1,16 +1,24 @@
-import { Component, For } from "solid-js";
 import Music from "@components/music/Music";
-import { ChapterText, DownArrow, SVGCircle, SVGLine, VerticalLine } from "@components/shared/Styling";
-import { TypedText } from "@components/shared/TypedText";
+import type { MusicItemProps } from "@components/music/Songplayer";
 import { Chapter } from "@components/shared/Chapter";
 import useLoading from "@components/shared/Loading";
-import { MusicItemProps } from "@components/music/Songplayer";
-
-const music = await fetch("/music/data.json").then(async res => await res.json() as MusicItemProps[]);
+import { ChapterText, DownArrow, SVGCircle, SVGLine, VerticalLine } from "@components/shared/Styling";
+import { TypedText } from "@components/shared/TypedText";
+import { type Component, createSignal, For, onMount, Show } from "solid-js";
 
 const Songs: Component = () => {
 
-    const { load } = useLoading();
+    const { load, startLoading } = useLoading();
+
+    const [music, setMusic] = createSignal<MusicItemProps[]>(null);
+
+    onMount(() => {
+        const complete = startLoading(0.3);
+        fetch("/music/data.json").then(async res => await res.json() as MusicItemProps[]).then((music) => {
+            setMusic(music);
+            complete();
+        });
+    });
 
     load(
         "/img/music/pause.png",
@@ -74,19 +82,18 @@ const Songs: Component = () => {
             <DownArrow top={150} />,
         ]} />
 
-        <For each={music}>
-            {(music, index) =>
-                <Music data={music} index={index()} />
-            }
-        </For>
+        <Show when={music() !== null} fallback={
+            "Loading..."
+        }>
+            <For each={music()}>
+                {(music, index) =>
+                    <Music data={music} index={index()} />
+                }
+            </For>
+        </Show>
 
         <section class="relative h-20">
-            <div class="styling left-16 top-0 w-1 h-8 bg-gray dark:bg-darkgray" />
-            <div class="styling left-16 top-8 w-4 h-4">
-                <svg viewBox="0 0 16 16" stroke="none" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="8" cy="8" r="8" />
-                </svg>
-            </div>
+            <SVGCircle />
         </section>
     </>
 }

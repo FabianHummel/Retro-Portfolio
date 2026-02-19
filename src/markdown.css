@@ -33,3 +33,12 @@ article code, article code * {
     @apply mb-0 font-mono;
     font-size: 1rem;
 }
+
+article blockquote {
+    @apply relative px-4 text-gray dark:text-darkgray;
+}
+
+article blockquote::before {
+    @apply absolute bg-light dark:bg-black w-2 h-full left-0;
+    content: '';
+}

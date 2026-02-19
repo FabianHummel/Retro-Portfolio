@@ -29,6 +29,7 @@ interface SongplayerContextProps {
     setPlaying: Setter<boolean>;
     playtime: Accessor<number>;
     setPlaytime: (time: number) => void;
+    isOpen: Accessor<boolean>;
 
     isThisSong(data: MusicItemProps): boolean;
     play(): void;
@@ -161,6 +162,7 @@ export function Songplayer(props: ParentProps) {
             setSong,
             setPlaying,
             isThisSong,
+            isOpen: open,
             play: handlePlay,
             pause: handlePause,
             resume: handleResume,
@@ -200,12 +202,12 @@ export function Songplayer(props: ParentProps) {
                             } w={5} h={5} scale={4} alt={"Toggle song playback"} />
                         </button>
 
-                        <p class="hidden max-lg:block leading-7">
+                        <p class="hidden max-lg:block leading-7 font-main">
                             {song().title}
                         </p>
                     </div>
 
-                    <div class="hidden lg:flex align-middle gap-4 justify-center">
+                    <div class="hidden lg:flex align-middle gap-4 justify-center font-main">
                         <p class="leading-7">
                             {song().title}
                         </p>
