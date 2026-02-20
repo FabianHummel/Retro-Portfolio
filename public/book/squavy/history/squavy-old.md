@@ -1,6 +1,6 @@
 # Squavy (Old)
 
-![Squavy Logo](squavy-old/logo.webp?width=200px&style={"float":"right","margin":"2rem","shape-outside":"circle(50%)"})
+![Squavy Logo](squavy-old/logo.webp?width=200px&style={"float":"right","margin":"1rem","margin-right":"-1rem","shape-outside":"circle(50%)"})
 
 A lot has changed since Harmony Hub and virtually all aspects of the program have been rewritten and redesigned. The design probably has had the biggest impact during the overhaul - *I wasn't the only one who hated the red tint...* It was a sickening disease that spread throughout the whole program, so it had to go.
 

@@ -1,6 +1,6 @@
 # Squavy 
 
-![Squavy Logo](squavy/logo.png?width=300px&style={"float":"right","margin":"1rem","shape-outside":"circle(60%)"})
+![Squavy Logo](squavy/logo.png?width=200px&style={"float":"right","margin-right":"-1rem","margin-left":"1rem","shape-outside":"circle(50%)"})
 
 The current state of Squavy is unrecognizable from the previous iteration. The pixelated artstyle is defined and made with lots of attention to small details like animated sprites that are brought to live through a saturated color palette.
 
