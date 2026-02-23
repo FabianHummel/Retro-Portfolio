@@ -25,7 +25,7 @@ jobs:
         run: npm run build
 
       - name: Deploy
-        uses: genietim/ftp-action@releases/v4
+        uses: GenieTim/ftp-action@v4.0.1
         with:
           host: ${{ secrets.FTP_SERVER }}
           user: ${{ secrets.FTP_USERNAME }}
