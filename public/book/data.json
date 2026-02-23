@@ -24,7 +24,12 @@
                 }
             },
             "Devlogs": {
-                "path": "devlogs"
+                "path": "devlogs",
+                "children": {
+                    "Spaceship Hangar": {
+                        "path": "spaceship-hangar.md"
+                    }
+                }
             }
         }
     },
