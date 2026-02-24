@@ -63,12 +63,6 @@
             }
         }
     },
-    "A Sailor's Tale": {
-        "path": "a-sailors-tale.md"
-    },
-    "Table Tennis": {
-        "path": "table-tennis.md"
-    },
     "Squavy": {
         "path": "squavy.md",
         "children": {
@@ -92,6 +86,9 @@
                     "Aseprite Integration": {
                         "path": "aseprite-integration.md"
                     },
+                    "Dockerizing Squavy": {
+                        "path": "dockerizing-squavy.md"
+                    },
                     "Synthesizer Architecture": {
                         "path": "synthesizer-architecture.md"
                     },
@@ -109,6 +106,12 @@
                 "isDownloadable": true
             }
         }
+    },
+    "Table Tennis": {
+        "path": "table-tennis.md"
+    },
+    "A Sailor's Tale": {
+        "path": "a-sailors-tale.md"
     },
     "Other Stuff": {},
     "About Me": {

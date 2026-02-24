@@ -11,10 +11,11 @@ import {
     on,
     onMount
 } from "solid-js";
-import SolidMarkdown from "solid-markdown";
+import { SolidMarkdown } from "solid-markdown";
 import "pdfjs-dist/web/pdf_viewer.css";
 import { Button } from "@components/book/Button";
 import { Entry } from "@components/book/Entry";
+import MarkdownImageComponent from "@components/book/MarkdownImage";
 import useLoading from "@components/shared/Loading";
 import { Entries } from "@solid-primitives/keyed";
 import worker from "pdfjs-dist/build/pdf.worker.mjs?raw";
@@ -254,7 +255,7 @@ const Book: Component = () => {
         const source = `/book/${path}${searchParamIndex === -1 ? src : src.substring(0, searchParamIndex)}`;
 
         setTimeout(() => {
-            const img = document.querySelector<HTMLImageElement>(`img[src='${source}']`);
+            const img = document.querySelector<HTMLImageElement>(`img[src='${source}'], video[src='${source}']`);
             img.style.height = queryParams.get("height");
             img.style.width = queryParams.get("width");
             img.style.marginLeft = queryParams.get("align") === "left" ? "auto" : "";
@@ -297,7 +298,9 @@ const Book: Component = () => {
                     {article.loading ? (
                         <p>Loading...</p>
                     ) : (
-                        <SolidMarkdown children={article()} transformImageUri={transformImageUri} />
+                        <SolidMarkdown children={article()} transformImageUri={transformImageUri} components={{
+                            img: MarkdownImageComponent
+                        }} />
                     )}
 
                     <div
