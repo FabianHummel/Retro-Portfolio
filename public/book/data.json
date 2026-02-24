@@ -28,6 +28,9 @@
                 "children": {
                     "Spaceship Hangar": {
                         "path": "spaceship-hangar.md"
+                    },
+                    "Space Warp": {
+                        "path": "space-warp.md"
                     }
                 }
             }
