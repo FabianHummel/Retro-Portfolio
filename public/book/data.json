@@ -89,7 +89,7 @@
                     "Dockerizing Squavy": {
                         "path": "dockerizing-squavy.md"
                     },
-                    "Synthesizer Architecture": {
+                    "Synth Architecture": {
                         "path": "synthesizer-architecture.md"
                     },
                     "Squidge Internals": {
