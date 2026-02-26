@@ -89,8 +89,22 @@
                     "Dockerizing Squavy": {
                         "path": "dockerizing-squavy.md"
                     },
-                    "Synthesizer Architecture": {
-                        "path": "synthesizer-architecture.md"
+                    "Synth Architecture": {
+                        "path": "synthesizer-architecture",
+                        "children": {
+                            "History": {
+                                "path": "history.md"
+                            },
+                            "Web Assembly": {
+                                "path": "compiling-to-webassembly.md"
+                            },
+                            "Web Audio API": {
+                                "path": "return-of-the-webaudioapi.md"
+                            },
+                            "Communication": {
+                                "path": "interacting-with-the-synthesizer.md"
+                            }
+                        }
                     },
                     "Squidge Internals": {
                         "path": "squidge-internals.md"
