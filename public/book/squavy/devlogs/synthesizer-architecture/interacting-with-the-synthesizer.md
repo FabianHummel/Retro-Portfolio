@@ -44,7 +44,7 @@ function synchronizeTracks(tracks: DeepPartial<ProjectData["tracks"]>) {
 The order of synchronization is really important here:
 
 1. If the datum is explicitly undefined, it means it was removed from the changeset
-2. If the `default` property is set (which is **ONLY** set for new objects, it doesn't change anymore after initial creation), it means the datum was added to the changeset.
+2. If the `default` property is set, which is **ONLY** set for new objects, (it doesn't change anymore after initial creation), it means the datum was added to the changeset.
 3. For child properties (like `patterns` and `nodes` in this case), call the synchronization function on them as well, which repeats the process for the containing children.
 
 The utility for automatically creating the bindings to the synthesizer is pretty complex and involves analysing the generated bindings from `wasm_bindgen` to forward the calls. However, it can be looked up [here](https://github.com/Squavy-DAW/Squavy/blob/dev/packages/synth/tools/generate-bindings.js) once Squavy and its source goes live.

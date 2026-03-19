@@ -103,6 +103,12 @@
                             },
                             "Communication": {
                                 "path": "interacting-with-the-synthesizer.md"
+                            },
+                            "Adding C++": {
+                                "path": "adding-cpp-support.md"
+                            },
+                            "Preparing the Synth": {
+                                "path": "preparing-the-synthesizer.md"
                             }
                         }
                     },
