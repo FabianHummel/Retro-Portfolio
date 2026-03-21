@@ -1,1 +1,0 @@
-# Squidge Internals

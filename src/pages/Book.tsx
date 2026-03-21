@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "@solidjs/router";
-import { theme } from "@src/App";
-import hljs from "highlight.js";
+import { theme as appTheme } from "@src/App";
+import hljs from "highlight.js/lib/core";
 import { GlobalWorkerOptions, getDocument } from "pdfjs-dist";
 import * as pdfjsViewer from "pdfjs-dist/web/pdf_viewer.mjs";
 import {
@@ -18,6 +18,10 @@ import { Entry } from "@components/book/Entry";
 import MarkdownImageComponent from "@components/book/MarkdownImage";
 import useLoading from "@components/shared/Loading";
 import { Entries } from "@solid-primitives/keyed";
+import javascript from 'highlight.js/lib/languages/javascript';
+import rust from 'highlight.js/lib/languages/rust';
+import darkTheme from "highlight.js/styles/atom-one-dark.min.css";
+import lightTheme from "highlight.js/styles/atom-one-light.min.css";
 import worker from "pdfjs-dist/build/pdf.worker.mjs?raw";
 import { parseQueryString } from "pdfjs-dist/web/pdf_viewer.mjs";
 import type { Accessor } from "solid-js";
@@ -54,6 +58,9 @@ export interface BookContextProps {
 export const BookContext = createContext<BookContextProps>();
 
 const Book: Component = () => {
+    hljs.registerLanguage("javascript", javascript);
+    hljs.registerLanguage("rust", rust);
+
     const [currentArticleIndex, setCurrentArticleIndex] = createSignal(-1);
 
     const [articles, setArticles] = createSignal<IArticle[]>([]);
@@ -184,7 +191,7 @@ const Book: Component = () => {
         pdfViewer?.cleanup();
     }));
 
-    createEffect(on([article, theme], () => {
+    createEffect(on([article, appTheme], () => {
         hljs.highlightAll();
     }));
 
@@ -244,7 +251,7 @@ const Book: Component = () => {
     function transformImageUri(src: string): string {
         const searchParamIndex = src.lastIndexOf('?');
         const queryParams = parseQueryString(src.substring(searchParamIndex));
-        if (queryParams.get("theme") !== undefined && theme() !== queryParams.get("theme")) {
+        if (queryParams.get("theme") !== undefined && appTheme() !== queryParams.get("theme")) {
             return "/book/blank.png";
         }
 
@@ -280,6 +287,8 @@ const Book: Component = () => {
     }}>
         {/* hide footer */}
         <style>{`footer { display: none !important; }`}</style>
+
+        <style>{appTheme() === "dark" ? darkTheme : lightTheme}</style>
 
         <section ref={scrollContainer} class="h-[100dvh] pt-[var(--navbar-height)] py-10 max-lg:pb-4 lg:px-6 grid grid-cols-[22rem,calc(100vw-3px)] lg:grid-cols-[25rem,auto] gap-1 lg:gap-x-8 overflow-auto snap-x snap-mandatory">
             <div ref={sidebarContainer} class="border-r-gray border-r-2 snap-start font-main">

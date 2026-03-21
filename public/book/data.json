@@ -109,11 +109,17 @@
                             },
                             "Preparing the Synth": {
                                 "path": "preparing-the-synthesizer.md"
+                            },
+                            "Introducing CXX": {
+                                "path": "introducing-cxx.md"
+                            },
+                            "Marrying Rust and CMake": {
+                                "path": "marrying-rust-and-cmake.md"
                             }
                         }
                     },
-                    "Squidge Internals": {
-                        "path": "squidge-internals.md"
+                    "Explaining cxx_bindgen": {
+                        "path": "explaining-cxx-bindgen.md"
                     }
                 }
             },
