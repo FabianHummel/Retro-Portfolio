@@ -1,0 +1,12 @@
+# Interacting with the synthesizer via C++
+
+In the previous article we saw how to call our synthesizer functions through C++ code. However, how does Squavy invoke the commands in the first place when the native agent lives in an entirely separate process?
+
+In a previous article I explained how the frontend interacts with the WebAssembly synthesizer by calling functions from the automatically generated facade. A similar thing happens with the native agent as well, with the only difference that the synthesizer commands are forwarded to a web socket instead of the browser's audio thread. Just like on the Javascript side, the C++ facade is also automatically generated to aid with development and can be found [here](https://github.com/Squavy-DAW/Squidge/blob/main/tools/generate-handlers.js) (please don't mind the regex-hell, it's not supposed to win a beauty-contest).
+
+Essentially, the native agent hosts a web socket server using `uWebSockets` and forwards incoming messages to our native synthesizer. Squavy then periodically checks if the port on the localhost is open and automatically connects to the program and forwards all future commands to the web socket while hibernating the in-browser synthesizer until the connection is closed.
+
+You may think that the overhead of transferring all data including the rendered audio buffers through web sockets induces a lot of overhead, but because the entire data is sent over the local host, it actually performs pretty good with no audible latency. We have lots of potential to optimize runtime depending on the execution environment:
+
+* When synthesizing audio directly within the browser, smaller audio buffers help reduce audio latency. Currently, the buffer size for audio worklet processors is 128 frames big, which is fine for in-process communication over a thread-boundary (through [message channels](https://developer.mozilla.org/en-US/docs/Web/API/MessageChannel))
+* When synthesizing audio in the external agent application, we should consider using a larger audio buffer to reduce the frequency of web socket messages as each of them requires encoding and decoding the entire buffer until it's played back by a small in-browser audio processor. It would probably also be possible to directly play back audio from the native agent, but I haven't played with that thought yet.

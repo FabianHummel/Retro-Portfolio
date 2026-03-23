@@ -117,7 +117,7 @@
                                 "path": "marrying-rust-and-cmake.md"
                             },
                             "Communication via C++": {
-                                "path": "marrying-rust-and-cmake.md"
+                                "path": "interacting-with-the-synthesizer-cpp.md"
                             }
                         }
                     },
