@@ -101,7 +101,7 @@
                             "Web Audio API": {
                                 "path": "return-of-the-webaudioapi.md"
                             },
-                            "Communication": {
+                            "Communication via JS": {
                                 "path": "interacting-with-the-synthesizer.md"
                             },
                             "Adding C++": {
@@ -113,7 +113,10 @@
                             "Introducing CXX": {
                                 "path": "introducing-cxx.md"
                             },
-                            "Marrying Rust and CMake": {
+                            "Marrying Rust & CMake": {
+                                "path": "marrying-rust-and-cmake.md"
+                            },
+                            "Communication via C++": {
                                 "path": "marrying-rust-and-cmake.md"
                             }
                         }

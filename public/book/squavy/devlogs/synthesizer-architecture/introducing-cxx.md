@@ -30,4 +30,4 @@ cxx_build::bridge("src/ffi.rs")
   .compile("example-bridge");
 ```
 
-And that's it! This makes maintaining and adding new functionality to the synthesizer so much easier. If you are interested in learning how `cxx_bindgen` works behind the scenes I recommend reading up on [this article](/#/book/squavy/devlogs/cxx-bindgen-explained.md), as it really wasn't a straightforward task to get working nicely.
+And that's it! This makes maintaining and adding new functionality to the synthesizer so much easier. If you are interested in learning how `cxx_bindgen` works behind the scenes I recommend reading up on [this article](/#/book/squavy/devlogs/explaining-cxx-bindgen.md), as it really wasn't a straightforward task to get working nicely.
