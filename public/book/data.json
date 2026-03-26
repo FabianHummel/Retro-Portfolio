@@ -118,6 +118,9 @@
                             },
                             "Communication via C++": {
                                 "path": "interacting-with-the-synthesizer-cpp.md"
+                            },
+                            "Building the Frontend": {
+                                "path": "building-the-frontend.md"
                             }
                         }
                     },
