@@ -31,6 +31,9 @@
                     },
                     "Space Warp": {
                         "path": "space-warp.md"
+                    },
+                    "Animated Logo": {
+                        "path": "animated-logo.md"
                     }
                 }
             }
