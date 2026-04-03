@@ -1,7 +1,5 @@
 # Dockerizing Squavy
 
-<!-- TODO: Introduction -->
-
 *Disclaimer: The majority of this content is taken from our [diploma thesis](/#/book/squavy/diploma-thesis.pdf) and is slightly adapted to the article.*
 
 To begin with, let's start with creating a `Dockerfile` in Squavy's root folder. I started by selecting a base image from Dockerhub - here we have used a rust-based image because it already comes with some essential tools that we need for building Squavy's web frontend and synthesizer:
