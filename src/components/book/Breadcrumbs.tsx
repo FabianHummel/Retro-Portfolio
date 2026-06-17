@@ -36,13 +36,13 @@ export const Breadcrumbs: Component = () => {
         }
 
         // Find the path to this article in the book hierarchy
-        function findPath(node: IBook, path: EntryWithTitle[]): EntryWithTitle[] | null {
-            for (const [title, entry] of Object.entries(node)) {
-                if (entry.path === article.path) {
-                    return [...path, { ...entry, title }];
+        function findPath(node: IBook, path: (EntryWithTitle & { path: string })[]): (EntryWithTitle & { path: string })[] | null {
+            for (const [entryPath, entry] of Object.entries(node)) {
+                if (entryPath === article.path) {
+                    return [...path, { ...entry, path: entryPath }];
                 }
                 if (entry.children) {
-                    const result = findPath(entry.children, [...path, { ...entry, title }]);
+                    const result = findPath(entry.children, [...path, { ...entry, path: entryPath }]);
                     if (result) return result;
                 }
             }

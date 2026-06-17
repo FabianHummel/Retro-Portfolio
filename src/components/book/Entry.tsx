@@ -7,29 +7,30 @@ import { type Component, createEffect, createSignal, type JSX, onMount, Show, sp
 
 export interface EntryProps extends JSX.HTMLAttributes<HTMLDivElement> {
     title: string;
+    path: string;
     entry: IEntry;
 }
 
 export const Entry: Component<EntryProps> = (props) => {
-    const [local, other] = splitProps(props, ["title", "entry"])
+    const [local, other] = splitProps(props, ["title", "path", "entry"])
     const [open, setOpen] = createSignal(false);
 
     const { currentArticleIndex, articles, findNextArticle, closeMobileSidebar } = useContext(BookContext);
 
     onMount(() => {
-        setOpen(window.localStorage.getItem(`book:${local.entry.path}`) === "true");
+        setOpen(window.localStorage.getItem(`book:${local.path}`) === "true");
     });
 
     createEffect(() => {
-        window.localStorage.setItem(`book:${local.entry.path}`, open() ? "true" : "false");
+        window.localStorage.setItem(`book:${local.path}`, open() ? "true" : "false");
     });
 
-    const articleIndex = articles().findIndex(a => a.path === local.entry.path);
+    const articleIndex = articles().findIndex(a => a.path === local.path);
     const nextArticle = findNextArticle(articleIndex, 1);
 
     return (
         <div {...other} class={clsx("text-m ml-3 border-l-[3px] border-l-gray dark:border-l-darkgray", props.class)}>
-            <Show when={local.entry.path} fallback={
+            <Show when={local.entry.hasContent || local.entry.children} fallback={
                 <header class="text-gray dark:text-darkgray pt-4">
                     {local.title}
                 </header>
@@ -42,7 +43,7 @@ export const Entry: Component<EntryProps> = (props) => {
                             {local.title}
                         </p>
                     )}>
-                        <A href={`/book/${local.entry.path}`} class={"flex-1"} onClick={() => {
+                        <A href={`/book/${local.path}`} class={"flex-1"} onClick={() => {
                             setOpen(true);
                             closeMobileSidebar();
                         }}>
@@ -56,7 +57,7 @@ export const Entry: Component<EntryProps> = (props) => {
                         <button type="button" class="p-2" onClick={() => {
                             const a = document.createElement("a");
                             a.download = local.title;
-                            a.href = `${window.location.origin}/book/${local.entry.path}`;
+                            a.href = `${window.location.origin}/book/${local.path}`;
                             a.click();
                         }}>
                             <PixelImage
@@ -82,8 +83,8 @@ export const Entry: Component<EntryProps> = (props) => {
                 <Show when={local.entry.children}>
                     <Show when={open()}>
                         <Entries of={local.entry.children}>
-                            {(title, entry) => (
-                                <Entry title={title} entry={entry()} />
+                            {(path, entry) => (
+                                <Entry title={entry().title ?? path} path={path} entry={entry()} />
                             )}
                         </Entries>
                     </Show>

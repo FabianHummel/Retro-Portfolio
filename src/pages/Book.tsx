@@ -31,7 +31,7 @@ import type { Accessor } from "solid-js";
 import { createContext, onCleanup } from "solid-js";
 
 export interface IEntry {
-    path?: string;
+    title?: string;
     children?: IBook;
     hasContent: boolean;
     isDownloadable: boolean;
@@ -103,15 +103,15 @@ const Book: Component = () => {
     })
 
     function transformBookEntries(book: IBook, path?: string): IBook {
-        return Object.fromEntries(Object.entries(book).map(([title, entry]) => {
-            entry.hasContent = entry.path?.includes('.') ?? false;
-            entry.path = path
-                ? `${path.includes('.') ? path.substring(0, path.lastIndexOf(".")) : path}/${entry.path}`
-                : entry.path;
+        return Object.fromEntries(Object.entries(book).map(([entryPath, entry]) => {
+            const fullPath = path
+                ? `${path.includes('.') ? path.substring(0, path.lastIndexOf(".")) : path}/${entryPath}`
+                : entryPath;
+            entry.hasContent = fullPath?.includes('.') ?? false;
             if (entry.children) {
-                entry.children = transformBookEntries(entry.children, entry.path);
+                entry.children = transformBookEntries(entry.children, fullPath);
             }
-            return [title, entry];
+            return [fullPath, entry];
         }));
     }
 
@@ -122,10 +122,10 @@ const Book: Component = () => {
     }
 
     function flattenBook(book: IBook) {
-        return Object.entries(book).reduce<IArticle[]>((acc, [title, entry]) => {
+        return Object.entries(book).reduce<IArticle[]>((acc, [path, entry]) => {
             acc.push({
-                title,
-                path: entry.path,
+                title: entry.title ?? path,
+                path: path,
                 hasContent: entry.hasContent
             });
             if (entry.children) {
@@ -307,8 +307,9 @@ const Book: Component = () => {
             <div ref={sidebarContainer} class="border-r-gray border-r-2 snap-start font-main">
                 <aside class="sticky top-0 self-start max-lg:px-5 lg:pr-8">
                     <Entries of={book()}>
-                        {(title, entry) => <Entry
-                            title={title}
+                        {(path, entry) => <Entry
+                            title={entry().title ?? path}
+                            path={path}
                             entry={entry()}
                             class="!ml-0" />}
                     </Entries>

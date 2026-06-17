@@ -1,173 +1,177 @@
 {
-    "My Projects": {},
-    "Sky's Horizon": {
-        "path": "skys-horizon.md",
+    "my-projects": {
+        "title": "My Projects"
+    },
+    "skys-horizon.md": {
+        "title": "Sky's Horizon",
         "children": {
-            "History": {
-                "path": "history",
+            "history": {
+                "title": "History",
                 "children": {
-                    "1. Minecraft": {
-                        "path": "minecraft.md"
+                    "minecraft.md": {
+                        "title": "1. Minecraft"
                     },
-                    "2. Unity": {
-                        "path": "unity.md"
+                    "unity.md": {
+                        "title": "2. Unity"
                     },
-                    "3. Back to Minecraft": {
-                        "path": "back-to-minecraft.md"
+                    "back-to-minecraft.md": {
+                        "title": "3. Back to Minecraft"
                     },
-                    "4. Godot": {
-                        "path": "godot.md"
+                    "godot.md": {
+                        "title": "4. Godot"
                     },
-                    "5. Minecraft - Again?": {
-                        "path": "minecraft-again.md"
+                    "minecraft-again.md": {
+                        "title": "5. Minecraft - Again?"
                     }
                 }
             },
-            "Devlogs": {
-                "path": "devlogs",
+            "devlogs": {
+                "title": "Devlogs",
                 "children": {
-                    "Spaceship Hangar": {
-                        "path": "spaceship-hangar.md"
+                    "spaceship-hangar.md": {
+                        "title": "Spaceship Hangar"
                     },
-                    "Space Warp": {
-                        "path": "space-warp.md"
+                    "space-warp.md": {
+                        "title": "Space Warp"
                     }
                 }
             }
         }
     },
-    "Heast Messenger": {
-        "path": "heast-messenger.md",
+    "heast-messenger.md": {
+        "title": "Heast Messenger",
         "children": {
-            "History": {
-                "path": "history",
+            "history": {
+                "title": "History",
                 "children": {
-                    "Whoerld Wide Messenger": {
-                        "path": "whoerld-wide-messenger.md"
+                    "whoerld-wide-messenger.md": {
+                        "title": "Whoerld Wide Messenger"
                     },
-                    "Heast Messenger (Java)": {
-                        "path": "heast-messenger-java.md"
+                    "heast-messenger-java.md": {
+                        "title": "Heast Messenger (Java)"
                     },
-                    "Heast Messenger (C#)": {
-                        "path": "heast-messenger-cs.md"
+                    "heast-messenger-cs.md": {
+                        "title": "Heast Messenger (C#)"
                     }
                 }
             },
-            "Devlogs": {
-                "path": "devlogs",
+            "devlogs": {
+                "title": "Devlogs",
                 "children": {
-                    "Security Layers": {
-                        "path": "security-layers.md"
+                    "security-layers.md": {
+                        "title": "Security Layers"
                     }
                 }
             }
         }
     },
-    "Squavy": {
-        "path": "squavy.md",
+    "squavy.md": {
+        "title": "Squavy",
         "children": {
-            "History": {
-                "path": "history",
+            "history": {
+                "title": "History",
                 "children": {
-                    "Harmony Hub": {
-                        "path": "harmony-hub.md"
+                    "harmony-hub.md": {
+                        "title": "Harmony Hub"
                     },
-                    "Squavy (Old)": {
-                        "path": "squavy-old.md"
+                    "squavy-old.md": {
+                        "title": "Squavy (Old)"
                     },
-                    "Squavy": {
-                        "path": "squavy.md"
+                    "squavy.md": {
+                        "title": "Squavy"
                     }
                 }
             },
-            "Devlogs": {
-                "path": "devlogs",
+            "devlogs": {
+                "title": "Devlogs",
                 "children": {
-                    "Aseprite Integration": {
-                        "path": "aseprite-integration.md"
+                    "aseprite-integration.md": {
+                        "title": "Aseprite Integration"
                     },
-                    "Dockerizing Squavy": {
-                        "path": "dockerizing-squavy.md"
+                    "dockerizing-squavy.md": {
+                        "title": "Dockerizing Squavy"
                     },
-                    "Synth Architecture": {
-                        "path": "synthesizer-architecture",
+                    "synthesizer-architecture": {
+                        "title": "Synth Architecture",
                         "children": {
-                            "History": {
-                                "path": "history.md"
+                            "history.md": {
+                                "title": "History"
                             },
-                            "Web Assembly": {
-                                "path": "compiling-to-webassembly.md"
+                            "compiling-to-webassembly.md": {
+                                "title": "Web Assembly"
                             },
-                            "Web Audio API": {
-                                "path": "return-of-the-webaudioapi.md"
+                            "return-of-the-webaudioapi.md": {
+                                "title": "Web Audio API"
                             },
-                            "Communication via JS": {
-                                "path": "interacting-with-the-synthesizer.md"
+                            "interacting-with-the-synthesizer.md": {
+                                "title": "Communication via JS"
                             },
-                            "Adding C++": {
-                                "path": "adding-cpp-support.md"
+                            "adding-cpp-support.md": {
+                                "title": "Adding C++"
                             },
-                            "Preparing the Synth": {
-                                "path": "preparing-the-synthesizer.md"
+                            "preparing-the-synthesizer.md": {
+                                "title": "Preparing the Synth"
                             },
-                            "Introducing CXX": {
-                                "path": "introducing-cxx.md"
+                            "introducing-cxx.md": {
+                                "title": "Introducing CXX"
                             },
-                            "Marrying Rust & CMake": {
-                                "path": "marrying-rust-and-cmake.md"
+                            "marrying-rust-and-cmake.md": {
+                                "title": "Marrying Rust & CMake"
                             },
-                            "Communication via C++": {
-                                "path": "interacting-with-the-synthesizer-cpp.md"
+                            "interacting-with-the-synthesizer-cpp.md": {
+                                "title": "Communication via C++"
                             }
                         }
                     },
-                    "Explaining cxx_bindgen": {
-                        "path": "explaining-cxx-bindgen.md"
+                    "explaining-cxx-bindgen.md": {
+                        "title": "Explaining cxx_bindgen"
                     }
                 }
             },
-            "Diploma Thesis": {
-                "path": "diploma-thesis.pdf",
+            "diploma-thesis.pdf": {
+                "title": "Diploma Thesis",
                 "isDownloadable": true
             },
-            "Business Plan": {
-                "path": "business-plan.pdf",
+            "business-plan.pdf": {
+                "title": "Business Plan",
                 "isDownloadable": true
             }
         }
     },
-    "Table Tennis": {
-        "path": "table-tennis.md"
+    "table-tennis.md": {
+        "title": "Table Tennis"
     },
-    "A Sailor's Tale": {
-        "path": "a-sailors-tale.md"
+    "a-sailors-tale.md": {
+        "title": "A Sailor's Tale"
     },
-    "Other Stuff": {},
-    "About Me": {
-        "path": "about-me",
+    "other-stuff": {
+        "title": "Other Stuff"
+    },
+    "about-me": {
+        "title": "About Me",
         "children": {
-            "Software Development": {
-                "path": "software-development.md"
+            "software-development.md": {
+                "title": "Software Development"
             },
-            "Leaning new things": {
-                "path": "learning-new-things.md"
+            "learning-new-things.md": {
+                "title": "Leaning new things"
             },
-            "(Web)-Design": {
-                "path": "(web)-design.md"
+            "(web)-design.md": {
+                "title": "(Web)-Design"
             },
-            "About my Portfolio": {
-                "path": "about-my-portfolio.md"
+            "about-my-portfolio.md": {
+                "title": "About my Portfolio"
             },
-            "My Profile Picture": {
-                "path": "my-profile-picture.md"
+            "my-profile-picture.md": {
+                "title": "My Profile Picture"
             }
         }
     },
-    "Running Heurigen": {
-        "path": "running-heurigen.md",
+    "running-heurigen.md": {
+        "title": "Running Heurigen",
         "children": {
-            "Business Plan": {
-                "path": "business-plan.pdf",
+            "business-plan.pdf": {
+                "title": "Business Plan",
                 "isDownloadable": true
             }
         }
