@@ -101,7 +101,7 @@ const ProjectList: () => Array<ProjectItemProps> = () => [
         ],
         links: [{
             name: "github",
-            url: "https://github.com/FabianHummel/CPP-TableTennis-Game"
+            url: "https://github.com/FabianHummel/TableTennis-Game"
         }],
         tags: ["C++", "SDL3"],
     },

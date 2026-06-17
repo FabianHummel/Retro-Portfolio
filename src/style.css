@@ -243,6 +243,7 @@ hr {
     border-style: solid;
     border-image-repeat: stretch;
     image-rendering: pixelated;
+    word-break: break-word;
 }
 
 #github-section {
