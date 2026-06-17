@@ -15,6 +15,7 @@ import { SolidMarkdown } from "solid-markdown";
 import "pdfjs-dist/web/pdf_viewer.css";
 import { Button } from "@components/book/Button";
 import { Entry } from "@components/book/Entry";
+import { Breadcrumbs } from "@components/book/Breadcrumbs";
 import MarkdownImageComponent from "@components/book/MarkdownImage";
 import useLoading from "@components/shared/Loading";
 import { Entries } from "@solid-primitives/keyed";
@@ -55,6 +56,7 @@ export interface BookContextProps {
     articles: Accessor<IArticle[]>;
     findNextArticle: (from: number, direction: number) => IArticle;
     closeMobileSidebar: VoidFunction;
+    book: Accessor<IBook>;
 }
 
 export const BookContext = createContext<BookContextProps>();
@@ -293,7 +295,8 @@ const Book: Component = () => {
         currentArticleIndex,
         articles,
         findNextArticle,
-        closeMobileSidebar
+        closeMobileSidebar,
+        book
     }}>
         {/* hide footer */}
         <style>{`footer { display: none !important; }`}</style>
@@ -314,6 +317,7 @@ const Book: Component = () => {
 
             <article class="max-lg:px-6 snap-start" style={`opacity: ${articleOpacity()};`}>
                 <main class="max-w-[800px] mx-auto">
+                    <Breadcrumbs />
                     {article.loading ? (
                         <p>Loading...</p>
                     ) : (
