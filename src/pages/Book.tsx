@@ -20,6 +20,8 @@ import useLoading from "@components/shared/Loading";
 import { Entries } from "@solid-primitives/keyed";
 import javascript from 'highlight.js/lib/languages/javascript';
 import rust from 'highlight.js/lib/languages/rust';
+import typescript from 'highlight.js/lib/languages/typescript';
+import cpp from 'highlight.js/lib/languages/cpp';
 import darkTheme from "highlight.js/styles/atom-one-dark.min.css";
 import lightTheme from "highlight.js/styles/atom-one-light.min.css";
 import worker from "pdfjs-dist/build/pdf.worker.mjs?raw";
@@ -60,6 +62,8 @@ export const BookContext = createContext<BookContextProps>();
 const Book: Component = () => {
     hljs.registerLanguage("javascript", javascript);
     hljs.registerLanguage("rust", rust);
+    hljs.registerLanguage("typescript", typescript);
+    hljs.registerLanguage("cpp", cpp);
 
     const [currentArticleIndex, setCurrentArticleIndex] = createSignal(-1);
 
@@ -129,7 +133,7 @@ const Book: Component = () => {
         }, []);
     }
 
-    function findNextArticle(i: number, direction: number) {
+    function findNextArticleIndex(i: number, direction: number) {
         while (true) {
             i += direction;
             if (i < 0 || i >= articles().length) {
@@ -137,9 +141,14 @@ const Book: Component = () => {
             }
             const article = articles()[i];
             if (article.hasContent) {
-                return article;
+                return i;
             }
         }
+    }
+
+    function findNextArticle(i: number, direction: number) {
+        const index = findNextArticleIndex(i, direction);
+        return index === undefined ? undefined : articles()[index];
     }
 
     async function fetchArticle(index: number) {
@@ -179,12 +188,12 @@ const Book: Component = () => {
         const indexByPath = articles().findIndex(article =>
             article.path === decodeURIComponent(params.chapter));
 
-        setCurrentArticleIndex(indexByPath);
-
         if (indexByPath === -1) {
             console.warn(`Article ${decodeURIComponent(params.chapter)} not found.`);
             return;
         }
+
+        setCurrentArticleIndex(findNextArticleIndex(indexByPath - 1, 1));
     });
 
     createEffect(on(currentArticleIndex, () => {
@@ -263,6 +272,7 @@ const Book: Component = () => {
 
         setTimeout(() => {
             const img = document.querySelector<HTMLImageElement>(`img[src='${source}'], video[src='${source}']`);
+            if (!img) return;
             img.style.height = queryParams.get("height");
             img.style.width = queryParams.get("width");
             img.style.marginLeft = queryParams.get("align") === "left" ? "auto" : "";

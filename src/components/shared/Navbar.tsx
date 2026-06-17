@@ -60,7 +60,7 @@ export const Navbar: Component = () => {
                 <A href="/music" class={`${playing() ? "animate-playing" : null}`}>
                     <PixelImage src="img/Music.png" darkSrc="img/Music Dark.png" w={12} h={12} scale={3} />
                 </A>
-                <A href="/github">
+                <A href="https://github.com/FabianHummel">
                     <PixelImage src="img/GitHub.png" darkSrc="img/GitHub Dark.png" w={12} h={12} scale={3} />
                 </A>
                 {theme() === "light" ? (

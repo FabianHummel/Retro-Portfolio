@@ -42,7 +42,7 @@ export const Entry: Component<EntryProps> = (props) => {
                             {local.title}
                         </p>
                     )}>
-                        <A href={local.entry.hasContent ? `/book/${local.entry.path}` : nextArticle.path} class={"flex-1"} onClick={() => {
+                        <A href={`/book/${local.entry.path}`} class={"flex-1"} onClick={() => {
                             setOpen(true);
                             closeMobileSidebar();
                         }}>
