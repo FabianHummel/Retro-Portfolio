@@ -290,7 +290,7 @@ const Book: Component = () => {
 
         <style>{appTheme() === "dark" ? darkTheme : lightTheme}</style>
 
-        <section ref={scrollContainer} class="h-[100dvh] pt-[var(--navbar-height)] py-10 max-lg:pb-4 lg:px-6 grid grid-cols-[22rem,calc(100vw-3px)] lg:grid-cols-[25rem,auto] gap-1 lg:gap-x-8 overflow-auto snap-x snap-mandatory">
+        <section ref={scrollContainer} class="h-[100dvh] pt-[var(--navbar-height)] py-10 max-lg:pb-4 lg:px-6 grid grid-cols-[22rem,calc(100vw-3px)] lg:grid-cols-[25rem,auto] gap-1 lg:gap-x-8 overflow-auto max-lg:snap-x snap-mandatory">
             <div ref={sidebarContainer} class="border-r-gray border-r-2 snap-start font-main">
                 <aside class="sticky top-0 self-start max-lg:px-5 lg:pr-8">
                     <Entries of={book()}>

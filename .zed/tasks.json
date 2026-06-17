@@ -1,0 +1,6 @@
+[
+    {
+        "label": "Start",
+        "command": "npm run dev"
+    }
+]

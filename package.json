@@ -1,7 +1,7 @@
 {
-    "name": "vite-template-solid",
-    "version": "0.0.0",
-    "description": "",
+    "name": "retro-portfolio",
+    "version": "1.0.0",
+    "description": "A retro styled version of my very own Portfolio!",
     "scripts": {
         "dev": "vite",
         "build": "vite build",

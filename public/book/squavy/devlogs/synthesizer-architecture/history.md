@@ -1,6 +1,6 @@
 # Squavy's Modular Synthesizer Engine
 
-![Squavy's Modular Synthesizer Engine](smse-logo.svg?width=300px)
+![Squavy's Modular Synthesizer Engine](smse-logo.svg?width=300px&align=center)
 
 The synthesizer is Squavy's core library that generates real-time audio based on MIDI-notes and a stateful structure that holds instrument-, pattern- and note-related data. Originally, the synthesizer was a weird mix of the WebAudioAPI and custom Javascript logic and worked solely in the browser. Later during development we noticed that a pure Javascript-based implementation wouln't meet our expectations, so I decided to rewrite the synthesizer in Rust, mainly because it has great WebAssembly support and fit our needs perfectly.
 
