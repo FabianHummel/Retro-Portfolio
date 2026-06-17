@@ -23,6 +23,9 @@ import javascript from 'highlight.js/lib/languages/javascript';
 import rust from 'highlight.js/lib/languages/rust';
 import typescript from 'highlight.js/lib/languages/typescript';
 import cpp from 'highlight.js/lib/languages/cpp';
+import c from 'highlight.js/lib/languages/c';
+import objectiveC from 'highlight.js/lib/languages/objectivec';
+import swift from 'highlight.js/lib/languages/swift';
 import darkTheme from "highlight.js/styles/atom-one-dark.min.css";
 import lightTheme from "highlight.js/styles/atom-one-light.min.css";
 import worker from "pdfjs-dist/build/pdf.worker.mjs?raw";
@@ -66,6 +69,9 @@ const Book: Component = () => {
     hljs.registerLanguage("rust", rust);
     hljs.registerLanguage("typescript", typescript);
     hljs.registerLanguage("cpp", cpp);
+    hljs.registerLanguage("c", c);
+    hljs.registerLanguage("objectivec", objectiveC);
+    hljs.registerLanguage("swift", swift);
 
     const [currentArticleIndex, setCurrentArticleIndex] = createSignal(-1);
 

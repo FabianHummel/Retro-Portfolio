@@ -33,6 +33,9 @@
                     },
                     "space-warp.md": {
                         "title": "Space Warp"
+                    },
+                    "animated-logo.md": {
+                        "title": "Animated Logo"
                     }
                 }
             }
@@ -120,6 +123,9 @@
                             },
                             "interacting-with-the-synthesizer-cpp.md": {
                                 "title": "Communication via C++"
+                            },
+                            "building-the-frontend.md": {
+                                "title": "Building the Frontend"
                             }
                         }
                     },
