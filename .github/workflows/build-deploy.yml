@@ -32,3 +32,4 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local_dir: "./dist"
           remote_dir: "/"
+          upload_log_on_failure: false
