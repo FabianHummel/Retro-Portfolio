@@ -26,6 +26,8 @@ jobs:
 
       - name: Deploy
         uses: airvzxf/ftp-deployment-action@v2.10.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           server: ${{ secrets.FTP_SERVER }}
           user: ${{ secrets.FTP_USERNAME }}
