@@ -25,7 +25,7 @@ jobs:
         run: npm run build
 
       - name: Deploy
-        uses: airvzxf/ftp-deployment-action@v2
+        uses: airvzxf/ftp-deployment-action@v2.10.0
         with:
           server: ${{ secrets.FTP_SERVER }}
           user: ${{ secrets.FTP_USERNAME }}
