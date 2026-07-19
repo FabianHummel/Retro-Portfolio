@@ -8,7 +8,7 @@ First, i started building the basic outline, floor and walls all by hand, but I 
 
 Only later in the process I remembered the existence of this one awesome tool called **Axiom**, which would soon carry most of the heavy duty of building.
 
-![Spaceship Hangar](spaceship-hangar.webp)
+![Spaceship Hangar](hangar-gif.gif)
 
 Besides from building the hangar, I also played around with post processing shaders using the transparency shader, which essentially abuses Minecraft's faboulous graphics option to hook into the shader pipeline during the final rendering phase.
 
