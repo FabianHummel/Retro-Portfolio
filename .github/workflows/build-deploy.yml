@@ -25,10 +25,10 @@ jobs:
         run: npm run build
 
       - name: Deploy
-        uses: airvzxf/ftp-deployment-action@v2.10.0
+        uses: SamKirkland/FTP-Deploy-Action@4.4.0
         with:
           server: ${{ secrets.FTP_SERVER }}
-          user: ${{ secrets.FTP_USERNAME }}
+          username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          local_dir: "./dist"
-          remote_dir: "/"
+          local-dir: "./dist"
+          server-dir: "/"
