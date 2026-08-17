@@ -50,12 +50,15 @@ export const Navbar: Component = () => {
                 </A>
             </div>
             <h1 class="hidden lg:block font-main text-m md:text-l text-center whitespace-nowrap">~ Fabian Hummel ~</h1>
-            <div class="w-full px-5 sm:px-10 gap-7 flex justify-end items-center">
+            <div class="w-full px-5 sm:px-10 gap-4 sm:gap-7 flex justify-end items-center">
                 <A href="/book">
                     <PixelImage src="img/Book.png" darkSrc="img/Book Dark.png" w={12} h={12} scale={3} />
                 </A>
                 <A href="/projects">
                     <PixelImage src="img/Projects.png" darkSrc="img/Projects Dark.png" w={12} h={12} scale={3} />
+                </A>
+                <A href="/gallery">
+                    <PixelImage src="img/Gallery.png" darkSrc="img/Gallery Dark.png" w={12} h={12} scale={3} />
                 </A>
                 <A href="/music" class={`${playing() ? "animate-playing" : null}`}>
                     <PixelImage src="img/Music.png" darkSrc="img/Music Dark.png" w={12} h={12} scale={3} />

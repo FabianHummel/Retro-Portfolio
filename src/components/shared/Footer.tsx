@@ -1,5 +1,6 @@
 import { Logo } from "@components/shared/Logo";
 import { PixelImage } from "@components/shared/PixelImage";
+import { A } from "@solidjs/router";
 import { theme } from "@src/App";
 import type { Component } from "solid-js";
 
@@ -37,11 +38,15 @@ export const Footer: Component = () => {
                 <tbody class="leading-none">
                     <tr>
                         <td><a href="https://github.com/FabianHummel" rel="noreferrer" target="_blank">Github</a></td>
-                        <td><a href="https://github.com/FabianHummel/Skys-Horizon" rel="noreferrer" target="_blank">Sky's Horizon</a></td>
+                        <td><A href="/book/skys-horizon.md">Sky's Horizon</A></td>
                     </tr>
                     <tr>
                         <td><a href="https://fabianhummel.dev" rel="noreferrer" target="_blank">Portfolio</a></td>
-                        <td><a href="https://github.com/Heast-Messenger/Heast/tree/master" rel="noreferrer" target="_blank">Heast Msg</a></td>
+                        <td><A href="/book/squavy.md">Squavy</A></td>
+                    </tr>
+                    <tr>
+                        <td><a href="https://artfight.net/~Hummle" rel="noreferrer" target="_blank">Artfight</a></td>
+                        <td><A href="/book/heast-messenger.md">Heast Messenger</A></td>
                     </tr>
                 </tbody>
             </table>

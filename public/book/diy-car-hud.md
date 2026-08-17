@@ -24,9 +24,9 @@ However, due to reliability issues, I opted to create, connect and immediately c
 
 ## Fetching Lyrics Data
 
-![Host-Screenshot](diy-car-hud/host-screenshot.jpg?width=200px&style={"float":"right","margin":"1rem"})
-
 Because apps on Android (and probably every other locked down OS out there) are sandboxed, we have limited ways to actually know what's happening from outside the own app. However, to our advantage, an app can listen to some events provided by the operating system such as notification changes. This way we can find out which song is currently playing, because the live-notification changes.
+
+![Host-Screenshot](diy-car-hud/host-screenshot.jpg?width=200px&style={"float":"right","margin":"1rem"})
 
 With this information I then had to fetch lyrics (ideally with timestamps). I chose https://lrclib.net, an open source library for many synchronized lyrics. The fetched data is then sent to the other phone where the data is parsed and displayed correctly.
 

@@ -21,6 +21,7 @@
         "vite-plugin-wasm": "^3.2.2"
     },
     "dependencies": {
+        "@masonry-grid/solid-js": "^1.1.1",
         "@solid-primitives/intersection-observer": "^2.0.1",
         "@solid-primitives/keyed": "^1.2.2",
         "@solidjs/router": "^0.15.4",

@@ -24,6 +24,7 @@ const Home = lazy(() => import("@pages/Home"));
 const Projects = lazy(() => import("@pages/Projects"));
 const Songs = lazy(withLoadingScreen(() => import("@pages/Songs")));
 const Book = lazy(withLoadingScreen(() => import("@pages/Book")));
+const Gallery = lazy(withLoadingScreen(() => import("@pages/Gallery")));
 
 render(
     () => (
@@ -39,6 +40,7 @@ render(
             <Route path="/" component={Home} />
             <Route path="/projects" component={Projects} />
             <Route path="/music" component={Songs} />
+            <Route path="/gallery" component={Gallery} />
             <Route path="/book/" component={Book} />
             <Route path="/book/*chapter" component={Book} />
         </HashRouter>

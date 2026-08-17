@@ -1,6 +1,6 @@
 {
     "my-projects": {
-        "title": "My Projects"
+        "title": "My Heart and Soul"
     },
     "skys-horizon.md": {
         "title": "Sky's Horizon",
@@ -154,13 +154,13 @@
         "title": "A Sailor's Tale"
     },
     "random-projects": {
-        "title": "Random Projects"
+        "title": "Other Tech-Stuff"
     },
     "diy-car-hud.md": {
         "title": "DIY Car Hud"
     },
     "other-stuff": {
-        "title": "Other Stuff"
+        "title": "Random Stuff"
     },
     "about-me": {
         "title": "About Me",
@@ -190,5 +190,8 @@
                 "isDownloadable": true
             }
         }
+    },
+    "fursuit-crafting.md": {
+        "title": "Fursuit crafting"
     }
 }
