@@ -20,7 +20,7 @@ const ProjectList: () => Array<ProjectItemProps> = () => [
         ],
         links: [{
             name: "github",
-            url: "https://github.com/FabianHummel/Minecraft-Skys-Horizon"
+            url: "https://github.com/FabianHummel/Skys-Horizon"
         }],
         tags: ["Minecraft", "Story", "Space exploration"]
     },

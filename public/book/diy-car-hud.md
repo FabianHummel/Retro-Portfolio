@@ -22,7 +22,7 @@ On the host-app, I can then insert the IP-address of the remote device and creat
 
 However, due to reliability issues, I opted to create, connect and immediately close a socket each time I wanted to transfer data, because long-lived sockets always failed to stay open for some reason. This is not a big issue though, because the network is so small and local that connecting the two phones is unnoticably fast and I don't need to send data constantly. (Also the netcode is a lot simpler this way)
 
-### Fetching Lyrics Data
+## Fetching Lyrics Data
 
 ![Host-Screenshot](diy-car-hud/host-screenshot.jpg?width=200px&style={"float":"right","margin":"1rem"})
 
@@ -39,3 +39,7 @@ Regarding desynchronization: The time between receiving the notification and pla
 - The phone has to manually establish the Tethering connection, which is a little bit sad, but could probably be fixed with some automatically invoked macro or some root-level script.
 - The phone currently doesn't boot on its own when receiving power, which I think can be fixed with configuring the phone via ADB.
 - The HUD-app doesn't automatically start once the phone boots. This can be fixed with some apps that run stuff on startup, but these are incredibly slow or locked behind a paywall. Maybe the app itself can be programmed to start itself automatically?
+
+## Future Thoughts
+
+I plan to extend the app to show even more information than just lyrics, like directional info from Google Maps or Waze and notification previews from messengers like Whatsapp, etc.
