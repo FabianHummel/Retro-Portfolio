@@ -21,7 +21,7 @@ itself.
 ```c++
 template <typename T> Entity *addComponent(T *component)
 {
-	((Component *)component)->parent = this;
+	((Component*)component)->parent = this;
 	this->components[typeid(*component).name()] = component;
 	return this;
 };
@@ -50,7 +50,7 @@ return the component.
 template <class T> T *getComponent()
 {
 	return dynamic_cast<T*>(
-    components[typeid(T).name()]
-  );
+		components[typeid(T).name()]
+    );
 };
 ```
