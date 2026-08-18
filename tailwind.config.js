@@ -80,12 +80,18 @@ module.exports = {
                     '80%': { 'height': '8rem', 'opacity': 1 },
                     '100%': { 'height': 0, 'opacity': 0 }
                 },
+
+                'fadeIn': {
+                    '0%': { 'opacity': 0 },
+                    '100%': { 'opacity': 1 }
+                },
             },
             animation: {
                 'push': 'push 2s ease infinite',
                 'scroll': 'svglinescroll 1s linear infinite',
                 'playing': 'musicplaying 0.6s linear infinite alternate',
                 'spin': 'spin 45s linear infinite',
+                'fadeIn': 'fadeIn 0.3s ease-in-out',
             },
         },
         fontFamily: {

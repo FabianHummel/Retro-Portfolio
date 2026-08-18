@@ -1,4 +1,4 @@
-import { type Component, For, type JSXElement } from "solid-js";
+import { type Component, For, type JSXElement, createSignal } from "solid-js";
 import { BalancedMasonryGrid as MasonryGrid, Frame } from '@masonry-grid/solid-js'
 import { clsx } from "clsx";
 
@@ -7,6 +7,8 @@ export interface GallerySectionProps {
     images: { src: string, width: number, height: number }[];
     decoration?: JSXElement[];
     description: JSXElement;
+    setImage: (image: string) => void;
+    dialog: HTMLDialogElement;
 }
 
 export const GallerySection: Component<GallerySectionProps> = (props) => {
@@ -28,8 +30,14 @@ export const GallerySection: Component<GallerySectionProps> = (props) => {
             <MasonryGrid class={clsx("mt-10 mx-auto", props.class)} frameWidth={180} gap={10}>
                 <For each={props.images}>
                     {image => (
-                        <Frame width={image.width} height={image.height}>
-                            <img src={`/gallery/${image.src}`} alt={image.src.substring(image.src.lastIndexOf('/') + 1, image.src.lastIndexOf("."))} />
+                        <Frame width={image.width} height={image.height} onClick={() => {
+                            props.setImage(image.src);
+                            props.dialog.showModal();
+                        }}>
+                            <img class="gallery-image cursor-pointer"
+                                src={`/gallery/${image.src}`}
+                                alt={image.src.substring(image.src.lastIndexOf('/') + 1, image.src.lastIndexOf("."))}
+                                data-src={image.src} />
                         </Frame>
                     )}
                 </For>

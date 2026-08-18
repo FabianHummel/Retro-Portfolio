@@ -2,14 +2,58 @@ import { GallerySection } from "@components/gallery/GallerySection";
 import { Featured } from "@components/projects/Featured";
 import { Project } from "@components/projects/Project";
 import useLoading from "@components/shared/Loading";
+import { PixelImage } from "@components/shared/PixelImage";
 import { ChapterText, DownArrow, SVGCircle, SVGLine, VerticalLine } from "@components/shared/Styling";
 import { TypedText } from "@components/shared/TypedText";
 import ProjectList, { genHeight } from "@data/Projects";
-import { type Component, For } from "solid-js";
+import { type Component, For, createSignal, createEffect, on, Show, onMount, onCleanup } from "solid-js";
 
 const Gallery: Component = () => {
 
-    const { load } = useLoading();
+    const [image, setImage] = createSignal<string | null>(null);
+
+    let galleryImageDialog!: HTMLDialogElement;
+
+    function onKeyDown(e: KeyboardEvent) {
+        if (image() === null) return;
+
+        if (e.key === "Escape") {
+            galleryImageDialog.close();
+            setImage(null);
+        } else if (e.key === "ArrowLeft") {
+            nextImage(false);
+        } else if (e.key === "ArrowRight") {
+            nextImage(true);
+        }
+    }
+
+    onMount(() => {
+        document.addEventListener("keydown", onKeyDown);
+    });
+
+    onCleanup(() => {
+        document.removeEventListener("keydown", onKeyDown);
+    });
+
+    createEffect(on(image, image => {
+        if (image !== null) {
+            document.documentElement.style.overflow = "hidden";
+        } else {
+            document.documentElement.style.overflow = "";
+        }
+    }));
+
+    function nextImage(next: boolean) {
+        if (image() === null) return;
+
+        const currentImage = document.querySelector(`img.gallery-image[src="/gallery/${image()}"]`) as HTMLImageElement | null;
+        if (!currentImage) return;
+
+        const target = next ? currentImage.parentElement.nextSibling?.firstChild : currentImage.parentElement.previousSibling?.firstChild;
+        if (target && target instanceof HTMLImageElement) {
+            setImage(target.dataset.src);
+        }
+    }
 
     return <>
         <section class="relative pt-52 pb-36 flex flex-col gap-5 justify-center items-center">
@@ -31,7 +75,48 @@ const Gallery: Component = () => {
             <div class="styling left-16 bottom-0 w-1 h-40 bg-gray dark:bg-darkgray" />
         </section>
 
+        <dialog
+            ref={galleryImageDialog}
+            id="gallery-image-dialog"
+            class="bg-[transparent] outline-none"
+            onClose={() => {
+                setImage(null);
+            }}
+            onClick={(e) => {
+                if (e.target === galleryImageDialog) {
+                    galleryImageDialog.close();
+                    setImage(null);
+                }
+            }}
+        >
+            <div class="grid grid-cols-[auto,1fr,auto] items-center">
+                <div class="hidden sm:grid place-items-center px-10 h-full cursor-pointer"
+                    onClick={() => nextImage(false)}>
+                    <PixelImage
+                        src="/img/gallery/Previous.png"
+                        darkSrc="/img/gallery/Previous.png"
+                        alt="Download article"
+                        w={3} h={5} scale={5} />
+                </div>
+
+                <Show when={image()}>
+                    <img src={`/gallery/${image()}`} alt="Gallery image" class="max-w-[800px] max-h-[90vh] w-full" />
+                </Show>
+
+                <div class="hidden sm:grid place-items-center px-10 h-full cursor-pointer"
+                    onClick={() => nextImage(true)}>
+                    <PixelImage
+                        src="/img/gallery/Next.png"
+                        darkSrc="/img/gallery/Next.png"
+                        alt="Download article"
+                        w={3} h={5} scale={5} />
+                </div>
+            </div>
+        </dialog>
+
         <GallerySection
+            setImage={setImage}
+            dialog={galleryImageDialog}
             description={<>
                 <p>Even as a young boy, I was very drawn to art and quickly began creating art on my own, which makes sense because I was surrounded by a very creative and talented family - my mother loved to paint on canvases, my sister was fenomenal with traditional pencil art and my father... <i>well</i>, he discovered painting mini-figures many years later, at which he actually is incredibly talented as well.</p>
 
@@ -62,6 +147,8 @@ const Gallery: Component = () => {
 
         <GallerySection
             class="max-w-[900px]"
+            setImage={setImage}
+            dialog={galleryImageDialog}
             description={<>
                 <p>As I grew older, I (obviously) started to consume content on social media and soon got interested in anime/manga-styled art, even though I never watched any real anime at this point - I was just there for the art, but I wagely remember being <i>reeeallly</i> into <i>Angel Devil</i> from <i>Chainsaw Man</i>.</p>
 
@@ -88,8 +175,10 @@ const Gallery: Component = () => {
 
         <GallerySection
             class="max-w-[900px]"
+            setImage={setImage}
+            dialog={galleryImageDialog}
             description={<>
-                <p>After taking a long break again, I grew <b>EVEN</b> older (19 now) and consumed <b>EVEN MORE</b> content on social media <i>(I know, not very healthy, but try my best to keep an eye on it...)</i> and <i>reaaaallly</i> got into Furry art, because it's very emotionally and artistically expressive and helped me through a pretty deep down-phase of my life.</p>
+                <p>After taking a long break again, I grew <b>EVEN</b> older (19 now) and consumed <b>EVEN MORE</b> content on social media <i>(I know, not very healthy, but I try my best to keep an eye on it...)</i> and <i>reaaaallly</i> got into Furry art, because it's very emotionally and artistically expressive and helped me through a pretty deep down-phase of my life.</p>
 
                 <p>Sadly, this topic is still very controversial in our society and it was fairly hard to get over myself and explain my hobby to the people I know and love, but they eventually let it slide and are very chill about it now. — <i>Shoutout to my friends!!! Love you! ♡</i></p>
 
