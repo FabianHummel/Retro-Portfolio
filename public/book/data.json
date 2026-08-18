@@ -148,7 +148,12 @@
         }
     },
     "table-tennis.md": {
-        "title": "Table Tennis"
+        "title": "Table Tennis",
+		"children": {
+			"ecs.md": {
+				"title": "ECS Implementation"
+			}
+		}
     },
     "a-sailors-tale.md": {
         "title": "A Sailor's Tale"
