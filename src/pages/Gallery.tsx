@@ -1,16 +1,13 @@
 import { GallerySection } from "@components/gallery/GallerySection";
-import { Featured } from "@components/projects/Featured";
-import { Project } from "@components/projects/Project";
-import useLoading from "@components/shared/Loading";
 import { PixelImage } from "@components/shared/PixelImage";
 import { ChapterText, DownArrow, SVGCircle, SVGLine, VerticalLine } from "@components/shared/Styling";
 import { TypedText } from "@components/shared/TypedText";
-import ProjectList, { genHeight } from "@data/Projects";
-import { type Component, For, createSignal, createEffect, on, Show, onMount, onCleanup } from "solid-js";
+import { type Component, createSignal, createEffect, on, Show, onMount, onCleanup } from "solid-js";
+import { GalleryData, GalleryImage } from "@data/Gallery";
 
 const Gallery: Component = () => {
 
-    const [image, setImage] = createSignal<string | null>(null);
+    const [image, setImage] = createSignal<GalleryImage>(null);
 
     let galleryImageDialog!: HTMLDialogElement;
 
@@ -46,12 +43,12 @@ const Gallery: Component = () => {
     function nextImage(next: boolean) {
         if (image() === null) return;
 
-        const currentImage = document.querySelector(`img.gallery-image[src="/gallery/${image()}"]`) as HTMLImageElement | null;
+        const currentImage = document.querySelector(`img.gallery-image[src="/gallery/${image().src}"]`) as HTMLImageElement | null;
         if (!currentImage) return;
 
         const target = next ? currentImage.parentElement.nextSibling?.firstChild : currentImage.parentElement.previousSibling?.firstChild;
         if (target && target instanceof HTMLImageElement) {
-            setImage(target.dataset.src);
+            setImage((target as any).image as GalleryImage);
         }
     }
 
@@ -89,7 +86,7 @@ const Gallery: Component = () => {
                 }
             }}
         >
-            <div class="grid grid-cols-[auto,1fr,auto] items-center">
+            <div class="grid grid-cols-[auto,1fr,auto,auto] items-center">
                 <div class="hidden sm:grid place-items-center px-10 h-full cursor-pointer"
                     onClick={() => nextImage(false)}>
                     <PixelImage
@@ -100,7 +97,7 @@ const Gallery: Component = () => {
                 </div>
 
                 <Show when={image()}>
-                    <img src={`/gallery/${image()}`} alt="Gallery image" class="max-w-[800px] max-h-[90vh] w-full" />
+                    <img src={`/gallery/${image().src}`} alt="Gallery image" class="max-w-[800px] max-h-[90vh] w-full" />
                 </Show>
 
                 <div class="hidden sm:grid place-items-center px-10 h-full cursor-pointer"
@@ -111,6 +108,8 @@ const Gallery: Component = () => {
                         alt="Download article"
                         w={3} h={5} scale={5} />
                 </div>
+
+                {image()?.description}
             </div>
         </dialog>
 
@@ -122,19 +121,7 @@ const Gallery: Component = () => {
 
                 <p>Speaking of my older sister, when we were in the age of 10 and 14, we would often sit at table together and draw pencil art, at which I had gotten pretty good, <i>even though most of the motifs were blatantly copied from the internet, but whatever...</i> Unfortunately, I lost my old sketchbook where I drew my very first things, so the pictures below were created a little later when I already kind of knew what I was doing:</p>
             </>}
-            images={[
-                { src: "Old Art Book/Jack Russel Terrier.jpeg", width: 2586, height: 3921 },
-                { src: "Old Art Book/Havaneser.jpeg", width: 2616, height: 3860 },
-                { src: "Old Art Book/Hase.jpeg", width: 2625, height: 3947 },
-                { src: "Old Art Book/Leopard.jpeg", width: 2641, height: 3816 },
-                { src: "Old Art Book/Löwe.jpeg", width: 3934, height: 2539 },
-                { src: "Old Art Book/Zwergspitz.jpeg", width: 2629, height: 3909 },
-                { src: "Old Art Book/Adler.jpeg", width: 2608, height: 3856 },
-                { src: "Old Art Book/Hütehund.jpeg", width: 2603, height: 3921 },
-                { src: "Old Art Book/Schwert.jpeg", width: 2521, height: 3816 },
-                { src: "Old Art Book/Wolf.jpeg", width: 2635, height: 3951 },
-                { src: "Old Art Book/Schildkröte.jpeg", width: 3492, height: 2991 },
-            ]}
+            images={GalleryData["old-art-book"]}
             decoration={[
                 <ChapterText text={`0.1 First attempts at art`} />,
                 <VerticalLine />,
@@ -154,15 +141,7 @@ const Gallery: Component = () => {
 
                 <p>I also never tried to draw a fully fleshed out picture with color, but rather sticked with lead pencils instead - I don't know why, but quick sketches were everything I needed at the time. However, I think the improvement is very noticable, even though I didn't draw anything for four years straight. I started to experiment with shading and lighting, but the proportions were still off most of the time.</p>
             </>}
-            images={[
-                { src: "Sketchbook/Anime Boy 1.jpeg", width: 2840, height: 3021 },
-                { src: "Sketchbook/Anime Boy 2.jpeg", width: 2752, height: 3718 },
-                { src: "Sketchbook/Anime Boy 3.jpeg", width: 2404, height: 3417 },
-                { src: "Sketchbook/Anime Girl 1.jpeg", width: 2764, height: 3563 },
-                { src: "Sketchbook/Boy 1.jpeg", width: 2594, height: 3667 },
-                { src: "Sketchbook/Boy 2.jpeg", width: 2146, height: 3394 },
-                { src: "Sketchbook/Your Side.jpeg", width: 2625, height: 3606 },
-            ]}
+            images={GalleryData["sketchbook"]}
             decoration={[
                 <ChapterText text={`0.2 Anime Sketches`} />,
                 <VerticalLine />,
@@ -184,14 +163,7 @@ const Gallery: Component = () => {
 
                 <p>From an artistic perspective, you can't say I didn't improve a lot since the last time. Taking <b>LONG</b> breaks <i>(and I mean years)</i> seems to help a lot and this was the first time I am actually really proud of what I accomplished here. I also upgraded my gear to a Toned Gray Sketch Paper from Strathmore together with a set of 24 polychromos pencils from Faber-Castell, which I can only absolutely recommend, it's such a different feeling and so rewarding!</p>
             </>}
-            images={[
-                { src: "Furry Book/Badger.jpeg", width: 3059, height: 4082 },
-                { src: "Furry Book/Kyle.jpeg", width: 3281, height: 4792 },
-                { src: "Furry Book/Viktor.jpeg", width: 3018, height: 4670 },
-                { src: "Furry Book/Rorschach.jpeg", width: 3000, height: 4000 },
-                { src: "Furry Book/Sina.jpeg", width: 2785, height: 3945 },
-                { src: "Furry Book/Müd.jpeg", width: 2421, height: 3129 },
-            ]}
+            images={GalleryData["furry-art"]}
             decoration={[
                 <ChapterText text={`0.3 Furries`} />,
                 <VerticalLine />,

@@ -1,13 +1,14 @@
 import { type Component, For, type JSXElement, createSignal } from "solid-js";
 import { BalancedMasonryGrid as MasonryGrid, Frame } from '@masonry-grid/solid-js'
 import { clsx } from "clsx";
+import { GalleryImage } from "@data/Gallery";
 
 export interface GallerySectionProps {
     class?: string;
-    images: { src: string, width: number, height: number }[];
+    images: GalleryImage[];
     decoration?: JSXElement[];
     description: JSXElement;
-    setImage: (image: string) => void;
+    setImage: (image: GalleryImage) => void;
     dialog: HTMLDialogElement;
 }
 
@@ -31,13 +32,13 @@ export const GallerySection: Component<GallerySectionProps> = (props) => {
                 <For each={props.images}>
                     {image => (
                         <Frame width={image.width} height={image.height} onClick={() => {
-                            props.setImage(image.src);
+                            props.setImage(image);
                             props.dialog.showModal();
                         }}>
                             <img class="gallery-image cursor-pointer"
                                 src={`/gallery/${image.src}`}
                                 alt={image.src.substring(image.src.lastIndexOf('/') + 1, image.src.lastIndexOf("."))}
-                                data-src={image.src} />
+                                prop:image={image} />
                         </Frame>
                     )}
                 </For>
