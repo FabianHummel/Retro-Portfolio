@@ -86,7 +86,7 @@ const Gallery: Component = () => {
                 }
             }}
         >
-            <div class="grid grid-cols-[auto,1fr,auto,auto] items-center">
+            <div class="grid grid-cols-[1fr] sm:grid-cols-[auto,1fr,auto] grid-rows-[auto,auto] lg:grid-cols-[auto,auto,auto,auto] lg:grid-rows-none items-center gap-y-10">
                 <div class="hidden sm:grid place-items-center px-10 h-full cursor-pointer"
                     onClick={() => nextImage(false)}>
                     <PixelImage
@@ -97,7 +97,7 @@ const Gallery: Component = () => {
                 </div>
 
                 <Show when={image()}>
-                    <img src={`/gallery/${image().src}`} alt="Gallery image" class="max-w-[800px] max-h-[90vh] w-full" />
+                    <img src={`/gallery/${image().src}`} alt="Gallery image" class="lg:max-w-[800px] sm:max-h-[90vh] w-full" />
                 </Show>
 
                 <div class="hidden sm:grid place-items-center px-10 h-full cursor-pointer"
@@ -109,7 +109,9 @@ const Gallery: Component = () => {
                         w={3} h={5} scale={5} />
                 </div>
 
-                {image()?.description}
+                <div class="place-self-start text-white lg:max-w-96 sm:col-start-2 lg:col-start-auto">
+                    {image()?.description}
+                </div>
             </div>
         </dialog>
 
