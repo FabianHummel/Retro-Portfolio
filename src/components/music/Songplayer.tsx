@@ -9,7 +9,8 @@ import {
     type ParentProps,
     type Setter,
     type Signal,
-    useContext
+    useContext,
+    Show
 } from "solid-js";
 import Slider from "./Slider";
 
@@ -29,7 +30,6 @@ interface SongplayerContextProps {
     setPlaying: Setter<boolean>;
     playtime: Accessor<number>;
     setPlaytime: (time: number) => void;
-    isOpen: Accessor<boolean>;
 
     isThisSong(data: MusicItemProps): boolean;
     play(): void;
@@ -49,7 +49,6 @@ export function Songplayer(props: ParentProps) {
 
     const [song, setSong]: Signal<MusicItemProps> = createSignal(null);
     const [isPlaying, setPlaying]: Signal<boolean> = createSignal(false);
-    const [open, setOpen] = createSignal<boolean>(null);
 
     let volumeFromStorage = parseFloat(localStorage.getItem(`master-volume`));
     if (Number.isNaN(volumeFromStorage)) volumeFromStorage = undefined;
@@ -103,7 +102,7 @@ export function Songplayer(props: ParentProps) {
     }
 
     function isThisSong(data: MusicItemProps) {
-        return song !== undefined && song() != null && song() === data;
+        return song()?.song === data.song;
     }
 
     function handlePlay() {
@@ -155,51 +154,62 @@ export function Songplayer(props: ParentProps) {
         player.currentTime = time;
     }
 
+    function stopSong() {
+        setSong(null);
+        setPlaying(false);
+        setPlaytime(0);
+        player.pause();
+    }
+
     return (
-        <SongplayerContext.Provider value={{
-            song,
-            isPlaying: isPlaying,
-            setSong,
-            setPlaying,
-            isThisSong,
-            isOpen: open,
-            play: handlePlay,
-            pause: handlePause,
-            resume: handleResume,
-            toggle: handleTogglePlaying,
-            updateVolume: handleUpdateVolume,
-            playtime,
-            setPlaytime: handleSetPlaytime
-        }}>
+        <SongplayerContext.Provider
+            value={{
+                song,
+                isPlaying: isPlaying,
+                setSong,
+                setPlaying,
+                isThisSong,
+                play: handlePlay,
+                pause: handlePause,
+                resume: handleResume,
+                toggle: handleTogglePlaying,
+                updateVolume: handleUpdateVolume,
+                playtime,
+                setPlaytime: handleSetPlaytime,
+            }}
+        >
             <audio ref={player} class="hidden" loop>
                 <track kind="captions" />
             </audio>
 
             {props.children}
 
-            <div id="song-player" class="fixed z-10 bottom-0 left-0 right-0 h-16 bg-white dark:bg-dark border-t-2 border-t-black px-6 py-4 grid grid-cols-[1fr,1fr] lg:grid-cols-[1fr,1fr,1fr] align-middle" classList={{
-                'open': song() !== null && open() !== false
-            }}> {song() !== null && (
-                <>
-                    <button type="button" id="song-player-toggle" class="absolute right-[0.75rem] -top-10 w-12 h-10 bg-white dark:bg-dark border-x-2 border-t-2 border-black dark:border-black grid place-content-center"
-                        onClick={() => setOpen(true)}
-                    >
-                        <div class="-mt-2">
-                            <PixelImage src="/img/music/open.png" darkSrc="/img/music/open Dark.png" w={5} h={5} scale={4} alt={"Open the player"} />
-                        </div>
-                    </button>
-
+            <div
+                id="song-player"
+                class="fixed z-10 bottom-0 left-0 right-0 h-16 bg-white dark:bg-dark border-t-2 border-t-black px-6 py-4 grid grid-cols-[1fr,1fr] lg:grid-cols-[1fr,1fr,1fr] align-middle"
+                classList={{
+                    'open': song() !== null
+                }}
+            >
+                <Show when={song() !== null}>
                     <div class="flex align-middle gap-4 justify-start">
                         <button type="button" onClick={handleTogglePlaying}>
-                            <PixelImage src={
-                                isPlaying() ?
-                                    "/img/music/pause.png" :
-                                    "/img/music/play.png"
-                            } darkSrc={
-                                isPlaying() ?
-                                    "/img/music/pause Dark.png" :
-                                    "/img/music/play Dark.png"
-                            } w={5} h={5} scale={4} alt={"Toggle song playback"} />
+                            <PixelImage
+                                src={
+                                    isPlaying()
+                                        ? "/img/music/pause.png"
+                                        : "/img/music/play.png"
+                                }
+                                darkSrc={
+                                    isPlaying()
+                                        ? "/img/music/pause Dark.png"
+                                        : "/img/music/play Dark.png"
+                                }
+                                w={5}
+                                h={5}
+                                scale={4}
+                                alt={"Toggle song playback"}
+                            />
                         </button>
 
                         <p class="hidden max-lg:block leading-7 font-main">
@@ -208,31 +218,52 @@ export function Songplayer(props: ParentProps) {
                     </div>
 
                     <div class="hidden lg:flex align-middle gap-4 justify-center font-main">
-                        <p class="leading-7">
-                            {song().title}
-                        </p>
+                        <p class="leading-7">{song().title}</p>
                     </div>
 
                     <div class="flex align-middle gap-4 justify-end">
-                        <button type="button" onClick={() => { handleToggleMute() }}>
+                        <button
+                            type="button"
+                            onClick={() => {
+                                handleToggleMute();
+                            }}
+                        >
                             <VolumeIcon volume={master()} />
                         </button>
 
                         <div class="w-24 sm:w-56">
-                            <Slider signal={[master, setMaster]} step={0.05} onChange={handleMasterVolumeChanged} range={1} />
+                            <Slider
+                                signal={[master, setMaster]}
+                                step={0.05}
+                                onChange={handleMasterVolumeChanged}
+                                range={1}
+                            />
                         </div>
 
-                        <button type="button" onClick={() => setOpen(false)}>
-                            <PixelImage src="/img/music/close.png" darkSrc="/img/music/close Dark.png" w={5} h={5} scale={4} alt={"Close player"} />
+                        <button type="button" onClick={() => stopSong()}>
+                            <PixelImage
+                                src="/img/music/close.png"
+                                darkSrc="/img/music/close Dark.png"
+                                w={5}
+                                h={5}
+                                scale={4}
+                                alt={"Close player"}
+                            />
                         </button>
                     </div>
 
-                    <div id="playback-progress" class="absolute -top-[5px] left-0 right-0">
-                        <Slider signal={[playtime, setPlaytime]} range={song().length} onChange={handleSetPlaytime} />
+                    <div
+                        id="playback-progress"
+                        class="absolute -top-[5px] left-0 right-0"
+                    >
+                        <Slider
+                            signal={[playtime, setPlaytime]}
+                            range={song().length}
+                            onChange={handleSetPlaytime}
+                        />
                     </div>
-                </>
-            )}
+                </Show>
             </div>
         </SongplayerContext.Provider>
-    )
+    );
 }

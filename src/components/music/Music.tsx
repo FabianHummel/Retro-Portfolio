@@ -18,7 +18,7 @@ export default function Music(props: MusicProps) {
     let storedVolumeFromStorage = parseFloat(localStorage.getItem(`storedVolume:${props.data.song}`));
     if (Number.isNaN(storedVolumeFromStorage)) storedVolumeFromStorage = undefined;
 
-    const { song, isPlaying: playing, toggle, setSong, play, isThisSong, updateVolume, setPlaytime } = useSongplayer();
+    const { isPlaying: playing, toggle, setSong, play, isThisSong, updateVolume, setPlaytime } = useSongplayer();
 
     const [volume, setVolume] = createSignal(volumeFromStorage ?? 0.33);
     let storedVolume = storedVolumeFromStorage ?? 0.33;
@@ -67,11 +67,11 @@ export default function Music(props: MusicProps) {
             <div class="row-start-2 flex gap-10 md:px-5">
                 <button type="button" onClick={() => { handleTogglePlay() }}>
                     <PixelImage src={
-                        playing() && song() === props.data ?
+                        playing() && isThisSong(props.data) ?
                             "/img/music/pause.png" :
                             "/img/music/play.png"
                     } darkSrc={
-                        playing() && song() === props.data ?
+                        playing() && isThisSong(props.data) ?
                             "/img/music/pause Dark.png" :
                             "/img/music/play Dark.png"
                     } w={5} h={5} scale={4} alt={"Toggle song playback"} />
