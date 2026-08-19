@@ -216,6 +216,12 @@ const Book: Component = () => {
         on(pdf, (pdfDocument) => {
             if (!pdfDocument) return;
             pdfViewer.setDocument(pdfDocument);
+            try {
+                // Inform the link service about the loaded document so internal links work
+                pdfLinkService.setDocument(pdfDocument, null);
+            } catch (e) {
+                // ignore if link service isn't ready
+            }
         }),
     );
 
@@ -230,10 +236,10 @@ const Book: Component = () => {
         pdfLinkService.setViewer(pdfViewer);
 
         // Ensure PDF initially fits the container width once pages are initialized
-        eventBus.on && eventBus.on('pagesinit', () => {
+        eventBus.on?.('pagesinit', () => {
             try {
                 pdfViewer.currentScaleValue = 'page-width';
-            } catch (e) {
+            } catch (_) {
                 // ignore if pdfViewer not ready
             }
         });
@@ -242,7 +248,7 @@ const Book: Component = () => {
         const handlePdfResize = () => {
             try {
                 pdfViewer.currentScaleValue = 'page-width';
-            } catch (e) {
+            } catch (_) {
                 // ignore
             }
         };
