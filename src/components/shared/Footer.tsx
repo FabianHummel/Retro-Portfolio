@@ -21,7 +21,7 @@ export const Footer: Component = () => {
                     <Logo />
                 </div>
                 <p class="items-center leading-none text-center md:text-start">Made with <span class="inline-block align-middle">
-                    <PixelImage src="img/Heart.png" w={6} h={6} scale={3} />
+                    <PixelImage src="img/footer/Heart.png" w={6} h={6} scale={3} />
                 </span> by
                     <br />
                     Fabian Hummel
@@ -37,16 +37,46 @@ export const Footer: Component = () => {
                 </thead>
                 <tbody class="leading-none">
                     <tr>
-                        <td><a href="https://github.com/FabianHummel" rel="noreferrer" target="_blank">Github</a></td>
-                        <td><A href="/book/skys-horizon.md">Sky's Horizon</A></td>
+                        <td>
+                            <a href="https://github.com/FabianHummel" rel="noreferrer" target="_blank">
+                                <PixelImage class="inline mr-2" src="/img/footer/GitHub.png" darkSrc="/img/footer/GitHub Dark.png" w={6} h={6} scale={3} />
+                                Github
+                            </a>
+                        </td>
+                        <td>
+                            <A href="/book/skys-horizon.md">
+                                <PixelImage class="inline mr-2" src="/img/footer/Skys Horizon.png" darkSrc="/img/footer/Skys Horizon Dark.png" w={6} h={6} scale={3} />
+                                Sky's Horizon
+                            </A>
+                        </td>
                     </tr>
                     <tr>
-                        <td><a href="https://fabianhummel.dev" rel="noreferrer" target="_blank">Portfolio</a></td>
-                        <td><A href="/book/squavy.md">Squavy</A></td>
+                        <td>
+                            <a href="https://fabianhummel.dev" rel="noreferrer" target="_blank">
+                                <PixelImage class="inline mr-2" src="/img/footer/Portfolio.png" darkSrc="/img/footer/Portfolio Dark.png" w={6} h={6} scale={3} />
+                                Portfolio
+                            </a>
+                        </td>
+                        <td>
+                            <A href="/book/squavy.md">
+                                <PixelImage class="inline mr-2" src="/img/footer/Squavy.png" darkSrc="/img/footer/Squavy.png" w={6} h={6} scale={3} />
+                                Squavy
+                            </A>
+                        </td>
                     </tr>
                     <tr>
-                        <td><a href="https://artfight.net/~Hummle" rel="noreferrer" target="_blank">Artfight</a></td>
-                        <td><A href="/book/heast-messenger.md">Heast Messenger</A></td>
+                        <td>
+                            <a href="https://artfight.net/~Hummle" rel="noreferrer" target="_blank">
+                                <PixelImage class="inline mr-2" src="/img/footer/Artfight.png" darkSrc="/img/footer/Artfight.png" w={6} h={6} scale={3} />
+                                Artfight
+                            </a>
+                        </td>
+                        <td>
+                            <A href="/book/heast-messenger.md">
+                                <PixelImage class="inline mr-2" src="/img/footer/Heast Messenger.png" darkSrc="/img/footer/Heast Messenger.png" w={6} h={6} scale={3} />
+                                Heast Messenger
+                            </A>
+                        </td>
                     </tr>
                 </tbody>
             </table>
