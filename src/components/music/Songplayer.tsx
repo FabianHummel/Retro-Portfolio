@@ -150,8 +150,8 @@ export function Songplayer(props: ParentProps) {
             title: song.title,
             album: "Portfolio",
             artwork: [{
-                src: "/img/music/media-art.png",
-                sizes: "1x1",
+                src: "/img/music/media-art.jpg",
+                sizes: "512x512",
                 type: "image/png"
             }]
         });
