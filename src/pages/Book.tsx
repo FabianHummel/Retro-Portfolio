@@ -228,6 +228,29 @@ const Book: Component = () => {
             enableHWA: true,
         });
         pdfLinkService.setViewer(pdfViewer);
+
+        // Ensure PDF initially fits the container width once pages are initialized
+        eventBus.on && eventBus.on('pagesinit', () => {
+            try {
+                pdfViewer.currentScaleValue = 'page-width';
+            } catch (e) {
+                // ignore if pdfViewer not ready
+            }
+        });
+
+        // Re-apply page-width on window resize to keep it fitting the container
+        const handlePdfResize = () => {
+            try {
+                pdfViewer.currentScaleValue = 'page-width';
+            } catch (e) {
+                // ignore
+            }
+        };
+        window.addEventListener('resize', handlePdfResize);
+
+        onCleanup(() => {
+            window.removeEventListener('resize', handlePdfResize);
+        });
     });
 
     let scrollContainer!: HTMLDivElement;
