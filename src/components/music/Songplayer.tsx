@@ -1,5 +1,6 @@
 import VolumeIcon from "@components/music/VolumeIcon";
 import { PixelImage } from "@components/shared/PixelImage";
+import { songs } from "@pages/Songs";
 import {
     type Accessor,
     createContext,
@@ -65,6 +66,50 @@ export function Songplayer(props: ParentProps) {
         frame = requestAnimationFrame(handleUpdate);
 
         document.addEventListener('keypress', onKeyPress);
+
+        navigator.mediaSession.setActionHandler("play", () => {
+            if (song() !== null) {
+                handleResume();
+            }
+        });
+
+        navigator.mediaSession.setActionHandler("pause", () => {
+            if (song() !== null) {
+                handlePause();
+            }
+        });
+
+        navigator.mediaSession.setActionHandler("stop", () => {
+            if (song() !== null) {
+                stopSong();
+            }
+        });
+
+        navigator.mediaSession.setActionHandler("seekto", (details) => {
+            if (song() !== null && details.seekTime !== undefined) {
+                handleSetPlaytime(details.seekTime);
+            }
+        });
+
+        navigator.mediaSession.setActionHandler("previoustrack", () => {
+            playSiblingSong(false);
+        });
+
+        navigator.mediaSession.setActionHandler("nexttrack", () => {
+            playSiblingSong(true);
+        });
+
+        navigator.mediaSession.setActionHandler("seekforward", (details) => {
+            if (song() !== null && details.seekOffset !== undefined) {
+                handleSetPlaytime(playtime() + details.seekOffset);
+            }
+        });
+
+        navigator.mediaSession.setActionHandler("seekbackward", (details) => {
+            if (song() !== null && details.seekOffset !== undefined) {
+                handleSetPlaytime(playtime() - details.seekOffset);
+            }
+        });
     });
 
     onCleanup(() => {
@@ -80,11 +125,11 @@ export function Songplayer(props: ParentProps) {
                 handleTogglePlaying();
             }
         }
-        if (event.code === "MediaTrackNext") {
-            // TODO: play next song
-        }
         if (event.code === "MediaTrackPrevious") {
-            // TODO: play previous song
+            playSiblingSong(false)
+        }
+        if (event.code === "MediaTrackNext") {
+            playSiblingSong(true)
         }
     }
 
@@ -92,8 +137,24 @@ export function Songplayer(props: ParentProps) {
         handleUpdateVolume();
     }));
 
-    createEffect(on(song, () => {
+    createEffect(on(song, song => {
         setPlaytime(0);
+
+        if (song === null) {
+            navigator.mediaSession.metadata = null;
+            return;
+        }
+
+        navigator.mediaSession.metadata = new MediaMetadata({
+            artist: "Fabian Hummel",
+            title: song.title,
+            album: "Portfolio",
+            artwork: [{
+                src: "/img/music/media-art.png",
+                sizes: "1x1",
+                type: "image/png"
+            }]
+        });
     }));
 
     function handleUpdate() {
@@ -161,6 +222,25 @@ export function Songplayer(props: ParentProps) {
         player.pause();
     }
 
+    function playSiblingSong(next: boolean) {
+        if (songs() === null) return;
+
+        const currentIdx = songs().findIndex((s) => s.song === song().song);
+
+        if (!next && (currentIdx === 0 || playtime() > 5)) {
+            setPlaytime(0);
+            handleResume();
+            return;
+        }
+
+        if (currentIdx === songs().length - 1 && next) {
+            return;
+        }
+
+        setSong(songs()[next ? currentIdx + 1 : currentIdx - 1]);
+        handlePlay();
+    }
+
     return (
         <SongplayerContext.Provider
             value={{
@@ -193,6 +273,17 @@ export function Songplayer(props: ParentProps) {
             >
                 <Show when={song() !== null}>
                     <div class="flex align-middle gap-4 justify-start">
+                        <button type="button" onClick={() => playSiblingSong(false)} class="hidden sm:block">
+                            <PixelImage
+                                src="/img/music/previous.png"
+                                darkSrc="/img/music/previous Dark.png"
+                                w={5}
+                                h={5}
+                                scale={4}
+                                alt={"Play previous song"}
+                            />
+                        </button>
+
                         <button type="button" onClick={handleTogglePlaying}>
                             <PixelImage
                                 src={
@@ -209,6 +300,17 @@ export function Songplayer(props: ParentProps) {
                                 h={5}
                                 scale={4}
                                 alt={"Toggle song playback"}
+                            />
+                        </button>
+
+                        <button type="button" onClick={() => playSiblingSong(true)} class="hidden sm:block">
+                            <PixelImage
+                                src="/img/music/next.png"
+                                darkSrc="/img/music/next Dark.png"
+                                w={5}
+                                h={5}
+                                scale={4}
+                                alt={"Play next song"}
                             />
                         </button>
 
@@ -231,7 +333,7 @@ export function Songplayer(props: ParentProps) {
                             <VolumeIcon volume={master()} />
                         </button>
 
-                        <div class="w-24 sm:w-56">
+                        <div class="w-24 md:w-56">
                             <Slider
                                 signal={[master, setMaster]}
                                 step={0.05}

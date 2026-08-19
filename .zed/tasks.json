@@ -1,6 +1,6 @@
 [
     {
         "label": "Start",
-        "command": "npm run dev"
+        "command": "npm run dev -- --host"
     }
 ]

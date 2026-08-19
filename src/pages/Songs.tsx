@@ -6,16 +6,16 @@ import { ChapterText, DownArrow, SVGCircle, SVGLine, VerticalLine } from "@compo
 import { TypedText } from "@components/shared/TypedText";
 import { type Component, createSignal, For, onMount, Show } from "solid-js";
 
+export const [songs, setSongs] = createSignal<MusicItemProps[]>(null);
+
 const Songs: Component = () => {
 
     const { load, startLoading } = useLoading();
 
-    const [music, setMusic] = createSignal<MusicItemProps[]>(null);
-
     onMount(() => {
         const complete = startLoading(0.3);
         fetch("/music/data.json").then(async res => await res.json() as MusicItemProps[]).then((music) => {
-            setMusic(music);
+            setSongs(music);
             complete();
         });
     });
@@ -82,12 +82,12 @@ const Songs: Component = () => {
             <DownArrow top={150} />,
         ]} />
 
-        <Show when={music() !== null} fallback={
+        <Show when={songs() !== null} fallback={
             "Loading..."
         }>
-            <For each={music()}>
-                {(music, index) =>
-                    <Music data={music} index={index()} />
+            <For each={songs()}>
+                {(song, index) =>
+                    <Music data={song} index={index()} />
                 }
             </For>
         </Show>

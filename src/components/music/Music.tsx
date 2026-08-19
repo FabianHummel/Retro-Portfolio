@@ -6,6 +6,14 @@ import { PixelImage } from "@components/shared/PixelImage";
 import { TypedText } from "@components/shared/TypedText";
 import { createEffect, createSignal, on } from "solid-js";
 
+declare module "solid-js" {
+    namespace JSX {
+        interface HTMLAttributes<T> {
+            "prop:song"?: MusicItemProps;
+        }
+    }
+}
+
 interface MusicProps {
     data: MusicItemProps;
     index: number;
@@ -55,7 +63,9 @@ export default function Music(props: MusicProps) {
     }
 
     return (
-        <section class="content grid md:grid-cols-[2fr,1.5fr] lg:grid-cols-[2fr,3fr] grid-rows-[1fr,1fr,auto] gap-x-20">
+        <section class="song content grid md:grid-cols-[2fr,1.5fr] lg:grid-cols-[2fr,3fr] grid-rows-[1fr,1fr,auto] gap-x-20"
+            data-song={props.data.song}
+            prop:song={props.data}>
             {/* text */}
             <div class="row-start-1">
                 <h2 class="text-l">
