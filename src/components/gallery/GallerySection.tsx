@@ -1,10 +1,17 @@
-import { type Component, For, type JSXElement, createSignal } from "solid-js";
-import { BalancedMasonryGrid as MasonryGrid, Frame } from '@masonry-grid/solid-js'
+import type { GalleryImage } from "@data/Gallery";
+import { Frame, BalancedMasonryGrid as MasonryGrid } from '@masonry-grid/solid-js';
 import { clsx } from "clsx";
-import { GalleryImage } from "@data/Gallery";
+import { type Component, For, type JSX, type JSXElement } from "solid-js";
 
-export interface GallerySectionProps {
-    class?: string;
+declare module "solid-js" {
+    namespace JSX {
+        interface ImgHTMLAttributes<T> {
+            "prop:image"?: GalleryImage;
+        }
+    }
+}
+
+export interface GallerySectionProps extends JSX.HTMLAttributes<HTMLElement> {
     images: GalleryImage[];
     decoration?: JSXElement[];
     description: JSXElement;
@@ -28,7 +35,7 @@ export const GallerySection: Component<GallerySectionProps> = (props) => {
                 {props.description}
             </div>
 
-            <MasonryGrid class={clsx("mt-10 mx-auto", props.class)} frameWidth={180} gap={10}>
+            <MasonryGrid class={clsx(props.class, "mt-10 mx-auto w-full")} frameWidth={180} gap={10}>
                 <For each={props.images}>
                     {image => (
                         <Frame width={image.width} height={image.height} onClick={() => {

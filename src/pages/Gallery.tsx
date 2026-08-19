@@ -52,6 +52,13 @@ const Gallery: Component = () => {
         }
     }
 
+    function onClickDialog(e: Event) {
+        if (e.target === galleryImageDialog) {
+            galleryImageDialog.close();
+            setImage(null);
+        }
+    }
+
     return <>
         <section class="relative pt-52 pb-36 flex flex-col gap-5 justify-center items-center">
             <h1 class="title">
@@ -79,12 +86,7 @@ const Gallery: Component = () => {
             onClose={() => {
                 setImage(null);
             }}
-            onClick={(e) => {
-                if (e.target === galleryImageDialog) {
-                    galleryImageDialog.close();
-                    setImage(null);
-                }
-            }}
+            onClick={onClickDialog}
         >
             <div class="grid grid-cols-[1fr] sm:grid-cols-[auto,1fr,auto] grid-rows-[auto,auto] lg:grid-cols-[auto,auto,auto,auto] lg:grid-rows-none items-center gap-y-10">
                 <div class="hidden sm:grid place-items-center px-10 h-full cursor-pointer"
@@ -97,7 +99,7 @@ const Gallery: Component = () => {
                 </div>
 
                 <Show when={image()}>
-                    <img src={`/gallery/${image().src}`} alt="Gallery image" class="lg:max-w-[800px] sm:max-h-[90vh] w-full" />
+                    <img src={`/gallery/${image().src}`} alt="Gallery Preview" class="lg:max-w-[800px] sm:max-h-[90vh] w-full" />
                 </Show>
 
                 <div class="hidden sm:grid place-items-center px-10 h-full cursor-pointer"
@@ -135,9 +137,9 @@ const Gallery: Component = () => {
         />
 
         <GallerySection
-            class="max-w-[900px]"
             setImage={setImage}
             dialog={galleryImageDialog}
+            class={"max-w-[900px]"}
             description={<>
                 <p>As I grew older, I (obviously) started to consume content on social media and soon got interested in anime/manga-styled art, even though I never watched any real anime at this point - I was just there for the art, but I wagely remember being <i>reeeallly</i> into <i>Angel Devil</i> from <i>Chainsaw Man</i>.</p>
 
@@ -155,9 +157,9 @@ const Gallery: Component = () => {
         />
 
         <GallerySection
-            class="max-w-[900px]"
             setImage={setImage}
             dialog={galleryImageDialog}
+            class={"max-w-[900px]"}
             description={<>
                 <p>After taking a long break again, I grew <b>EVEN</b> older (19 now) and consumed <b>EVEN MORE</b> content on social media <i>(I know, not very healthy, but I try my best to keep an eye on it...)</i> and <i>reaaaallly</i> got into Furry art, because it's very emotionally and artistically expressive and helped me through a pretty deep down-phase of my life.</p>
 
