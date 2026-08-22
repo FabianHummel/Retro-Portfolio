@@ -9,7 +9,7 @@ import type { Component } from "solid-js";
 const Home: Component = () => {
     function getAge() {
         var today = new Date();
-        var birthDate = new Date(2006, 8, 21);
+        var birthDate = new Date("2006-08-21T00:00:00");
         var age = today.getFullYear() - birthDate.getFullYear();
         var m = today.getMonth() - birthDate.getMonth();
         if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
