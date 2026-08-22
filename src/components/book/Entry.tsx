@@ -3,7 +3,7 @@ import { BookContext, type IEntry } from "@pages/Book";
 import { Entries } from "@solid-primitives/keyed";
 import { A } from "@solidjs/router";
 import { clsx } from "clsx";
-import { type Component, createEffect, createSignal, type JSX, onMount, Show, splitProps, useContext } from "solid-js";
+import { type Component, createEffect, createSignal, type JSX, onMount, Show, splitProps, useContext, on } from "solid-js";
 
 export interface EntryProps extends JSX.HTMLAttributes<HTMLDivElement> {
     title: string;
@@ -17,19 +17,31 @@ export const Entry: Component<EntryProps> = (props) => {
 
     const { currentArticleIndex, articles, findNextArticle, closeMobileSidebar } = useContext(BookContext);
 
+    let entryRef!: HTMLDivElement;
+
     onMount(() => {
         setOpen(window.localStorage.getItem(`book:${local.path}`) === "true");
+
+        entryRef.addEventListener("openEntry", () => {
+            setOpen(true);
+        });
     });
 
     createEffect(() => {
         window.localStorage.setItem(`book:${local.path}`, open() ? "true" : "false");
     });
 
+    createEffect(on(currentArticleIndex, (currentArticleIndex) => {
+        if (articles()[currentArticleIndex]?.path.startsWith(local.path)) {
+            setOpen(true);
+        }
+    }));
+
     const articleIndex = articles().findIndex(a => a.path === local.path);
     const nextArticle = findNextArticle(articleIndex, 1);
 
     return (
-        <div {...other} class={clsx("text-m ml-3 border-l-[3px] border-l-gray dark:border-l-darkgray", props.class)}>
+        <div ref={entryRef} {...other} class={clsx("text-m ml-3 border-l-[3px] border-l-gray dark:border-l-darkgray", props.class)}>
             <Show when={local.entry.hasContent || local.entry.children} fallback={
                 <header class="text-gray dark:text-darkgray pt-4">
                     {local.title}

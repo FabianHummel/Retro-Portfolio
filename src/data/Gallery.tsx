@@ -129,9 +129,24 @@ export const GalleryData = {
             height: 3945
         },
         {
-            src: "Furry Book/Müd.jpeg",
+            src: "Furry Book/Skira mit Katze.jpeg",
+            width: 1822,
+            height: 2733
+        },
+        {
+            src: "Furry Book/Chris Zwanziger.jpeg",
+            width: 2647,
+            height: 3970
+        },
+        {
+            src: "Furry Book/Müd Zwanziger.jpeg",
             width: 2421,
             height: 3129
+        },
+        {
+            src: "Furry Book/Simmmie Zwanziger.jpeg",
+            width: 3000,
+            height: 4000
         },
     ]
 } satisfies Record<string, GalleryImage[]>;

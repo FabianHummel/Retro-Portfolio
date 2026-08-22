@@ -68,9 +68,7 @@ const Gallery: Component = () => {
             </h1>
 
             <p class="title max-w-lg">
-                I don't draw often, but whenever I do, it brings me joy.
-                <br />
-                And what's possibly better than sharing art?
+                I may not draw every day, but every piece brings me joy. And what's possibly better than sharing this feeling?
                 <br />
                 <br />
                 <i style={"line-height: 1rem;"}>♡ mostly for my fur-loving people ♡</i>
@@ -89,27 +87,27 @@ const Gallery: Component = () => {
             onClick={onClickDialog}
         >
             <div class="grid grid-cols-[1fr] sm:grid-cols-[auto,1fr,auto] grid-rows-[auto,auto] lg:grid-cols-[auto,auto,auto,auto] lg:grid-rows-none items-center gap-y-10">
-                <div class="hidden sm:grid place-items-center px-10 h-full cursor-pointer"
+                <button type="button" class="hidden sm:grid place-items-center px-10 h-full"
                     onClick={() => nextImage(false)}>
                     <PixelImage
                         src="/img/gallery/Previous.png"
                         darkSrc="/img/gallery/Previous.png"
                         alt="Download article"
                         w={3} h={5} scale={5} />
-                </div>
+                </button>
 
                 <Show when={image()}>
                     <img src={`/gallery/${image().src}`} alt="Gallery Preview" class="lg:max-w-[800px] sm:max-h-[90vh] w-full" />
                 </Show>
 
-                <div class="hidden sm:grid place-items-center px-10 h-full cursor-pointer"
+                <button type="button" class="hidden sm:grid place-items-center px-10 h-full"
                     onClick={() => nextImage(true)}>
                     <PixelImage
                         src="/img/gallery/Next.png"
                         darkSrc="/img/gallery/Next.png"
                         alt="Download article"
                         w={3} h={5} scale={5} />
-                </div>
+                </button>
 
                 <div class="place-self-start text-white lg:max-w-96 sm:col-start-2 lg:col-start-auto">
                     {image()?.description}
@@ -123,7 +121,7 @@ const Gallery: Component = () => {
             description={<>
                 <p>Even as a young boy, I was very drawn to art and quickly began creating art on my own, which makes sense because I was surrounded by a very creative and talented family - my mother loved to paint on canvases, my sister was fenomenal with traditional pencil art and my father... <i>well</i>, he discovered painting mini-figures many years later, at which he actually is incredibly talented as well.</p>
 
-                <p>Speaking of my older sister, when we were in the age of 10 and 14, we would often sit at table together and draw pencil art, at which I had gotten pretty good, <i>even though most of the motifs were blatantly copied from the internet, but whatever...</i> Unfortunately, I lost my old sketchbook where I drew my very first things, so the pictures below were created a little later when I already kind of knew what I was doing:</p>
+                <p>Speaking of my older sister, when we were in the age of 10 and 14, we would often sit at the table together and draw pencil art, at which I had gotten pretty good, <i>even though most of the motifs were blatantly copied from the internet, but whatever...</i> Unfortunately, I lost my old sketchbook where I drew my very first things, so the pictures below were created a little later when I already kind of knew what I was doing:</p>
             </>}
             images={GalleryData["old-art-book"]}
             decoration={[
@@ -165,7 +163,7 @@ const Gallery: Component = () => {
 
                 <p>Sadly, this topic is still very controversial in our society and it was fairly hard to get over myself and explain my hobby to the people I know and love, but they eventually let it slide and are very chill about it now. — <i>Shoutout to my friends!!! Love you! ♡</i></p>
 
-                <p>From an artistic perspective, you can't say I didn't improve a lot since the last time. Taking <b>LONG</b> breaks <i>(and I mean years)</i> seems to help a lot and this was the first time I am actually really proud of what I accomplished here. I also upgraded my gear to a Toned Gray Sketch Paper from Strathmore together with a set of 24 polychromos pencils from Faber-Castell, which I can only absolutely recommend, it's such a different feeling and so rewarding!</p>
+                <p>From an artistic perspective, you can't say I didn't improve a lot since the last time. Taking <b>LONG</b> breaks <i>(and I mean years)</i> seems to help a lot and this was the first time I am actually really proud of what I accomplished here. I also upgraded to a toned gray sketchbook from Strathmore - it's such a different feeling and drawing gets so rewarding!</p>
             </>}
             images={GalleryData["furry-art"]}
             decoration={[

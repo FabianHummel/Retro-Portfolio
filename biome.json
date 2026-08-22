@@ -4,6 +4,9 @@
         "rules": {
             "suspicious": {
                 "noUnknownAtRules": "off"
+            },
+            "a11y": {
+                "useKeyWithClickEvents": "off"
             }
         }
     },

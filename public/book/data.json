@@ -149,11 +149,11 @@
     },
     "table-tennis.md": {
         "title": "Table Tennis",
-		"children": {
-			"ecs.md": {
-				"title": "ECS Implementation"
-			}
-		}
+        "children": {
+            "ecs.md": {
+                "title": "ECS Implementation"
+            }
+        }
     },
     "a-sailors-tale.md": {
         "title": "A Sailor's Tale"
@@ -197,6 +197,14 @@
         }
     },
     "fursuit-crafting.md": {
-        "title": "Fursuit crafting"
+        "title": "Fursuit crafting",
+        "children": {
+            "how-did-i-get-here.md": {
+                "title": "How did I get here?"
+            },
+            "design-planning.md": {
+                "title": "Planning the Design"
+            }
+        }
     }
 }

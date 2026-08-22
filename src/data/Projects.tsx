@@ -97,7 +97,7 @@ const ProjectList: () => Array<ProjectItemProps> = () => [
 
             <hr />,
 
-            <p>I used this project as a way to learn C++. Because I like hooking up the learning process with a simple project, I decided to start working on this minimalistic Table Tennis game. Later in the process, I added some trickier game mechanics and features such as a fairly customizable UI + animation engine and a pretty solid entity component system. At first, I was unsure whether to stick with C++ or switch to another language like Rust, because I honestly didn't like the way C++ is written, but I have changed my mind about that - I think C++ offers many great ways to express one's intentions, especially newer standards with better synatic sugar.</p>
+            <p>I used this project as a way to learn C++. Because I like combining the learning process with a simple project, I decided to start working on this minimalistic Table Tennis game. Later in the process, I added some trickier game mechanics and features such as a fairly customizable UI + animation engine and a pretty solid entity component system. At first, I was unsure whether to stick with C++ or switch to another language like Rust, because I honestly didn't like the way C++ is written, but I have changed my mind about that - I think C++ offers many great ways to express one's intentions, especially newer standards with better synatic sugar.</p>
         ],
         links: [{
             name: "github",

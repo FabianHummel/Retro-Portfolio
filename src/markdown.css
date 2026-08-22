@@ -35,10 +35,10 @@ article code, article code * {
 }
 
 article blockquote {
-    @apply relative px-4 text-gray dark:text-darkgray;
+    @apply relative px-4 text-darkgray dark:text-gray opacity-50;
 }
 
 article blockquote::before {
-    @apply absolute bg-light dark:bg-black w-2 h-full left-0;
+    @apply absolute bg-gray dark:bg-darkgray w-2 h-full left-0;
     content: '';
 }

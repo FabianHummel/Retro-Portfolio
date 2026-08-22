@@ -38,7 +38,7 @@ export const GallerySection: Component<GallerySectionProps> = (props) => {
             <MasonryGrid class={clsx(props.class, "mt-10 mx-auto w-full")} frameWidth={180} gap={10}>
                 <For each={props.images}>
                     {image => (
-                        <Frame width={image.width} height={image.height} onClick={() => {
+                        <Frame class="flex" width={image.width} height={image.height} onClick={() => {
                             props.setImage(image);
                             props.dialog.showModal();
                         }}>

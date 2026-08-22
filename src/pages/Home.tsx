@@ -61,7 +61,7 @@ const Home: Component = () => {
         </section>
 
         <Chapter title="> About me" text={[
-            <span>I am a {getAge()} year old Austrian computer scientist who <i>was</i> learning computer science at a higher technical highschool (HTL), but is currently employed.</span>,
+            `I am a ${getAge()} year old Austrian computer scientist who learnt computer science at a higher technical highschool (HTL) and is currently employed as a fulltime software engineer`,
 
             "Since 4th grade primary school I started making small games in the Unity engine. (of which I haven't finished a single one, but more about that later)",
 
@@ -73,7 +73,7 @@ const Home: Component = () => {
             <SVGLine top={40} height={200} />,
             <DownArrow top={80} />
         ]} graphics={
-            <ImageWithText image="img/home/Profile Picture.png" text={<span>this is me. More about the picture <A href="/book/about-me/my-profile-picture.md">here</A></span>} />
+            <ImageWithText image="img/home/Profile Picture.png" text={<span>This is me. More about the picture <A href="/book/about-me/my-profile-picture.md">here</A></span>} />
         } />
 
         <Chapter title="> School life" text={[
