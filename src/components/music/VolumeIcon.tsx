@@ -1,24 +1,27 @@
-import {PixelImage} from "@components/shared/PixelImage";
-import {theme} from "@src/App";
+import { PixelImage } from "@components/shared/PixelImage";
+import { splitProps } from "solid-js";
+import type { JSX } from "solid-js/jsx-runtime";
 
-interface VolumeIconProps {
+interface VolumeIconProps extends JSX.HTMLAttributes<HTMLImageElement> {
     volume: number;
 }
 
 export default function VolumeIcon(props: VolumeIconProps) {
+    const [local, other] = splitProps(props, ["volume"]);
+
     return (
-        <PixelImage w={10} h={8} scale={3} alt={"Volume indicator"} src={
-            props.volume == 0
+        <PixelImage {...other} w={10} h={8} scale={3} alt={"Volume indicator"} src={
+            local.volume === 0
                 ? "/img/music/muted.png"
-            : props.volume < 0.5
-                ? "/img/music/silent.png"
-                : "/img/music/loud.png"
+                : local.volume < 0.5
+                    ? "/img/music/silent.png"
+                    : "/img/music/loud.png"
         } darkSrc={
-            props.volume == 0
+            local.volume === 0
                 ? "/img/music/muted Dark.png"
-            : props.volume < 0.5
-                ? "/img/music/silent Dark.png"
-                : "/img/music/loud Dark.png"
+                : local.volume < 0.5
+                    ? "/img/music/silent Dark.png"
+                    : "/img/music/loud Dark.png"
         } />
     )
 }

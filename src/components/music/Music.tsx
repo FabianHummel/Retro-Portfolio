@@ -75,7 +75,7 @@ export default function Music(props: MusicProps) {
                 </h2>
             </div>
             <div class="row-start-2 flex gap-10 md:px-5">
-                <button type="button" onClick={() => { handleTogglePlay() }}>
+                <button type="button" onClick={handleTogglePlay}>
                     <PixelImage src={
                         playing() && isThisSong(props.data) ?
                             "/img/music/pause.png" :
@@ -86,7 +86,7 @@ export default function Music(props: MusicProps) {
                             "/img/music/play Dark.png"
                     } w={5} h={5} scale={4} alt={"Toggle song playback"} />
                 </button>
-                <button type="button" onClick={() => { toggleMute() }}>
+                <button type="button" onClick={toggleMute}>
                     <VolumeIcon volume={volume()} />
                 </button>
                 <Slider signal={[volume, setVolume]} step={0.05} onChange={handleVolumeChanged} range={1} />

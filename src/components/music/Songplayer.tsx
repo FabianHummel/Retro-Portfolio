@@ -1,6 +1,7 @@
 import VolumeIcon from "@components/music/VolumeIcon";
 import { PixelImage } from "@components/shared/PixelImage";
 import { songs } from "@pages/Songs";
+import { create } from "domain";
 import {
     type Accessor,
     createContext,
@@ -31,6 +32,7 @@ interface SongplayerContextProps {
     setPlaying: Setter<boolean>;
     playtime: Accessor<number>;
     setPlaytime: (time: number) => void;
+    setIsEditorFocused: Setter<boolean>;
 
     isThisSong(data: MusicItemProps): boolean;
     play(): void;
@@ -50,6 +52,7 @@ export function Songplayer(props: ParentProps) {
 
     const [song, setSong]: Signal<MusicItemProps> = createSignal(null);
     const [isPlaying, setPlaying]: Signal<boolean> = createSignal(false);
+    const [isEditorFocused, setIsEditorFocused] = createSignal(false);
 
     let volumeFromStorage = parseFloat(localStorage.getItem(`master-volume`));
     if (Number.isNaN(volumeFromStorage)) volumeFromStorage = undefined;
@@ -119,8 +122,18 @@ export function Songplayer(props: ParentProps) {
     });
 
     function onKeyPress(event: KeyboardEvent) {
-        if (event.code === "Space" || event.code === "MediaPlayPause") {
+        if (event.code === "Space") {
+            if (isEditorFocused() || !["BODY", "A"].includes(document.activeElement.nodeName)) {
+                return;
+            }
+
             event.preventDefault();
+
+            if (song() !== null) {
+                handleTogglePlaying();
+            }
+        }
+        if (event.code === "MediaPlayPause") {
             if (song() !== null) {
                 handleTogglePlaying();
             }
@@ -256,6 +269,7 @@ export function Songplayer(props: ParentProps) {
                 updateVolume: handleUpdateVolume,
                 playtime,
                 setPlaytime: handleSetPlaytime,
+                setIsEditorFocused
             }}
         >
             <audio ref={player} class="hidden" loop>
@@ -266,7 +280,7 @@ export function Songplayer(props: ParentProps) {
 
             <div
                 id="song-player"
-                class="fixed z-10 bottom-0 left-0 right-0 h-16 bg-white dark:bg-dark border-t-2 border-t-black px-6 py-4 grid grid-cols-[1fr,1fr] lg:grid-cols-[1fr,1fr,1fr] align-middle"
+                class="fixed z-20 bottom-0 left-0 right-0 h-16 bg-white dark:bg-dark border-t-2 border-t-black px-6 py-4 grid grid-cols-[1fr,1fr] lg:grid-cols-[1fr,1fr,1fr] align-middle"
                 classList={{
                     'open': song() !== null
                 }}

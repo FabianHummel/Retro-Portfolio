@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "@solidjs/router";
-import { theme as appTheme } from "@src/App";
+import { theme as appTheme, theme } from "@src/App";
 import hljs from "highlight.js/lib/core";
 import { GlobalWorkerOptions, getDocument } from "pdfjs-dist";
 import * as pdfjsViewer from "pdfjs-dist/web/pdf_viewer.mjs";
@@ -9,7 +9,8 @@ import {
     createResource,
     createSignal,
     on,
-    onMount
+    onMount,
+    Show
 } from "solid-js";
 import { SolidMarkdown } from "solid-markdown";
 import "pdfjs-dist/web/pdf_viewer.css";
@@ -32,6 +33,16 @@ import worker from "pdfjs-dist/build/pdf.worker.mjs?raw";
 import { parseQueryString } from "pdfjs-dist/web/pdf_viewer.mjs";
 import type { Accessor } from "solid-js";
 import { createContext, onCleanup } from "solid-js";
+import { createCodeMirror, createEditorControlledValue } from "solid-codemirror";
+import { EditorView } from "@codemirror/view";
+import { markdown } from "@codemirror/lang-markdown";
+import { basicSetup } from "codemirror";
+import { gruvboxDark } from "@fsegurai/codemirror-theme-gruvbox-dark";
+import { Compartment } from "@codemirror/state";
+import { gruvboxLight } from "@fsegurai/codemirror-theme-gruvbox-light";
+import useSongplayer from "@components/music/Songplayer";
+import { unifiedMergeView } from "@codemirror/merge";
+import interact from "interactjs";
 
 export interface IEntry {
     title?: string;
@@ -60,6 +71,9 @@ export interface BookContextProps {
     findNextArticle: (from: number, direction: number) => IArticle;
     closeMobileSidebar: VoidFunction;
     book: Accessor<IBook>;
+    isEditing: Accessor<boolean>;
+    toggleEditMode: () => void;
+    dragEntry: Accessor<Element>;
 }
 
 export const BookContext = createContext<BookContextProps>();
@@ -74,8 +88,14 @@ const Book: Component = () => {
     hljs.registerLanguage("swift", swift);
 
     const [currentArticleIndex, setCurrentArticleIndex] = createSignal(-1);
-
     const [articles, setArticles] = createSignal<IArticle[]>([]);
+    const [isEditing, setIsEditing] = createSignal(false);
+
+    const { setIsEditorFocused } = useSongplayer();
+
+    function toggleEditMode() {
+        setIsEditing(!isEditing());
+    }
 
     const { startLoading } = useLoading();
     let complete: VoidFunction;
@@ -123,7 +143,6 @@ const Book: Component = () => {
 
     function onBookLoaded(book: IBook) {
         complete();
-        setArticles(flattenBook(book));
         setBook(book);
     }
 
@@ -140,6 +159,11 @@ const Book: Component = () => {
             return acc;
         }, []);
     }
+
+    createEffect(on(book, book => {
+        if (!book) return;
+        setArticles(flattenBook(book));
+    }));
 
     function findNextArticleIndex(i: number, direction: number) {
         while (true) {
@@ -261,6 +285,7 @@ const Book: Component = () => {
 
     let scrollContainer!: HTMLDivElement;
     let sidebarContainer!: HTMLDivElement;
+    let aside!: HTMLDivElement;
 
     onMount(() => {
         scrollContainer.scrollLeft = sidebarContainer.clientWidth;
@@ -326,12 +351,158 @@ const Book: Component = () => {
         return source;
     }
 
+    const [code, setCode] = createSignal("");
+
+    const { editorView, ref: editorRef, createExtension } = createCodeMirror({
+        onValueChange: setCode
+    });
+
+    createEditorControlledValue(editorView, code);
+
+    const themeCompartment = new Compartment();
+    const mergeCompartment = new Compartment();
+
+    const focusListener = EditorView.updateListener.of((update) => {
+        if (update.focusChanged) {
+            setIsEditorFocused(update.view.hasFocus);
+        }
+    });
+
+    createExtension(basicSetup);
+    createExtension(EditorView.lineWrapping)
+    createExtension(markdown());
+    createExtension(themeCompartment.of(theme() === "light" ? gruvboxLight : gruvboxDark));
+    createExtension(focusListener)
+    createExtension(mergeCompartment.of(unifiedMergeView({
+        original: "",
+        mergeControls: false,
+    })));
+
+    createEffect(on([article], ([article]) => {
+        setCode(article);
+
+        editorView()?.dispatch({
+            effects: mergeCompartment.reconfigure(
+                unifiedMergeView({
+                    original: article,
+                    mergeControls: false,
+                }),
+            ),
+        });
+    }));
+
+    createEffect(on(theme, theme => {
+        editorView()?.dispatch({
+            effects: themeCompartment.reconfigure(theme === "light" ? gruvboxLight : gruvboxDark)
+        });
+    }));
+
+    const [dragEntry, setDragEntry] = createSignal<HTMLElement>(null);
+    const [dropZoneTarget, setDropZoneTarget] = createSignal<HTMLElement>(null);
+
+    interact(".book-entry")
+        .draggable({
+            manualStart: true,
+            lockAxis: "y",
+            onstart: (event: Interact.DragEvent) => {
+                event.currentTarget.classList.add("drag");
+                setDragEntry(event.currentTarget as HTMLElement);
+            },
+            onend: (event: Interact.DragEvent) => {
+                event.currentTarget.classList.remove("drag");
+                if (dragEntry() && dropZoneTarget()) {
+                    handleDropEntry();
+                }
+                setDragEntry(null);
+                setDropZoneTarget(null);
+            },
+            onmove: (event: Interact.DragEvent) => {
+                const element = document.elementFromPoint(event.clientX, event.clientY);
+                if (!element.classList.contains("drop-zone")) return;
+                setDropZoneTarget(element as HTMLElement);
+            }
+        })
+        .on('hold', (event) => {
+            var interaction = event.interaction;
+
+            if (!interaction.interacting() && isEditing()) {
+                interaction.start(
+                    { name: "drag" },
+                    event.interactable,
+                    event.currentTarget,
+                );
+            }
+        });
+
+    createEffect(on(dropZoneTarget, (target, previous) => {
+        previous?.classList?.remove("active");
+        target?.classList?.add("active");
+    }));
+
+    function traverseAndGetContainingEntryBook(path: string, deleteIfLastChild?: boolean): [IBook, string, string] {
+        let containingEntryBook = book();
+        let searchPath = null;
+        const paths = path.split("/");
+        const name = paths.pop();
+        for (const dir of paths) {
+            searchPath = searchPath === null ? dir : `${searchPath}/${dir}`;
+            containingEntryBook = Object.entries(containingEntryBook).find(([path]) => path.startsWith(searchPath))[1].children;
+        }
+        if (deleteIfLastChild) {
+            const [parent, previousSearchPath, name] = traverseAndGetContainingEntryBook(searchPath);
+            const entry = Object.entries(parent).find(([path]) => path.startsWith(`${previousSearchPath}/${name}`))[1];
+            if (Object.entries(entry.children).length <= 1) {
+                entry.children = undefined;
+            }
+        }
+        return [containingEntryBook, searchPath, name];
+    }
+
+    function handleDropEntry() {
+        const fromEntryPath = dragEntry().dataset.path;
+        const toEntryPath = dropZoneTarget().parentElement.dataset.path;
+
+        console.log(`Moving ${fromEntryPath} → ${toEntryPath}`);
+
+        // Remove "from" entry
+        let [containingEntryBook, searchPath, name] = traverseAndGetContainingEntryBook(fromEntryPath, true);
+        const fromEntry = containingEntryBook[`${searchPath}/${name}`];
+        delete containingEntryBook[`${searchPath}/${name}`];
+        const fromName = name;
+
+        // Insert next or inside "to" entry
+        [containingEntryBook, searchPath, name] = traverseAndGetContainingEntryBook(toEntryPath);
+        const toEntries = Object.entries(containingEntryBook);
+        const insertIndex = toEntries.findIndex(([path]) => path === `${searchPath}/${name}`)
+
+        if (dropZoneTarget().classList.contains("drop-zone-above")) {
+            toEntries.splice(insertIndex, 0, [`${searchPath}/${fromName}`, fromEntry]);
+            [containingEntryBook, searchPath, name] = traverseAndGetContainingEntryBook(searchPath);
+            containingEntryBook[`${searchPath}/${name}`].children = Object.fromEntries(toEntries);
+        }
+        else if (dropZoneTarget().classList.contains("drop-zone-inside")) {
+            containingEntryBook[`${searchPath}/${name}`].children ??= {}
+            const newDirName = name.includes(".") ? name.substring(0, name.lastIndexOf(".")) : name;
+            containingEntryBook[`${searchPath}/${name}`].children[`${searchPath}/${newDirName}/${fromName}`] = fromEntry;
+        }
+        else if (dropZoneTarget().classList.contains("drop-zone-below")) {
+            toEntries.splice(insertIndex + 1, 0, [`${searchPath}/${fromName}`, fromEntry]);
+            [containingEntryBook, searchPath, name] = traverseAndGetContainingEntryBook(searchPath);
+            containingEntryBook[`${searchPath}/${name}`].children = Object.fromEntries(toEntries);
+        }
+
+        setBook(JSON.parse(JSON.stringify(book())));
+    }
+
     return <BookContext.Provider value={{
         currentArticleIndex,
         articles,
         findNextArticle,
         closeMobileSidebar,
-        book
+        book,
+        isEditing,
+        toggleEditMode,
+        dragEntry
     }}>
         {/* hide footer */}
         <style>{`footer { display: none !important; }`}</style>
@@ -340,7 +511,7 @@ const Book: Component = () => {
 
         <section ref={scrollContainer} class="h-[100dvh] pt-[var(--navbar-height)] py-10 max-lg:pb-4 lg:px-6 grid grid-cols-[22rem,calc(100vw-3px)] lg:grid-cols-[25rem,auto] gap-1 lg:gap-x-8 overflow-auto max-lg:snap-x snap-mandatory">
             <div ref={sidebarContainer} class="border-r-gray border-r-2 snap-start font-main">
-                <aside class="sticky top-0 self-start max-lg:px-5 lg:pr-8">
+                <aside ref={aside} class="sticky top-0 self-start max-lg:px-5 lg:pr-8">
                     <Entries of={book()}>
                         {(path, entry) => <Entry
                             title={entry().title ?? path}
@@ -351,36 +522,41 @@ const Book: Component = () => {
                 </aside>
             </div>
 
-            <article class="max-lg:px-6 snap-start" style={`opacity: ${articleOpacity()};`}>
-                <main class="max-w-[800px] mx-auto">
-                    <Breadcrumbs />
-                    {article.loading ? (
-                        <p>Loading...</p>
-                    ) : (
-                        <SolidMarkdown children={article()} transformImageUri={transformImageUri} components={{
-                            img: MarkdownImageComponent
-                        }} />
-                    )}
+            <main
+                class="w-full max-w-[800px] max-lg:px-6 mx-auto snap-start"
+                style={`opacity: ${articleOpacity()};`}
+            >
+                <Breadcrumbs />
+                <Show when={!isEditing()}>
+                    <article>
+                        {article.loading ? (
+                            <p>Loading...</p>
+                        ) : (
+                            <SolidMarkdown children={code()} transformImageUri={transformImageUri} components={{
+                                img: MarkdownImageComponent
+                            }} />
+                        )}
 
-                    <div
-                        class="h-[calc(100vh-20rem)] overflow-scroll"
-                        classList={{
-                            hidden: !pdf(),
-                        }}
-                    >
-                        <div ref={pdfContainer} class="relative inset-0">
-                            <div id="viewer" class="pdfViewer"></div>
+                        <div
+                            class="h-[calc(100vh-20rem)] overflow-scroll"
+                            classList={{ hidden: !pdf() }}
+                        >
+                            <div ref={pdfContainer} class="relative inset-0">
+                                <div id="viewer" class="pdfViewer"></div>
+                            </div>
                         </div>
-                    </div>
 
-                    {currentArticleIndex() !== -1 && (
-                        <div class="grid grid-cols-[1fr,1fr] gap-x-6 mt-8">
-                            <Button article={findNextArticle(currentArticleIndex(), -1)} class="col-start-1" />
-                            <Button article={findNextArticle(currentArticleIndex(), 1)} class="col-start-2" />
-                        </div>
-                    )}
-                </main>
-            </article>
+                        <Show when={currentArticleIndex() !== -1}>
+                            <div class="grid grid-cols-[1fr,1fr] gap-x-6 mt-8">
+                                <Button article={findNextArticle(currentArticleIndex(), -1)} class="col-start-1" />
+                                <Button article={findNextArticle(currentArticleIndex(), 1)} class="col-start-2" />
+                            </div>
+                        </Show>
+                    </article>
+                </Show>
+
+                <div ref={editorRef} style={`margin-inline: ${isEditing() ? "-1.5rem" : null}; display: ${isEditing() ? "block" : "none"}`} />
+            </main>
         </section>
     </BookContext.Provider>;
 };

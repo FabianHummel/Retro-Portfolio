@@ -154,8 +154,32 @@ aside > * {
     border-left: none !important;
 }
 
+aside p {
+    text-align: left;
+}
+
 aside a {
     text-decoration-line: none;
+}
+
+aside .book-entry.drag {
+    @apply outline-4 outline-dashed outline-black dark:outline-light
+}
+
+aside .book-entry .drop-zone.active {
+    @apply border-black dark:border-light
+}
+
+aside .book-entry .drop-zone.active.drop-zone-above {
+    @apply border-t-4
+}
+
+aside .book-entry .drop-zone.active.drop-zone-inside {
+    @apply outline -outline-offset-4 outline-4 outline-black dark:outline-light
+}
+
+aside .book-entry .drop-zone.active.drop-zone-below {
+    @apply border-b-4
 }
 
 hr {
