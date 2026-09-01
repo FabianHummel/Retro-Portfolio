@@ -204,7 +204,19 @@
             },
             "design-planning.md": {
                 "title": "Planning the Design"
+            },
+            "preparing-the-head-base.md": {
+                "title": "Preparing the Head Base"
+            },
+            "adding-inner-lining.md": {
+                "title": "Adding inner Lining"
             }
+        }
+    },
+    "vorsprung-durch-technik.md": {
+        "title": "Vorsprung durch Technik",
+        "children": {
+            
         }
     }
 }
