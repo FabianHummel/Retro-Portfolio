@@ -42,3 +42,9 @@ article blockquote::before {
     @apply absolute bg-gray dark:bg-darkgray w-2 h-full left-0;
     content: '';
 }
+
+article img {
+    margin-inline: 1rem;
+    margin-block: 0.5rem;
+    @apply border-none border-2 border-black dark:border-white;
+}

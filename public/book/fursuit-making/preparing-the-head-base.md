@@ -1,10 +1,8 @@
 # Preparing the Head Base
 
-![Head Base Package](head-base-package.jpg?width=200px&align=right&style={"float":"right","margin":"1rem"})
+![Head Base Package](head-base-package.jpg?width=150px&align=right&border)
 
 My package from Canada finally arrived! I bought the head base from [Yazur's Critter Hub](https://www.etsy.com/at/shop/YazursCrittersHub), a Canadian shop for fursuit materials on Etsy, because I fell in love with the head shape and there were options to buy fitting ears, eyeblanks and an incredible jawset, without having to worry about compatibility issues.
-
-![Head Base and other Stuff](head-base-and-other-stuff.jpg)
 
 ## Shipping
 
@@ -12,7 +10,7 @@ Normally I don't like importing things from countries outside the EU due to unpr
 
 ## Glueing the Ears to the Head
 
-![Head Base with Ears](head-base-with-ears.jpg?width=200px&align=right&style={"float":"right","margin":"1rem"})
+![Head Base with Ears](head-base-with-ears.jpg?width=150px&align=right&border)
 
 The very first thing I did was glueing the ears to the head base, mainly to get a better idea of the finished suit and the fur would need to go over the entire thing anyways, so why not.
 

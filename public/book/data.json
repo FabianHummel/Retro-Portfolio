@@ -173,6 +173,9 @@
             "software-development.md": {
                 "title": "Software Development"
             },
+            "my-take-on-ai.md": {
+                "title": "My take on AI"
+            },
             "learning-new-things.md": {
                 "title": "Leaning new things"
             },
@@ -196,11 +199,11 @@
             }
         }
     },
-    "fursuit-crafting.md": {
-        "title": "Fursuit crafting",
+    "fursuit-making.md": {
+        "title": "Fursuit making",
         "children": {
-            "how-did-i-get-here.md": {
-                "title": "How did I get here?"
+            "how-did-i-end-up-here.md": {
+                "title": "How did I end up here?"
             },
             "design-planning.md": {
                 "title": "Planning the Design"
@@ -215,8 +218,6 @@
     },
     "vorsprung-durch-technik.md": {
         "title": "Vorsprung durch Technik",
-        "children": {
-            
-        }
+        "children": {}
     }
 }

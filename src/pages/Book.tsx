@@ -351,6 +351,8 @@ const Book: Component = () => {
             img.style.marginLeft = queryParams.get("align") === "left" ? "auto" : "";
             img.style.marginRight = queryParams.get("align") === "right" ? "auto" : "";
             img.style.marginInline = queryParams.get("align") === "center" ? "auto" : "";
+            img.style.float = queryParams.get("align") === "left" ? "left" : queryParams.get("align") === "right" ? "right" : "";
+            img.style.borderStyle = queryParams.get("border") !== undefined ? "solid" : undefined;
 
             if (queryParams.has("style")) {
                 for (const [key, value] of Object.entries(JSON.parse(queryParams.get("style")))) {
@@ -394,10 +396,10 @@ const Book: Component = () => {
     })));
 
     createEffect(on(article, article => {
-        if (!articles() || currentArticleIndex() === -1) return;
+        if (!article) return;
 
         const currentArticle = articles()?.[currentArticleIndex()];
-        setCode(articleChanges.get(currentArticle.path) ?? article);
+        setCode(articleChanges.get(currentArticle?.path) ?? article);
 
         editorView()?.dispatch({
             effects: mergeCompartment.reconfigure(
@@ -592,13 +594,15 @@ const Book: Component = () => {
                 <Breadcrumbs />
                 <Show when={!isEditing()}>
                     <article>
-                        {article.loading ? (
+                        <Show when={!article.loading} fallback={
                             <p>Loading...</p>
-                        ) : (
-                            <SolidMarkdown children={code()} transformImageUri={transformImageUri} components={{
-                                img: MarkdownImageComponent
-                            }} />
-                        )}
+                        }>
+                            <Show when={!pdf()}>
+                                <SolidMarkdown children={code()} transformImageUri={transformImageUri} components={{
+                                    img: MarkdownImageComponent
+                                }} />
+                            </Show>
+                        </Show>
 
                         <div
                             class="h-[calc(100vh-20rem)] overflow-scroll"
