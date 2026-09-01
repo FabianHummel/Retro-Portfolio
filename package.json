@@ -32,6 +32,7 @@
         "@masonry-grid/solid-js": "^1.1.1",
         "@solid-primitives/intersection-observer": "^2.0.1",
         "@solid-primitives/keyed": "^1.2.2",
+        "@solid-primitives/map": "^0.7.4",
         "@solidjs/router": "^0.15.4",
         "clsx": "^2.1.1",
         "codemirror": "^6.0.2",

@@ -1,6 +1,6 @@
 import { A } from "@solidjs/router";
 import { type Component, createSignal, createEffect, useContext, Index, Show } from "solid-js";
-import { BookContext, type IBook, type IEntry } from "@pages/Book";
+import { BookContext, toPath, type IBook, type IEntry } from "@pages/Book";
 import { AuthContext } from "@src/services/AuthContext";
 import { PixelImage } from "@components/shared/PixelImage";
 
@@ -15,7 +15,7 @@ interface EntryWithTitle extends IEntry {
 }
 
 export const Breadcrumbs: Component = () => {
-    const { currentArticleIndex, articles, book, findNextArticle, toggleEditMode, isEditing } = useContext(BookContext);
+    const { currentArticleIndex, articles, book, toggleEditMode, publishChanges } = useContext(BookContext);
     const [breadcrumbs, setBreadcrumbs] = createSignal<BreadcrumbItem[]>([]);
 
     const { isAuthenticated, loading, login, logout } = useContext(AuthContext);
@@ -34,46 +34,23 @@ export const Breadcrumbs: Component = () => {
         }
 
         const crumbs: BreadcrumbItem[] = [];
-        const bookData = book();
+        let bookData = book();
         if (!bookData) {
             return;
         }
 
-        // Find the path to this article in the book hierarchy
-        function findPath(node: IBook, path: (EntryWithTitle & { path: string })[]): (EntryWithTitle & { path: string })[] | null {
-            for (const [entryPath, entry] of Object.entries(node)) {
-                if (entryPath === article.path) {
-                    return [...path, { ...entry, path: entryPath }];
-                }
-                if (entry.children) {
-                    const result = findPath(entry.children, [...path, { ...entry, path: entryPath }]);
-                    if (result) return result;
-                }
-            }
-            return null;
-        }
+        let linkPath = "";
+        for (const name of article.path.split('/')) {
+            const [path, entry] = Object.entries(bookData).find(([path]) => path.startsWith(name));
+            linkPath = toPath(linkPath) + (linkPath ? '/' : '') + path;
 
-        const pathToArticle = findPath(bookData, []);
+            crumbs.push({
+                title: entry.title,
+                path: linkPath,
+                hasContent: entry.hasContent
+            });
 
-        if (pathToArticle) {
-            for (const entry of pathToArticle) {
-                // For entries without content, find the next article after them
-                let linkPath = entry.path;
-                if (!entry.hasContent && entry.path) {
-                    // Find article index that matches this path prefix
-                    const articleIndex = articles().findIndex(a => a.path === entry.path);
-                    if (articleIndex !== -1) {
-                        const nextArticle = findNextArticle(articleIndex, 1);
-                        linkPath = nextArticle?.path || entry.path;
-                    }
-                }
-
-                crumbs.push({
-                    title: entry.title || "",
-                    path: linkPath || "",
-                    hasContent: entry.hasContent
-                });
-            }
+            bookData = entry.children;
         }
 
         setBreadcrumbs(crumbs);
@@ -114,6 +91,19 @@ export const Breadcrumbs: Component = () => {
             </ol>
 
             <div class="flex gap-4 p-3 pr-0 items-center font-main">
+                <Show when={isAuthenticated()}>
+                    <button
+                        type="button"
+                        class="relative before:absolute before:-inset-2"
+                        onClick={publishChanges}
+                    >
+                        <PixelImage
+                            src="/img/book/Publish.png"
+                            darkSrc="/img/book/Publish Dark.png"
+                            w={5} h={5} scale={3} />
+                    </button>
+                </Show>
+
                 <button
                     type="button"
                     class="relative before:absolute before:-inset-2"

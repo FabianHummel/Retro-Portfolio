@@ -106,6 +106,8 @@ module.exports = {
             'black': 'rgb(40, 40, 40)',
             'light': 'rgb(235, 235, 235)',
             'dark': 'rgb(20, 20, 20)',
+            'changed': '#e3b707',
+            'changed-dark': '#cca225'
         },
         fontSize: {
             'l': '2.3rem',

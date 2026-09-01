@@ -6,16 +6,22 @@ import { clsx } from "clsx";
 import { type Component, createEffect, createSignal, type JSX, onMount, Show, splitProps, useContext, on, createMemo } from "solid-js";
 
 export interface EntryProps extends JSX.HTMLAttributes<HTMLDivElement> {
-    title: string;
     path: string;
     entry: IEntry;
+    parent?: string;
+    dataParent?: string;
 }
 
 export const Entry: Component<EntryProps> = (props) => {
-    const [local, other] = splitProps(props, ["title", "path", "entry"])
+    const [local, other] = splitProps(props, ["path", "entry", "parent", "dataParent"])
     const [open, setOpen] = createSignal(false);
 
-    const { currentArticleIndex, articles, findNextArticle, closeMobileSidebar, isEditing, dragEntry } = useContext(BookContext);
+    const absoluteParent = local.parent ? local.parent.includes('.') ? local.parent.substring(0, local.parent.lastIndexOf('.')) : local.parent : null
+    const absolutePath = absoluteParent ? `${absoluteParent}/${local.path}` : local.path;
+    const dataPath = local.dataParent ? `${local.dataParent}/${local.path}` : local.path;
+    const title = local.entry.title ?? local.path;
+
+    const { currentArticleIndex, articles, findNextArticle, closeMobileSidebar, isEditing, dragEntry, articleChanges } = useContext(BookContext);
 
     let entryRef!: HTMLDivElement;
 
@@ -38,7 +44,7 @@ export const Entry: Component<EntryProps> = (props) => {
     }));
 
     const articleIndex = createMemo(() => {
-        return articles().findIndex(a => a.path === local.path);
+        return articles().findIndex(a => a.path === absolutePath);
     });
 
     const hasNextArticle = createMemo(() => {
@@ -46,25 +52,25 @@ export const Entry: Component<EntryProps> = (props) => {
     });
 
     function handleContextMenu(event: Event) {
-        if (isEditing()) {
-            event.preventDefault()
-        }
+        event.stopPropagation();
+        event.preventDefault();
     }
 
     return (
         <div
             ref={entryRef} {...other}
             class={clsx("relative book-entry text-m ml-3 border-l-[3px] border-l-gray dark:border-l-darkgray", props.class)}
-            data-path={local.path}
+            data-absolute-path={absolutePath}
+            data-data-path={dataPath}
             onContextMenu={handleContextMenu}
         >
-            <Show when={dragEntry() && dragEntry() !== entryRef}>
+            <Show when={dragEntry()}>
                 <div class="drop-zone drop-zone-inside absolute z-10 inset-0" />
             </Show>
 
             <Show when={local.entry.hasContent || local.entry.children} fallback={
                 <header class="text-gray dark:text-darkgray pt-4">
-                    {local.title}
+                    {title}
                 </header>
             }>
                 <div class="entry-title flex justify-between items-center gap-2 pl-3" classList={{
@@ -72,15 +78,15 @@ export const Entry: Component<EntryProps> = (props) => {
                 }}>
                     <Show when={local.entry.hasContent || local.entry.children && hasNextArticle()} fallback={(
                         <p class="text-gray dark:text-darkgray">
-                            {local.title}
+                            {title}
                         </p>
                     )}>
-                        <A href={`/book/${local.path}`} class={"flex-1"} onClick={() => {
+                        <A href={`/book/${absolutePath}`} class={"flex-1"} onClick={() => {
                             setOpen(true);
                             closeMobileSidebar();
                         }}>
-                            <p class="text-black dark:text-gray">
-                                {local.title}
+                            <p class={articleChanges.has(absolutePath) ? "text-changed dark:text-changed-dark" : "text-black dark:text-gray"}>
+                                {title}
                             </p>
                         </A>
                     </Show>
@@ -88,8 +94,8 @@ export const Entry: Component<EntryProps> = (props) => {
                     <Show when={local.entry.isDownloadable}>
                         <button type="button" class="p-2" onClick={() => {
                             const a = document.createElement("a");
-                            a.download = local.title;
-                            a.href = `${window.location.origin}/book/${local.path}`;
+                            a.download = title;
+                            a.href = `${window.location.origin}/book/${absolutePath}`;
                             a.click();
                         }}>
                             <PixelImage
@@ -112,18 +118,21 @@ export const Entry: Component<EntryProps> = (props) => {
                     </Show>
                 </div>
 
-                <Show when={local.entry.children}>
-                    <Show when={open()}>
-                        <Entries of={local.entry.children}>
-                            {(path, entry) => (
-                                <Entry title={entry().title ?? path} path={path} entry={entry()} />
-                            )}
-                        </Entries>
-                    </Show>
+                <Show when={local.entry.children && open()}>
+                    <Entries of={local.entry.children}>
+                        {(path, entry) => (
+                            <Entry
+                                title={entry().title ?? path}
+                                path={path}
+                                entry={entry()}
+                                parent={absolutePath}
+                                dataParent={dataPath} />
+                        )}
+                    </Entries>
                 </Show>
             </Show>
 
-            <Show when={dragEntry() && dragEntry() !== entryRef}>
+            <Show when={dragEntry()}>
                 <div class="drop-zone drop-zone-above absolute z-10 inset-0 h-3" />
                 <div class="drop-zone drop-zone-below absolute z-10 bottom-0 h-3 left-0 right-0" />
             </Show>

@@ -43,6 +43,7 @@ import { gruvboxLight } from "@fsegurai/codemirror-theme-gruvbox-light";
 import useSongplayer from "@components/music/Songplayer";
 import { unifiedMergeView } from "@codemirror/merge";
 import interact from "interactjs";
+import { ReactiveMap } from "@solid-primitives/map";
 
 export interface IEntry {
     title?: string;
@@ -74,9 +75,15 @@ export interface BookContextProps {
     isEditing: Accessor<boolean>;
     toggleEditMode: () => void;
     dragEntry: Accessor<Element>;
+    articleChanges: ReactiveMap<string, string>;
+    publishChanges: () => void;
 }
 
 export const BookContext = createContext<BookContextProps>();
+
+export function toPath(path: string) {
+    return path.split('/').map(s => s.includes('.') ? s.substring(0, s.lastIndexOf('.')) : s).join('/');
+}
 
 const Book: Component = () => {
     hljs.registerLanguage("javascript", javascript);
@@ -119,43 +126,47 @@ const Book: Component = () => {
 
     const [book, setBook] = createSignal<IBook>(null);
 
-    onMount(() => {
-        fetch("/book/data.json").then(async res => {
+    const articleChanges = new ReactiveMap<string, string>(localStorage.getItem("articleChanges") ? new Map(JSON.parse(localStorage.getItem("articleChanges"))) : []);
+
+    function transformBookData(data: IBook) {
+        for (const [path, entry] of Object.entries(data)) {
+            entry.hasContent = path.includes('.');
+            if (entry.children) {
+                transformBookData(entry.children);
+            }
+        }
+    }
+
+    onMount(async () => {
+        const data = await fetch("/book/data.json").then(async res => {
             complete = startLoading(1.0);
             return await res.json() as Promise<IBook>;
-        })
-            .then(transformBookEntries)
-            .then(onBookLoaded);
-    })
+        });
 
-    function transformBookEntries(book: IBook, path?: string): IBook {
-        return Object.fromEntries(Object.entries(book).map(([entryPath, entry]) => {
-            const fullPath = path
-                ? `${path.includes('.') ? path.substring(0, path.lastIndexOf(".")) : path}/${entryPath}`
-                : entryPath;
-            entry.hasContent = fullPath?.includes('.') ?? false;
-            if (entry.children) {
-                entry.children = transformBookEntries(entry.children, fullPath);
-            }
-            return [fullPath, entry];
-        }));
-    }
+        transformBookData(data);
 
-    function onBookLoaded(book: IBook) {
         complete();
-        setBook(book);
-    }
+        setBook(data);
+    });
 
-    function flattenBook(book: IBook) {
-        return Object.entries(book).reduce<IArticle[]>((acc, [path, entry]) => {
+    function flattenBook(book: IBook, parentPath: string = ""): IArticle[] {
+        return Object.entries(book).reduce<IArticle[]>((acc, [key, entry]) => {
+            // Concatenate the parent path with the current key
+            let currentPath = parentPath ? `${parentPath}/${key}` : key;
+
             acc.push({
-                title: entry.title ?? path,
-                path: path,
+                title: entry.title ?? key,
+                path: currentPath,
                 hasContent: entry.hasContent
             });
+
+            currentPath = currentPath.includes('.') ? currentPath.substring(0, currentPath.lastIndexOf('.')) : currentPath;
+
+            // Pass the current path down to the children
             if (entry.children) {
-                acc.push(...flattenBook(entry.children))
-            };
+                acc.push(...flattenBook(entry.children, currentPath));
+            }
+
             return acc;
         }, []);
     }
@@ -243,7 +254,7 @@ const Book: Component = () => {
             try {
                 // Inform the link service about the loaded document so internal links work
                 pdfLinkService.setDocument(pdfDocument, null);
-            } catch (e) {
+            } catch (_) {
                 // ignore if link service isn't ready
             }
         }),
@@ -353,6 +364,10 @@ const Book: Component = () => {
 
     const [code, setCode] = createSignal("");
 
+    createEffect(() => {
+        localStorage.setItem("articleChanges", JSON.stringify(Array.from(articleChanges.entries())));
+    });
+
     const { editorView, ref: editorRef, createExtension } = createCodeMirror({
         onValueChange: setCode
     });
@@ -378,8 +393,11 @@ const Book: Component = () => {
         mergeControls: false,
     })));
 
-    createEffect(on([article], ([article]) => {
-        setCode(article);
+    createEffect(on(article, article => {
+        if (!articles() || currentArticleIndex() === -1) return;
+
+        const currentArticle = articles()?.[currentArticleIndex()];
+        setCode(articleChanges.get(currentArticle.path) ?? article);
 
         editorView()?.dispatch({
             effects: mergeCompartment.reconfigure(
@@ -395,6 +413,18 @@ const Book: Component = () => {
         editorView()?.dispatch({
             effects: themeCompartment.reconfigure(theme === "light" ? gruvboxLight : gruvboxDark)
         });
+    }));
+
+    createEffect(on(code, code => {
+        if (!articles() || currentArticleIndex() === -1) return;
+
+        const currentArticle = articles()?.[currentArticleIndex()];
+        if (code === article()) {
+            articleChanges.delete(currentArticle.path);
+        }
+        else {
+            articleChanges.set(currentArticle.path, code);
+        }
     }));
 
     const [dragEntry, setDragEntry] = createSignal<HTMLElement>(null);
@@ -439,18 +469,18 @@ const Book: Component = () => {
         target?.classList?.add("active");
     }));
 
-    function traverseAndGetContainingEntryBook(path: string, deleteIfLastChild?: boolean): [IBook, string, string] {
-        let containingEntryBook = book();
+    function traverseAndGetContainingEntryBook(book: IBook, path: string, deleteIfLastChild?: boolean): [IBook, string, string] {
+        let containingEntryBook = book
         let searchPath = null;
         const paths = path.split("/");
         const name = paths.pop();
         for (const dir of paths) {
             searchPath = searchPath === null ? dir : `${searchPath}/${dir}`;
-            containingEntryBook = Object.entries(containingEntryBook).find(([path]) => path.startsWith(searchPath))[1].children;
+            containingEntryBook = Object.entries(containingEntryBook).find(([path]) => path.startsWith(dir))[1].children;
         }
-        if (deleteIfLastChild) {
-            const [parent, previousSearchPath, name] = traverseAndGetContainingEntryBook(searchPath);
-            const entry = Object.entries(parent).find(([path]) => path.startsWith(`${previousSearchPath}/${name}`))[1];
+        if (deleteIfLastChild && searchPath) {
+            const [parent, _, name] = traverseAndGetContainingEntryBook(book, searchPath);
+            const entry = Object.entries(parent).find(([path]) => path.startsWith(name))[1];
             if (Object.entries(entry.children).length <= 1) {
                 entry.children = undefined;
             }
@@ -458,40 +488,72 @@ const Book: Component = () => {
         return [containingEntryBook, searchPath, name];
     }
 
-    function handleDropEntry() {
-        const fromEntryPath = dragEntry().dataset.path;
-        const toEntryPath = dropZoneTarget().parentElement.dataset.path;
+    function updateBookChildren(book: IBook, searchPath: string, toEntries: Array<[string, IEntry]>) {
+        if (!searchPath) {
+            return Object.fromEntries(toEntries)
+        }
+        const [containingEntryBook, _, name] = traverseAndGetContainingEntryBook(book, searchPath);
+        containingEntryBook[name].children = Object.fromEntries(toEntries);
+        return book;
+    }
 
-        console.log(`Moving ${fromEntryPath} → ${toEntryPath}`);
+    function handleDropEntry() {
+        const fromEntryDataPath = dragEntry().dataset.dataPath;
+        const toEntryDataPath = dropZoneTarget().parentElement.dataset.dataPath;
+
+        if (fromEntryDataPath === toEntryDataPath) return;
+
+        console.log(`Moving ${fromEntryDataPath} → ${toEntryDataPath}`);
+
+        let newBook = book();
 
         // Remove "from" entry
-        let [containingEntryBook, searchPath, name] = traverseAndGetContainingEntryBook(fromEntryPath, true);
-        const fromEntry = containingEntryBook[`${searchPath}/${name}`];
-        delete containingEntryBook[`${searchPath}/${name}`];
+        let [containingEntryBook, searchPath, name] = traverseAndGetContainingEntryBook(newBook, fromEntryDataPath, true);
+        const fromEntry = containingEntryBook[name];
+        delete containingEntryBook[name];
         const fromName = name;
 
         // Insert next or inside "to" entry
-        [containingEntryBook, searchPath, name] = traverseAndGetContainingEntryBook(toEntryPath);
+        [containingEntryBook, searchPath, name] = traverseAndGetContainingEntryBook(newBook, toEntryDataPath);
         const toEntries = Object.entries(containingEntryBook);
-        const insertIndex = toEntries.findIndex(([path]) => path === `${searchPath}/${name}`)
+        const insertIndex = toEntries.findIndex(([path]) => path === name);
+
+        // Remove code-change from old path
+        const fromEntryPath = dragEntry().dataset.absolutePath;
+        const toEntryPath = dropZoneTarget().parentElement.dataset.absolutePath;
+        const code = articleChanges.get(fromEntryPath);
+        if (code) {
+            articleChanges.delete(fromEntryPath);
+        }
 
         if (dropZoneTarget().classList.contains("drop-zone-above")) {
-            toEntries.splice(insertIndex, 0, [`${searchPath}/${fromName}`, fromEntry]);
-            [containingEntryBook, searchPath, name] = traverseAndGetContainingEntryBook(searchPath);
-            containingEntryBook[`${searchPath}/${name}`].children = Object.fromEntries(toEntries);
+            toEntries.splice(insertIndex, 0, [fromName, fromEntry]);
+            newBook = updateBookChildren(newBook, searchPath, toEntries);
         }
         else if (dropZoneTarget().classList.contains("drop-zone-inside")) {
-            containingEntryBook[`${searchPath}/${name}`].children ??= {}
-            const newDirName = name.includes(".") ? name.substring(0, name.lastIndexOf(".")) : name;
-            containingEntryBook[`${searchPath}/${name}`].children[`${searchPath}/${newDirName}/${fromName}`] = fromEntry;
+            containingEntryBook[name].children ??= {};
+            containingEntryBook[name].children[fromName] = fromEntry;
+            searchPath = toEntryPath;
         }
         else if (dropZoneTarget().classList.contains("drop-zone-below")) {
-            toEntries.splice(insertIndex + 1, 0, [`${searchPath}/${fromName}`, fromEntry]);
-            [containingEntryBook, searchPath, name] = traverseAndGetContainingEntryBook(searchPath);
-            containingEntryBook[`${searchPath}/${name}`].children = Object.fromEntries(toEntries);
+            toEntries.splice(insertIndex + 1, 0, [fromName, fromEntry]);
+            newBook = updateBookChildren(newBook, searchPath, toEntries);
         }
 
-        setBook(JSON.parse(JSON.stringify(book())));
+        const newPath = searchPath ? `${toPath(searchPath)}/${fromName}` : fromName;
+        if (!articles().find(a => a.path === newPath)) {
+            articleChanges.set(newPath, code);
+        }
+        window.location.href = `${window.location.origin}/#/book/${newPath}`
+
+        setBook(JSON.parse(JSON.stringify(newBook)));
+    }
+
+    function publishChanges() {
+        console.log(JSON.stringify(book(), (k, v) => {
+            if (k === "hasContent") return undefined;
+            return v;
+        }, 4));
     }
 
     return <BookContext.Provider value={{
@@ -502,7 +564,9 @@ const Book: Component = () => {
         book,
         isEditing,
         toggleEditMode,
-        dragEntry
+        dragEntry,
+        articleChanges,
+        publishChanges
     }}>
         {/* hide footer */}
         <style>{`footer { display: none !important; }`}</style>
@@ -514,7 +578,6 @@ const Book: Component = () => {
                 <aside ref={aside} class="sticky top-0 self-start max-lg:px-5 lg:pr-8">
                     <Entries of={book()}>
                         {(path, entry) => <Entry
-                            title={entry().title ?? path}
                             path={path}
                             entry={entry()}
                             class="!ml-0" />}
