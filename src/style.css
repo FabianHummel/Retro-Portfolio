@@ -63,12 +63,12 @@
 }
 
 :root {
-    --navbar-height: 8rem;
+    --navbar-height: 128px;
 }
 
 @media (max-width: 480px) {
     :root {
-        --navbar-height: 6rem;
+        --navbar-height: 96px;
     }
 }
 

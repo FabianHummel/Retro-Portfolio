@@ -3,6 +3,8 @@ import { type Component, createSignal, createEffect, useContext, Index, Show } f
 import { BookContext, toPath, type IBook, type IEntry } from "@pages/Book";
 import { AuthContext } from "@src/services/AuthContext";
 import { PixelImage } from "@components/shared/PixelImage";
+import { JSX } from "solid-js/jsx-runtime";
+import clsx from "clsx";
 
 export interface BreadcrumbItem {
     title: string;
@@ -14,7 +16,7 @@ interface EntryWithTitle extends IEntry {
     title?: string;
 }
 
-export const Breadcrumbs: Component = () => {
+export const Breadcrumbs: Component = (props: JSX.HTMLAttributes<HTMLDivElement>) => {
     const { currentArticleIndex, articles, book, toggleEditMode, publishChanges } = useContext(BookContext);
     const [breadcrumbs, setBreadcrumbs] = createSignal<BreadcrumbItem[]>([]);
 
@@ -66,7 +68,7 @@ export const Breadcrumbs: Component = () => {
     }
 
     return (
-        <nav class="mb-6 text-sm flex">
+        <nav {...props} class={clsx(props.class, "pb-6 text-sm flex")}>
             <ol class="flex-1 flex flex-wrap items-center gap-0 list-none">
                 <Index each={breadcrumbs()}>
                     {(crumb, index) => (

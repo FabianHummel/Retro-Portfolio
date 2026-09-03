@@ -70,7 +70,6 @@ export interface BookContextProps {
     currentArticleIndex: Accessor<number>;
     articles: Accessor<IArticle[]>;
     findNextArticle: (from: number, direction: number) => IArticle;
-    closeMobileSidebar: VoidFunction;
     book: Accessor<IBook>;
     isEditing: Accessor<boolean>;
     toggleEditMode: () => void;
@@ -297,6 +296,7 @@ const Book: Component = () => {
     let scrollContainer!: HTMLDivElement;
     let sidebarContainer!: HTMLDivElement;
     let aside!: HTMLDivElement;
+    let breadcrumbsRef!: HTMLDivElement;
 
     onMount(() => {
         scrollContainer.scrollLeft = sidebarContainer.clientWidth;
@@ -320,14 +320,6 @@ const Book: Component = () => {
             setArticleOpacity(1.0);
             scrollContainer.classList.remove("mobile-sidebar-visible");
         }
-    }
-
-    function closeMobileSidebar() {
-        scrollContainer.scrollTo({
-            behavior: "smooth",
-            top: 0,
-            left: sidebarContainer.clientWidth
-        });
     }
 
     function transformImageUri(src: string): string {
@@ -397,6 +389,16 @@ const Book: Component = () => {
 
     createEffect(on(article, article => {
         if (!article) return;
+
+        const scrollOffset = breadcrumbsRef ? breadcrumbsRef.getBoundingClientRect().height : 0;
+
+        setTimeout(() => {
+            scrollContainer.scrollTo({
+                top: scrollOffset,
+                left: sidebarContainer.clientWidth,
+                behavior: "smooth"
+            });
+        });
 
         const currentArticle = articles()?.[currentArticleIndex()];
         setCode(articleChanges.get(currentArticle?.path) ?? article);
@@ -562,7 +564,6 @@ const Book: Component = () => {
         currentArticleIndex,
         articles,
         findNextArticle,
-        closeMobileSidebar,
         book,
         isEditing,
         toggleEditMode,
@@ -591,16 +592,21 @@ const Book: Component = () => {
                 class="w-full max-w-[800px] max-lg:px-6 mx-auto snap-start"
                 style={`opacity: ${articleOpacity()};`}
             >
-                <Breadcrumbs />
+                <Breadcrumbs ref={breadcrumbsRef} />
                 <Show when={!isEditing()}>
                     <article>
                         <Show when={!article.loading} fallback={
                             <p>Loading...</p>
                         }>
                             <Show when={!pdf()}>
-                                <SolidMarkdown children={code()} transformImageUri={transformImageUri} components={{
-                                    img: MarkdownImageComponent
-                                }} />
+                                <SolidMarkdown
+                                    class="article-renderer"
+                                    children={code()}
+                                    transformImageUri={transformImageUri}
+                                    components={{
+                                        img: MarkdownImageComponent
+                                    }}
+                                />
                             </Show>
                         </Show>
 
