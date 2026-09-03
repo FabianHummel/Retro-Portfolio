@@ -17,6 +17,10 @@ article :is(p, pre, ul) {
     @apply mt-4 mb-4;
 }
 
+article li {
+    @apply ml-8 pl-2;
+}
+
 article :is(pre > code) {
     overflow: unset !important;
 }

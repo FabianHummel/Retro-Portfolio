@@ -1,15 +1,17 @@
 # Planning the Design
 
-![Head Design Overdraw](head-design-overdraw.jpg?width=200px&align=right)
+![Head Design Overdraw](head-design-overdraw.jpg?width=200px&align=right&border)
 
 The image on the right is an overdraw of the first head design I made for my suit. Initially I wanted to design it on paper, but I am terrible at creating sketches and I thought it would make more sense to do a digital overdraw of the actual head base that I am going to use. This should give me a better idea of how the final design will look like and it's way easier to adjust the design.
 
-However, before starting with the head I should first make a tail to get used to the fabric and sewing in general. [Matrices](https://pupdates.matrices.net/post/126684480883/making-a-tail) provides great learning resources and I will try my best to follow their tutorials so I don't mess up :)
+I can already spoil that the final suit will look a bit different than this, especially because the ears are actually located a little bit farther apart than as seen in the image - I think it'll look cute regardless.
 
-## Faux Fur
+## Designing the Tail
 
-![Stoffhummel Shopping Cart](stoffhummel-shopping-cart.jpg?width=30%&align=right)
+![Tail Design](tail-design.webp?width=200px&align=right&border)
 
-For the actual faux fur, I did a ton of research and compared a handful popular brand such as Big Z Fabric, Howl Fabric and a few local manufacturers in the EU. I didn't want to pay for import fees _again_, as my head base was already being imported from Canada. So I mainly looked at European companies. The most obvious choice is to buy from [Stoffhummel](https://stoffhummel.shop) because they are the biggest reseller of Big Z Fabric and located in Germany, which means I wouldn't even have to pay for a delivery to Austria. A few people did however mention varying quality lately, so I guess I'll see how my fur ends up looking.
+Before starting with creating the head, I should first focus on making a tail to get used to the fabric and sewing in general. Design-wise the idea is pretty obvious _but ingenious_: The teal part of the head continues down to the start of the tail where the colors blend in nicely. I think this design gives off a professional look, which is exactly what I am aiming to achieve!
 
-**Edit 28.08.2026:** Some friends of mine actually bought me a €50,- Stoffhummel gift card for my fursuit, even though I didn't tell them I would buy my faux fur there, which is so awesome. Also the timing is brilliant, as I was this 🤏 close to finish my order. _I can't say often enough how much I love my incredible friends!!!_ <3
+Generally speaking, [Matrices](https://pupdates.matrices.net/post/126684480883/making-a-tail) provides great learning resources and I will try my best to follow their tutorials so I don't mess up. For the tail in particular, I decided to follow [this tutorial](https://www.fursuitmak.ing/tutorials/simpletail.php) by [fursuitmak.ing](https://www.fursuitmak.ing/) instead, because it seems trivial to follow and their design is very appealing.
+
+To help me experiment with the colors and different pattern designs, I also did an overdraw of the original tail design. However, I mostly kept the design the same, but I'd love to add some more details such as the small dots (or triangles) to stay consistent with the head's design.

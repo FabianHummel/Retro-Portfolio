@@ -1,12 +1,12 @@
-# Preparing the Head Base
+# Unboxing and assembling the Head Base
 
 ![Head Base Package](head-base-package.jpg?width=150px&align=right&border)
 
 My package from Canada finally arrived! I bought the head base from [Yazur's Critter Hub](https://www.etsy.com/at/shop/YazursCrittersHub), a Canadian shop for fursuit materials on Etsy, because I fell in love with the head shape and there were options to buy fitting ears, eyeblanks and an incredible jawset, without having to worry about compatibility issues.
 
-## Shipping
+## A "short" stay in the Netherlands
 
-Normally I don't like importing things from countries outside the EU due to unpredictable shipping fees and delivery date, but I didn't really have another option, as the objectively best bases were from America. Delivery to Austria took 28 days, which is a little longer than expected, and customs duty was about €60,-. I am kind of scared about the total price of the suit, but we'll see...
+Normally I don't like importing things from countries outside the EU due to unpredictable shipping fees and delivery date, but I didn't really have another option, as the objectively best bases were from America. Within a few days of shipment via ferry, the package was soon in the Netherlands and I thought the remaining delivery would be quick as well, because it's only within the EU from there on. Long story short, delivery to Austria took another 17 days, which was quite a bit longer than expected, making it a total of 28 days. Customs duty was about €60,- which honestly was expected - but I am already kind of scared about the final price of the entire suit, _but hobbies are allowed to dig holes in the purse, right?_
 
 ## Glueing the Ears to the Head
 
