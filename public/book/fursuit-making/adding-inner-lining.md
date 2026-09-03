@@ -14,4 +14,4 @@ This step was by far the most frustrating thing I have done in a long time. Work
 
 Now comes the (first) fun part! I get to actually *wear* the suit! Originally, my plan was to glue the strap onto the inner lining, but the head base already included pre-made cutouts for where the head strap should be attached, so I just had to wrap the rubber straps through the loops and sew them tight. The best part is that the strap I ordered from Amazon is adjustable, which helped me immensely to achieve a snug fit for my head shape.
 
-I know, the front strap that goes on the forehead looks far too tight - in fact it spans completely straight - but this fit is necessary so my brow bones don't touch the eyeblanks which would have given me one hell of a headache after a few minutes of wearing the suit.
+I know, the front strap that goes on the forehead looks far too tight - in fact it spans completely straight - but this fit is necessary so my brow bones don't touch the eyeblanks which would give me one hell of a headache after a few minutes of wearing the suit.
