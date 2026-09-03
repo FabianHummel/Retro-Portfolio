@@ -340,9 +340,10 @@ const Book: Component = () => {
             if (!img) return;
             img.style.height = queryParams.get("height");
             img.style.width = queryParams.get("width");
-            img.style.marginLeft = queryParams.get("align") === "left" ? "auto" : "";
-            img.style.marginRight = queryParams.get("align") === "right" ? "auto" : "";
-            img.style.marginInline = queryParams.get("align") === "center" ? "auto" : "";
+            if (queryParams.get("align")) img.style.marginBlock = "0.5rem";
+            if (queryParams.get("align") === "left") img.style.marginRight = "1rem";
+            if (queryParams.get("align") === "right") img.style.marginLeft = "1rem";
+            if (queryParams.get("align") === "center") img.style.marginInline = "auto";
             img.style.float = queryParams.get("align") === "left" ? "left" : queryParams.get("align") === "right" ? "right" : "";
             img.style.borderStyle = queryParams.get("border") !== undefined ? "solid" : undefined;
 
