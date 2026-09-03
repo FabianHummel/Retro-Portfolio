@@ -4,6 +4,7 @@ import { ChapterText, DownArrow, SVGCircle, SVGLine, VerticalLine } from "@compo
 import { TypedText } from "@components/shared/TypedText";
 import { type Component, createSignal, createEffect, on, Show, onMount, onCleanup } from "solid-js";
 import { GalleryData, GalleryImage } from "@data/Gallery";
+import interact from "interactjs";
 
 const Gallery: Component = () => {
 
@@ -24,12 +25,25 @@ const Gallery: Component = () => {
         }
     }
 
+    const interactable = interact("#gallery-preview").draggable({
+        onend(event: Interact.DragEvent) {
+            if (event.swipe.left) {
+                nextImage(true);
+            }
+            else if (event.swipe.right) {
+                nextImage(false);
+            }
+        }
+    });
+
     onMount(() => {
         document.addEventListener("keydown", onKeyDown);
     });
 
     onCleanup(() => {
         document.removeEventListener("keydown", onKeyDown);
+
+        interactable.unset();
     });
 
     createEffect(on(image, image => {
@@ -97,7 +111,10 @@ const Gallery: Component = () => {
                 </button>
 
                 <Show when={image()}>
-                    <img src={`/gallery/${image().src}`} alt="Gallery Preview" class="lg:max-w-[800px] sm:max-h-[90vh] w-full" />
+                    <img id="gallery-preview"
+                        class="lg:max-w-[800px] sm:max-h-[90vh] w-full"
+                        src={`/gallery/${image().src}`}
+                        alt="Gallery Preview" />
                 </Show>
 
                 <button type="button" class="hidden sm:grid place-items-center px-10 h-full"
