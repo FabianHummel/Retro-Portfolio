@@ -3,14 +3,6 @@ import { Frame, BalancedMasonryGrid as MasonryGrid } from '@masonry-grid/solid-j
 import { clsx } from "clsx";
 import { type Component, For, type JSX, type JSXElement } from "solid-js";
 
-declare module "solid-js" {
-    namespace JSX {
-        interface ImgHTMLAttributes<T> {
-            "prop:image"?: GalleryImage;
-        }
-    }
-}
-
 export interface GallerySectionProps extends JSX.HTMLAttributes<HTMLElement> {
     images: GalleryImage[];
     decoration?: JSXElement[];
@@ -44,8 +36,7 @@ export const GallerySection: Component<GallerySectionProps> = (props) => {
                         }}>
                             <img class="gallery-image cursor-pointer"
                                 src={`/gallery/${image.src}`}
-                                alt={image.src.substring(image.src.lastIndexOf('/') + 1, image.src.lastIndexOf("."))}
-                                prop:image={image} />
+                                alt={image.src.substring(image.src.lastIndexOf('/') + 1, image.src.lastIndexOf("."))} />
                         </Frame>
                     )}
                 </For>

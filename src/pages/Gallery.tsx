@@ -9,6 +9,7 @@ import interact from "interactjs";
 const Gallery: Component = () => {
 
     const [image, setImage] = createSignal<GalleryImage>(null);
+    const images = Object.values(GalleryData).flat();
 
     let galleryImageDialog!: HTMLDialogElement;
 
@@ -55,15 +56,12 @@ const Gallery: Component = () => {
     }));
 
     function nextImage(next: boolean) {
-        if (image() === null) return;
+        const currentIndex = images.indexOf(image());
+        const targetIndex = currentIndex + (next ? 1 : -1);
 
-        const currentImage = document.querySelector(`img.gallery-image[src="/gallery/${image().src}"]`) as HTMLImageElement | null;
-        if (!currentImage) return;
+        if (currentIndex === -1 || targetIndex < 0 || targetIndex >= images.length) return;
 
-        const target = next ? currentImage.parentElement.nextSibling?.firstChild : currentImage.parentElement.previousSibling?.firstChild;
-        if (target && target instanceof HTMLImageElement) {
-            setImage((target as any).image as GalleryImage);
-        }
+        setImage(images[targetIndex]);
     }
 
     function onClickDialog(e: Event) {
