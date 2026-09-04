@@ -44,6 +44,7 @@ import useSongplayer from "@components/music/Songplayer";
 import { unifiedMergeView } from "@codemirror/merge";
 import interact from "interactjs";
 import { ReactiveMap } from "@solid-primitives/map";
+import bookStyle from "@components/book/style.css?raw";
 
 export interface IEntry {
     title?: string;
@@ -294,8 +295,8 @@ const Book: Component = () => {
     });
 
     let scrollContainer!: HTMLDivElement;
+    let articleContainer!: HTMLDivElement;
     let sidebarContainer!: HTMLDivElement;
-    let aside!: HTMLDivElement;
     let breadcrumbsRef!: HTMLDivElement;
 
     onMount(() => {
@@ -395,8 +396,12 @@ const Book: Component = () => {
 
         setTimeout(() => {
             scrollContainer.scrollTo({
-                top: scrollOffset,
                 left: sidebarContainer.clientWidth,
+                behavior: "smooth"
+            });
+            
+            articleContainer.scrollTo({
+                top: scrollOffset,
                 behavior: "smooth"
             });
         });
@@ -573,35 +578,28 @@ const Book: Component = () => {
         publishChanges
     }}>
         {/* hide footer */}
-        <style>
-            {`
-                footer {
-                    display: none !important;
-                }
-                
-                #root {
-                    height: 100dvh !important;
-                    background: red !important;
-                }
-            `}
-        </style>
+        <style>{bookStyle}</style>
 
         <style>{appTheme() === "dark" ? darkTheme : lightTheme}</style>
 
-        <section ref={scrollContainer} class="pb-10 max-lg:pb-4 lg:px-6 grid grid-cols-[22rem,calc(100vw-3px)] lg:grid-cols-[25rem,auto] gap-1 lg:gap-x-8 overflow-auto max-lg:snap-x snap-mandatory">
-            <div ref={sidebarContainer} class="border-r-gray border-r-2 snap-start font-main">
-                <aside ref={aside} class="sticky top-0 self-start max-lg:px-5 lg:pr-8">
-                    <Entries of={book()}>
-                        {(path, entry) => <Entry
-                            path={path}
-                            entry={entry()}
-                            class="!ml-0" />}
-                    </Entries>
-                </aside>
-            </div>
+        <section
+            ref={scrollContainer}
+            class="h-full lg:pl-6 grid grid-cols-[22rem,calc(100vw-3px)] lg:grid-cols-[25rem,auto] max-lg:snap-x snap-mandatory overflow-auto items-start"
+        >
+            <aside
+                ref={sidebarContainer}
+                class="h-full pb-10 max-lg:pb-4 mr-1 border-r-gray border-r-2 snap-start font-main self-start max-lg:px-5 lg:pr-8 overflow-auto"
+            >
+                <Entries of={book()}>
+                    {(path, entry) => <Entry
+                        path={path}
+                        entry={entry()}
+                        class="!ml-0" />}
+                </Entries>
+            </aside>
 
-            <main
-                class="w-full max-w-[800px] max-lg:px-6 mx-auto snap-start"
+            <main ref={articleContainer}
+                class="h-full pb-10 max-lg:pb-4 mx-auto snap-start px-4 sm:px-12 xl:px-20 overflow-auto"
                 style={`opacity: ${articleOpacity()};`}
             >
                 <Breadcrumbs ref={breadcrumbsRef} />

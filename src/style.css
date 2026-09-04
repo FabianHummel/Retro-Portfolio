@@ -214,16 +214,12 @@ hr {
     image-rendering: pixelated;
 }
 
-#loading-screen:not(.loaded) {
-    overflow: hidden;
-}
-
 #loading-container {
     transition: opacity 300ms ease;
     opacity: 1;
 }
 
-#loading-screen.loaded #loading-container {
+#loading-container.loaded {
     opacity: 0;
 }
 
@@ -366,17 +362,6 @@ hr {
 
 .mobile-sidebar-visible {
     overflow-y: hidden;
-}
-
-aside {
-    overflow-y: auto;
-    height: calc(100vh - var(--navbar-height) - 1rem);
-}
-
-@media (min-width: 1024px) {
-    aside {
-        height: calc(100vh - var(--navbar-height) - 2.5rem);
-    }
 }
 
 #gallery-image-dialog::backdrop {

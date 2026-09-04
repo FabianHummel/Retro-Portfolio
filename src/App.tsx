@@ -13,7 +13,7 @@ export default function App(props: ParentProps) {
     });
 
     return (
-        <main class="max-w-[1500px] mx-auto">
+        <main class="max-w-[1500px] mx-auto flex-1 w-full overflow-hidden">
             {props.children}
         </main>
     );

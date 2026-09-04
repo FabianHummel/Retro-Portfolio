@@ -21,7 +21,7 @@ export const Entry: Component<EntryProps> = (props) => {
     const dataPath = local.dataParent ? `${local.dataParent}/${local.path}` : local.path;
     const title = local.entry.title ?? local.path;
 
-    const { currentArticleIndex, articles, findNextArticle, dragEntry, articleChanges } = useContext(BookContext);
+    const { currentArticleIndex, articles, findNextArticle, dragEntry, isEditing, articleChanges } = useContext(BookContext);
 
     let entryRef!: HTMLDivElement;
 
@@ -82,7 +82,7 @@ export const Entry: Component<EntryProps> = (props) => {
                         </p>
                     )}>
                         <A href={`/book/${absolutePath}`} class={"flex-1"} onClick={() => setOpen(true)}>
-                            <p class={articleChanges.has(absolutePath) ? "text-changed dark:text-changed-dark" : "text-black dark:text-gray"}>
+                            <p class={(articleChanges.has(absolutePath) && isEditing()) ? "text-changed dark:text-changed-dark" : "text-black dark:text-gray"}>
                                 {title}
                             </p>
                         </A>
