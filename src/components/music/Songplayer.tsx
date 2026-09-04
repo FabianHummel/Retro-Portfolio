@@ -280,13 +280,13 @@ export function Songplayer(props: ParentProps) {
 
             <div
                 id="song-player"
-                class="fixed z-20 bottom-0 left-0 right-0 h-16 bg-white dark:bg-dark border-t-2 border-t-black px-6 py-4 grid grid-cols-[1fr,1fr] lg:grid-cols-[1fr,1fr,1fr] align-middle"
+                class="sticky bottom-0 h-16 bg-white dark:bg-dark border-t-2 border-t-black px-6 grid grid-cols-[1fr,1fr] lg:grid-cols-[1fr,1fr,1fr] items-center"
                 classList={{
                     'open': song() !== null
                 }}
             >
                 <Show when={song() !== null}>
-                    <div class="flex align-middle gap-4 justify-start">
+                    <div class="flex items-center gap-4 justify-start">
                         <button type="button" onClick={() => playSiblingSong(false)} class="hidden sm:block">
                             <PixelImage
                                 src="/img/music/previous.png"
