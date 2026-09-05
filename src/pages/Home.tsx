@@ -20,14 +20,14 @@ const Home: Component = () => {
 
     function scrollToHeading() {
         const y = document.getElementById(">-about-me").getBoundingClientRect().top;
-        window.scrollTo({ top: y - 300, behavior: "smooth" });
+        window.scrollTo({ top: y - 110, behavior: "smooth" });
     }
 
     return <>
         <section id="home-section" class="relative h-screen flex flex-col justify-center items-center select-none">
             <div id="pixel-globe" />
 
-            <h1 class="text-center bg-white dark:bg-dark">
+            <h1 class="text-center bg-white dark:bg-dark -mt-64">
                 <TypedText>
                     &nbsp;Hello visitor!&nbsp;
                 </TypedText>

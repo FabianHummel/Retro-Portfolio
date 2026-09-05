@@ -10,7 +10,7 @@ I can already spoil that the final suit will look a bit different than this, esp
 
 ![Tail Design](tail-design.webp?width=200px&align=right&border)
 
-Before starting with creating the head, I should first focus on making a tail to get used to the fabric and sewing in general. Design-wise the idea is pretty obvious _but ingenious_: The teal part of the head continues down to the start of the tail where the colors blend in nicely. I think this design gives off a professional look, which is exactly what I am aiming to achieve!
+Before starting with creating the head, I should first focus on making a tail to get used to the fabric and sewing in general. Design-wise the idea is pretty obvious: The teal part of the head continues down to the start of the tail - same idea with the other colors. I think this design gives off a professional look, which is exactly what I am aiming to achieve!
 
 Generally speaking, [Matrices](https://pupdates.matrices.net/post/126684480883/making-a-tail) provides great learning resources and I will try my best to follow their tutorials so I don't mess up. For the tail in particular, I decided to follow [this tutorial](https://www.fursuitmak.ing/tutorials/simpletail.php) by [fursuitmak.ing](https://www.fursuitmak.ing/) instead, because it seems trivial to follow and their design is very appealing.
 
