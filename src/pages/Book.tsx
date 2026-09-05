@@ -399,7 +399,7 @@ const Book: Component = () => {
                 left: sidebarContainer.clientWidth,
                 behavior: "smooth"
             });
-            
+
             articleContainer.scrollTo({
                 top: scrollOffset,
                 behavior: "smooth"
@@ -599,7 +599,7 @@ const Book: Component = () => {
             </aside>
 
             <main ref={articleContainer}
-                class="h-full pb-10 max-lg:pb-4 mx-auto snap-start px-4 sm:px-12 xl:px-20 overflow-auto"
+                class="w-full h-full pb-10 max-lg:pb-4 mx-auto snap-start px-4 sm:px-12 xl:px-20 overflow-auto"
                 style={`opacity: ${articleOpacity()};`}
             >
                 <Breadcrumbs ref={breadcrumbsRef} />
