@@ -214,6 +214,17 @@ hr {
     image-rendering: pixelated;
 }
 
+@supports (corner-shape: notch) {
+    .projects-tag {
+        @apply bg-black dark:bg-gray;
+        border: unset !important;
+        border-radius: 6px;
+        corner-shape: notch;
+        padding-block: 6px;
+        padding-inline: 12px;
+    }
+}
+
 #loading-container {
     transition: opacity 300ms ease;
     opacity: 1;

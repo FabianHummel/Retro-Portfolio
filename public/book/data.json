@@ -199,6 +199,10 @@
             }
         }
     },
+    "vorsprung-durch-technik.md": {
+        "title": "Vorsprung durch Technik",
+        "children": {}
+    },
     "fursuit-making.md": {
         "title": "Fursuit making",
         "children": {
@@ -221,9 +225,5 @@
                 "title": "Adding inner Lining"
             }
         }
-    },
-    "vorsprung-durch-technik.md": {
-        "title": "Vorsprung durch Technik",
-        "children": {}
     }
 }

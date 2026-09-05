@@ -588,7 +588,7 @@ const Book: Component = () => {
         >
             <aside
                 ref={sidebarContainer}
-                class="h-full pb-10 max-lg:pb-4 mr-1 border-r-gray border-r-2 snap-start font-main self-start max-lg:px-5 lg:pr-8 overflow-auto"
+                class="h-full pb-10 max-lg:pb-4 mr-1 border-r-gray dark:border-r-darkgray border-r-2 snap-start font-main self-start max-lg:px-5 lg:pr-8 overflow-auto"
             >
                 <Entries of={book()}>
                     {(path, entry) => <Entry
