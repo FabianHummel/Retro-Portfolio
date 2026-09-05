@@ -1,7 +1,3 @@
-#featured-section {
-	@apply pt-[var(--navbar-height)]
-}
-
 #featured-section * {
 	font-family: 'spectral';
 	text-transform: initial;
@@ -14,7 +10,7 @@
 	background-image: url('/img/projects/featured.jpg');
 	background-repeat: no-repeat;
 	background-size: cover;
-	background-position: center var(--navbar-height);
+	background-position: center top;
 
 	-webkit-mask-image: linear-gradient(to bottom, #000000FF 0%, #00000030 90%, #00000000 100%);
     mask-image: linear-gradient(to bottom, #000000FF 0%, #00000030 90%, #00000000 100%);

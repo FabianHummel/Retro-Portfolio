@@ -6,6 +6,6 @@ Not too long ago I really got into the Furry fandom _(because of reasons...)_ an
 
 ![Tyrartist Studio at Awoostria 2026](tyrartist-awoostria.jpg?width=230px&align=right)
 
-Let me give you a little more context: At the convention's dealer's den I was allowed to try out an incredible suit of a really talented art studio (shout-out to [Tyrartist Studio](https://www.instagram.com/tyrartist_studio)!). However, the suit was a _little_ pricey, with the head alone costing roughly €2.500,- to €3.000,- (I can't remember exactly), but it felt **AMAZING** - everything had such a high quality and it looked awesome. Seeing myself in the mirror with a suit for the first time flipped a switch in my head...
+Let me provide a little more context: At the convention's dealer's den I was allowed to try out an incredible suit of a really talented art studio (shout-out to [Tyrartist Studio](https://www.instagram.com/tyrartist_studio)!). However, the suit was a _little_ pricey, with the head alone costing roughly €2.500,- to €3.000,- (I can't remember exactly), but it felt **AMAZING** - everything had such a high quality and it looked awesome. Seeing myself in the mirror with a suit for the first time flipped a switch in my head...
 
 Naturally, the next logical step would be to create my own suit, as I didn't feel like spending thousands of €€€ on a suit _for now_, so I started researching... A LOT.

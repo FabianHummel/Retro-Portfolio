@@ -5,8 +5,8 @@ import { theme } from "@src/App";
 
 export const Featured: Component = () => {
     return (
-        <section id="featured-section" class="content h-[54rem]">
-            <main class="h-full max-w-md mx-auto flex flex-col gap-6">
+        <section id="featured-section" class="h-[54rem] content">
+            <main class="h-full max-w-md md:max-w-lg mx-auto flex flex-col gap-6">
                 <img src={theme() === "light" ? "/img/projects/skys-horizon.png" : "/img/projects/skys-horizon-dark.png"} alt="Sky's Horizon Logo" class="mt-20" />
                 <div id="featured-text" class="mt-16">
                     <p id="featured-title">

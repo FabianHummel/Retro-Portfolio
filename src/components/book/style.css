@@ -1,0 +1,11 @@
+footer {
+    display: none !important;
+}
+
+#root {
+    height: 100dvh !important;
+}
+
+#navbar {
+    border-bottom-width: 2px !important;
+}
