@@ -1,6 +1,6 @@
 # Aquiring the Faux Fur
 
-![Stoffhummel Shopping Cart](stoffhummel-shopping-cart.jpg?width=30%&align=right)
+![Stoffhummel Shopping Cart](stoffhummel-shopping-cart.jpg?width=30%&align=right&border)
 
 For the actual faux fur, I did a ton of research and compared a handful popular brand such as Big Z Fabric, Howl Fabric and a few local manufacturers in the EU. I didn't want to pay for import fees _again_, as my head base was already being imported from Canada. So I mainly looked at European companies. The most obvious choice is to buy from [Stoffhummel](https://stoffhummel.shop) because they are the biggest reseller of Big Z Fabric and located in Germany, which means I wouldn't even have to pay for a delivery to Austria. A few people did however mention varying quality lately, so I guess I'll see how my fur ends up looking.
 

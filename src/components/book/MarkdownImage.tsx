@@ -1,14 +1,23 @@
-import type { JSX } from "solid-js";
+import { createEffect, JSX } from "solid-js";
 
 function MarkdownImageComponent(props: JSX.ImgHTMLAttributes<HTMLImageElement>) {
     const fileExtension = props.src.substring(props.src.lastIndexOf("."));
 
+    let ref: HTMLImageElement & HTMLVideoElement;
+
+    createEffect(() => {
+        ref.style.display = "block";
+        if (props.src === "null") {
+            ref.style.display = "none";
+        }
+    });
+
     return [".webm", ".mov", ".mp4"].includes(fileExtension) ? (
-        <video controls src={props.src}>
+        <video ref={ref} controls src={props.src}>
             <track kind="captions" />
         </video>
     ) : (
-        <img alt={props.alt} {...props} />
+        <img ref={ref} alt={props.alt} {...props} />
     )
 }
 

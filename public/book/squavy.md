@@ -1,4 +1,4 @@
-![Squavy](squavy/logo.png?height=300px&align=center)
+![Squavy](squavy/logo.png?height=400px&align=center)
 
 Squavy is a Digital Audio Workstation (DAW) written in SolidJS/Typescript and a partially native Rust backend for realtime collaboration and audio synthesis with optional VST-Plugin support all within the browser.
 

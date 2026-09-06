@@ -1,5 +1,5 @@
-![Sky's Horizon](skys-horizon/logo.png?theme=light)
-![Sky's Horizon](skys-horizon/logo-dark.png?theme=dark)
+![Sky's Horizon](skys-horizon/logo.png?theme=light&width=700px&align=center)
+![Sky's Horizon](skys-horizon/logo-dark.png?theme=dark&width=700px&align=center)
 
 
 *For over a hundred years, outer space has been under control by the AFI, a leading scientific institute filled with propaganda, manipulation and oppression. Scientist Chance and his companion Chris secretly discover a revolutionary breakthrough in space exploration that they use against the intentions of the institute. However, this discovery doesn't come at no cost - during an intense chase, Chance looses his friend while using the opportunity to leave the space station once and for all. But the situation keeps escalating... A mysterious forcefield causes Chance to crash on planet Sorax 4B, where he is confronted with entirely new challenges including fighting, exploring and seeking friendship with the unknown.*

@@ -327,7 +327,7 @@ const Book: Component = () => {
         const searchParamIndex = src.lastIndexOf('?');
         const queryParams = parseQueryString(src.substring(searchParamIndex));
         if (queryParams.get("theme") !== undefined && appTheme() !== queryParams.get("theme")) {
-            return "/book/blank.png";
+            return "null";
         }
 
         if (src.startsWith("http")) return src;
@@ -341,7 +341,7 @@ const Book: Component = () => {
             if (!img) return;
             img.style.height = queryParams.get("height");
             img.style.width = queryParams.get("width");
-            if (queryParams.get("align")) img.style.marginBlock = "0.5rem";
+            if (queryParams.get("align")) img.style.marginBottom = "1rem";
             if (queryParams.get("align") === "left") img.style.marginRight = "1rem";
             if (queryParams.get("align") === "right") img.style.marginLeft = "1rem";
             if (queryParams.get("align") === "center") img.style.marginInline = "auto";
@@ -584,7 +584,7 @@ const Book: Component = () => {
 
         <section
             ref={scrollContainer}
-            class="h-full lg:pl-6 grid grid-cols-[22rem,calc(100vw-3px)] lg:grid-cols-[25rem,auto] max-lg:snap-x snap-mandatory overflow-auto items-start"
+            class="h-full lg:pl-6 grid grid-cols-[22rem,calc(100vw-3px)] lg:grid-cols-[25rem,minmax(0px,1200px)] max-lg:snap-x snap-mandatory overflow-auto items-start"
         >
             <aside
                 ref={sidebarContainer}

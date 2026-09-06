@@ -1,4 +1,4 @@
-![Heast Messenger](heast-messenger/logo.png?width=500px&align=center)
+![Heast Messenger](heast-messenger/logo.png?width=400px&align=center)
 
 # Heast Messenger
 

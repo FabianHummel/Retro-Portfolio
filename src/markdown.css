@@ -4,7 +4,7 @@ article * {
 }
 
 article :is(h1) {
-    @apply w-full mb-6 border-b-black border-b-2;
+    @apply w-full mb-6 border-b-light dark:border-b-black border-b-2;
     font-size: 2.7rem;
 }
 
