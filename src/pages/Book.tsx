@@ -18,6 +18,7 @@ import { Button } from "@components/book/Button";
 import { Entry } from "@components/book/Entry";
 import { Breadcrumbs } from "@components/book/Breadcrumbs";
 import MarkdownImageComponent from "@components/book/MarkdownImage";
+import WelcomePage from "@components/book/WelcomePage";
 import useLoading from "@components/shared/Loading";
 import { Entries } from "@solid-primitives/keyed";
 import javascript from 'highlight.js/lib/languages/javascript';
@@ -223,7 +224,7 @@ const Book: Component = () => {
 
     createEffect(() => {
         if (articles().length > 0 && !params.chapter) {
-            const firstArticle = findNextArticle(0, 1);
+            const firstArticle = findNextArticle(-1, 1);
             navigate(firstArticle.path);
             return;
         }
@@ -341,11 +342,10 @@ const Book: Component = () => {
             if (!img) return;
             img.style.height = queryParams.get("height");
             img.style.width = queryParams.get("width");
-            if (queryParams.get("align")) img.style.marginBottom = "1rem";
-            if (queryParams.get("align") === "left") img.style.marginRight = "1rem";
-            if (queryParams.get("align") === "right") img.style.marginLeft = "1rem";
-            if (queryParams.get("align") === "center") img.style.marginInline = "auto";
-            img.style.float = queryParams.get("align") === "left" ? "left" : queryParams.get("align") === "right" ? "right" : "";
+            if (queryParams.get("align")) img.classList.add("align")
+            if (queryParams.get("align") === "left") img.classList.add("left")
+            if (queryParams.get("align") === "right") img.classList.add("right")
+            if (queryParams.get("align") === "center") img.classList.add("center")
             img.style.borderStyle = queryParams.get("border") !== undefined ? "solid" : undefined;
 
             if (queryParams.has("style")) {
@@ -389,11 +389,8 @@ const Book: Component = () => {
         mergeControls: false,
     })));
 
-    createEffect(on(article, article => {
-        if (!article) return;
-
+    createEffect(on(currentArticleIndex, () => {
         const scrollOffset = breadcrumbsRef ? breadcrumbsRef.getBoundingClientRect().height : 0;
-
         setTimeout(() => {
             scrollContainer.scrollTo({
                 left: sidebarContainer.clientWidth,
@@ -405,6 +402,10 @@ const Book: Component = () => {
                 behavior: "smooth"
             });
         });
+    }))
+
+    createEffect(on(article, article => {
+        if (!article) return;
 
         const currentArticle = articles()?.[currentArticleIndex()];
         setCode(articleChanges.get(currentArticle?.path) ?? article);
@@ -588,7 +589,7 @@ const Book: Component = () => {
         >
             <aside
                 ref={sidebarContainer}
-                class="h-full pb-10 max-lg:pb-4 mr-1 border-r-gray dark:border-r-darkgray border-r-2 snap-start font-main self-start max-lg:px-5 lg:pr-8 overflow-auto"
+                class="h-full pt-6 pb-10 max-lg:pb-4 mr-1 border-r-gray dark:border-r-darkgray border-r-2 snap-start font-main self-start max-lg:px-5 lg:pr-8 overflow-auto"
             >
                 <Entries of={book()}>
                     {(path, entry) => <Entry
@@ -599,43 +600,47 @@ const Book: Component = () => {
             </aside>
 
             <main ref={articleContainer}
-                class="w-full h-full pb-10 max-lg:pb-4 mx-auto snap-start px-4 sm:px-12 xl:px-20 overflow-auto"
+                class="w-full h-full pb-10 pt-5 max-lg:pb-4 mx-auto snap-start px-4 sm:px-12 xl:px-20 overflow-auto"
                 style={`opacity: ${articleOpacity()};`}
             >
                 <Breadcrumbs ref={breadcrumbsRef} />
                 <Show when={!isEditing()}>
-                    <article>
-                        <Show when={!article.loading} fallback={
-                            <p>Loading...</p>
-                        }>
-                            <Show when={!pdf()}>
-                                <SolidMarkdown
-                                    class="article-renderer"
-                                    children={code()}
-                                    transformImageUri={transformImageUri}
-                                    components={{
-                                        img: MarkdownImageComponent
-                                    }}
-                                />
+                    <Show when={currentArticleIndex() !== 0} fallback={
+                        <WelcomePage />
+                    }>
+                        <article>
+                            <Show when={!article.loading} fallback={
+                                <p>Loading...</p>
+                            }>
+                                <Show when={!pdf()}>
+                                    <SolidMarkdown
+                                        class="article-renderer"
+                                        children={code()}
+                                        transformImageUri={transformImageUri}
+                                        components={{
+                                            img: MarkdownImageComponent
+                                        }}
+                                    />
+                                </Show>
                             </Show>
-                        </Show>
 
-                        <div
-                            class="h-[calc(100vh-20rem)] overflow-scroll"
-                            classList={{ hidden: !pdf() }}
-                        >
-                            <div ref={pdfContainer} class="relative inset-0">
-                                <div id="viewer" class="pdfViewer"></div>
+                            <div
+                                class="h-[calc(100vh-20rem)] overflow-scroll"
+                                classList={{ hidden: !pdf() }}
+                            >
+                                <div ref={pdfContainer} class="relative inset-0">
+                                    <div id="viewer" class="pdfViewer"></div>
+                                </div>
                             </div>
-                        </div>
 
-                        <Show when={currentArticleIndex() !== -1}>
-                            <div class="grid grid-cols-[1fr,1fr] gap-x-6 mt-8">
-                                <Button article={findNextArticle(currentArticleIndex(), -1)} class="col-start-1" />
-                                <Button article={findNextArticle(currentArticleIndex(), 1)} class="col-start-2" />
-                            </div>
-                        </Show>
-                    </article>
+                            <Show when={currentArticleIndex() !== -1}>
+                                <div class="grid grid-cols-[1fr,1fr] gap-x-6 mt-8">
+                                    <Button article={findNextArticle(currentArticleIndex(), -1)} class="col-start-1" />
+                                    <Button article={findNextArticle(currentArticleIndex(), 1)} class="col-start-2" />
+                                </div>
+                            </Show>
+                        </article>
+                    </Show>
                 </Show>
 
                 <div ref={editorRef} style={`margin-inline: ${isEditing() ? "-1.5rem" : null}; display: ${isEditing() ? "block" : "none"}`} />

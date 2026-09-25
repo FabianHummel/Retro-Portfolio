@@ -1,4 +1,7 @@
 {
+    "welcome.md": {
+        "title": "Welcome :)"
+    },
     "my-projects": {
         "title": "My Heart and Soul"
     },
@@ -167,14 +170,11 @@
     "other-stuff": {
         "title": "Random Stuff"
     },
-    "about-me": {
+    "about-me.md": {
         "title": "About Me",
         "children": {
             "software-development.md": {
                 "title": "Software Development"
-            },
-            "my-take-on-ai.md": {
-                "title": "My take on AI"
             },
             "learning-new-things.md": {
                 "title": "Leaning new things"
@@ -187,6 +187,17 @@
             },
             "my-profile-picture.md": {
                 "title": "My Profile Picture"
+            }
+        }
+    },
+    "unpopular-opinions.md": {
+        "title": "Unpopular Opinions",
+        "children": {
+            "my-take-on-ai.md": {
+                "title": "My take on AI"
+            },
+            "hate-over-social-norms.md": {
+                "title": "Hate over Social Norms"
             }
         }
     },
@@ -209,20 +220,23 @@
             "how-did-i-end-up-here.md": {
                 "title": "How did I end up here?"
             },
+            "my-fursona.md": {
+                "title": "My Fursona"
+            },
             "planning-the-design.md": {
                 "title": "Planning the Design"
             },
             "acquiring-faux-fur.md": {
                 "title": "Acquiring Faux Fur"
             },
+            "fur-color-comparison.md": {
+                "title": "Fur color comparison"
+            },
             "making-the-tail.md": {
                 "title": "Making the Tail"
             },
-            "head-base-arrival.md": {
-                "title": "Head Base arrival"
-            },
-            "adding-inner-lining.md": {
-                "title": "Adding inner Lining"
+            "preparing-the-head-base.md": {
+                "title": "Preparing the Head Base"
             }
         }
     }

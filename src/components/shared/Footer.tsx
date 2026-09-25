@@ -6,7 +6,7 @@ import type { Component } from "solid-js";
 
 export const Footer: Component = () => {
     return (
-        <footer class="relative px-10 lg:px-20 pt-10 md:pt-20 pb-48 border-t-2 border-t-black grid grid-cols-[1fr] lg:grid-cols-[1fr,30rem] md:grid-cols-[1fr,20rem] font-main"
+        <footer class="relative px-10 lg:px-20 pt-10 md:pt-20 pb-48 border-t-2 border-t-light dark:border-t-black grid grid-cols-[1fr] lg:grid-cols-[1fr,30rem] md:grid-cols-[1fr,20rem] font-main"
             style={`${theme() === "light" ? `background:
 					url("/img/footer/Foreground.png") repeat-x bottom,
 					url("/img/footer/Background.png") repeat-x bottom;` :
@@ -31,7 +31,7 @@ export const Footer: Component = () => {
             <table class="mt-16 md:mt-0 text-s text-center md:text-left">
                 <thead class="leading-loose">
                     <tr>
-                        <th>Social:</th>
+                        <th>Socials:</th>
                         <th>Featured:</th>
                     </tr>
                 </thead>
@@ -44,6 +44,20 @@ export const Footer: Component = () => {
                             </a>
                         </td>
                         <td>
+                            <A href="/book/squavy.md">
+                                <PixelImage class="inline mr-2" src="/img/footer/Squavy.png" darkSrc="/img/footer/Squavy.png" w={6} h={6} scale={3} />
+                                Squavy
+                            </A>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <a href="https://www.instagram.com/fabii.hummel" rel="noreferrer" target="_blank">
+                                <PixelImage class="inline mr-2" src="/img/footer/Instagram.png" darkSrc="/img/footer/Instagram.png" w={6} h={6} scale={3} />
+                                Instagram
+                            </a>
+                        </td>
+                        <td>
                             <A href="/book/skys-horizon.md">
                                 <PixelImage class="inline mr-2" src="/img/footer/Skys Horizon.png" darkSrc="/img/footer/Skys Horizon Dark.png" w={6} h={6} scale={3} />
                                 Sky's Horizon
@@ -52,15 +66,15 @@ export const Footer: Component = () => {
                     </tr>
                     <tr>
                         <td>
-                            <a href="https://fabianhummel.dev" rel="noreferrer" target="_blank">
-                                <PixelImage class="inline mr-2" src="/img/footer/Portfolio.png" darkSrc="/img/footer/Portfolio Dark.png" w={6} h={6} scale={3} />
-                                Portfolio
+                            <a href="https://t.me/FabiHummle" rel="noreferrer" target="_blank">
+                                <PixelImage class="inline mr-2" src="/img/footer/Telegram.png" darkSrc="/img/footer/Telegram.png" w={6} h={6} scale={3} />
+                                Telegram
                             </a>
                         </td>
                         <td>
-                            <A href="/book/squavy.md">
-                                <PixelImage class="inline mr-2" src="/img/footer/Squavy.png" darkSrc="/img/footer/Squavy.png" w={6} h={6} scale={3} />
-                                Squavy
+                            <A href="/book/heast-messenger.md">
+                                <PixelImage class="inline mr-2" src="/img/footer/Heast Messenger.png" darkSrc="/img/footer/Heast Messenger.png" w={6} h={6} scale={3} />
+                                Heast Messenger
                             </A>
                         </td>
                     </tr>
@@ -71,12 +85,7 @@ export const Footer: Component = () => {
                                 Artfight
                             </a>
                         </td>
-                        <td>
-                            <A href="/book/heast-messenger.md">
-                                <PixelImage class="inline mr-2" src="/img/footer/Heast Messenger.png" darkSrc="/img/footer/Heast Messenger.png" w={6} h={6} scale={3} />
-                                Heast Messenger
-                            </A>
-                        </td>
+                        <td />
                     </tr>
                 </tbody>
             </table>

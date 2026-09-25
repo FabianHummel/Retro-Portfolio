@@ -188,7 +188,7 @@ hr {
 }
 
 .font-main {
-    @apply lowercase text-start;
+    @apply lowercase;
 }
 
 .disabled {

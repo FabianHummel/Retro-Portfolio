@@ -4,7 +4,7 @@ Not too long ago I really got into the Furry fandom _(because of reasons...)_ an
 
 ## The Dealer's Den
 
-![Tyrartist Studio at Awoostria 2026](tyrartist-awoostria.jpg?width=230px&align=right)
+![Tyrartist Studio at Awoostria 2026](how-did-i-end-up-here/tyrartist-awoostria.jpg?width=230px&align=right)
 
 Let me provide a little more context: At the convention's dealer's den I was allowed to try out an incredible suit of a really talented art studio (shout-out to [Tyrartist Studio](https://www.instagram.com/tyrartist_studio)!). However, the suit was a _little_ pricey, with the head alone costing roughly €2.500,- to €3.000,- (I can't remember exactly), but it felt **AMAZING** - everything had such a high quality and it looked awesome. Seeing myself in the mirror with a suit for the first time flipped a switch in my head...
 

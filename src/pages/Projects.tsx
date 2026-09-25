@@ -44,7 +44,7 @@ const Projects: Component = () => {
             {(item, index) => <Project
                 project={item}
                 decoration={[
-                    <ChapterText text={`0.${index() + 2} ${item.title}`} />,
+                    <ChapterText>0.${index() + 2} ${item.title}</ChapterText>,
                     <VerticalLine />,
                     <SVGCircle top={30} />,
                     <SVGLine top={40} height={genHeight()} />,

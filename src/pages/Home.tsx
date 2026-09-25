@@ -20,11 +20,11 @@ const Home: Component = () => {
 
     function scrollToHeading() {
         const y = document.getElementById(">-about-me").getBoundingClientRect().top;
-        window.scrollTo({ top: y - 110, behavior: "smooth" });
+        window.scrollTo({ top: y - 200, behavior: "smooth" });
     }
 
     return <>
-        <section id="home-section" class="relative h-screen flex flex-col justify-center items-center select-none">
+        <section id="home-section" class="relative h-[80vh] flex flex-col justify-center items-center select-none pt-52">
             <div id="pixel-globe" />
 
             <h1 class="text-center bg-white dark:bg-dark -mt-64">
@@ -48,32 +48,27 @@ const Home: Component = () => {
                 </svg>
             </button>
 
-            <div class="styling left-16 bottom-0 w-1 h-40 bg-gray dark:bg-darkgray" />
-            <div class="styling left-5 bottom-8" style="writing-mode: tb-rl; transform: rotate(-180deg);">
-                0.1 Welcome
-            </div>
-            <div class="styling left-16 bottom-40 w-4 h-4">
-                <svg viewBox="0 0 16 16" stroke="none" xmlns="http://www.w3.org/2000/svg">
-                    <title>design-circle</title>
-                    <circle cx="8" cy="8" r="8" />
-                </svg>
-            </div>
+            <VerticalLine class="h-[10rem] bottom-0" />
+            <ChapterText class="bottom-5">0.1 Welcome</ChapterText>
+            <SVGCircle class="bottom-40" />
+            <SVGCircle class="bottom-0" />
+            <DownArrow top={87} />
         </section>
 
         <Chapter title="> About me" text={[
             `I am a ${getAge()} year old Austrian computer scientist who learnt computer science at a higher technical highschool (HTL) and is currently employed as a fulltime software engineer`,
 
-            "Since 4th grade primary school I started making small games in the Unity engine. (of which I haven't finished a single one, but more about that later)",
+            <p>Since 4th grade primary school I started making small games in the Unity engine. (of which I haven't finished a single one, but more about that later...). I try to experiment with many different things in my free-time, mostly software, but occasionally even arts and crafts - <i>whatever motivates me ;)</i></p>,
 
-            "Doing that was a lot of fun though and I realised this is exactly what I want to do in the future, so I decided to continue school at a technical highschool."
+            "Making silly mobile games was a lot of fun though and I realised this is exactly what I want to do in the future, so I decided to continue school at a technical school (HTL)."
         ]} decoration={[
-            <ChapterText text="0.2 About me" />,
+            <ChapterText class="top-20">0.2 About me</ChapterText>,
             <VerticalLine />,
             <SVGCircle top={30} />,
             <SVGLine top={40} height={200} />,
             <DownArrow top={80} />
         ]} graphics={
-            <ImageWithText image="img/home/Profile Picture.png" text={<span>This is me. More about the picture <A href="/book/about-me/my-profile-picture.md">here</A></span>} />
+            <ImageWithText image="img/home/Bumble.jpg" text={<span>This is me. More about the picture <A href="/book/about-me/my-profile-picture.md">here</A></span>} />
         } />
 
         <Chapter title="> School life" text={[
@@ -85,23 +80,42 @@ const Home: Component = () => {
 
             "After five years, in 2025, I eventually graduated with a Matura and was ready for the \"real life\"."
         ]} decoration={[
-            <ChapterText text="0.3 School life" />,
+            <ChapterText class="top-20">0.3 School life</ChapterText>,
             <VerticalLine />,
             <SVGCircle top={60} />,
             <SVGLine top={70} height={150} />,
-            <DownArrow top={40} />
+            <DownArrow top={40} />,
+            <SVGCircle top={60} />,
         ]} graphics={
-            <ImageWithText image="img/home/Spengergasse GMaps.png" text="this is the highschool I have been visiting" />
+            <ImageWithText image="img/home/HTL_Spengergasse_Eingang.jpg" text="this is the HTL I was visiting from 2020-2025" />
+        } />
+
+        <Chapter title="> Employment" text={[
+            <span>During the summer holidays of my last two years at Spengergasse, I had the opportunity to complete an internship for two months at <img src="/img/home/Erste Digital.png" alt="Erste Digital" class="inline h-6 align-text-top rounded-md" /> (Erste Digital), the tech-division of Austria's biggest bank - <img src="/img/home/Erste Bank.png" alt="Erste Bank" class="inline h-6 align-text-top" /> Erste Bank.</span>,
+
+            <span>I really liked it there - the location was very convenient (right next to the main train station), my colleagues were all super friendly and I could genuinely imagine myself working there for a longer period of time - <i>maybe not for the rest of my life,</i> but definitely the upcoming few years!</span>,
+
+            "After finishing the matura I contacted my previous boss and he eventually got me a full-time position in a different department, which I am very grateful for, as it secured an essential part of my adulthood."
+        ]} decoration={[
+            <ChapterText class="top-40">0.4 Employment</ChapterText>,
+            <VerticalLine />,
+            <SVGCircle top={60} />,
+            <SVGLine top={70} height={120} />,
+            <SVGLine top={10} height={70} />,
+            <DownArrow top={20} />,
+            <SVGCircle top={60} />,
+        ]} graphics={
+            <ImageWithText image="img/home/Erste_Campus_Vienna.jpg" text="a lovely view of the Erste-Campus!" />
         } />
 
         <section class="relative py-20 md:py-36 flex flex-col gap-5 justify-center items-center">
             <h1 class="text-center">
-                ~ More about me <A href="/book/about-me/software-development.md">Here</A> ~
+                ~ More about me <A href="/book/about-me.md">Here</A> ~
             </h1>
 
-            <div class="styling left-16 top-0 w-1 h-28 bg-gray dark:bg-darkgray" />
-
-            <SVGCircle class="top-28" />
+            <VerticalLine class="top-20 h-[7rem]" />
+            <SVGCircle class="top-16" />
+            <SVGCircle class="top-44" />
         </section>
     </>
 }

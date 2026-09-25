@@ -21,6 +21,10 @@ article li {
     @apply ml-8 pl-2;
 }
 
+article :is(p, li) {
+    @apply text-justify xl:text-left;
+}
+
 article :is(pre > code) {
     overflow: unset !important;
 }
@@ -47,6 +51,24 @@ article blockquote::before {
     content: '';
 }
 
-article img {
+article :is(img, video) {
     @apply border-none border-2 border-black dark:border-white;
+
+    &.align {
+        margin-block: 0.6rem;
+    }
+
+    &.align.left {
+        margin-right: 1rem;
+        float: left;
+    }
+
+    &.align.right {
+        margin-left: 1rem;
+        float: right;
+    }
+
+    &.align.center {
+        margin-inline: auto;
+    }
 }

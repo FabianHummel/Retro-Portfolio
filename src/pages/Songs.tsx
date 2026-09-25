@@ -55,7 +55,7 @@ const Songs: Component = () => {
         <Chapter title="How I got to making music" text={[
             "It all started with 10 year old me playing the first notes on my new guitar. Ever since, I loved creating my own melodies. When I got older, I more and more fell in love with synthwave music. I wanted to create my own music in that style, but I was very uncreative and inexperienced at that time.",
         ]} decoration={[
-            <ChapterText text="0.1 Music" />,
+            <ChapterText>0.1 Music</ChapterText>,
             <VerticalLine />,
             <SVGCircle top={30} />,
             <SVGLine top={40} height={100} />,
@@ -65,7 +65,7 @@ const Songs: Component = () => {
         <Chapter title="Music for games" text={[
             "When my obsession with video games programming kicked in, I then had a goal of making simple tracks for my games. That's when I found out about Beepbox, a free online tool that allows me to create music with a simple interface. It's relatively easy to get familiar with, perfect for beginners like me.",
         ]} decoration={[
-            <ChapterText text="0.2 Music for games" />,
+            <ChapterText>0.2 Music for games</ChapterText>,
             <VerticalLine />,
             <SVGCircle top={60} />,
             <DownArrow top={40} />
@@ -74,7 +74,7 @@ const Songs: Component = () => {
         <Chapter title="My very own Music Player" text={[
             "The songs listed below are some of the better ones I created. You can directly listen to them by clicking on the play button beneath the song title. Scrub through the track by dragging the waveform to the desired place. Have fun!",
         ]} decoration={[
-            <ChapterText text="0.3 Music Player" />,
+            <ChapterText>0.3 Music Player</ChapterText>,
             <VerticalLine />,
             <SVGCircle top={40} />,
             <SVGLine top={80} height={200} />,

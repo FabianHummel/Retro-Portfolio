@@ -140,8 +140,9 @@ const Gallery: Component = () => {
             </>}
             images={GalleryData["old-art-book"]}
             decoration={[
-                <ChapterText text={`0.1 First attempts at art`} />,
+                <ChapterText>0.1 First attempts at art</ChapterText>,
                 <VerticalLine />,
+                <SVGCircle top={-13} />,
                 <SVGCircle top={30} />,
                 <SVGLine top={30} height={200} />,
                 <DownArrow top={80} />,
@@ -160,7 +161,7 @@ const Gallery: Component = () => {
             </>}
             images={GalleryData["sketchbook"]}
             decoration={[
-                <ChapterText text={`0.2 Anime Sketches`} />,
+                <ChapterText>0.2 Anime Sketches</ChapterText>,
                 <VerticalLine />,
                 <SVGCircle top={20} />,
                 <SVGCircle top={50} />,
@@ -182,7 +183,7 @@ const Gallery: Component = () => {
             </>}
             images={GalleryData["furry-art"]}
             decoration={[
-                <ChapterText text={`0.3 Furries`} />,
+                <ChapterText>0.3 Furries</ChapterText>,
                 <VerticalLine />,
                 <SVGCircle top={20} />,
                 <SVGLine top={30} height={150} />,
