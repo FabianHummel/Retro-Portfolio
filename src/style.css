@@ -276,6 +276,30 @@ hr {
     border-image-repeat: stretch;
     image-rendering: pixelated;
     word-break: break-word;
+    border-image-source: url("/img/book/Link Background.png");
+}
+
+html.dark .book-button {
+    border-image-source: url("/img/book/Link Background Dark.png");
+}
+
+.article-link {
+    @apply mx-1 px-1 cursor-pointer leading-none font-main bg-light dark:bg-black;
+}
+
+.article-link:before {
+    content: '';
+    display: inline-block;
+    margin-right: 8px;
+    width: 14px;
+    height: 14px;
+    background-image: url("/img/book/Article Link.png");
+    background-size: contain;
+    image-rendering: pixelated;
+}
+
+html.dark .article-link:before {
+    background-image: url("/img/book/Article Link Dark.png");
 }
 
 #github-section {
@@ -377,4 +401,8 @@ hr {
 
 #gallery-image-dialog::backdrop {
     background-color: rgba(0, 0, 0, 0.8);
+}
+
+#book-scroll-container::-webkit-scrollbar {
+    width: 0; height: 0;
 }

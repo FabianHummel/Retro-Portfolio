@@ -46,6 +46,8 @@ import { unifiedMergeView } from "@codemirror/merge";
 import interact from "interactjs";
 import { ReactiveMap } from "@solid-primitives/map";
 import bookStyle from "@components/book/style.css?raw";
+import { remarkArticleLink } from "@components/book/article-link"
+import { ArticleLink, ArticleLinkProps } from "@components/book/ArticleLink";
 
 export interface IEntry {
     title?: string;
@@ -584,12 +586,13 @@ const Book: Component = () => {
         <style>{appTheme() === "dark" ? darkTheme : lightTheme}</style>
 
         <section
+            id="book-scroll-container"
             ref={scrollContainer}
             class="h-full lg:pl-6 grid grid-cols-[22rem,calc(100vw-3px)] lg:grid-cols-[25rem,minmax(0px,1200px)] max-lg:snap-x snap-mandatory overflow-auto items-start"
         >
             <aside
                 ref={sidebarContainer}
-                class="h-full pt-6 pb-10 max-lg:pb-4 mr-1 border-r-gray dark:border-r-darkgray border-r-2 snap-start font-main self-start max-lg:px-5 lg:pr-8 overflow-auto"
+                class="h-full pt-6 pb-10 max-lg:pb-4 mr-1 border-r-light dark:border-r-black border-r-2 snap-start font-main self-start max-lg:px-5 lg:pr-8 overflow-auto"
             >
                 <Entries of={book()}>
                     {(path, entry) => <Entry
@@ -617,8 +620,11 @@ const Book: Component = () => {
                                         class="article-renderer"
                                         children={code()}
                                         transformImageUri={transformImageUri}
+                                        remarkPlugins={[remarkArticleLink]}
                                         components={{
-                                            img: MarkdownImageComponent
+                                            img: MarkdownImageComponent,
+                                            // @ts-ignore ArticleLink does not exist in type Components
+                                            ArticleLink: ArticleLink
                                         }}
                                     />
                                 </Show>

@@ -4,4 +4,6 @@ Once the suit is done, I'll post a short article how it went with some awesome p
 
 Stay tuned and have fun - because it's all about that - _simply having fun._ :)
 
-For everyone else: _You are more than welcome to leave!_
+---
+
+**For everyone else:** Either read upon @unpopular-opinions/hate-over-social-norms.md or _you are more than welcome to leave!_

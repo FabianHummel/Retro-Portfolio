@@ -48,7 +48,7 @@ const Home: Component = () => {
                 </svg>
             </button>
 
-            <VerticalLine class="h-[10rem] bottom-0" />
+            <VerticalLine class="!h-[10rem] bottom-0" />
             <ChapterText class="bottom-5">0.1 Welcome</ChapterText>
             <SVGCircle class="bottom-40" />
             <SVGCircle class="bottom-0" />
@@ -113,7 +113,7 @@ const Home: Component = () => {
                 ~ More about me <A href="/book/about-me.md">Here</A> ~
             </h1>
 
-            <VerticalLine class="top-20 h-[7rem]" />
+            <VerticalLine class="top-20 !h-[7rem]" />
             <SVGCircle class="top-16" />
             <SVGCircle class="top-44" />
         </section>
