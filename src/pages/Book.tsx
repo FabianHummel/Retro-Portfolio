@@ -355,6 +355,13 @@ const Book: Component = () => {
                     img.style[key] = value;
                 }
             }
+            
+            if (queryParams.has("gif")) {
+                img.autoplay = true;
+                img.muted = true;
+                img.loop = true;
+                img.playsinline = true;
+            }
         });
 
         return source;
