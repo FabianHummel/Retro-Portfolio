@@ -43,7 +43,7 @@ export const Navbar: Component = () => {
     });
 
     return (
-        <nav ref={navbar} id="navbar" class="sticky top-0 w-full h-[var(--navbar-height)] z-40 grid grid-cols-[auto,1fr] lg:grid-cols-[0.5fr_1fr_0.5fr] grid-rows-[1fr] place-items-center bg-white dark:bg-dark border-b-2 border-b-black dark:border-b-black transition-[border-bottom-width,transform]">
+        <nav ref={navbar} id="navbar" class="sticky top-0 w-full h-[var(--navbar-height)] z-40 grid grid-cols-[auto,1fr] lg:grid-cols-[0.5fr_1fr_0.5fr] grid-rows-[1fr] place-items-center bg-white dark:bg-dark border-b-2 border-b-light dark:border-b-black transition-[border-bottom-width,transform]">
             <div class="w-full h-20 sm:h-28 flex">
                 <A href="/" class="mx-5 fill-black dark:fill-gray">
                     <Logo />

@@ -82,7 +82,7 @@ export const Entry: Component<EntryProps> = (props) => {
                         </p>
                     )}>
                         <A href={`/book/${absolutePath}`} class={"flex-1"} onClick={() => setOpen(true)}>
-                            <p class={(articleChanges.has(absolutePath) && isEditing()) ? "text-changed dark:text-changed-dark" : "text-black dark:text-gray"}>
+                            <p class={clsx((articleChanges.has(absolutePath) && isEditing()) ? "text-changed dark:text-changed-dark" : "text-black dark:text-gray", "leading-none py-1.5")}>
                                 {title}
                             </p>
                         </A>

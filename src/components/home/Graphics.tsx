@@ -16,8 +16,8 @@ export const ImageWithText: Component<ImageWithTextProps> = (props) => {
             } />
         </div>
 
-        <p class="font-main text-gray dark:text-darkgray text-s rotate-[-7.5deg] max-w-48 md:max-w-64 max-md:ml-6" hidden={!props.text}>
-            <span class="ml-16 md:ml-32 inline-block rotate-90 md:rotate-180">
+        <p class="font-main text-gray dark:text-darkgray text-s text-center rotate-[-7.5deg] max-w-52 md:max-w-72 max-md:ml-4" hidden={!props.text}>
+            <span class="mr-16 md:ml-16 inline-block rotate-90 md:rotate-180">
                 <svg style="scale: 3" class="fill-gray dark:fill-darkgray" xmlns="http://www.w3.org/2000/svg"
                     width="5" height="6" viewBox="0 0 5 6">
                     <title>Stylizied arrow</title>

@@ -1,19 +1,27 @@
 import { clsx } from "clsx";
 import type { Component, JSX } from "solid-js";
 
-export const VerticalLine: Component = () => {
+export interface VerticalLineProps extends JSX.HTMLAttributes<HTMLDivElement> {
+}
+
+export const VerticalLine: Component<VerticalLineProps> = (props) => {
     return (
-        <div class="styling left-16 w-1 h-full bg-gray dark:bg-darkgray"></div>
+        <div {...props} class={clsx("styling left-16 w-1 h-full bg-gray dark:bg-darkgray", props.class)}></div>
     );
 };
 
-export const ChapterText: Component<{ text: string }> = (props) => {
+export interface ChapterTextProps extends JSX.HTMLAttributes<HTMLDivElement> {
+}
+
+
+export const ChapterText: Component<ChapterTextProps> = (props) => {
     return (
         <div
-            class="styling left-5"
-            style="writing-mode: vertical-lr; transform: rotate(-180deg);"
+            {...props}
+            class={clsx("styling left-5", props.class)}
+            style={`writing-mode: vertical-lr; transform: rotate(-180deg); ${props.style}`}
         >
-            {props.text}
+            {props.children}
         </div>
     );
 };

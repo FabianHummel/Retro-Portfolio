@@ -1,6 +1,6 @@
 # Planning the Design
 
-![Head Design Overdraw](head-design-overdraw.jpg?width=200px&align=right&border)
+![Head Design Overdraw](planning-the-design/head-design-overdraw.jpg?width=200px&align=right&border)
 
 The image on the right is an overdraw of the first head design I made for my suit. Initially I wanted to design it on paper, but I am terrible at creating sketches and I thought it would make more sense to do a digital overdraw of the actual head base that I am going to use. This should give me a better idea of how the final design will look like and it's way easier to adjust the design.
 
@@ -8,7 +8,7 @@ I can already spoil that the final suit will look a bit different than this, esp
 
 ## Designing the Tail
 
-![Tail Design](tail-design.webp?width=200px&align=right&border)
+![Tail Design](planning-the-design/tail-design-overdraw.webp?width=200px&align=right&border)
 
 Before starting with creating the head, I should first focus on making a tail to get used to the fabric and sewing in general. Design-wise the idea is pretty obvious: The teal part of the head continues down to the start of the tail - same idea with the other colors. I think this design gives off a professional look, which is exactly what I am aiming to achieve!
 

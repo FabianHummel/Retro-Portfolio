@@ -85,6 +85,11 @@ module.exports = {
                     '0%': { 'opacity': 0 },
                     '100%': { 'opacity': 1 }
                 },
+
+                'sidebar-hint': {
+                    '0%, 100%': { 'transform': 'translateX(0px)' },
+                    '30%': { 'transform': 'translateX(-10px)' },
+                }
             },
             animation: {
                 'push': 'push 2s ease infinite',
@@ -92,6 +97,7 @@ module.exports = {
                 'playing': 'musicplaying 0.6s linear infinite alternate',
                 'spin': 'spin 45s linear infinite',
                 'fadeIn': 'fadeIn 0.3s ease-in-out',
+                'sidebar-hint': 'sidebar-hint 2s ease infinite',
             },
         },
         fontFamily: {
