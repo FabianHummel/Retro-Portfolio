@@ -212,7 +212,11 @@
     },
     "vorsprung-durch-technik.md": {
         "title": "Vorsprung durch Technik",
-        "children": {}
+        "children": {
+            "about-my-car.md": {
+                "title": "About my car"
+            }
+        }
     },
     "fursuit-making.md": {
         "title": "Fursuit making",

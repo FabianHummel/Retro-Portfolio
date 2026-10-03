@@ -56,7 +56,10 @@ const Home: Component = () => {
         </section>
 
         <Chapter title="> About me" text={[
-            `I am a ${getAge()} year old Austrian computer scientist who learnt computer science at a higher technical highschool (HTL) and is currently employed as a fulltime software engineer`,
+            <p>I am a {getAge()} year old <svg xmlns="http://www.w3.org/2000/svg" class="inline align-sub rounded-sm" width="27" height="18">
+                <rect fill="#c8102e" width="27" height="18" />
+                <rect fill="#fff" y="6" width="27" height="6" />
+            </svg> Austrian computer scientist who learnt computer science at a higher technical highschool (HTL) and is currently employed as a fulltime software engineer.</p>,
 
             <p>Since 4th grade primary school I started making small games in the Unity engine. (of which I haven't finished a single one, but more about that later...). I try to experiment with many different things in my free-time, mostly software, but occasionally even arts and crafts - <i>whatever motivates me ;)</i></p>,
 
@@ -76,7 +79,7 @@ const Home: Component = () => {
 
             <span>Right from the start we were introduced to the basics of Java development. Because I already had experience with C# from making games, the first two years were very easy for me to follow. <i>(not that the rest was particularly hard to follow as well...)</i> </span>,
 
-            "Aside from the programming lessons, we were also teached relational databases, computer hardware, and web development.",
+            <p>Aside from the programming lessons, we were also teached relational databases, computer hardware, and web development as well! Read more upon that <A href="/book/about-me/(web)-design.md">here</A>!</p>,
 
             "After five years, in 2025, I eventually graduated with a Matura and was ready for the \"real life\"."
         ]} decoration={[
