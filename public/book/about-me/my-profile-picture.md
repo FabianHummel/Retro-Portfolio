@@ -29,7 +29,7 @@ From now on, my profile pictures became simpler and simpler over time, but I sti
 
 ![Fourth Generation](my-profile-picture/version-4.webp?width=150px&align=right&style={"margin-left":"1rem","shape-outside":"circle(50%)"})
 
-Version four was more colorful again because it fit the style of my portfolio (which it never made to the public). Essentially it was just a rearranged version of the previous one and **huge** dropshadow (which looks horrendous in my opinion 😆). I think this image was the first vectorized one created in Illustrator (years later I'd literally rather die than to use this program - _fuck Adobe!_)
+Version four was more colorful again because it fit the style of my portfolio (which it never made to the public). Essentially it was just a rearranged version of the previous one and **huge** dropshadow (which looks horrendous in my opinion xD). I think this image was the first vectorized one created in Illustrator (although there are better alternatives out there now!)
 
 ---
 

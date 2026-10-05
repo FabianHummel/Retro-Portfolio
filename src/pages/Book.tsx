@@ -46,8 +46,11 @@ import { unifiedMergeView } from "@codemirror/merge";
 import interact from "interactjs";
 import { ReactiveMap } from "@solid-primitives/map";
 import bookStyle from "@components/book/style.css?raw";
-import { remarkArticleLink } from "@components/book/article-link"
-import { ArticleLink, ArticleLinkProps } from "@components/book/ArticleLink";
+import { remarkArticleLink } from "@components/book/remark-article-link"
+import { ArticleLink } from "@components/book/ArticleLink";
+import MarkdownIFrame from "@components/book/MarkdownIFrame";
+import { remarkHtmlIframe } from "@components/book/remark-iframe";
+import { Subject } from "rxjs"
 
 export interface IEntry {
     title?: string;
@@ -80,12 +83,37 @@ export interface BookContextProps {
     dragEntry: Accessor<Element>;
     articleChanges: ReactiveMap<string, string>;
     publishChanges: () => void;
+    collapseEvent: Subject<void>;
 }
 
 export const BookContext = createContext<BookContextProps>();
 
 export function toPath(path: string) {
     return path.split('/').map(s => s.includes('.') ? s.substring(0, s.lastIndexOf('.')) : s).join('/');
+}
+
+export function applyClasses(element: HTMLElement, queryParams: Map<string, any>) {
+    if (queryParams.get("align")) element.classList.add("align")
+    if (queryParams.get("align") === "left") element.classList.add("left")
+    if (queryParams.get("align") === "right") element.classList.add("right")
+    if (queryParams.get("align") === "center") element.classList.add("center")
+    element.style.borderStyle = queryParams.get("border") !== undefined ? "solid" : undefined;
+
+    if (queryParams.has("style")) {
+        for (const [key, value] of Object.entries(JSON.parse(queryParams.get("style")))) {
+            element.style[key] = value;
+        }
+    }
+
+    if (queryParams.has("gif")) {
+        const video = element as HTMLVideoElement;
+        video.autoplay = true;
+        video.muted = true;
+        video.loop = true;
+        video.playsInline = true;
+    }
+
+    if (queryParams.get("size") === "half") element.classList.add("half");
 }
 
 const Book: Component = () => {
@@ -301,6 +329,7 @@ const Book: Component = () => {
     let articleContainer!: HTMLDivElement;
     let sidebarContainer!: HTMLDivElement;
     let breadcrumbsRef!: HTMLDivElement;
+    let articleRef!: HTMLDivElement;
 
     onMount(() => {
         scrollContainer.scrollLeft = sidebarContainer.clientWidth;
@@ -327,41 +356,24 @@ const Book: Component = () => {
     }
 
     function transformImageUri(src: string): string {
+        if (src.startsWith("http")) return src;
+
         const searchParamIndex = src.lastIndexOf('?');
         const queryParams = parseQueryString(src.substring(searchParamIndex));
         if (queryParams.get("theme") !== undefined && appTheme() !== queryParams.get("theme")) {
             return "null";
         }
 
-        if (src.startsWith("http")) return src;
-
         const directory = articles()[currentArticleIndex()].path;
         const path = directory.substring(0, directory.lastIndexOf("/") + 1);
         const source = `/book/${path}${searchParamIndex === -1 ? src : src.substring(0, searchParamIndex)}`;
 
         setTimeout(() => {
-            const img = document.querySelector<HTMLImageElement>(`img[src='${source}'], video[src='${source}']`);
+            const img = document.querySelector<HTMLElement>(`img[src='${source}'], video[src='${source}'], .iframe-container`);
             if (!img) return;
             img.style.height = queryParams.get("height");
             img.style.width = queryParams.get("width");
-            if (queryParams.get("align")) img.classList.add("align")
-            if (queryParams.get("align") === "left") img.classList.add("left")
-            if (queryParams.get("align") === "right") img.classList.add("right")
-            if (queryParams.get("align") === "center") img.classList.add("center")
-            img.style.borderStyle = queryParams.get("border") !== undefined ? "solid" : undefined;
-
-            if (queryParams.has("style")) {
-                for (const [key, value] of Object.entries(JSON.parse(queryParams.get("style")))) {
-                    img.style[key] = value;
-                }
-            }
-            
-            if (queryParams.has("gif")) {
-                img.autoplay = true;
-                img.muted = true;
-                img.loop = true;
-                img.playsinline = true;
-            }
+            applyClasses(img, queryParams);
         });
 
         return source;
@@ -585,7 +597,8 @@ const Book: Component = () => {
         toggleEditMode,
         dragEntry,
         articleChanges,
-        publishChanges
+        publishChanges,
+        collapseEvent: new Subject()
     }}>
         {/* hide footer */}
         <style>{bookStyle}</style>
@@ -599,7 +612,7 @@ const Book: Component = () => {
         >
             <aside
                 ref={sidebarContainer}
-                class="h-full pt-6 pb-10 max-lg:pb-4 mr-1 border-r-light dark:border-r-black border-r-2 snap-start font-main self-start max-lg:px-5 lg:pr-8 overflow-auto"
+                class="relative h-full pt-6 pb-10 max-lg:pb-4 mr-1 border-r-light dark:border-r-black border-r-2 snap-start font-main self-start max-lg:px-5 lg:pr-8 overflow-auto"
             >
                 <Entries of={book()}>
                     {(path, entry) => <Entry
@@ -618,7 +631,7 @@ const Book: Component = () => {
                     <Show when={currentArticleIndex() !== 0} fallback={
                         <WelcomePage />
                     }>
-                        <article>
+                        <article ref={articleRef}>
                             <Show when={!article.loading} fallback={
                                 <p>Loading...</p>
                             }>
@@ -627,11 +640,16 @@ const Book: Component = () => {
                                         class="article-renderer"
                                         children={code()}
                                         transformImageUri={transformImageUri}
-                                        remarkPlugins={[remarkArticleLink]}
+                                        remarkPlugins={[
+                                            remarkArticleLink,
+                                            remarkHtmlIframe,
+                                        ]}
                                         components={{
                                             img: MarkdownImageComponent,
                                             // @ts-ignore ArticleLink does not exist in type Components
-                                            ArticleLink: ArticleLink
+                                            ArticleLink: ArticleLink,
+                                            // @ts-ignore MarkdownIFrame does not exist in type Components
+                                            MarkdownIFrame: MarkdownIFrame,
                                         }}
                                     />
                                 </Show>

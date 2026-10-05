@@ -51,7 +51,7 @@ article blockquote::before {
     content: '';
 }
 
-article :is(img, video) {
+article :is(img, video, div.iframe-container) {
     @apply border-none border-2 border-black dark:border-white;
 
     &.align {
@@ -70,5 +70,9 @@ article :is(img, video) {
 
     &.align.center {
         margin-inline: auto;
+    }
+
+    &.half {
+        @apply max-md:w-full max-lg:w-1/2 max-xl:w-full xl:w-1/2;
     }
 }

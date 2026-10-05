@@ -1,5 +1,6 @@
 import { ImageWithText } from "@components/home/Graphics";
 import { Chapter } from "@components/shared/Chapter";
+import { PixelImage } from "@components/shared/PixelImage";
 import { ChapterText, DownArrow, SVGCircle, SVGLine, VerticalLine } from "@components/shared/Styling";
 import { TypedText } from "@components/shared/TypedText";
 import { A } from "@solidjs/router";
@@ -74,7 +75,7 @@ const Home: Component = () => {
             <ImageWithText image="img/home/Bumble.jpg" text={<span>This is me. More about the picture <A href="/book/about-me/my-profile-picture.md">here</A></span>} />
         } />
 
-        <Chapter title="> School life" text={[
+        <Chapter flipped title="> School life" text={[
             <span>I ended up going to HTL <img src={theme() === "light" ? "/img/home/spengergasse-vector-logo.svg" : "/img/home/spengergasse-vector-logo-dark.svg"} alt="Spengergasse" class="inline h-6 align-text-top" />, located in Vienna's 5th district, Margareten.</span>,
 
             <span>Right from the start we were introduced to the basics of Java development. Because I already had experience with C# from making games, the first two years were very easy for me to follow. <i>(not that the rest was particularly hard to follow as well...)</i> </span>,
@@ -113,7 +114,10 @@ const Home: Component = () => {
 
         <section class="relative py-20 md:py-36 flex flex-col gap-5 justify-center items-center">
             <h1 class="text-center">
-                ~ More about me <A href="/book/about-me.md">Here</A> ~
+                ~ More about me in <A href="/book/about-me.md">my book!</A>&nbsp;
+                <A href="/book/about-me.md">
+                    <PixelImage class="inline" src="img/Book.png" darkSrc="img/Book Dark.png" w={12} h={12} scale={3} />
+                </A> ~
             </h1>
 
             <VerticalLine class="top-20 !h-[7rem]" />

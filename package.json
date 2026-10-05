@@ -43,6 +43,7 @@
         "interactjs": "^1.10.27",
         "path": "^0.12.7",
         "pdfjs-dist": "4.5.136",
+        "rxjs": "^7.8.2",
         "solid-codemirror": "^2.3.3",
         "solid-js": "^1.7.5",
         "solid-markdown": "^2.0.0",

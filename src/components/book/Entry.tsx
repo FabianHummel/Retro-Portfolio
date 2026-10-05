@@ -3,7 +3,7 @@ import { BookContext, type IEntry } from "@pages/Book";
 import { Entries } from "@solid-primitives/keyed";
 import { A } from "@solidjs/router";
 import { clsx } from "clsx";
-import { type Component, createEffect, createSignal, type JSX, onMount, Show, splitProps, useContext, on, createMemo } from "solid-js";
+import { type Component, createEffect, createSignal, type JSX, onMount, Show, splitProps, useContext, on, createMemo, onCleanup } from "solid-js";
 
 export interface EntryProps extends JSX.HTMLAttributes<HTMLDivElement> {
     path: string;
@@ -21,20 +21,33 @@ export const Entry: Component<EntryProps> = (props) => {
     const dataPath = local.dataParent ? `${local.dataParent}/${local.path}` : local.path;
     const title = local.entry.title ?? local.path;
 
-    const { currentArticleIndex, articles, findNextArticle, dragEntry, isEditing, articleChanges } = useContext(BookContext);
+    const { currentArticleIndex, articles, findNextArticle, dragEntry, isEditing, articleChanges, collapseEvent } = useContext(BookContext);
 
     let entryRef!: HTMLDivElement;
 
+    const subscription = collapseEvent.subscribe(() => {
+        setOpen(false);
+    });
+
     onMount(() => {
-        setOpen(window.localStorage.getItem(`book:${local.path}`) === "true");
+        setOpen(window.localStorage.getItem(`book:${dataPath}`) === "true");
 
         entryRef.addEventListener("openEntry", () => {
             setOpen(true);
         });
     });
 
+    onCleanup(() => {
+        subscription.unsubscribe();
+    });
+
     createEffect(() => {
-        window.localStorage.setItem(`book:${local.path}`, open() ? "true" : "false");
+        if (open()) {
+            window.localStorage.setItem(`book:${dataPath}`, "true");
+        }
+        else {
+            window.localStorage.removeItem(`book:${dataPath}`);
+        }
     });
 
     createEffect(on(currentArticleIndex, (currentArticleIndex) => {
@@ -54,6 +67,16 @@ export const Entry: Component<EntryProps> = (props) => {
     function handleContextMenu(event: Event) {
         event.stopPropagation();
         event.preventDefault();
+    }
+
+    function collapseAll() {
+        for (const key of Object.keys(window.localStorage)) {
+            if (key.startsWith("book:")) {
+                window.localStorage.removeItem(key);
+            }
+        }
+
+        collapseEvent.next();
     }
 
     return (
@@ -86,6 +109,16 @@ export const Entry: Component<EntryProps> = (props) => {
                                 {title}
                             </p>
                         </A>
+                    </Show>
+
+                    <Show when={local.path === "welcome.md"}>
+                        <button type="button" class="p-2" onClick={collapseAll}>
+                            <PixelImage
+                                src="/img/book/Collapse All.png"
+                                darkSrc="/img/book/Collapse All Dark.png"
+                                alt="Collapse all articles"
+                                w={5} h={6} scale={3} />
+                        </button>
                     </Show>
 
                     <Show when={local.entry.isDownloadable}>

@@ -1,8 +1,8 @@
 # "Vorsprung durch Technik" _they said ..._
 
-In this mini series I'll go over each and every hurdle I have had with my car in chronological order, so sit back, relax and enjoy my biggest pain I probably will ever experience.
+In this mini series I'll go over each and every hurdle I have had with my car in chronological order, so sit back, relax and enjoy my biggest (financial) pain I probably ever experienced.
 
-## A brief foreword about me and my love for cars
+## Briefly about me and my love for cars
 
 In the early days of my life I often worked on mechanical and technical things with my grandfather, as he was a learnt technician at Volkswagen and he taught me a thing or two about cars. However, that was around the age of eight up until when I was fourteen, when he unfortunately passed due to medical problems. The garage ended up not being used a lot, because I was still in an age where I couldn't really work on things alone and didn't yet have "projects" such as my car to get my hands dirty. Essentially, I drifted off into software development, as this was my special field of interest.
 
