@@ -18,7 +18,7 @@ After I cut out each individual fur piece (twice, for each side) I sewed them to
 
 3. Maintaining an even seam allowance is crucial for not messing up the seam while machine sewing. When fixating both sides with sewing clips I line up the fur edge to edge, but sew along the pencil markings. When the seam allowance is unequally spaced, it will result in either really close or super far seams and, in the worst case, results in spots where the sides aren't even sewn shut at all!
 
-## Finished tail _(\*wag\*, \*wag\*)_
+## Finished tail _\*wag\* \*wag\*_
 
 ![Finished tail](making-the-tail/fursuit-tail-finished.webm?width=200px&align=right&gif&border)
 
@@ -28,4 +28,4 @@ However, I think it turned out exceptionally well and looks (and feels) stunning
 
 I never imagined this to work out so well and originally planned this accessory to be my practice piece, but I have a hard time now selling this tail when I could use it myself :/
 
-Color wise, the Mallard really stands out and also has a different texture (well, it's also from a different manufacturer) and looks incredible. The only downside is that it's really hard to work with because the fabric is super soft and the much thinner than Big Z's faux fur, so it glides around like nothing else when I want to keep it in place...
+Color wise, the Mallard really stands out and also has a different texture (well, it's also from a different manufacturer) and looks incredible. The only downside is that it's really hard to work with because the fabric is super soft and the much thinner than Big Z's faux fur, so it glides around like there's no tomorrow when I want to keep it in place...

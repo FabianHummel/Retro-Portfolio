@@ -1,8 +1,8 @@
 # Making my own Fursuit
 
-Once the suit is done, I'll post a short article how it went with some awesome pictures of me. However, you *can* already (and also should!) read the progress updates!
+Hi there! Glad you found this article, where I post status updates on making my own fursuit. I'm currently working intensively on the suit, but I will write a short résumé and add awesome pictures of me once it's is done. However, I already encourage you to read the progress updates right now!
 
-Stay tuned and have fun - because it's all about that - _simply having fun._ :)
+Stay tuned and have fun - because it's all about that - _simply having fun._
 
 ---
 

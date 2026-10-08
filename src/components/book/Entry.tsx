@@ -16,8 +16,8 @@ export const Entry: Component<EntryProps> = (props) => {
     const [local, other] = splitProps(props, ["path", "entry", "parent", "dataParent"])
     const [open, setOpen] = createSignal(false);
 
-    const absoluteParent = local.parent ? local.parent.includes('.') ? local.parent.substring(0, local.parent.lastIndexOf('.')) : local.parent : null
-    const absolutePath = absoluteParent ? `${absoluteParent}/${local.path}` : local.path;
+    const absoluteParent = stripExtension(local.parent);
+    const linkPath = absoluteParent ? `${absoluteParent}/${local.path}` : local.path;
     const dataPath = local.dataParent ? `${local.dataParent}/${local.path}` : local.path;
     const title = local.entry.title ?? local.path;
 
@@ -25,39 +25,46 @@ export const Entry: Component<EntryProps> = (props) => {
 
     let entryRef!: HTMLDivElement;
 
+    function stripExtension(str: string): string {
+        return str ? str.includes('.') ? str.substring(0, str.lastIndexOf('.')) : str : null;
+    }
+
     const subscription = collapseEvent.subscribe(() => {
         setOpen(false);
+        saveOpenClosed();
     });
 
     onMount(() => {
-        setOpen(window.localStorage.getItem(`book:${dataPath}`) === "true");
-
-        entryRef.addEventListener("openEntry", () => {
-            setOpen(true);
-        });
+        setOpen(isPersistentlyOpen());
     });
 
     onCleanup(() => {
         subscription.unsubscribe();
     });
 
-    createEffect(() => {
+    function isPersistentlyOpen(): boolean {
+        return window.localStorage.getItem(`book:${dataPath}`) === "true";
+    }
+
+    function saveOpenClosed() {
         if (open()) {
             window.localStorage.setItem(`book:${dataPath}`, "true");
         }
         else {
             window.localStorage.removeItem(`book:${dataPath}`);
         }
-    });
+    }
 
     createEffect(on(currentArticleIndex, (currentArticleIndex) => {
-        if (articles()[currentArticleIndex]?.path.startsWith(local.path)) {
-            setOpen(true);
+        const currentArticlePath = articles()[currentArticleIndex]?.path;
+        const linkPathWithoutExt = stripExtension(linkPath);
+        if (!isPersistentlyOpen()) {
+            setOpen(currentArticlePath?.startsWith(linkPathWithoutExt) ?? false);
         }
     }));
 
     const articleIndex = createMemo(() => {
-        return articles().findIndex(a => a.path === absolutePath);
+        return articles().findIndex(a => a.path === linkPath);
     });
 
     const hasNextArticle = createMemo(() => {
@@ -83,7 +90,7 @@ export const Entry: Component<EntryProps> = (props) => {
         <div
             ref={entryRef} {...other}
             class={clsx("relative book-entry text-m ml-3 border-l-[3px] border-l-gray dark:border-l-darkgray", props.class)}
-            data-absolute-path={absolutePath}
+            data-absolute-path={linkPath}
             data-data-path={dataPath}
             onContextMenu={handleContextMenu}
         >
@@ -104,8 +111,8 @@ export const Entry: Component<EntryProps> = (props) => {
                             {title}
                         </p>
                     )}>
-                        <A href={`/book/${absolutePath}`} class={"flex-1"} onClick={() => setOpen(true)}>
-                            <p class={clsx((articleChanges.has(absolutePath) && isEditing()) ? "text-changed dark:text-changed-dark" : "text-black dark:text-gray", "leading-none py-1.5")}>
+                        <A href={`/book/${linkPath}`} class={"flex-1"}>
+                            <p class={clsx((articleChanges.has(linkPath) && isEditing()) ? "text-changed dark:text-changed-dark" : "text-black dark:text-gray", "leading-none py-1.5")}>
                                 {title}
                             </p>
                         </A>
@@ -125,7 +132,7 @@ export const Entry: Component<EntryProps> = (props) => {
                         <button type="button" class="p-2" onClick={() => {
                             const a = document.createElement("a");
                             a.download = title;
-                            a.href = `${window.location.origin}/book/${absolutePath}`;
+                            a.href = `${window.location.origin}/book/${linkPath}`;
                             a.click();
                         }}>
                             <PixelImage
@@ -137,9 +144,10 @@ export const Entry: Component<EntryProps> = (props) => {
                     </Show>
 
                     <Show when={local.entry.children}>
-                        <button type="button" class="p-2" onClick={() =>
-                            setOpen(!open())
-                        }>
+                        <button type="button" class="p-2" onClick={() => {
+                            setOpen(!open());
+                            saveOpenClosed();
+                        }}>
                             <PixelImage
                                 src={open() ? "/img/book/Retract.png" : "/img/book/Expand.png"}
                                 darkSrc={open() ? "/img/book/Retract Dark.png" : "/img/book/Expand Dark.png"}
@@ -155,7 +163,7 @@ export const Entry: Component<EntryProps> = (props) => {
                                 title={entry().title ?? path}
                                 path={path}
                                 entry={entry()}
-                                parent={absolutePath}
+                                parent={linkPath}
                                 dataParent={dataPath} />
                         )}
                     </Entries>

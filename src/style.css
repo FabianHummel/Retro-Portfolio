@@ -99,7 +99,8 @@ body {
 }
 
 footer {
-    image-rendering: pixelated
+    image-rendering: pixelated;
+    @apply px-10 lg:px-20 pt-10 md:pt-20 grid-cols-[1fr] md:grid-cols-[1fr,25rem] lg:grid-cols-[1fr,30rem];
 }
 
 footer td {

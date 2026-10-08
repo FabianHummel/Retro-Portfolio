@@ -2,11 +2,12 @@ import { Logo } from "@components/shared/Logo";
 import { PixelImage } from "@components/shared/PixelImage";
 import { A } from "@solidjs/router";
 import { theme } from "@src/App";
-import type { Component } from "solid-js";
+import { clsx } from "clsx";
+import type { Component, JSX } from "solid-js";
 
-export const Footer: Component = () => {
+export const Footer: Component<JSX.HTMLAttributes<HTMLDivElement>> = (props) => {
     return (
-        <footer class="relative px-10 lg:px-20 pt-10 md:pt-20 pb-48 border-t-2 border-t-light dark:border-t-black grid grid-cols-[1fr] lg:grid-cols-[1fr,30rem] md:grid-cols-[1fr,20rem] font-main"
+        <footer {...props} class={clsx("pb-48 border-t-2 border-t-light dark:border-t-black grid font-main", props.class)}
             style={`${theme() === "light" ? `background:
 					url("/img/footer/Foreground.png") repeat-x bottom,
 					url("/img/footer/Background.png") repeat-x bottom;` :
@@ -14,10 +15,10 @@ export const Footer: Component = () => {
 					url("/img/footer/Foreground Dark.png") repeat-x bottom,
 					url("/img/footer/Background Dark.png") repeat-x bottom;`
                 }
-						background-size: auto 16rem, auto 16rem;`}>
+						background-size: auto 16rem, auto 16rem; ${props.style}`}>
 
             <div class="flex flex-row gap-x-5 items-center justify-center md:justify-start">
-                <div class="h-16 fill-black dark:fill-gray hidden md:block">
+                <div class="h-16 fill-black dark:fill-gray">
                     <Logo />
                 </div>
                 <p class="items-center leading-none text-center md:text-start">Made with <span class="inline-block align-middle">

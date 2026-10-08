@@ -2,6 +2,45 @@
     "welcome.md": {
         "title": "Welcome :)"
     },
+    "about-me.md": {
+        "title": "About Me",
+        "children": {
+            "my-profile-picture.md": {
+                "title": "My Profile Picture",
+                "children": {
+                    "profile-picture-evolution.md": {
+                        "title": "Profile Picture Evolution"
+                    },
+                    "other-profile-pictures.md": {
+                        "title": "Other profile pictures"
+                    }
+                }
+            },
+            "my-fursonas": {
+                "title": "My Fursonas",
+                "children": {
+                    "bumble.md": {
+                        "title": "Bumble"
+                    },
+                    "fabi.md": {
+                        "title": "Fabi"
+                    }
+                }
+            },
+            "about-my-portfolio.md": {
+                "title": "About my Portfolio"
+            },
+            "(web)-design.md": {
+                "title": "(Web)-Design"
+            },
+            "software-development.md": {
+                "title": "Software Development"
+            },
+            "learning-new-things.md": {
+                "title": "Leaning new things"
+            }
+        }
+    },
     "my-projects": {
         "title": "My Heart and Soul"
     },
@@ -170,26 +209,6 @@
     "other-stuff": {
         "title": "Random Stuff"
     },
-    "about-me.md": {
-        "title": "About Me",
-        "children": {
-            "software-development.md": {
-                "title": "Software Development"
-            },
-            "learning-new-things.md": {
-                "title": "Leaning new things"
-            },
-            "(web)-design.md": {
-                "title": "(Web)-Design"
-            },
-            "about-my-portfolio.md": {
-                "title": "About my Portfolio"
-            },
-            "my-profile-picture.md": {
-                "title": "My Profile Picture"
-            }
-        }
-    },
     "unpopular-opinions.md": {
         "title": "Unpopular Opinions",
         "children": {
@@ -215,6 +234,15 @@
         "children": {
             "about-my-car.md": {
                 "title": "About my car"
+            },
+            "show-room.md": {
+                "title": "Show Room"
+            },
+            "lowering-springs-odyssey.md": {
+                "title": "Lowering Springs Odyssey"
+            },
+            "brake-disk-nightmare.md": {
+                "title": "Brake Disk Nightmare"
             }
         }
     },

@@ -2,9 +2,9 @@
 
 <iframe src="//embed.gettyimages.com/embed/2284651656?et=IvzKcupwQNpDD9URzVZIkQ&tld=com&sig=KtH78G60-WQ8NpcPtIzLUrF8UABKKREwaPPveCr-i8k=&caption=true&ver=1&align=right&size=half" width="509" height="339" />
 
-## A quick preface
+## Author's Notice
 
-Hate over social nonconformity and minorities has been an issue for ages, but is getting increasingly more popular, especially amongst young people. Although I haven't yet personally been a victim of serious hate for my interests or participation of non curricular activities, I have noticed excessive hate towards other people more than I'm comfortable with, which is mainly the reason I write this article.
+Hate over social nonconformity and minorities has been an issue for ages, but is getting increasingly more popular, especially amongst young people. Although I haven't yet personally been a victim of serious hate for my interests or participation in non curricular activities, I have noticed excessive hate towards other people more than I'm comfortable with, which is mainly the reason I feel like needing to write this article.
 
 Even though I shouldn't have to justify myself and my hobbies, I'll dump my thoughts anyway despite being already so fed up with this entire drama, _so here goes nothing._
 
@@ -50,6 +50,6 @@ Yes, it absolutely is. And that's why the furry fandom strictly rejects any use 
 
 ---
 
-That's it for now, I hope I could clarify a thing or two! Now you can _(and should!)_ read my fursuit making articles! @fursuit-making.md
+That's it for now, I hope I could clarify a thing or two! Now you can _(peacefully)_ read my fursuit making articles, they are awesome! @fursuit-making.md
 
-P.S.: Fact is, _the pipeline is real_, so meet me at the other side when you've finally made it ;)
+P.S.: And fact is, _the pipeline is real_, so meet me at the other side when you've finally made it ;)

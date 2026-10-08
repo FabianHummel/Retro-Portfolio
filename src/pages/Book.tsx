@@ -10,7 +10,8 @@ import {
     createSignal,
     on,
     onMount,
-    Show
+    Show,
+    createMemo
 } from "solid-js";
 import { SolidMarkdown } from "solid-markdown";
 import "pdfjs-dist/web/pdf_viewer.css";
@@ -51,6 +52,7 @@ import { ArticleLink } from "@components/book/ArticleLink";
 import MarkdownIFrame from "@components/book/MarkdownIFrame";
 import { remarkHtmlIframe } from "@components/book/remark-iframe";
 import { Subject } from "rxjs"
+import { Footer } from "@components/shared/Footer";
 
 export interface IEntry {
     title?: string;
@@ -84,6 +86,7 @@ export interface BookContextProps {
     articleChanges: ReactiveMap<string, string>;
     publishChanges: () => void;
     collapseEvent: Subject<void>;
+    currentArticle: Accessor<IArticle>;
 }
 
 export const BookContext = createContext<BookContextProps>();
@@ -134,6 +137,8 @@ const Book: Component = () => {
     function toggleEditMode() {
         setIsEditing(!isEditing());
     }
+
+    const currentArticle = createMemo(() => articles()[currentArticleIndex()]);
 
     const { startLoading } = useLoading();
     let complete: VoidFunction;
@@ -598,7 +603,8 @@ const Book: Component = () => {
         dragEntry,
         articleChanges,
         publishChanges,
-        collapseEvent: new Subject()
+        collapseEvent: new Subject(),
+        currentArticle
     }}>
         {/* hide footer */}
         <style>{bookStyle}</style>
@@ -623,7 +629,7 @@ const Book: Component = () => {
             </aside>
 
             <main ref={articleContainer}
-                class="w-full h-full pb-10 pt-5 max-lg:pb-4 mx-auto snap-start px-4 sm:px-12 xl:px-20 overflow-auto"
+                class="flex flex-col w-full h-full pb-10 pt-5 max-lg:pb-4 mx-auto snap-start px-4 sm:px-12 xl:px-20 overflow-auto"
                 style={`opacity: ${articleOpacity()};`}
             >
                 <Breadcrumbs ref={breadcrumbsRef} />
@@ -631,7 +637,7 @@ const Book: Component = () => {
                     <Show when={currentArticleIndex() !== 0} fallback={
                         <WelcomePage />
                     }>
-                        <article ref={articleRef}>
+                        <article ref={articleRef} class="flex-1">
                             <Show when={!article.loading} fallback={
                                 <p>Loading...</p>
                             }>
@@ -665,13 +671,16 @@ const Book: Component = () => {
                             </div>
 
                             <Show when={currentArticleIndex() !== -1}>
-                                <div class="grid grid-cols-[1fr,1fr] gap-x-6 mt-8">
-                                    <Button article={findNextArticle(currentArticleIndex(), -1)} class="col-start-1" />
-                                    <Button article={findNextArticle(currentArticleIndex(), 1)} class="col-start-2" />
+                                <div class="flex gap-6 mt-8">
+                                    <Button direction={-1} class="flex-1 max-w-[500px]" />
+                                    <Button direction={1} class="flex-1 max-w-[500px] mx-auto" />
                                 </div>
                             </Show>
+
                         </article>
                     </Show>
+
+                    <Footer class="mt-16 -mb-10 -mx-4 sm:-mx-12 xl:-mx-20" />
                 </Show>
 
                 <div ref={editorRef} style={`margin-inline: ${isEditing() ? "-1.5rem" : null}; display: ${isEditing() ? "block" : "none"}`} />

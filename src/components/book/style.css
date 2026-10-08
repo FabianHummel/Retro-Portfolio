@@ -1,5 +1,43 @@
-footer {
+#root > footer {
     display: none !important;
+}
+
+@media (min-width: 1024px) {
+    footer {
+        padding-left: 2.5rem /* 40px */ !important;
+        padding-right: 2.5rem /* 40px */ !important;
+        padding-top: 2.5rem /* 40px */ !important;
+        grid-template-columns: 1fr !important;
+    }
+
+    footer > div {
+        justify-content: center !important;
+    }
+
+    footer > table {
+        margin-top: 4rem /* 64px */ !important;
+        text-align: center !important;
+    }
+}
+
+@media (min-width: 1200px) {
+    footer {
+        padding-top: 5rem /* 80px */ !important;
+        grid-template-columns: 1fr 25rem /* 400px */ !important;
+    }
+
+    footer > table {
+        margin-top: 0px !important;
+        text-align: left !important;
+    }
+}
+
+@media (min-width: 1400px) {
+    footer {
+        padding-left: 5rem /* 80px */ !important;
+        padding-right: 5rem /* 80px */ !important;
+        grid-template-columns: 1fr 30rem /* 480px */ !important;
+    }
 }
 
 main {

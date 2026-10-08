@@ -114,7 +114,7 @@ const Home: Component = () => {
 
         <section class="relative py-20 md:py-36 flex flex-col gap-5 justify-center items-center">
             <h1 class="text-center">
-                ~ More about me in <A href="/book/about-me.md">my book!</A>&nbsp;
+                ~ More about me in<br class="block md:hidden" /> <A href="/book/about-me.md">my book!</A>&nbsp;
                 <A href="/book/about-me.md">
                     <PixelImage class="inline" src="img/Book.png" darkSrc="img/Book Dark.png" w={12} h={12} scale={3} />
                 </A> ~
