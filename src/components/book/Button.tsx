@@ -26,7 +26,7 @@ export const Button: Component<ButtonProps> = (props) => {
                 href={`/book/${article().path}`}
                 {...other}
                 class={clsx(
-                    `book-button flex-1 px-3 py-1 text-m content-center cursor-pointer leading-none font-main no-underline`,
+                    `book-button flex-1 px-3 py-1 text-m content-center cursor-pointer leading-none font-main no-underline!`,
                     other.class,
                 )}
             >

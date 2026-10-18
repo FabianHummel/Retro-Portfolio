@@ -1,11 +1,10 @@
 import type { Component } from "solid-js";
-import "./Featured.css";
 import { A } from "@solidjs/router";
 import { theme } from "@src/App";
 
 export const Featured: Component = () => {
     return (
-        <section id="featured-section" class="h-[54rem] content">
+        <section id="featured-section" class="h-216 content">
             <main class="h-full max-w-md md:max-w-lg mx-auto flex flex-col gap-6">
                 <img src={theme() === "light" ? "/img/projects/skys-horizon.png" : "/img/projects/skys-horizon-dark.png"} alt="Sky's Horizon Logo" class="mt-20" />
                 <div id="featured-text" class="mt-16">

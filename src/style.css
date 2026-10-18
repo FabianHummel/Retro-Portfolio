@@ -1,6 +1,91 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+
+  /* --- FONTS --- */
+  --font-main: "bitmirror", "sans-serif";
+  --font-spectral: "spectral", "serif";
+  --font-mono: "monospace";
+
+  /* --- FONT SIZES --- */
+  --text-l: 2.3rem;
+  --text-m: 1.8rem;
+  --text-s: 1.5rem;
+
+  /* --- COLORS (Hier definierst du dein nacktes bg-gray zurück!) --- */
+  --color-white: rgb(245, 245, 245);
+  --color-gray: rgb(205, 205, 205);
+  --color-darkgray: rgb(90, 90, 90);
+  --color-black: rgb(40, 40, 40);
+  --color-light: rgb(235, 235, 235);
+  --color-dark: rgb(20, 20, 20);
+  --color-changed: #e3b707;
+  --color-changed-dark: #cca225;
+
+  /* --- ANIMATIONS --- */
+  --animate-push: push 2s ease infinite;
+  --animate-scroll: svglinescroll 1s linear infinite;
+  --animate-playing: musicplaying 0.6s linear infinite alternate;
+  --animate-spin: spin 45s linear infinite;
+  --animate-fadeIn: fadeIn 0.3s ease-in-out;
+  --animate-sidebar-hint: sidebar-hint 2s ease infinite;
+
+  /* --- KEYFRAMES --- */
+  @keyframes push {
+    0%, 100% { transform: translateY(0px); }
+    30% { transform: translateY(10px); }
+  }
+  @keyframes svglinescroll {
+    0% { stroke-dashoffset: 16; }
+    100% { stroke-dashoffset: 0; }
+  }
+  @keyframes musicplaying {
+    0% { transform: rotate(-10deg) translateY(3px) translateX(-3px); }
+    50% { transform: rotate(0deg) translateY(0px); }
+    100% { transform: rotate(10deg) translateY(3px) translateX(3px); }
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  @keyframes keyscale {
+    0% { width: 0px; transform: translateX(32px); }
+    100% { width: 64px; transform: translateX(0px); }
+  }
+  @keyframes firstkeyscale {
+    0% { width: 0px; }
+    100% { width: 64px; }
+  }
+  @keyframes keyin {
+    0% { transform: translateY(40px); }
+    100% { transform: translateY(0px); }
+  }
+  @keyframes pwcorrect {
+    0% { height: 8rem; opacity: 1; }
+    100% { height: 0; opacity: 0; }
+  }
+  @keyframes pwincorrect {
+    0% { transform: translateX(0px); }
+    10% { transform: translateX(10px); }
+    20% { transform: translateX(-10px); }
+    30% { transform: translateX(10px); }
+    40% { transform: translateX(-10px); }
+    50% { transform: translateX(10px); }
+    60% { transform: translateX(0px); }
+    80% { height: 8rem; opacity: 1; }
+    100% { height: 0; opacity: 0; }
+  }
+  @keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  @keyframes sidebar-hint {
+    0%, 100% { transform: translateX(0px); }
+    30% { transform: translateX(-10px); }
+  }
+}
 
 @font-face {
     font-family: 'bitmirror';
@@ -66,7 +151,7 @@
     --navbar-height: 128px;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 640px) {
     :root {
         --navbar-height: 96px;
     }
@@ -100,7 +185,7 @@ body {
 
 footer {
     image-rendering: pixelated;
-    @apply px-10 lg:px-20 pt-10 md:pt-20 grid-cols-[1fr] md:grid-cols-[1fr,25rem] lg:grid-cols-[1fr,30rem];
+    @apply px-10 lg:px-20 pt-10 md:pt-20 grid-cols-[1fr] md:grid-cols-[1fr_25rem] lg:grid-cols-[1fr_30rem];
 }
 
 footer td {
@@ -141,7 +226,7 @@ li {
 }
 
 pre {
-    @apply p-2 bg-light dark:bg-black rounded !important;
+    @apply p-2 bg-light dark:bg-black rounded;
 }
 
 pre code {
@@ -285,7 +370,7 @@ html.dark .book-button {
 }
 
 .article-link {
-    @apply mx-1 px-1 cursor-pointer leading-none font-main bg-light dark:bg-black;
+    @apply mx-1 px-1 cursor-pointer leading-none lowercase! font-main! bg-light dark:bg-black;
 }
 
 .article-link:before {
@@ -404,6 +489,139 @@ html.dark .article-link:before {
     background-color: rgba(0, 0, 0, 0.8);
 }
 
+.gallery-preview-button[disabled] {
+    opacity: 0.5;
+}
+
 #book-scroll-container::-webkit-scrollbar {
     width: 0; height: 0;
+}
+
+article *:not(.book-button) {
+    @apply font-spectral;
+    text-transform: none;
+}
+
+article :is(h1) {
+    @apply w-full mb-6 border-b-light dark:border-b-black border-b-2;
+    font-size: 2.7rem;
+}
+
+article :is(h2) {
+    @apply mt-8;
+    font-size: 2.3rem;
+}
+
+article :is(p, pre, ul) {
+    @apply mt-4 mb-4;
+}
+
+article li {
+    @apply ml-8 pl-2;
+}
+
+article :is(p, li) {
+    @apply text-justify xl:text-left;
+}
+
+article :is(pre > code) {
+    overflow: unset !important;
+}
+
+article :is(pre) {
+    @apply overflow-x-auto;
+}
+
+article :is(a) {
+    @apply underline;
+}
+
+article code, article code * {
+    @apply mb-0 font-mono;
+    font-size: 1rem;
+}
+
+article blockquote {
+    @apply relative px-4 text-darkgray dark:text-gray opacity-50;
+}
+
+article blockquote::before {
+    @apply absolute bg-gray dark:bg-darkgray w-2 h-full left-0;
+    content: '';
+}
+
+article :is(img, video, div.iframe-container) {
+    @apply border-none border-2 border-black dark:border-light;
+
+    &.align {
+        margin-block: 0.6rem;
+    }
+
+    &.align.left {
+        margin-right: 1rem;
+        float: left;
+    }
+
+    &.align.right {
+        margin-left: 1rem;
+        float: right;
+    }
+
+    &.align.center {
+        margin-inline: auto;
+    }
+
+    &.half {
+        @apply max-md:w-full max-lg:w-1/2 max-xl:w-full xl:w-1/2;
+    }
+}
+
+#featured-section * {
+	font-family: 'spectral';
+	text-transform: initial;
+}
+
+#featured-section::before {
+	content: '';
+	@apply absolute inset-0 -z-10;
+
+	background-image: url('/img/projects/featured.jpg');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center top;
+
+	-webkit-mask-image: linear-gradient(to bottom, #000000FF 0%, #00000030 90%, #00000000 100%);
+    mask-image: linear-gradient(to bottom, #000000FF 0%, #00000030 90%, #00000000 100%);
+}
+
+#featured-text * {
+	margin-bottom: 1rem;
+}
+
+#featured-title {
+	font-variant: small-caps;
+}
+
+#featured-subtitle {
+	text-align: left;
+}
+
+#featured-links * {
+	text-transform: capitalize;
+	padding-left: 1rem;
+	font-weight: normal;
+}
+
+#featured-links *:last-child {
+	padding-right: 1rem;
+}
+
+#featured-links *:not(:last-child)::after {
+	content: '·';
+	margin-left: 1rem;
+}
+
+#featured-links::before, #featured-links::after {
+	content: '';
+	@apply flex-1 border-b-2 border-b-black dark:border-b-gray;
 }

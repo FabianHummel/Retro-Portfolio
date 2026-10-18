@@ -15,9 +15,9 @@ export const Chapter: Component<ChapterProps> = (props) => {
     const [local, other] = splitProps(props, ["title", "text", "decoration", "graphics"]);
 
     return (
-        <section class={clsx("content mt-16 grid max-md:!grid-cols-[1fr] md:grid-rows-[auto,auto] lg:grid-rows-[6rem,auto] gap-10 md:gap-x-20 md:gap-y-0", other.class)} classList={{
-            "grid-cols-[auto,1fr]": !props.flipped,
-            "grid-cols-[1fr,auto]": props.flipped
+        <section class={clsx("content mt-16 grid max-md:!grid-cols-[1fr] md:grid-rows-[auto_auto] lg:grid-rows-[6rem_auto] gap-10 md:gap-x-20 md:gap-y-0", other.class)} classList={{
+            "grid-cols-[auto_1fr]": !props.flipped,
+            "grid-cols-[1fr_auto]": props.flipped
         }}>
             {/* text */}
             <div class="row-start-1" classList={{

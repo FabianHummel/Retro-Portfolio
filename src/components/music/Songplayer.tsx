@@ -280,7 +280,7 @@ export function Songplayer(props: ParentProps) {
 
             <div
                 id="song-player"
-                class="sticky bottom-0 h-16 bg-white dark:bg-dark border-t-2 border-t-black px-6 grid grid-cols-[1fr,1fr] lg:grid-cols-[1fr,1fr,1fr] items-center"
+                class="sticky bottom-0 h-16 bg-white dark:bg-dark border-t-2 border-t-black px-6 grid grid-cols-[1fr_1fr] lg:grid-cols-[1fr_1fr_1fr] items-center"
                 classList={{
                     'open': song() !== null
                 }}

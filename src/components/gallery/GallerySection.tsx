@@ -14,7 +14,7 @@ export interface GallerySectionProps extends JSX.HTMLAttributes<HTMLElement> {
 export const GallerySection: Component<GallerySectionProps> = (props) => {
     return (
         <section
-            class="content grid grid-cols-[1fr] grid-rows-[auto,auto] md:gap-x-20 relative"
+            class="content grid grid-cols-[1fr] grid-rows-[auto_auto] md:gap-x-20 relative"
         >
             {/* extra styling */}
             <For each={props.decoration}>

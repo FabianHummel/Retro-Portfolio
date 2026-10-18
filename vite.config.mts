@@ -17,10 +17,10 @@ export default defineConfig({
     },
     resolve: {
         alias: {
-            "@components": path.resolve(__dirname, "./src/components"),
-            "@pages": path.resolve(__dirname, "./src/pages"),
-            "@data": path.resolve(__dirname, "./src/data"),
-            "@src": path.resolve(__dirname, "./src"),
+            "@components": path.resolve(import.meta.dirname, "./src/components"),
+            "@pages": path.resolve(import.meta.dirname, "./src/pages"),
+            "@data": path.resolve(import.meta.dirname, "./src/data"),
+            "@src": path.resolve(import.meta.dirname, "./src"),
         },
     },
 });
@@ -31,7 +31,7 @@ function reloadOnChangesInPublicDirectory(): PluginOption {
         configureServer(server) {
             const { ws, watcher } = server;
             watcher.on("change", (file) => {
-                if (file.startsWith(path.join(__dirname, "public"))) {
+                if (file.startsWith(path.join(import.meta.dirname, "public"))) {
                     ws.send({
                         type: "full-reload",
                     });

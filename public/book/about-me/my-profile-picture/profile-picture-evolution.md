@@ -13,7 +13,7 @@ I began to experiment with different tools on my computer such as Paint.Net - it
 ---
 
 ![Third Generation](profile-picture-evolution/version-3-dark.png?theme=dark&width=150px&align=left&style={"margin-right":"1rem","shape-outside":"circle(50%)"})
-![Third Generation](my-profile-picture/version-3-light.png?theme=light&width=150px&align=left&style={"margin-right":"1rem","shape-outside":"circle(50%)"})
+![Third Generation](profile-picture-evolution/version-3-light.png?theme=light&width=150px&align=left&style={"margin-right":"1rem","shape-outside":"circle(50%)"})
 
 From now on, my profile pictures became simpler and simpler over time, but I still liked the design and it was easy to embed into different places such as my website, etc... I kept this design idea in particular through the next few iterations, probably because it was fairly easy to adapt to get the most out of it.
 

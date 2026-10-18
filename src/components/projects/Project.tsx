@@ -21,7 +21,7 @@ export const Project: Component<{ project: ProjectItemProps, decoration?: JSXEle
     const dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', day: '2-digit' });
 
     return (
-        <section id={props.project.id} class="content grid grid-cols-[1fr] grid-rows-[auto,auto] md:gap-x-20 relative">
+        <section id={props.project.id} class="content grid grid-cols-[1fr] grid-rows-[auto_auto] md:gap-x-20 relative">
             {/* text */}
             <div class="row-start-1 mb-8">
                 {/* title */}
@@ -64,7 +64,7 @@ export const Project: Component<{ project: ProjectItemProps, decoration?: JSXEle
                         }
                     </>}
                 </For>
-                <div class="min-w-[20rem] hidden md:grid grid-rows-[30px,0,30px] grid-cols-[2fr,1fr] flex-1 items-center">
+                <div class="min-w-[20rem] hidden md:grid grid-rows-[30px_0_30px] grid-cols-[2fr_1fr] flex-1 items-center">
                     <p class="col-span-2 text-s text-gray dark:text-darkgray row-start-1 leading-none">{
                         `${props.project.title} ... ${[...Array(10)].map(() => Math.round(Math.random())).join('')}`
                     }</p>

@@ -29,8 +29,8 @@ import cpp from 'highlight.js/lib/languages/cpp';
 import c from 'highlight.js/lib/languages/c';
 import objectiveC from 'highlight.js/lib/languages/objectivec';
 import swift from 'highlight.js/lib/languages/swift';
-import darkTheme from "highlight.js/styles/atom-one-dark.min.css";
-import lightTheme from "highlight.js/styles/atom-one-light.min.css";
+import darkTheme from "highlight.js/styles/atom-one-dark.min.css?inline";
+import lightTheme from "highlight.js/styles/atom-one-light.min.css?inline";
 import worker from "pdfjs-dist/build/pdf.worker.mjs?raw";
 import { parseQueryString } from "pdfjs-dist/web/pdf_viewer.mjs";
 import type { Accessor } from "solid-js";
@@ -53,6 +53,8 @@ import MarkdownIFrame from "@components/book/MarkdownIFrame";
 import { remarkHtmlIframe } from "@components/book/remark-iframe";
 import { Subject } from "rxjs"
 import { Footer } from "@components/shared/Footer";
+import { targetFPS } from "@solid-primitives/raf";
+import { getCurrentTransformInverse } from "pdfjs-dist/types/src/display/display_utils";
 
 export interface IEntry {
     title?: string;
@@ -108,12 +110,12 @@ export function applyClasses(element: HTMLElement, queryParams: Map<string, any>
         }
     }
 
-    if (queryParams.has("gif")) {
-        const video = element as HTMLVideoElement;
-        video.autoplay = true;
-        video.muted = true;
-        video.loop = true;
-        video.playsInline = true;
+    if (queryParams.has("gif") && element instanceof HTMLVideoElement) {
+        element.autoplay = true;
+        element.muted = true;
+        element.loop = true;
+        element.playsInline = true;
+        element.controls = false;
     }
 
     if (queryParams.get("size") === "half") element.classList.add("half");
@@ -614,7 +616,7 @@ const Book: Component = () => {
         <section
             id="book-scroll-container"
             ref={scrollContainer}
-            class="h-full lg:pl-6 grid grid-cols-[22rem,calc(100vw-3px)] lg:grid-cols-[25rem,minmax(0px,1200px)] max-lg:snap-x snap-mandatory overflow-auto items-start"
+            class="h-full lg:pl-6 grid grid-cols-[22rem_calc(100vw-3px)] lg:grid-cols-[25rem_minmax(0px,1200px)] max-lg:snap-x snap-mandatory overflow-auto items-start"
         >
             <aside
                 ref={sidebarContainer}
@@ -633,6 +635,7 @@ const Book: Component = () => {
                 style={`opacity: ${articleOpacity()};`}
             >
                 <Breadcrumbs ref={breadcrumbsRef} />
+
                 <Show when={!isEditing()}>
                     <Show when={currentArticleIndex() !== 0} fallback={
                         <WelcomePage />
@@ -672,8 +675,8 @@ const Book: Component = () => {
 
                             <Show when={currentArticleIndex() !== -1}>
                                 <div class="flex gap-6 mt-8">
-                                    <Button direction={-1} class="flex-1 max-w-[500px]" />
-                                    <Button direction={1} class="flex-1 max-w-[500px] mx-auto" />
+                                    <Button direction={-1} class="flex-1 max-w-[50%]" />
+                                    <Button direction={1} class="flex-1 max-w-[50%] mx-auto" />
                                 </div>
                             </Show>
 

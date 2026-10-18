@@ -63,7 +63,7 @@ export default function Music(props: MusicProps) {
     }
 
     return (
-        <section class="song content grid md:grid-cols-[2fr,1.5fr] lg:grid-cols-[2fr,3fr] grid-rows-[1fr,1fr,auto] gap-x-20"
+        <section class="song content grid md:grid-cols-[2fr_1.5fr] lg:grid-cols-[2fr_3fr] grid-rows-[1fr_1fr_auto] gap-x-20"
             data-song={props.data.song}
             prop:song={props.data}>
             {/* text */}

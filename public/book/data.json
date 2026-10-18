@@ -275,6 +275,12 @@
             },
             "preparing-the-head-base.md": {
                 "title": "Preparing the Head Base"
+            },
+            "ducktape-dummy.md": {
+                "title": "Ducktape Dummy"
+            },
+            "furring-the-head.md": {
+                "title": "Furring the Head"
             }
         }
     }

@@ -30,7 +30,7 @@ export const GalleryData = {
             height: 3816
         },
         {
-            src: "Old Art Book/Löwe.jpeg",
+            src: "Old Art Book/Loewe.jpeg",
             width: 3934,
             height: 2539
         },
@@ -45,7 +45,7 @@ export const GalleryData = {
             height: 3856
         },
         {
-            src: "Old Art Book/Hütehund.jpeg",
+            src: "Old Art Book/Huetehund.jpeg",
             width: 2603,
             height: 3921
         },
@@ -60,7 +60,7 @@ export const GalleryData = {
             height: 3951
         },
         {
-            src: "Old Art Book/Schildkröte.jpeg",
+            src: "Old Art Book/Schildkroete.jpeg",
             width: 3492,
             height: 2991
         },
@@ -139,7 +139,7 @@ export const GalleryData = {
             height: 3970
         },
         {
-            src: "Furry Book/Müd Zwanziger.jpeg",
+            src: "Furry Book/Mued Zwanziger.jpeg",
             width: 2421,
             height: 3129
         },

@@ -1,6 +1,6 @@
 # Fur Color comparison
 
-_Soooooo... I kind of messed up._ I ordered the fur as planned, namely the Sherbet Orange, Seafoam and Burgundy, but it turns out the colors are **way** off. The sherbet orange is not orange at all, but rather a very pastel pink, whereas burgundy is pretty purple (but still acceptable) and seafoam is **very** light. Also worth mentioning is that the brown on the far left is pretty borderline black, but whatever.
+_Soooooo... I kinda messed up._ I ordered the fur as planned, namely the Sherbet Orange, Seafoam and Burgundy, but it turns out the colors are **way** off. The sherbet orange is not orange at all, but rather a very pastel pink, whereas burgundy is pretty purple (but still acceptable) and seafoam is **very** light and rather blue-ish. Also worth mentioning is that the brown on the far left is pretty borderline black, but that is definitely the least of my problems...
 
 ![Faux Fur Colors](fur-color-comparison/faux-fur-colors.jpg?width=80%&align=center)
 

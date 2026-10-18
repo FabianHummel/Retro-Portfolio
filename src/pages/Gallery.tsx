@@ -2,7 +2,7 @@ import { GallerySection } from "@components/gallery/GallerySection";
 import { PixelImage } from "@components/shared/PixelImage";
 import { ChapterText, DownArrow, SVGCircle, SVGLine, VerticalLine } from "@components/shared/Styling";
 import { TypedText } from "@components/shared/TypedText";
-import { type Component, createSignal, createEffect, on, Show, onMount, onCleanup } from "solid-js";
+import { type Component, createSignal, createEffect, on, Show, onMount, onCleanup, createMemo } from "solid-js";
 import { GalleryData, GalleryImage } from "@data/Gallery";
 import interact from "interactjs";
 
@@ -10,6 +10,8 @@ const Gallery: Component = () => {
 
     const [image, setImage] = createSignal<GalleryImage>(null);
     const images = Object.values(GalleryData).flat();
+
+    const currentIndex = createMemo(() => images.indexOf(image()));
 
     let galleryImageDialog!: HTMLDialogElement;
 
@@ -26,16 +28,16 @@ const Gallery: Component = () => {
         }
     }
 
-    const interactable = interact("#gallery-preview").draggable({
-        onend(event: Interact.DragEvent) {
-            if (event.swipe.left) {
-                nextImage(true);
-            }
-            else if (event.swipe.right) {
-                nextImage(false);
-            }
-        }
-    });
+    // const interactable = interact("#gallery-preview").draggable({
+    //     onend(event: Interact.DragEvent) {
+    //         if (event.swipe.left) {
+    //             nextImage(true);
+    //         }
+    //         else if (event.swipe.right) {
+    //             nextImage(false);
+    //         }
+    //     }
+    // });
 
     onMount(() => {
         document.addEventListener("keydown", onKeyDown);
@@ -44,23 +46,16 @@ const Gallery: Component = () => {
     onCleanup(() => {
         document.removeEventListener("keydown", onKeyDown);
 
-        interactable.unset();
+        // interactable.unset();
     });
 
     createEffect(on(image, image => {
-        if (image !== null) {
-            document.documentElement.style.overflow = "hidden";
-        } else {
-            document.documentElement.style.overflow = "";
-        }
+        document.documentElement.style.overflow = image !== null ? "hidden" : "";
     }));
 
     function nextImage(next: boolean) {
-        const currentIndex = images.indexOf(image());
-        const targetIndex = currentIndex + (next ? 1 : -1);
-
-        if (currentIndex === -1 || targetIndex < 0 || targetIndex >= images.length) return;
-
+        const targetIndex = currentIndex() + (next ? 1 : -1);
+        if (currentIndex() === -1 || targetIndex < 0 || targetIndex >= images.length) return;
         setImage(images[targetIndex]);
     }
 
@@ -92,41 +87,57 @@ const Gallery: Component = () => {
         <dialog
             ref={galleryImageDialog}
             id="gallery-image-dialog"
-            class="bg-[transparent] outline-none"
-            onClose={() => {
-                setImage(null);
-            }}
+            class="bg-transparent outline-none m-auto"
+            onClose={() => setImage(null)}
             onClick={onClickDialog}
         >
-            <div class="grid grid-cols-[1fr] sm:grid-cols-[auto,1fr,auto] grid-rows-[auto,auto] lg:grid-cols-[auto,auto,auto,auto] lg:grid-rows-none items-center gap-y-10">
-                <button type="button" class="hidden sm:grid place-items-center px-10 h-full"
-                    onClick={() => nextImage(false)}>
+            <div class="grid grid-cols-[1fr_1fr] grid-rows-[1fr_auto] sm:grid-cols-[auto_1fr_auto] sm:grid-rows-[1fr]">
+                <button
+                    type="button"
+                    class="gallery-preview-button outline-none max-sm:col-start-1 grid place-items-center p-8"
+                    disabled={currentIndex() === 0}
+                    onClick={() => nextImage(false)}
+                >
                     <PixelImage
                         src="/img/gallery/Previous.png"
                         darkSrc="/img/gallery/Previous.png"
-                        alt="Download article"
+                        alt="Previous image"
                         w={3} h={5} scale={5} />
                 </button>
 
                 <Show when={image()}>
                     <img id="gallery-preview"
-                        class="lg:max-w-[800px] sm:max-h-[90vh] w-full"
+                        class="h-full w-full max-w-[95vw] max-h-[80vh] sm:max-h-[95vh] max-sm:row-start-1 max-sm:col-span-2"
                         src={`/gallery/${image().src}`}
                         alt="Gallery Preview" />
                 </Show>
 
-                <button type="button" class="hidden sm:grid place-items-center px-10 h-full"
-                    onClick={() => nextImage(true)}>
+                <button
+                    type="button"
+                    class="gallery-preview-button outline-none max-sm:col-start-2 grid place-items-center p-8"
+                    disabled={currentIndex() === images.length - 1}
+                    onClick={() => nextImage(true)}
+                >
                     <PixelImage
                         src="/img/gallery/Next.png"
                         darkSrc="/img/gallery/Next.png"
-                        alt="Download article"
+                        alt="Next image"
                         w={3} h={5} scale={5} />
                 </button>
+            </div>
 
-                <div class="place-self-start text-white lg:max-w-96 sm:col-start-2 lg:col-start-auto">
-                    {image()?.description}
-                </div>
+            <div class="fixed top-0 right-0">
+                <button
+                    type="button"
+                    class="outline-none max-sm:col-start-1 grid place-items-center p-8"
+                    onClick={() => galleryImageDialog.close()}
+                >
+                    <PixelImage
+                        src="/img/gallery/Close.png"
+                        darkSrc="/img/gallery/Close.png"
+                        alt="Close preview"
+                        w={5} h={5} scale={5} />
+                </button>
             </div>
         </dialog>
 
@@ -153,7 +164,7 @@ const Gallery: Component = () => {
         <GallerySection
             setImage={setImage}
             dialog={galleryImageDialog}
-            class={"max-w-[900px]"}
+            class="max-w-225"
             description={<>
                 <p>As I grew older, I (obviously) started to consume content on social media and soon got interested in anime/manga-styled art, even though I never watched any real anime at this point - I was just there for the art, but I wagely remember being <i>reeeallly</i> into <i>Angel Devil</i> from <i>Chainsaw Man</i>.</p>
 
@@ -173,7 +184,7 @@ const Gallery: Component = () => {
         <GallerySection
             setImage={setImage}
             dialog={galleryImageDialog}
-            class={"max-w-[900px]"}
+            class="max-w-225"
             description={<>
                 <p>After taking a long break again, I grew <b>EVEN</b> older (19 now) and consumed <b>EVEN MORE</b> content on social media <i>(I know, not very healthy, but I try my best to keep an eye on it...)</i> and <i>reaaaallly</i> got into Furry art, because it's very emotionally and artistically expressive and helped me through a pretty deep down-phase of my life.</p>
 

@@ -72,7 +72,7 @@ export const Breadcrumbs: Component = (props: JSX.HTMLAttributes<HTMLDivElement>
             <ol class="flex-1 flex flex-wrap items-center gap-0 list-none">
                 <Index each={breadcrumbs()}>
                     {(crumb, index) => (
-                        <li class="flex items-center font-main ml-0" classList={{
+                        <li class="flex items-center font-main ml-0!" classList={{
                             "before:content-['/'] before:mx-6 before:text-gray before:dark:text-darkgray": index > 0,
                             "text-black dark:text-gray font-medium": index === breadcrumbs().length - 1,
                             "text-gray dark:text-darkgray": index !== breadcrumbs().length - 1

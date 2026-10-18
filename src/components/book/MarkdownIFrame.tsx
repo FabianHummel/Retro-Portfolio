@@ -8,7 +8,6 @@ function MarkdownIFrame(props: JSX.IframeHTMLAttributes<HTMLIFrameElement> & { c
     let parentRef: HTMLDivElement;
 
     let resizeObserver = new ResizeObserver(([entry]) => {
-        console.log(entry.contentRect.width, ref.width);
         ref.style.scale = `${entry.contentRect.width / ref.width}`;
     });
 

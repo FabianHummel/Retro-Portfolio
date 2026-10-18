@@ -43,14 +43,12 @@ export const Navbar: Component = () => {
     });
 
     return (
-        <nav ref={navbar} id="navbar" class="sticky top-0 w-full h-[var(--navbar-height)] z-40 grid grid-cols-[auto,1fr] lg:grid-cols-[0.5fr_1fr_0.5fr] grid-rows-[1fr] place-items-center bg-white dark:bg-dark border-b-2 border-b-light dark:border-b-black transition-[border-bottom-width,transform]">
-            <div class="w-full h-20 sm:h-28 flex">
-                <A href="/" class="mx-5 fill-black dark:fill-gray">
-                    <Logo />
-                </A>
-            </div>
+        <nav ref={navbar} id="navbar" class="sticky top-0 px-5 sm:px-10 w-full h-[var(--navbar-height)] z-40 grid grid-cols-[auto_1fr] lg:grid-cols-[0.5fr_1fr_0.5fr] grid-rows-[1fr] place-items-center bg-white dark:bg-dark border-b-2 border-b-light dark:border-b-black transition-[border-bottom-width,transform]">
+            <A href="/" class="w-full h-20 sm:h-28 flex fill-black dark:fill-gray">
+                <Logo />
+            </A>
             <h1 class="hidden lg:block font-main text-m md:text-l text-center whitespace-nowrap">~ Fabian Hummel ~</h1>
-            <div class="w-full px-5 sm:px-10 gap-4 sm:gap-7 flex justify-end items-center">
+            <div class="w-full gap-4 sm:gap-7 flex justify-end items-center">
                 <A href="/book">
                     <PixelImage src="img/Book.png" darkSrc="img/Book Dark.png" w={12} h={12} scale={3} />
                 </A>

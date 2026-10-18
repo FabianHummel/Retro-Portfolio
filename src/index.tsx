@@ -1,6 +1,5 @@
 /* @refresh reload */
 import './style.css';
-import './markdown.css'
 import { Songplayer } from '@components/music/Songplayer';
 import { Footer } from '@components/shared/Footer';
 import useLoading, { Loading } from '@components/shared/Loading';
