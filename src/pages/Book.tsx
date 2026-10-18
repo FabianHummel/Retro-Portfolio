@@ -73,7 +73,7 @@ export function applyClasses(element: HTMLElement, queryParams: URLSearchParams)
     if (queryParams.get("align") === "left") element.classList.add("left")
     if (queryParams.get("align") === "right") element.classList.add("right")
     if (queryParams.get("align") === "center") element.classList.add("center")
-    element.style.borderStyle = queryParams.get("border") !== undefined ? "solid" : undefined;
+    element.style.borderStyle = queryParams.get("border") !== null ? "solid" : undefined;
 
     if (queryParams.has("style")) {
         for (const [key, value] of Object.entries(JSON.parse(queryParams.get("style")))) {
@@ -258,7 +258,7 @@ const Book: Component = () => {
 
         const searchParamIndex = src.lastIndexOf('?');
         const queryParams = new URLSearchParams(src.substring(searchParamIndex));
-        if (queryParams.get("theme") !== undefined && appTheme() !== queryParams.get("theme")) {
+        if (queryParams.get("theme") !== null && appTheme() != queryParams.get("theme")) {
             return "null";
         }
 
