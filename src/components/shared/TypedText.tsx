@@ -1,5 +1,4 @@
-import { createViewportObserver } from '@solid-primitives/intersection-observer';
-import { type Component, createSignal, type JSX, onMount } from "solid-js";
+import { type Component, createSignal, type JSX, onMount, onCleanup } from "solid-js";
 
 interface TypedTextProps extends JSX.HTMLAttributes<HTMLDivElement> {
     children: string;
@@ -9,9 +8,6 @@ interface TypedTextProps extends JSX.HTMLAttributes<HTMLDivElement> {
 }
 
 export const TypedText: Component<TypedTextProps> = (props) => {
-
-    // biome-ignore lint/correctness/noUnusedVariables: "use:intersectionObserver hook in DOM"
-    const [intersectionObserver] = createViewportObserver()
 
     let interval: number;
     const [index, setIndex] = createSignal(0);
@@ -31,11 +27,11 @@ export const TypedText: Component<TypedTextProps> = (props) => {
         })
     }
 
-    function handleIntersect(e: IntersectionObserverEntry) {
+    function handleIntersect([entry]: IntersectionObserverEntry[]) {
         if (!props.onIntersect) {
             return
         }
-        if (e.isIntersecting) {
+        if (entry.isIntersecting) {
             startAnimation()
         }
         setIndex(0);
@@ -46,7 +42,24 @@ export const TypedText: Component<TypedTextProps> = (props) => {
         return <>{props.children.substring(0, index())}<span class="text-light dark:text-black">{remainingText}</span></>;
     }
 
+    let ref!: HTMLSpanElement;
+
+    let intersectionObserver = new IntersectionObserver(handleIntersect, {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.1
+    });
+
+    onMount(() => {
+        intersectionObserver.observe(ref);
+    });
+
+    onCleanup(() => {
+        intersectionObserver.disconnect();
+        window.clearInterval(interval);
+    });
+
     return (
-        <span class="row-start-1 col-start-1" use:intersectionObserver={handleIntersect}>{getText() || <br />}</span>
+        <span ref={ref} class="row-start-1 col-start-1">{getText() || <br />}</span>
     )
 }

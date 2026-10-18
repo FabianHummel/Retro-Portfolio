@@ -4,7 +4,6 @@ import { ChapterText, DownArrow, SVGCircle, SVGLine, VerticalLine } from "@compo
 import { TypedText } from "@components/shared/TypedText";
 import { type Component, createSignal, createEffect, on, Show, onMount, onCleanup, createMemo } from "solid-js";
 import { GalleryData, GalleryImage } from "@data/Gallery";
-import interact from "interactjs";
 
 const Gallery: Component = () => {
 

@@ -1,8 +1,6 @@
 import { A } from "@solidjs/router";
-import { type Component, createSignal, createEffect, useContext, Index, Show } from "solid-js";
-import { BookContext, toPath, type IBook, type IEntry } from "@pages/Book";
-import { AuthContext } from "@src/services/AuthContext";
-import { PixelImage } from "@components/shared/PixelImage";
+import { type Component, createSignal, createEffect, useContext, Index } from "solid-js";
+import { BookContext, toPath } from "@pages/Book";
 import { JSX } from "solid-js/jsx-runtime";
 import clsx from "clsx";
 
@@ -12,15 +10,9 @@ export interface BreadcrumbItem {
     hasContent?: boolean;
 }
 
-interface EntryWithTitle extends IEntry {
-    title?: string;
-}
-
 export const Breadcrumbs: Component = (props: JSX.HTMLAttributes<HTMLDivElement>) => {
-    const { currentArticleIndex, articles, book, toggleEditMode, publishChanges } = useContext(BookContext);
+    const { currentArticleIndex, articles, book } = useContext(BookContext);
     const [breadcrumbs, setBreadcrumbs] = createSignal<BreadcrumbItem[]>([]);
-
-    const { isAuthenticated, loading, login, logout } = useContext(AuthContext);
 
     createEffect(() => {
         const index = currentArticleIndex();
@@ -58,15 +50,6 @@ export const Breadcrumbs: Component = (props: JSX.HTMLAttributes<HTMLDivElement>
         setBreadcrumbs(crumbs);
     });
 
-    function handleEditClick() {
-        if (!isAuthenticated()) {
-            login();
-            return;
-        }
-
-        toggleEditMode();
-    }
-
     return (
         <nav {...props} class={clsx(props.class, "pb-6 text-sm flex")}>
             <ol class="flex-1 flex flex-wrap items-center gap-0 list-none">
@@ -91,49 +74,6 @@ export const Breadcrumbs: Component = (props: JSX.HTMLAttributes<HTMLDivElement>
                     )}
                 </Index>
             </ol>
-
-            <div class="flex gap-4 p-3 pr-0 items-center font-main">
-                <Show when={isAuthenticated()}>
-                    <button
-                        type="button"
-                        class="relative before:absolute before:-inset-2"
-                        onClick={publishChanges}
-                    >
-                        <PixelImage
-                            src="/img/book/Publish.png"
-                            darkSrc="/img/book/Publish Dark.png"
-                            w={5} h={5} scale={3} />
-                    </button>
-                </Show>
-
-                <button
-                    type="button"
-                    class="relative before:absolute before:-inset-2"
-                    onClick={handleEditClick}
-                >
-                    <PixelImage
-                        src="/img/book/Edit.png"
-                        darkSrc="/img/book/Edit Dark.png"
-                        w={5} h={5} scale={3} />
-                </button>
-
-                <Show when={isAuthenticated()}>
-                    <Show when={!loading()} fallback={
-                        <p>Loading...</p>
-                    }>
-                        <button
-                            type="button"
-                            onClick={logout}
-                            class="relative before:absolute before:-inset-2"
-                        >
-                            <PixelImage
-                                src="/img/book/Logout.png"
-                                darkSrc="/img/book/Logout Dark.png"
-                                w={6} h={5} scale={3} />
-                        </button>
-                    </Show>
-                </Show>
-            </div>
         </nav>
     );
 };

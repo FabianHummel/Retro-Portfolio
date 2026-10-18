@@ -1,7 +1,5 @@
 import VolumeIcon from "@components/music/VolumeIcon";
 import { PixelImage } from "@components/shared/PixelImage";
-import { songs } from "@pages/Songs";
-import { create } from "domain";
 import {
     type Accessor,
     createContext,
@@ -41,6 +39,8 @@ interface SongplayerContextProps {
     toggle(): void;
     updateVolume(): void;
 }
+
+export const [songs, setSongs] = createSignal<MusicItemProps[]>(null);
 
 const SongplayerContext = createContext<SongplayerContextProps>({} as SongplayerContextProps);
 

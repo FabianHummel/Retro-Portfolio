@@ -21,7 +21,7 @@ export const Entry: Component<EntryProps> = (props) => {
     const dataPath = local.dataParent ? `${local.dataParent}/${local.path}` : local.path;
     const title = local.entry.title ?? local.path;
 
-    const { currentArticleIndex, articles, findNextArticle, dragEntry, isEditing, articleChanges, collapseEvent } = useContext(BookContext);
+    const { currentArticleIndex, articles, findNextArticle, collapseListeners } = useContext(BookContext);
 
     let entryRef!: HTMLDivElement;
 
@@ -29,17 +29,18 @@ export const Entry: Component<EntryProps> = (props) => {
         return str ? str.includes('.') ? str.substring(0, str.lastIndexOf('.')) : str : null;
     }
 
-    const subscription = collapseEvent.subscribe(() => {
+    function onCollapse() {
         setOpen(false);
         saveOpenClosed();
-    });
+    }
 
     onMount(() => {
         setOpen(isPersistentlyOpen());
+        collapseListeners.add(onCollapse);
     });
 
     onCleanup(() => {
-        subscription.unsubscribe();
+        collapseListeners.delete(onCollapse);
     });
 
     function isPersistentlyOpen(): boolean {
@@ -83,7 +84,7 @@ export const Entry: Component<EntryProps> = (props) => {
             }
         }
 
-        collapseEvent.next();
+        collapseListeners.forEach(listener => listener());
     }
 
     return (
@@ -94,10 +95,6 @@ export const Entry: Component<EntryProps> = (props) => {
             data-data-path={dataPath}
             onContextMenu={handleContextMenu}
         >
-            <Show when={dragEntry()}>
-                <div class="drop-zone drop-zone-inside absolute z-10 inset-0" />
-            </Show>
-
             <Show when={local.entry.hasContent || local.entry.children} fallback={
                 <header class="text-gray dark:text-darkgray pt-4">
                     {title}
@@ -112,7 +109,7 @@ export const Entry: Component<EntryProps> = (props) => {
                         </p>
                     )}>
                         <A href={`/book/${linkPath}`} class={"flex-1"}>
-                            <p class={clsx((articleChanges.has(linkPath) && isEditing()) ? "text-changed dark:text-changed-dark" : "text-black dark:text-gray", "leading-none py-1.5")}>
+                            <p class="text-black dark:text-gray leading-none py-1.5">
                                 {title}
                             </p>
                         </A>
@@ -168,11 +165,6 @@ export const Entry: Component<EntryProps> = (props) => {
                         )}
                     </Entries>
                 </Show>
-            </Show>
-
-            <Show when={dragEntry()}>
-                <div class="drop-zone drop-zone-above absolute z-10 inset-0 h-3" />
-                <div class="drop-zone drop-zone-below absolute z-10 bottom-0 h-3 left-0 right-0" />
             </Show>
         </div>
     )

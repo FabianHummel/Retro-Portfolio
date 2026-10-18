@@ -8,7 +8,6 @@ import { HashRouter, Route } from '@solidjs/router';
 import { lazy } from 'solid-js';
 import { render } from 'solid-js/web';
 import App from './App';
-import { AuthProvider } from './services/AuthContext';
 
 function withLoadingScreen<T>(importCb: () => Promise<T>) {
     return async () => {
@@ -30,13 +29,11 @@ render(
     () => (
         <HashRouter root={props => (
             <Loading>
-                <AuthProvider>
-                    <Songplayer>
-                        <Navbar />
-                        <App {...props} />
-                        <Footer />
-                    </Songplayer>
-                </AuthProvider>
+                <Songplayer>
+                    <Navbar />
+                    <App {...props} />
+                    <Footer />
+                </Songplayer>
             </Loading>
         )}>
             <Route path="/" component={Home} />

@@ -1,12 +1,10 @@
 import Music from "@components/music/Music";
-import type { MusicItemProps } from "@components/music/Songplayer";
+import { MusicItemProps, setSongs, songs } from "@components/music/Songplayer";
 import { Chapter } from "@components/shared/Chapter";
 import useLoading from "@components/shared/Loading";
 import { ChapterText, DownArrow, SVGCircle, SVGLine, VerticalLine } from "@components/shared/Styling";
 import { TypedText } from "@components/shared/TypedText";
 import { type Component, createSignal, For, onMount, Show } from "solid-js";
-
-export const [songs, setSongs] = createSignal<MusicItemProps[]>(null);
 
 const Songs: Component = () => {
 
@@ -46,10 +44,6 @@ const Songs: Component = () => {
             <p class="title">
                 Use headphones for the best <br /> experience - Enjoy!
             </p>
-
-            <div class="styling left-16 bottom-0 w-1 h-40 bg-gray dark:bg-darkgray" />
-
-            <SVGCircle class="bottom-40" />
         </section>
 
         <Chapter title="How I got to making music" text={[
