@@ -1,6 +1,5 @@
 import { applyClasses } from "@pages/Book";
 import { clsx } from "clsx";
-import { parseQueryString } from "pdfjs-dist/web/pdf_viewer.mjs";
 import { createEffect, JSX } from "solid-js";
 
 function MarkdownIFrame(props: JSX.IframeHTMLAttributes<HTMLIFrameElement> & { className: string[] }) {
@@ -16,8 +15,7 @@ function MarkdownIFrame(props: JSX.IframeHTMLAttributes<HTMLIFrameElement> & { c
 
         resizeObserver.observe(parentRef);
 
-        const searchParamIndex = props.src.lastIndexOf('?');
-        const queryParams = parseQueryString(props.src.substring(searchParamIndex));
+        const queryParams = new URLSearchParams(props.src.substring(props.src.lastIndexOf('?')));
         applyClasses(parentRef, queryParams);
     });
 

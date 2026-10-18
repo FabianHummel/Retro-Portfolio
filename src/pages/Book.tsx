@@ -1,8 +1,6 @@
 import { useNavigate, useParams } from "@solidjs/router";
 import { theme as appTheme, theme } from "@src/App";
 import hljs from "highlight.js/lib/core";
-import { GlobalWorkerOptions, getDocument } from "pdfjs-dist";
-import * as pdfjsViewer from "pdfjs-dist/web/pdf_viewer.mjs";
 import {
     type Component,
     createEffect,
@@ -14,7 +12,6 @@ import {
     createMemo
 } from "solid-js";
 import { SolidMarkdown } from "solid-markdown";
-import "pdfjs-dist/web/pdf_viewer.css";
 import { Button } from "@components/book/Button";
 import { Entry } from "@components/book/Entry";
 import { Breadcrumbs } from "@components/book/Breadcrumbs";
@@ -31,8 +28,6 @@ import objectiveC from 'highlight.js/lib/languages/objectivec';
 import swift from 'highlight.js/lib/languages/swift';
 import darkTheme from "highlight.js/styles/atom-one-dark.min.css?inline";
 import lightTheme from "highlight.js/styles/atom-one-light.min.css?inline";
-import worker from "pdfjs-dist/build/pdf.worker.mjs?raw";
-import { parseQueryString } from "pdfjs-dist/web/pdf_viewer.mjs";
 import type { Accessor } from "solid-js";
 import { createContext, onCleanup } from "solid-js";
 import { createCodeMirror, createEditorControlledValue } from "solid-codemirror";
@@ -53,8 +48,6 @@ import MarkdownIFrame from "@components/book/MarkdownIFrame";
 import { remarkHtmlIframe } from "@components/book/remark-iframe";
 import { Subject } from "rxjs"
 import { Footer } from "@components/shared/Footer";
-import { targetFPS } from "@solid-primitives/raf";
-import { getCurrentTransformInverse } from "pdfjs-dist/types/src/display/display_utils";
 
 export interface IEntry {
     title?: string;
@@ -72,10 +65,6 @@ export interface IArticle {
     path: string;
     hasContent: boolean;
 }
-
-GlobalWorkerOptions.workerSrc = URL.createObjectURL(
-    new Blob([worker], { type: "application/javascript" }),
-);
 
 export interface BookContextProps {
     currentArticleIndex: Accessor<number>;
@@ -97,7 +86,7 @@ export function toPath(path: string) {
     return path.split('/').map(s => s.includes('.') ? s.substring(0, s.lastIndexOf('.')) : s).join('/');
 }
 
-export function applyClasses(element: HTMLElement, queryParams: Map<string, any>) {
+export function applyClasses(element: HTMLElement, queryParams: URLSearchParams) {
     if (queryParams.get("align")) element.classList.add("align")
     if (queryParams.get("align") === "left") element.classList.add("left")
     if (queryParams.get("align") === "right") element.classList.add("right")
@@ -146,21 +135,6 @@ const Book: Component = () => {
     let complete: VoidFunction;
 
     const navigate = useNavigate();
-
-    let pdfViewer: pdfjsViewer.PDFViewer;
-
-    const eventBus = new pdfjsViewer.EventBus();
-
-    // (Optionally) enable hyperlinks within PDF files.
-    const pdfLinkService = new pdfjsViewer.PDFLinkService({
-        eventBus,
-    });
-
-    // (Optionally) enable find controller.
-    const pdfFindController = new pdfjsViewer.PDFFindController({
-        eventBus,
-        linkService: pdfLinkService,
-    });
 
     const [book, setBook] = createSignal<IBook>(null);
 
@@ -246,15 +220,10 @@ const Book: Component = () => {
             return null;
         }
 
-        const path = `/book/${articles()[index].path}`;
-        return await getDocument({
-            url: path,
-            enableHWA: true,
-        }).promise;
+        return `/book/${articles()[index].path}#toolbar=0&navpanes=0`;
     }
 
     const params = useParams();
-    let pdfContainer: HTMLDivElement;
 
     const [article] = createResource(currentArticleIndex, fetchArticle);
     const [pdf] = createResource(currentArticleIndex, fetchPdf);
@@ -277,60 +246,9 @@ const Book: Component = () => {
         setCurrentArticleIndex(findNextArticleIndex(indexByPath - 1, 1));
     });
 
-    createEffect(on(currentArticleIndex, () => {
-        pdfViewer?.cleanup();
-    }));
-
     createEffect(on([article, appTheme], () => {
         hljs.highlightAll();
     }));
-
-    createEffect(
-        on(pdf, (pdfDocument) => {
-            if (!pdfDocument) return;
-            pdfViewer.setDocument(pdfDocument);
-            try {
-                // Inform the link service about the loaded document so internal links work
-                pdfLinkService.setDocument(pdfDocument, null);
-            } catch (_) {
-                // ignore if link service isn't ready
-            }
-        }),
-    );
-
-    onMount(() => {
-        pdfViewer = new pdfjsViewer.PDFViewer({
-            container: pdfContainer,
-            eventBus,
-            linkService: pdfLinkService,
-            findController: pdfFindController,
-            enableHWA: true,
-        });
-        pdfLinkService.setViewer(pdfViewer);
-
-        // Ensure PDF initially fits the container width once pages are initialized
-        eventBus.on?.('pagesinit', () => {
-            try {
-                pdfViewer.currentScaleValue = 'page-width';
-            } catch (_) {
-                // ignore if pdfViewer not ready
-            }
-        });
-
-        // Re-apply page-width on window resize to keep it fitting the container
-        const handlePdfResize = () => {
-            try {
-                pdfViewer.currentScaleValue = 'page-width';
-            } catch (_) {
-                // ignore
-            }
-        };
-        window.addEventListener('resize', handlePdfResize);
-
-        onCleanup(() => {
-            window.removeEventListener('resize', handlePdfResize);
-        });
-    });
 
     let scrollContainer!: HTMLDivElement;
     let articleContainer!: HTMLDivElement;
@@ -366,7 +284,7 @@ const Book: Component = () => {
         if (src.startsWith("http")) return src;
 
         const searchParamIndex = src.lastIndexOf('?');
-        const queryParams = parseQueryString(src.substring(searchParamIndex));
+        const queryParams = new URLSearchParams(src.substring(searchParamIndex));
         if (queryParams.get("theme") !== undefined && appTheme() !== queryParams.get("theme")) {
             return "null";
         }
@@ -630,21 +548,29 @@ const Book: Component = () => {
                 </Entries>
             </aside>
 
-            <main ref={articleContainer}
-                class="flex flex-col w-full h-full pb-10 pt-5 max-lg:pb-4 mx-auto snap-start px-4 sm:px-12 xl:px-20 overflow-auto"
-                style={`opacity: ${articleOpacity()};`}
-            >
-                <Breadcrumbs ref={breadcrumbsRef} />
+            <Show when={pdf()}>
+                <embed
+                    src={pdf()}
+                    type="application/pdf"
+                    class="w-full h-full snap-start"
+                />
+            </Show>
 
-                <Show when={!isEditing()}>
-                    <Show when={currentArticleIndex() !== 0} fallback={
-                        <WelcomePage />
-                    }>
-                        <article ref={articleRef} class="flex-1">
-                            <Show when={!article.loading} fallback={
-                                <p>Loading...</p>
-                            }>
-                                <Show when={!pdf()}>
+            <Show when={!pdf()}>
+                <main ref={articleContainer}
+                    class="flex flex-col w-full h-full pb-10 pt-5 max-lg:pb-4 mx-auto snap-start px-4 sm:px-12 xl:px-20 overflow-auto"
+                    style={`opacity: ${articleOpacity()};`}
+                >
+                    <Breadcrumbs ref={breadcrumbsRef} />
+
+                    <Show when={!isEditing()}>
+                        <Show when={currentArticleIndex() !== 0} fallback={
+                            <WelcomePage />
+                        }>
+                            <article ref={articleRef} class="flex-1">
+                                <Show when={!article.loading} fallback={
+                                    <p>Loading...</p>
+                                }>
                                     <SolidMarkdown
                                         class="article-renderer"
                                         children={code()}
@@ -662,32 +588,24 @@ const Book: Component = () => {
                                         }}
                                     />
                                 </Show>
-                            </Show>
 
-                            <div
-                                class="h-[calc(100vh-20rem)] overflow-scroll"
-                                classList={{ hidden: !pdf() }}
-                            >
-                                <div ref={pdfContainer} class="relative inset-0">
-                                    <div id="viewer" class="pdfViewer"></div>
-                                </div>
-                            </div>
+                                <Show when={currentArticleIndex() !== -1}>
+                                    <div class="flex gap-6 mt-8">
+                                        <Button direction={-1} class="flex-1 max-w-[50%]" />
+                                        <Button direction={1} class="flex-1 max-w-[50%] mx-auto" />
+                                    </div>
+                                </Show>
 
-                            <Show when={currentArticleIndex() !== -1}>
-                                <div class="flex gap-6 mt-8">
-                                    <Button direction={-1} class="flex-1 max-w-[50%]" />
-                                    <Button direction={1} class="flex-1 max-w-[50%] mx-auto" />
-                                </div>
-                            </Show>
+                            </article>
+                        </Show>
 
-                        </article>
+                        <Footer class="mt-16 -mb-10 -mx-4 sm:-mx-12 xl:-mx-20" />
                     </Show>
 
-                    <Footer class="mt-16 -mb-10 -mx-4 sm:-mx-12 xl:-mx-20" />
-                </Show>
+                    <div ref={editorRef} style={`margin-inline: ${isEditing() ? "-1.5rem" : null}; display: ${isEditing() ? "block" : "none"}`} />
+                </main>
 
-                <div ref={editorRef} style={`margin-inline: ${isEditing() ? "-1.5rem" : null}; display: ${isEditing() ? "block" : "none"}`} />
-            </main>
+            </Show>
         </section>
     </BookContext.Provider>;
 };
