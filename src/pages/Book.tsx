@@ -35,6 +35,7 @@ import { remarkArticleLink } from "@components/book/remark-article-link"
 import { ArticleLink } from "@components/book/ArticleLink";
 import MarkdownIFrame from "@components/book/MarkdownIFrame";
 import { remarkHtmlIframe } from "@components/book/remark-iframe";
+import { Footer } from "@components/shared/Footer";
 
 export interface IEntry {
     title?: string;
@@ -371,6 +372,8 @@ const Book: Component = () => {
 
                         </article>
                     </Show>
+
+                    <Footer class="mt-16 -mb-10 -mx-4 sm:-mx-12 xl:-mx-20" />
                 </main>
             </Show>
         </section>
