@@ -27,17 +27,6 @@ const Gallery: Component = () => {
         }
     }
 
-    // const interactable = interact("#gallery-preview").draggable({
-    //     onend(event: Interact.DragEvent) {
-    //         if (event.swipe.left) {
-    //             nextImage(true);
-    //         }
-    //         else if (event.swipe.right) {
-    //             nextImage(false);
-    //         }
-    //     }
-    // });
-
     onMount(() => {
         document.addEventListener("keydown", onKeyDown);
     });
@@ -86,14 +75,14 @@ const Gallery: Component = () => {
         <dialog
             ref={galleryImageDialog}
             id="gallery-image-dialog"
-            class="bg-transparent outline-none m-auto"
+            class="bg-transparent outline-none m-auto backdrop:bg-[rgba(0,0,0,0.8)]"
             onClose={() => setImage(null)}
             onClick={onClickDialog}
         >
             <div class="grid grid-cols-[1fr_1fr] grid-rows-[1fr_auto] sm:grid-cols-[auto_1fr_auto] sm:grid-rows-[1fr]">
                 <button
                     type="button"
-                    class="gallery-preview-button outline-none max-sm:col-start-1 grid place-items-center p-8"
+                    class="disabled:opacity-50 outline-none max-sm:col-start-1 grid place-items-center p-8"
                     disabled={currentIndex() === 0}
                     onClick={() => nextImage(false)}
                 >
@@ -113,7 +102,7 @@ const Gallery: Component = () => {
 
                 <button
                     type="button"
-                    class="gallery-preview-button outline-none max-sm:col-start-2 grid place-items-center p-8"
+                    class="disabled:opacity-50 outline-none max-sm:col-start-2 grid place-items-center p-8"
                     disabled={currentIndex() === images.length - 1}
                     onClick={() => nextImage(true)}
                 >

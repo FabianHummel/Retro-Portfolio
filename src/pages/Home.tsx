@@ -26,8 +26,6 @@ const Home: Component = () => {
 
     return <>
         <section id="home-section" class="relative h-[80vh] flex flex-col justify-center items-center select-none pt-52">
-            <div id="pixel-globe" />
-
             <h1 class="text-center bg-white dark:bg-dark -mt-64">
                 <TypedText>
                     &nbsp;Hello visitor!&nbsp;

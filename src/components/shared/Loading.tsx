@@ -14,23 +14,10 @@ export default function useLoading() {
 export const Loading: Component<{ children: JSX.Element }> = (props) => {
 
     const [progress, setProgress] = createSignal(0);
-    const [dots, setDots] = createSignal(0);
 
     const [loaded, setLoaded] = createSignal(true);
 
     const downloaded = new Set<string>();
-
-    onMount(() => {
-        const interval = setInterval(() => {
-            const current = dots();
-            if (current >= 3) setDots(0);
-            else setDots(dots() + 1);
-        }, 500);
-
-        return (() => {
-            clearInterval(interval);
-        });
-    })
 
     function load(...pool: string[]) {
         if (pool.every(item => downloaded.has(item))) return;
@@ -87,10 +74,10 @@ export const Loading: Component<{ children: JSX.Element }> = (props) => {
 
     return (
         <LoadingContext.Provider value={{ load, startLoading }}>
-            <div id="loading-container" class="select-none pointer-events-none absolute inset-0 z-50 h-full bg-white dark:bg-dark flex flex-col gap-2 items-center justify-center" classList={{
-                "loaded": loaded()
+            <div class="opacity-100 transition-opacity duration-700 ease-in-out select-none pointer-events-none absolute inset-0 z-50 h-full bg-white dark:bg-dark flex flex-col gap-2 items-center justify-center" classList={{
+                "opacity-0!": loaded()
             }}>
-                <h1>Loading{".".repeat(dots())}</h1>
+                <h1 class="animate-loading-dots">Loading...</h1>
                 <div id="loading-bar" class="w-[200px]">
                     <div id="loading-items" style={`width:${Math.floor(progress() * 10) * 18}px;`} />
                 </div>

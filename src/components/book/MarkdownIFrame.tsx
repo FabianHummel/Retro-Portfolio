@@ -7,7 +7,7 @@ function MarkdownIFrame(props: JSX.IframeHTMLAttributes<HTMLIFrameElement> & { c
     let parentRef: HTMLDivElement;
 
     let resizeObserver = new ResizeObserver(([entry]) => {
-        ref.style.scale = `${entry.contentRect.width / ref.width}`;
+        ref.style.scale = `${entry.contentRect.width / Number(ref.width)}`;
     });
 
     createEffect(() => {
@@ -19,9 +19,11 @@ function MarkdownIFrame(props: JSX.IframeHTMLAttributes<HTMLIFrameElement> & { c
         applyClasses(parentRef, queryParams);
     });
 
-    return <div ref={parentRef} class={clsx(props.class, "iframe-container relative")}>
-        <iframe ref={ref} {...props} class="absolute inset-0 origin-top-left" />
-    </div>
+    return (
+        <div ref={parentRef} class={clsx(props.class, "iframe-container relative")}>
+            <iframe ref={ref} {...props} class="absolute inset-0 origin-top-left" />
+        </div>
+    )
 }
 
 export default MarkdownIFrame;

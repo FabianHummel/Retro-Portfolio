@@ -11,7 +11,7 @@ export function remarkArticleLink() {
             regex.lastIndex = 0; // Reset regex pointer
             const nodes = [];
             let lastIndex = 0;
-            let match: RegExpMatchArray;
+            let match;
 
             while ((match = regex.exec(node.value)) !== null) {
                 const matchIndex = match.index;

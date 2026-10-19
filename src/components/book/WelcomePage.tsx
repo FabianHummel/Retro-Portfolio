@@ -1,7 +1,5 @@
-import { Component, onCleanup, onMount, useContext } from "solid-js";
-import { BookContext } from "@pages/Book";
+import { Component, onCleanup, onMount } from "solid-js";
 import { TypedText } from "@components/shared/TypedText";
-import { Footer } from "@components/shared/Footer";
 import { PixelImage } from "@components/shared/PixelImage";
 import createLocalStorageSignal from "@components/shared/LocalStorageSignal";
 import { Button } from "@components/book/Button";
@@ -9,8 +7,6 @@ import { Button } from "@components/book/Button";
 const WelcomePage: Component = () => {
 
     let scrollContainer: HTMLDivElement;
-
-    const { currentArticleIndex, findNextArticle } = useContext(BookContext);
 
     onMount(() => {
         scrollContainer = document.querySelector("#book-scroll-container");
@@ -59,7 +55,9 @@ const WelcomePage: Component = () => {
             <p class="mt-8">Even though I wasn't doing exceptionally well in English and German classes, I nevertheless always liked to write stuff, so naturally I started documenting my projects. </p>
         </section>
 
-        <Button direction={1} forceShow class="block mt-16 w-64 mx-auto text-center" />
+        <Button direction={1} forceShow class="block mt-16 w-64 mx-auto text-center flex-none" />
+
+        <div class="flex-1" />
     </>
 }
 

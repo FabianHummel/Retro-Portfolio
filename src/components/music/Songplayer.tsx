@@ -370,7 +370,7 @@ export function Songplayer(props: ParentProps) {
 
                     <div
                         id="playback-progress"
-                        class="absolute -top-[5px] left-0 right-0"
+                        class="absolute top-[-5px] left-0 right-0"
                     >
                         <Slider
                             signal={[playtime, setPlaytime]}

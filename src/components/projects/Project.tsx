@@ -2,6 +2,7 @@ import { A } from "@solidjs/router";
 import { theme } from "@src/App";
 import { type Component, For, type JSX, type JSXElement, Show } from "solid-js";
 import { Tag } from "../shared/Tag";
+import projectStyle from "@components/projects/style.css?inline";
 
 export interface ProjectItemProps {
     logo: string;
@@ -20,7 +21,9 @@ export const Project: Component<{ project: ProjectItemProps, decoration?: JSXEle
 
     const dateTimeFormat = new Intl.DateTimeFormat('en', { year: 'numeric', month: 'long', day: '2-digit' });
 
-    return (
+    return <>
+        <style>{projectStyle}</style>
+
         <section id={props.project.id} class="content grid grid-cols-[1fr] grid-rows-[auto_auto] md:gap-x-20 relative">
             {/* text */}
             <div class="row-start-1 mb-8">
@@ -92,5 +95,5 @@ export const Project: Component<{ project: ProjectItemProps, decoration?: JSXEle
                 )}
             </For>
         </section>
-    )
+    </>
 }

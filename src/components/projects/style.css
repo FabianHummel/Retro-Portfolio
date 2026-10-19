@@ -1,0 +1,86 @@
+@reference "../../style.css";
+
+.projects-tag {
+    @apply ml-0 px-2 text-white dark:text-black leading-none;
+    border-image-slice: 1 fill;
+    border-width: 6px;
+    image-rendering: pixelated;
+}
+
+@supports (corner-shape: notch) {
+    .projects-tag {
+        @apply bg-black dark:bg-gray px-3 py-1.5 border-none!;
+        border-radius: 6px;
+        corner-shape: notch;
+    }
+}
+
+@keyframes shiny-text-animation {
+    0% { background-position: 0 0; }
+    100% { background-position: -400% 0; }
+}
+
+.shiny-background {
+    width: fit-content;
+    background: linear-gradient(-45deg, rgb(40, 40, 40) 30%, #fff 50%, rgb(40, 40, 40) 70%);
+    background-size: 400% 100%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    animation: shiny-text-animation 7s infinite linear;
+}
+
+@font-face {
+    font-family: 'heast-messenger';
+    src: url('/font/heast-messenger.woff2') format('woff2'),
+        url('/font/heast-messenger.woff') format('woff'),
+        url("/font/heast-messenger.ttf") format("truetype");
+    font-weight: normal;
+    font-display: swap;
+}
+
+#heast-messenger .project-font {
+    text-transform: initial;
+    font-family: 'heast-messenger', serif;
+    font-size: 1.2rem;
+    line-height: 2rem;
+}
+
+@font-face {
+    font-family: 'table-tennis';
+    src: url('/font/table-tennis.woff2') format('woff2'),
+        url('/font/table-tennis.woff') format('woff'),
+        url("/font/table-tennis.ttf") format("truetype");
+    font-weight: normal;
+    font-display: swap;
+}
+
+#table-tennis .project-font {
+    text-transform: initial;
+    font-family: 'table-tennis', serif;
+    font-size: 1.2rem;
+}
+
+@font-face {
+    font-family: 'a-sailors-tale';
+    src: url('/font/bitmirror.woff2') format('woff2'),
+        url('/font/bitmirror.woff') format('woff'),
+        url("/font/bitmirror.ttf") format("truetype");
+    font-weight: normal;
+    font-display: swap;
+}
+
+#a-sailors-tale .project-font {
+    text-transform: lowercase;
+    font-family: 'a-sailors-tale', serif;
+}
+
+#featured-section::before {
+	content: '';
+	background-image: url('/img/projects/featured.jpg');
+	@apply absolute inset-0 -z-10 bg-no-repeat bg-cover bg-center;
+
+	-webkit-mask-image: linear-gradient(to bottom, #000000FF 0%, #00000030 90%, #00000000 100%);
+    mask-image: linear-gradient(to bottom, #000000FF 0%, #00000030 90%, #00000000 100%);
+}

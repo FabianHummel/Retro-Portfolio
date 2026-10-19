@@ -21,7 +21,7 @@ export const Entry: Component<EntryProps> = (props) => {
     const dataPath = local.dataParent ? `${local.dataParent}/${local.path}` : local.path;
     const title = local.entry.title ?? local.path;
 
-    const { currentArticleIndex, articles, findNextArticle, collapseListeners } = useContext(BookContext);
+    const { currentArticle, currentArticleIndex, articles, findNextArticle, collapseListeners } = useContext(BookContext);
 
     let entryRef!: HTMLDivElement;
 
@@ -32,6 +32,9 @@ export const Entry: Component<EntryProps> = (props) => {
     function onCollapse() {
         setOpen(false);
         saveOpenClosed();
+        if (currentArticle()?.path.startsWith(stripExtension(linkPath))) {
+            setOpen(true);
+        }
     }
 
     onMount(() => {

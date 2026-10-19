@@ -9,7 +9,10 @@ import {
     on,
     onMount,
     Show,
-    createMemo
+    createMemo,
+    Accessor,
+    createContext,
+    onCleanup
 } from "solid-js";
 import { SolidMarkdown } from "solid-markdown";
 import { Button } from "@components/book/Button";
@@ -28,9 +31,7 @@ import objectiveC from 'highlight.js/lib/languages/objectivec';
 import swift from 'highlight.js/lib/languages/swift';
 import darkTheme from "highlight.js/styles/atom-one-dark.min.css?inline";
 import lightTheme from "highlight.js/styles/atom-one-light.min.css?inline";
-import type { Accessor } from "solid-js";
-import { createContext, onCleanup } from "solid-js";
-import bookStyle from "@components/book/style.css?raw";
+import bookStyle from "@components/book/style.css?inline";
 import { remarkArticleLink } from "@components/book/remark-article-link"
 import { ArticleLink } from "@components/book/ArticleLink";
 import MarkdownIFrame from "@components/book/MarkdownIFrame";
@@ -246,11 +247,11 @@ const Book: Component = () => {
         if (scrollContainer.scrollWidth > scrollContainer.clientWidth) {
             setArticleOpacity(scrollContainer.scrollLeft / sidebarContainer.clientWidth / 2.0 + 0.5);
             const mobileSidebarVisible = scrollContainer.scrollLeft < sidebarContainer.clientWidth / 2.0;
-            scrollContainer.classList.toggle("mobile-sidebar-visible", mobileSidebarVisible);
+            scrollContainer.classList.toggle("overflow-y-hidden", mobileSidebarVisible);
         }
         else {
             setArticleOpacity(1.0);
-            scrollContainer.classList.remove("mobile-sidebar-visible");
+            scrollContainer.classList.remove("overflow-y-hidden");
         }
     }
 
@@ -301,7 +302,6 @@ const Book: Component = () => {
         collapseListeners: new Set(),
         currentArticle
     }}>
-        {/* hide footer */}
         <style>{bookStyle}</style>
 
         <style>{appTheme() === "dark" ? darkTheme : lightTheme}</style>

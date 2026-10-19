@@ -1,53 +1,170 @@
+@reference "../../style.css";
+
 #root > footer {
-    display: none !important;
+    @apply hidden!;
 }
 
-@media (min-width: 1024px) {
-    footer {
-        padding-left: 2.5rem /* 40px */ !important;
-        padding-right: 2.5rem /* 40px */ !important;
-        padding-top: 2.5rem /* 40px */ !important;
-        grid-template-columns: 1fr !important;
-    }
-
-    footer > div {
-        justify-content: center !important;
-    }
-
-    footer > table {
-        margin-top: 4rem /* 64px */ !important;
-        text-align: center !important;
-    }
+footer {
+    @apply lg:px-10! lg:pt-10! lg:grid-cols-[1fr]!
+        xl:pt-20! xl:grid-cols-[1fr_25rem]!
+        2xl:px-20! 2xl:grid-cols-[1fr_30rem]!;
 }
 
-@media (min-width: 1200px) {
-    footer {
-        padding-top: 5rem /* 80px */ !important;
-        grid-template-columns: 1fr 25rem /* 400px */ !important;
-    }
-
-    footer > table {
-        margin-top: 0px !important;
-        text-align: left !important;
-    }
+footer > div {
+    @apply lg:justify-center!;
 }
 
-@media (min-width: 1400px) {
-    footer {
-        padding-left: 5rem /* 80px */ !important;
-        padding-right: 5rem /* 80px */ !important;
-        grid-template-columns: 1fr 30rem /* 480px */ !important;
-    }
+footer > table {
+    @apply lg:mt-16! lg:text-center!
+        xl:mt-0! xl:text-left!;
 }
 
 main {
-    max-width: 1780px !important;
+    @apply max-w-[1780px]!;
 }
 
 #root {
-    height: 100dvh !important;
+    @apply h-dvh!;
 }
 
 #navbar {
-    border-bottom-width: 2px !important;
+    @apply border-b-2!;
+}
+
+#book-scroll-container::-webkit-scrollbar {
+    width: 0; height: 0;
+}
+
+pre {
+    @apply p-2 bg-light dark:bg-black rounded;
+}
+
+pre code {
+    background: none !important;
+}
+
+code * {
+    line-height: 1.2rem;
+}
+
+aside > * {
+    border-left: none !important;
+}
+
+aside p {
+    text-align: left;
+}
+
+aside a {
+    text-decoration-line: none;
+}
+
+article * {
+    @apply font-spectral;
+    text-transform: none;
+}
+
+article :is(h1) {
+    @apply w-full mb-6 border-b-light dark:border-b-black border-b-2;
+    font-size: 2.7rem;
+}
+
+article :is(h2) {
+    @apply mt-8;
+    font-size: 2.3rem;
+}
+
+article :is(p, pre, ul) {
+    @apply mt-4 mb-4;
+}
+
+article li {
+    @apply ml-8 pl-2;
+}
+
+article :is(p, li) {
+    @apply text-justify xl:text-left;
+}
+
+article :is(pre > code) {
+    overflow: unset !important;
+}
+
+article :is(pre) {
+    @apply overflow-x-auto;
+}
+
+article :is(a) {
+    @apply underline;
+}
+
+article code, article code * {
+    @apply mb-0 font-mono!;
+    font-size: 1rem;
+}
+
+article blockquote {
+    @apply relative px-4 text-darkgray dark:text-gray opacity-50;
+}
+
+article blockquote::before {
+    @apply absolute bg-gray dark:bg-darkgray w-2 h-full left-0;
+    content: '';
+}
+
+article :is(img, video, div.iframe-container) {
+    @apply border-none border-2 border-black dark:border-light;
+
+    &.align {
+        @apply my-[0.6rem];
+    }
+
+    &.align.left {
+        @apply mr-4 float-left;
+    }
+
+    &.align.right {
+        @apply ml-4 float-right;
+    }
+
+    &.align.center {
+        @apply mx-auto;
+    }
+
+    &.half {
+        @apply max-md:w-full max-lg:w-1/2 max-xl:w-full xl:w-1/2;
+    }
+}
+
+.book-button {
+    border-image-slice: 3;
+    border-width: 12px;
+    border-style: solid;
+    border-image-repeat: stretch;
+    image-rendering: pixelated;
+    word-break: break-word;
+    border-image-source: url("/img/book/Link Background.png");
+}
+
+html.dark .book-button {
+    border-image-source: url("/img/book/Link Background Dark.png");
+}
+
+.article-link {
+    @apply mx-1 px-1 cursor-pointer leading-none lowercase! font-main! bg-light dark:bg-black;
+}
+
+.article-link:before {
+    content: '';
+    display: inline-block;
+    margin-right: 8px;
+    width: 14px;
+    height: 14px;
+    background-image: url("/img/book/Article Link.png");
+    background-size: contain;
+    image-rendering: pixelated;
+}
+
+html.dark .article-link:before {
+    background-image: url("/img/book/Article Link Dark.png");
 }

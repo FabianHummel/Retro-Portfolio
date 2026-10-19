@@ -1,3 +1,4 @@
+import { PixelImage } from "@components/shared/PixelImage";
 import { BookContext } from "@pages/Book";
 import { A } from "@solidjs/router";
 import { clsx } from "clsx";
@@ -26,10 +27,16 @@ export const Button: Component<ButtonProps> = (props) => {
                 href={`/book/${article().path}`}
                 {...other}
                 class={clsx(
-                    `book-button flex-1 px-3 py-1 text-m content-center cursor-pointer leading-none font-main no-underline!`,
+                    `book-button flex-1 px-3 py-1 text-m content-center cursor-pointer leading-none font-main! lowercase! no-underline!`,
                     other.class,
                 )}
             >
+                <PixelImage
+                    class="inline mr-3"
+                    src={props.direction > 0 ? `/img/book/Next.png` : `/img/book/Previous.png`}
+                    darkSrc={props.direction > 0 ? `/img/book/Next Dark.png` : `/img/book/Previous Dark.png`}
+                    w={5} h={5} scale={3} />
+
                 {article().title}
             </A>
         </Show>
