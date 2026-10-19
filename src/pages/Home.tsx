@@ -20,8 +20,7 @@ const Home: Component = () => {
     }
 
     function scrollToHeading() {
-        const y = document.getElementById(">-about-me").getBoundingClientRect().top;
-        window.scrollTo({ top: y - 200, behavior: "smooth" });
+        window.scrollTo({ top: 830, behavior: "smooth" });
     }
 
     return <>
@@ -38,7 +37,7 @@ const Home: Component = () => {
                 </TypedText>
             </h1>
 
-            <button type="button" class="mt-20 animate-push" onClick={scrollToHeading}>
+            <button type="button" class="mt-20 animate-push cursor-pointer" onClick={scrollToHeading}>
                 <svg style="scale: 5" class="fill-dark dark:fill-gray" xmlns="http://www.w3.org/2000/svg"
                     width="5" height="6" viewBox="0 0 5 6">
                     <title>Scroll down...</title>
@@ -55,7 +54,7 @@ const Home: Component = () => {
         </section>
 
         <Chapter title="> About me" text={[
-            <p>I am a {getAge()} year old <svg xmlns="http://www.w3.org/2000/svg" class="inline align-sub rounded-sm" width="27" height="18">
+            <p>I am a {getAge()} year old <svg xmlns="http://www.w3.org/2000/svg" class="inline align-sub rounded-sm ml-1" width="27" height="18">
                 <rect fill="#c8102e" width="27" height="18" />
                 <rect fill="#fff" y="6" width="27" height="6" />
             </svg> Austrian computer scientist who learnt computer science at a higher technical highschool (HTL) and is currently employed as a fulltime software engineer.</p>,
@@ -70,7 +69,7 @@ const Home: Component = () => {
             <SVGLine top={40} height={200} />,
             <DownArrow top={80} />
         ]} graphics={
-            <ImageWithText image="img/home/Bumble.jpg" text={<span>This is me. More about the picture <A href="/book/about-me/my-profile-picture.md">here</A></span>} />
+            <ImageWithText image="img/home/Bumble.jpg" text={<span>This is me! More about the picture <A href="/book/about-me/my-profile-picture.md">here</A> ^<span class="after:animate-eye" />.0<span class="after:animate-ear" /></span>} />
         } />
 
         <Chapter flipped title="> School life" text={[
@@ -93,7 +92,7 @@ const Home: Component = () => {
         } />
 
         <Chapter title="> Employment" text={[
-            <span>During the summer holidays of my last two years at Spengergasse, I had the opportunity to complete an internship for two months at <img src="/img/home/Erste Digital.png" alt="Erste Digital" class="inline h-6 align-text-top rounded-md" /> (Erste Digital), the tech-division of Austria's biggest bank - <img src="/img/home/Erste Bank.png" alt="Erste Bank" class="inline h-6 align-text-top" /> Erste Bank.</span>,
+            <span>During the summer holidays of my last two years at Spengergasse, I had the opportunity to complete an internship for two months at <img src="/img/home/Erste Digital.png" alt="Erste Digital" class="inline h-6 align-text-top rounded-md ml-1" /> (Erste Digital), the tech-division of Austria's biggest bank - <img src="/img/home/Erste Bank.png" alt="Erste Bank" class="inline h-6 align-text-top" /> Erste Bank.</span>,
 
             <span>I really liked it there - the location was very convenient (right next to the main train station), my colleagues were all super friendly and I could genuinely imagine myself working there for a longer period of time - <i>maybe not for the rest of my life,</i> but definitely the upcoming few years!</span>,
 

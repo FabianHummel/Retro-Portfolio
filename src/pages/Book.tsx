@@ -206,7 +206,9 @@ const Book: Component = () => {
     createEffect(() => {
         if (articles().length > 0 && !params.chapter) {
             const firstArticle = findNextArticle(-1, 1);
-            navigate(firstArticle.path);
+            navigate(firstArticle.path, {
+                replace: true
+            });
             return;
         }
 

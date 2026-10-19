@@ -28,6 +28,8 @@
   --animate-spin: spin 45s linear infinite;
   --animate-sidebar-hint: sidebar-hint 2s ease infinite;
   --animate-loading-dots: loading-dots 1s steps(4, start) infinite;
+  --animate-eye: eye 5s linear infinite;
+  --animate-ear: ear 8s linear infinite;
 
   /* --- KEYFRAMES --- */
   @keyframes push {
@@ -54,6 +56,14 @@
   @keyframes loading-dots {
     0% { clip-path: inset(0 45px 0 0); }
     100% { clip-path: inset(0 0 0 0); }
+  }
+  @keyframes eye {
+    0%, 80% { content: '0'; }
+    100% { content: '-'; }
+  }
+  @keyframes ear {
+    0%, 95% { content: '^'; }
+    100% { content: '`'; }
   }
 }
 
