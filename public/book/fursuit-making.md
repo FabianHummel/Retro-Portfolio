@@ -1,6 +1,8 @@
 # Making my own Fursuit
 
-Hi there! Glad you found this article, where I post status updates on making my own fursuit. I'm currently working intensively on the suit, but I will write a short résumé and add awesome pictures of me once it's is done. However, I already encourage you to read the progress updates right now!
+Hi there! Glad you found this article, where I post status updates on making my own fursuit. ~~I'm currently working intensively on the suit, but I will write a short résumé and add awesome pictures of me once it's is done. However, I already encourage you to read the progress updates right now!~~
+
+**Edit 24.10.2026:** The suit is _almost_ done now! Only a pair of cute paws remaining! :3
 
 Stay tuned and have fun - because it's all about that - _simply having fun._
 

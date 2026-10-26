@@ -37,6 +37,7 @@ import { ArticleLink } from "@components/book/ArticleLink";
 import MarkdownIFrame from "@components/book/MarkdownIFrame";
 import { remarkHtmlIframe } from "@components/book/remark-iframe";
 import { Footer } from "@components/shared/Footer";
+import remarkGfm from "remark-gfm";
 
 export interface IEntry {
     title?: string;
@@ -354,6 +355,7 @@ const Book: Component = () => {
                                     remarkPlugins={[
                                         remarkArticleLink,
                                         remarkHtmlIframe,
+                                        remarkGfm,
                                     ]}
                                     components={{
                                         img: MarkdownImageComponent,

@@ -74,6 +74,11 @@ article :is(h2) {
     font-size: 2.3rem;
 }
 
+article :is(h3) {
+    @apply mt-8;
+    font-size: 2rem;
+}
+
 article :is(p, pre, ul) {
     @apply mt-4 mb-4;
 }
@@ -132,8 +137,16 @@ article :is(img, video, div.iframe-container) {
     }
 
     &.half {
-        @apply max-md:w-full max-lg:w-1/2 max-xl:w-full xl:w-1/2;
+        @apply max-md:w-full max-lg:w-[49%] max-xl:w-full xl:w-[49%];
     }
+}
+
+article td, article th {
+    @apply px-2 py-1 border-2 border-light dark:border-black
+}
+
+article th {
+    @apply bg-light dark:bg-black
 }
 
 .book-button {
