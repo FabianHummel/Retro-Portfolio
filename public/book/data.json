@@ -209,6 +209,9 @@
     "other-stuff": {
         "title": "Random Stuff"
     },
+    "unity-games.md": {
+        "title": "Unity Games"
+    },
     "unpopular-opinions.md": {
         "title": "Unpopular Opinions",
         "children": {

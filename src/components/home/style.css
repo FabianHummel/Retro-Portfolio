@@ -1,0 +1,30 @@
+@reference "../../style.css";
+
+#home-section {
+    height: calc(100vh - var(--navbar-height));
+}
+
+#background-images {
+    @apply absolute inset-0 -z-10;
+    background-image: url("/img/home/Fabi Fursuit_subject.webp"), url("/img/home/Fabi Fursuit_background.webp");
+    background-position: calc(100% + var(--offset-x)) calc(30% + var(--offset-y)), calc(100% - var(--offset-x)) calc(30% - var(--offset-y));
+    background-size: 70%;
+    background-repeat: no-repeat;
+    mask: url("/img/home/Background Mask.svg");
+    mask-size: 70%;
+    mask-position: right;
+    mask-repeat: no-repeat;
+    transition: background-position 0.3s ease-out;
+
+    @media (width < theme(--breakpoint-lg)) {
+        background-size: 100%;
+        background-position: calc(100% + var(--offset-x)) calc(30% + var(--offset-y)), calc(100% - var(--offset-x)) calc(30% - var(--offset-y));
+        mask: linear-gradient(to right, transparent 10%, rgba(0,0,0,0.2) 25%, black 60%);
+    }
+
+    @media (width < theme(--breakpoint-sm)) {
+        background-size: 130%;
+        background-position: calc(100% + var(--offset-x)) calc(0% + var(--offset-y)), calc(100% - var(--offset-x)) calc(0% - var(--offset-y));
+        mask: linear-gradient(to top, transparent 10%, rgba(0,0,0,0.1) 25%, black 60%);
+    }
+}

@@ -48,7 +48,7 @@ export interface SVGLineProps extends JSX.HTMLAttributes<HTMLDivElement> {
 
 export const SVGLine: Component<SVGLineProps> = (props) => {
     return (
-        <div {...props} class={clsx("styling left-12 w-1", props.class)} style={`top: ${props.top ?? 0}%;`}>
+        <div {...props} class={clsx("styling left-12 w-1", props.class)} style={props.top ? `top: ${props.top ?? 0}%;` : null}>
             <svg
                 class="animate-scroll"
                 width="4"
@@ -71,9 +71,9 @@ export const SVGLine: Component<SVGLineProps> = (props) => {
     );
 };
 
-export const DownArrow: Component<{ top: number }> = (props) => {
+export const DownArrow: Component<{ top?: number } & JSX.HTMLAttributes<HTMLDivElement>> = (props) => {
     return (
-        <div class="styling left-20" style={`top: ${props.top}%;`}>
+        <div {...props} class={clsx("styling left-20", props.class)} style={`top: ${props.top}%;`}>
             <svg
                 style="scale: 3"
                 class="fill-gray dark:fill-darkgray"

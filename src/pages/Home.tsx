@@ -5,9 +5,41 @@ import { ChapterText, DownArrow, SVGCircle, SVGLine, VerticalLine } from "@compo
 import { TypedText } from "@components/shared/TypedText";
 import { A } from "@solidjs/router";
 import { theme } from "@src/App";
-import type { Component } from "solid-js";
+import { Component, createEffect, createMemo, createSignal, onCleanup, onMount } from "solid-js";
+import homeStyle from "@components/home/style.css?inline";
+import { createMousePosition } from "@solid-primitives/mouse";
+import AustriaFlag from "@components/home/AustriaFlag";
 
 const Home: Component = () => {
+
+    const pos = createMousePosition(window, {
+        touch: false
+    });
+
+    window.addEventListener("deviceorientation", (event) => {
+        setDepthX(event.gamma / 4.0);
+        setDepthY(event.beta / 10.0);
+    });
+
+    function sineSmoothstep(x) {
+        if (x <= -1) return -1;
+        if (x >= 1) return 1;
+        return Math.sin((Math.PI / 2) * x);
+    }
+
+    const DEPTH_FACTOR = 5;
+
+    createEffect(() => {
+        setDepthX(DEPTH_FACTOR * (sineSmoothstep(pos.x / window.innerWidth * 2 - 1)));
+    });
+
+    createEffect(() => {
+        setDepthY(DEPTH_FACTOR * (sineSmoothstep((pos.y - window.scrollY) / window.innerHeight) * 2 - 1));
+    });
+
+    const [depthX, setDepthX] = createSignal(0.0);
+    const [depthY, setDepthY] = createSignal(0.0);
+
     function getAge() {
         var today = new Date();
         var birthDate = new Date("2006-08-21T00:00:00");
@@ -24,20 +56,32 @@ const Home: Component = () => {
     }
 
     return <>
-        <section id="home-section" class="relative h-[80vh] flex flex-col justify-center items-center select-none pt-52">
-            <h1 class="text-center bg-white dark:bg-dark -mt-64">
+        <style>{homeStyle}</style>
+
+        <section id="home-section" class="relative flex flex-col md:justify-center items-start pl-10 lg:pl-40 pt-20 md:pt-52">
+            <div id="background-images" style={{
+                "--offset-x": depthX() + "px",
+                "--offset-y": depthY() + "px",
+            }} />
+
+            <h1 class="bg-white dark:bg-dark pr-4 max-md:pl-4 md:-mt-64 text-5xl! lg:text-7xl!">
                 <TypedText>
-                    &nbsp;Hello visitor!&nbsp;
+                    Hello visitor!
                 </TypedText>
             </h1>
 
-            <h1 class="text-center bg-white dark:bg-dark">
+            <h1 class="bg-white dark:bg-dark pr-4 max-md:pl-4 text-2xl! lg:text-4xl!">
                 <TypedText offset={1.5}>
-                    &nbsp;This is my portfolio.&nbsp;
+                    This is my portfolio.
                 </TypedText>
             </h1>
 
-            <button type="button" class="mt-20 animate-push cursor-pointer" onClick={scrollToHeading}>
+            <div class="md:hidden flex-1" />
+
+            <h1 class="bg-white dark:bg-dark text-2xl! lg:text-3xl! md:mt-40 pr-4 max-md:pl-4 max-md:self-center">Scroll down to learn</h1>
+            <h1 class="bg-white dark:bg-dark text-2xl! lg:text-3xl! pr-4 max-md:pl-4 max-md:self-center">more about me!</h1>
+
+            <button type="button" class="bg-white dark:bg-dark w-14 h-14 grid place-content-center max-md:mb-40 md:ml-10 mt-10 animate-push cursor-pointer max-md:self-center" onClick={scrollToHeading}>
                 <svg style="scale: 5" class="fill-dark dark:fill-gray" xmlns="http://www.w3.org/2000/svg"
                     width="5" height="6" viewBox="0 0 5 6">
                     <title>Scroll down...</title>
@@ -46,20 +90,18 @@ const Home: Component = () => {
                 </svg>
             </button>
 
-            <VerticalLine class="h-40! bottom-0" />
-            <ChapterText class="bottom-5">0.1 Welcome</ChapterText>
-            <SVGCircle class="bottom-40" />
-            <SVGCircle class="bottom-0" />
-            <DownArrow top={87} />
+            <VerticalLine class="h-44! bottom-10" />
+            <ChapterText class="bottom-20">0.1 Welcome</ChapterText>
+            <SVGLine class="bottom-20" height={100} />
+            <SVGCircle class="bottom-52" />
+            <SVGCircle class="bottom-10" />
+            <DownArrow class="bottom-20" />
         </section>
 
         <Chapter title="> About me" text={[
-            <p>I am a {getAge()} year old <svg xmlns="http://www.w3.org/2000/svg" class="inline align-sub rounded-sm ml-1" width="27" height="18">
-                <rect fill="#c8102e" width="27" height="18" />
-                <rect fill="#fff" y="6" width="27" height="6" />
-            </svg> Austrian computer scientist who learnt computer science at a higher technical highschool (HTL) and is currently employed as a fulltime software engineer.</p>,
+            <p>Hi there! Let me introduce myself: I am a {getAge()} year old <AustriaFlag /> Austrian who learnt computer science at a higher technical highschool (HTL) and is currently employed as a fulltime software engineer. <i>Occasionally I'm also something inbetween a cute fox, wolf or hyena :3</i></p>,
 
-            <p>Since 4th grade primary school I started making small games in the Unity engine. (of which I haven't finished a single one, but more about that later...). I try to experiment with many different things in my free-time, mostly software, but occasionally even arts and crafts - <i>whatever motivates me ;)</i></p>,
+            <p>Since 4th grade primary school I started making small games in the Unity engine <i>(of which I haven't finished a single one, but more about that <A href="/book/unity-games.md">here</A>...)</i>. I try to experiment with many different things in my free-time, mostly software, but occasionally even arts and crafts - <i>whatever motivates me ;)</i></p>,
 
             "Making silly mobile games was a lot of fun though and I realised this is exactly what I want to do in the future, so I decided to continue school at a technical school (HTL)."
         ]} decoration={[

@@ -22,6 +22,7 @@
     "dependencies": {
         "@masonry-grid/solid-js": "^1.1.1",
         "@solid-primitives/keyed": "^1.2.2",
+        "@solid-primitives/mouse": "^2.1.7",
         "@solidjs/router": "^0.15.4",
         "clsx": "^2.1.1",
         "highlight.js": "^11.8.0",
