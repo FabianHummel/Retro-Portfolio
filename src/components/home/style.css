@@ -4,6 +4,15 @@
     height: calc(100vh - var(--navbar-height));
 }
 
+@keyframes parallax {
+    from {
+        transform: translate(0px 0px);
+    }
+    to {
+        transform: translate(0px, 100%);
+    }
+}
+
 #background-images {
     @apply absolute inset-0 -z-10;
     background-image: url("/img/home/Fabi Fursuit_subject.webp"), url("/img/home/Fabi Fursuit_background.webp");
@@ -15,6 +24,8 @@
     mask-position: right;
     mask-repeat: no-repeat;
     transition: background-position 0.3s ease-out;
+    animation: parallax linear;
+    animation-timeline: scroll();
 
     @media (width < theme(--breakpoint-lg)) {
         background-size: 100%;
