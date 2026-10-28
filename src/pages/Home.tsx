@@ -61,7 +61,8 @@ const Home: Component = () => {
         <section id="home-section" class="relative sm:overflow-clip flex flex-col md:justify-center items-start pl-4 md:pl-10 lg:pl-40 pt-20 md:pt-52">
             <div id="background-images" style={{
                 "--offset-x": depthX() + "px",
-                "--offset-y": depthY() + "px"
+                "--offset-y": depthY() + "px",
+                "animation-timeline": "scroll()"
             }} />
 
             <h1 class="bg-white dark:bg-dark pr-4 max-md:pl-4 md:-mt-64 text-5xl! lg:text-7xl!">

@@ -25,7 +25,6 @@
     mask-repeat: no-repeat;
     transition: background-position 0.3s ease-out;
     animation: parallax linear;
-    animation-timeline: scroll();
 
     @media (width < theme(--breakpoint-lg)) {
         background-size: 100%;
