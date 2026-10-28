@@ -4,6 +4,10 @@
     @apply hidden!;
 }
 
+#root > main {
+    @apply overflow-hidden;
+}
+
 footer {
     @apply lg:px-10! lg:pt-10! lg:grid-cols-[1fr]!
         xl:pt-20! xl:grid-cols-[1fr_25rem]!
