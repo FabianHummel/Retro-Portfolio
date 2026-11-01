@@ -50,7 +50,7 @@ const WelcomePage: Component = () => {
         <section>
             <p class="mt-8">This collection of articles sort of serves as my mental notebook, where I capture random thoughts, progress updates and opinions regarding many different parts of my life, hobbies and interests.</p>
 
-            <p class="mt-8">It was <i>- and still is -</i> one of my biggest goals and achievement of this portfolio. I love to have all of my beloved things organized in one place and this library helped me manifest this vision.</p>
+            <p class="mt-8">It was - <i>and still is</i> - one of my biggest goals and achievements of this portfolio. I love to have all of my beloved things organized in one place and this library helped me manifest this vision.</p>
 
             <p class="mt-8">Even though I wasn't doing exceptionally well in English and German classes, I nevertheless always liked to write stuff, so naturally I started documenting my projects. </p>
         </section>

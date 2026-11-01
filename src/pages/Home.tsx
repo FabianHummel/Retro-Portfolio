@@ -58,31 +58,31 @@ const Home: Component = () => {
     return <>
         <style>{homeStyle}</style>
 
-        <section id="home-section" class="relative sm:overflow-clip flex flex-col md:justify-center items-start pl-4 md:pl-10 lg:pl-40 pt-20 md:pt-52">
+        <section id="home-section" class="relative sm:overflow-clip flex flex-col sm:justify-center items-start pl-4 sm:pl-10 md:pl-24 lg:pl-40 pt-20 sm:pt-52">
             <div id="background-images" style={{
                 "--offset-x": depthX() + "px",
                 "--offset-y": depthY() + "px",
-                "animation-timeline": "scroll()"
+                "animation-timeline": "--parallax"
             }} />
 
-            <h1 class="bg-white dark:bg-dark pr-4 max-md:pl-4 md:-mt-64 text-5xl! lg:text-7xl!">
+            <h1 class="bg-white dark:bg-dark pr-4 max-sm:pl-4 sm:-mt-64 text-5xl! lg:text-7xl!">
                 <TypedText>
                     Hello visitor!
                 </TypedText>
             </h1>
 
-            <h1 class="bg-white dark:bg-dark pr-4 max-md:pl-4 text-2xl! lg:text-4xl!">
+            <h1 class="bg-white dark:bg-dark pr-4 max-sm:pl-4 text-2xl! lg:text-4xl!">
                 <TypedText offset={1.5}>
                     This is my portfolio.
                 </TypedText>
             </h1>
 
-            <div class="md:hidden flex-1" />
+            <div class="sm:hidden flex-1" />
 
-            <h1 class="bg-white dark:bg-dark text-2xl! lg:text-3xl! md:mt-40 pr-4 max-md:pl-4 max-md:self-center">Scroll down to learn</h1>
-            <h1 class="bg-white dark:bg-dark text-2xl! lg:text-3xl! pr-4 max-md:pl-4 max-md:self-center">more about me!</h1>
+            <h1 class="bg-white dark:bg-dark text-2xl! lg:text-3xl! sm:mt-40 pr-4 max-sm:pl-4 max-sm:self-center">Scroll down to learn</h1>
+            <h1 class="bg-white dark:bg-dark text-2xl! lg:text-3xl! pr-4 max-sm:pl-4 max-sm:self-center">more about me!</h1>
 
-            <button type="button" class="bg-white dark:bg-dark w-14 h-14 grid place-content-center max-md:mb-40 md:ml-10 mt-10 animate-push cursor-pointer max-md:self-center" onClick={scrollToHeading}>
+            <button type="button" class="bg-white dark:bg-dark w-14 h-14 grid place-content-center max-sm:mb-40 sm:ml-10 mt-10 animate-push cursor-pointer max-sm:self-center" onClick={scrollToHeading}>
                 <svg style="scale: 5" class="fill-dark dark:fill-gray" xmlns="http://www.w3.org/2000/svg"
                     width="5" height="6" viewBox="0 0 5 6">
                     <title>Scroll down...</title>
@@ -100,9 +100,9 @@ const Home: Component = () => {
         </section>
 
         <Chapter title="> About me" text={[
-            <p>Hi there! Let me introduce myself: I am a {getAge()} year old <AustriaFlag /> Austrian who learnt computer science at a higher technical highschool (HTL) and is currently employed as a fulltime software engineer. <i>Occasionally I'm also something inbetween a cute fox, wolf or hyena :3</i></p>,
+            <p>Hi there! I am Fabian, a silly {getAge()} year old <AustriaFlag /> Austrian engineer that tries to experiment with many different things in his life - mostly with software - but occasionally even arts and crafts. On other days I may also be something inbetween a fox, wolf and hyena, so watch out - I can bite! (just kidding :3 )</p>,
 
-            <p>Since 4th grade primary school I started making small games in the Unity engine <i>(of which I haven't finished a single one, but more about that <A href="/book/unity-games.md">here</A>...)</i>. I try to experiment with many different things in my free-time, mostly software, but occasionally even arts and crafts - <i>whatever motivates me ;)</i></p>,
+            <p>Since 4th grade primary school I started making small games in the Unity engine <i>(of which I haven't finished a single one, but more about that <A href="/book/unity-games.md">here</A>...)</i>. Later I professionally learnt computer science at a higher technical highschool (HTL) and am currently employed as a fulltime software engineer.</p>,
 
             "Making silly mobile games was a lot of fun though and I realised this is exactly what I want to do in the future, so I decided to continue school at a technical school (HTL)."
         ]} decoration={[

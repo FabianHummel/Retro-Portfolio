@@ -1,5 +1,10 @@
 @reference "../../style.css";
 
+html {
+    scroll-timeline: --parallax block;
+    timeline-scope: --parallax;
+}
+
 #home-section {
     height: calc(100vh - var(--navbar-height));
 }
@@ -16,25 +21,36 @@
 #background-images {
     @apply absolute inset-0 -z-10;
     background-image: url("/img/home/Fabi Fursuit_subject.webp"), url("/img/home/Fabi Fursuit_background.webp");
-    background-position: calc(100% + var(--offset-x)) calc(30% + var(--offset-y)), calc(100% - var(--offset-x)) calc(30% - var(--offset-y));
-    background-size: 70%;
+    --bg-x: 70%;
+    --bg-size: 50%;
+    background-position: calc(var(--bg-x) + var(--offset-x)) calc(30% + var(--offset-y)), calc(var(--bg-x) - var(--offset-x)) calc(30% - var(--offset-y));
+    background-size: var(--bg-size);
     background-repeat: no-repeat;
-    mask: url("/img/home/Background Mask.svg");
-    mask-size: 70%;
-    mask-position: right;
+    mask: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.2) 15%, black 50%);
+    mask-size: var(--bg-size) 100%;
+    mask-position: var(--bg-x) 100%;
     mask-repeat: no-repeat;
     transition: background-position 0.3s ease-out;
     animation: parallax linear;
+    scale: 1.1;
+    transform-origin: top center;
+
+    @media (width < theme(--breakpoint-xl)) {
+        --bg-x: 90%;
+    }
 
     @media (width < theme(--breakpoint-lg)) {
-        background-size: 100%;
-        background-position: calc(100% + var(--offset-x)) calc(30% + var(--offset-y)), calc(100% - var(--offset-x)) calc(30% - var(--offset-y));
-        mask: linear-gradient(to right, transparent 10%, rgba(0,0,0,0.2) 25%, black 60%);
+        --bg-x: 90%;
+        --bg-size: 70%;
+    }
+    
+    @media (width < theme(--breakpoint-md)) {
+        --bg-x: 100%;
+        --bg-size: 90%;
     }
 
     @media (width < theme(--breakpoint-sm)) {
-        background-size: 130%;
-        background-position: calc(100% + var(--offset-x)) calc(0% + var(--offset-y)), calc(100% - var(--offset-x)) calc(0% - var(--offset-y));
+        --bg-size: 130%;
         mask: linear-gradient(to top, transparent 10%, rgba(0,0,0,0.1) 25%, black 60%);
     }
 }

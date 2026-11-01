@@ -117,7 +117,7 @@ const Gallery: Component = () => {
             <div class="fixed top-0 right-0">
                 <button
                     type="button"
-                    class="outline-none max-sm:col-start-1 grid place-items-center p-8"
+                    class="outline-none max-sm:col-start-1 p-8"
                     onClick={() => galleryImageDialog.close()}
                 >
                     <PixelImage
