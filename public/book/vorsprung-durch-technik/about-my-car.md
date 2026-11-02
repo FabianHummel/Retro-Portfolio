@@ -1,6 +1,6 @@
 # About my car
 
-![My little big boy](audi-on-a-hill.webp?width=40%&align=right)
+![My little big boy](about-my-car/audi-on-a-hill.webp?width=40%&align=right)
 
 My little big boy is a 2009 Audi A4 B8 with a 2.0L TDI diesel engine pushing somewhat around 120 horsepower. This makes the car only three years younger than myself, which is kinda odd to think about.
 

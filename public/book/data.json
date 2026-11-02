@@ -241,11 +241,32 @@
             "show-room.md": {
                 "title": "Show Room"
             },
-            "lowering-springs-odyssey.md": {
-                "title": "Lowering Springs Odyssey"
+            "where-the-pain-begins": {
+                "title": "Here we go..."
             },
-            "brake-disk-nightmare.md": {
-                "title": "Brake Disk Nightmare"
+            "lowering-springs.md": {
+                "title": "Lowering Springs"
+            },
+            "car-is-too-low.md": {
+                "title": "The car is too low"
+            },
+            "spaccer-for-the-rescue.md": {
+                "title": "Spaccer for the rescue"
+            },
+            "about-a-year-later": {
+                "title": "About a year later"
+            },
+            "broken-parking-brake.md": {
+                "title": "Broken parking brake"
+            },
+            "changing-brakes-on-an-audi.md": {
+                "title": "Changing brakes on an Audi"
+            },
+            "steering-alignment.md": {
+                "title": "Steering Alignment"
+            },
+            "loose-brake-caliper-bolt.md": {
+                "title": "Loose brake caliper bolt"
             }
         }
     },

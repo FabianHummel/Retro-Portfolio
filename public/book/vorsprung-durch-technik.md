@@ -1,4 +1,4 @@
-# "Vorsprung durch Technik" _they said ..._
+# _"Vorsprung durch Technik"_ they said ...
 
 In this mini series I'll go over each and every hurdle I have had with my car in chronological order, so sit back, relax and enjoy my biggest (financial) pain I probably ever experienced.
 

@@ -99,7 +99,9 @@ export const Entry: Component<EntryProps> = (props) => {
             onContextMenu={handleContextMenu}
         >
             <Show when={local.entry.hasContent || local.entry.children} fallback={
-                <header class="text-gray dark:text-darkgray pt-4">
+                <header class="text-gray dark:text-darkgray pt-4" classList={{
+                    "pl-3": local.parent != null
+                }}>
                     {title}
                 </header>
             }>
