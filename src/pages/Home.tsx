@@ -112,7 +112,7 @@ const Home: Component = () => {
             <SVGLine top={40} height={200} />,
             <DownArrow top={80} />
         ]} graphics={
-            <ImageWithText image="img/home/Bumble.jpg" text={<span>This is me! More about the picture <A href="/book/about-me/my-profile-picture.md">here</A> ^<span class="after:animate-eye" />.0<span class="after:animate-ear" /></span>} />
+            <ImageWithText image="img/home/Bumble.jpg" text={<p class="text-start!">Look at me!!! Isn't this drawing by ★&nbsp;<a href="https://www.instagram.com/starryskira">Starry Skira</a>&nbsp;★ sooo cute?! ^<span class="after:animate-eye" />.0<span class="after:animate-ear" /></p>} />
         } />
 
         <Chapter flipped title="> School life" text={[

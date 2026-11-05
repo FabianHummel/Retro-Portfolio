@@ -16,7 +16,7 @@ I know it's probably not the best idea to use a picture of oneself on the intern
 
 # The latest and Greatest
 
-This time it's not my own original design, but actually from a super talented friend of mine! I received this **gorgeous** drawing of my fursona on my 20th birthday!!! Go check it out! @about-me/my-fursonas/bumble.md
+This time it's not my own original design, but actually from a super talented friend of mine, ★&nbsp;[Starry Skira](https://www.instagram.com/starryskira)&nbsp;★! I received this **gorgeous** drawing of my fursona on my 20th birthday!!! Go check it out! @about-me/my-fursonas/bumble.md
 
 It's so cute I JUST CAN'T :3
 
