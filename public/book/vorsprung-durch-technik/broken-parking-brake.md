@@ -8,7 +8,7 @@ I didn't think a lot about it and moved on, spending the entire day with my frie
 
 It was already very late, around one in the morning and the towing service needed at least 2 to 3 hours to pick up my car. I felt stressed and planned to resolve this issue on my own the next few days with another friend of mine with a car jack and some tools.
 
-Very early the next day I receive a call from my buddy the voluntary fire department needs my car to be moved **immediately**, because they would start preparing the spot for their yearly "Marschwertung" (marching-music evaluation; something very typically Austrian). Of all spots in this town my car was parked exactly there. Immovable.
+Very early the next day I receive a call from my buddy: The voluntary fire department needed my car to be moved **immediately**, because they would start preparing the spot for their annual "Marschwertung" (marching-music evaluation; something very typically Austrian). Of all spots in this town my car was parked exactly _there. Immovable._
 
 I told my grandfather about the incident and we drove to my friend's house, hoping to somehow get the car moving again. To our luck, a mechanic next door noticed my problem and came right to help me out by providing important tools I didn't have. Eventually we disconnected the parking brake and the car was thankfully moving again.
 

@@ -73,7 +73,7 @@ const Home: Component = () => {
 
             <h1 class="bg-white dark:bg-dark pr-4 max-sm:pl-4 text-2xl! lg:text-4xl!">
                 <TypedText offset={1.5}>
-                    This is my portfolio.
+                    This is my blog
                 </TypedText>
             </h1>
 
