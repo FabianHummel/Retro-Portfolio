@@ -5,3 +5,6 @@ target/
 .env
 Icon
 .nomedia
+.idea
+.zed
+.vscode
