@@ -58,7 +58,7 @@ const Home: Component = () => {
     return <>
         <style>{homeStyle}</style>
 
-        <section id="home-section" class="relative sm:overflow-clip flex flex-col sm:justify-center items-start pl-4 sm:pl-10 md:pl-24 lg:pl-40 pt-20 sm:pt-52">
+        <section id="home-section" class="relative sm:overflow-clip flex flex-col sm:justify-center items-start pl-4 sm:pl-10 md:pl-24 lg:pl-40 pt-12 sm:pt-52">
             <div id="background-images" style={{
                 "--offset-x": depthX() + "px",
                 "--offset-y": depthY() + "px",
@@ -100,7 +100,7 @@ const Home: Component = () => {
         </section>
 
         <Chapter title="> About me" text={[
-            <p>Hi there! I am Fabian, a silly {getAge()} year old <AustriaFlag /> Austrian engineer that tries to experiment with many different things in his life - mostly with software - but occasionally even arts and crafts. On other days I may also be something inbetween a fox, wolf and hyena, so watch out - I can bite! (just kidding :3 )</p>,
+            <p>Hi there! I am Fabian, a silly {getAge()} year old <AustriaFlag /> Austrian engineer that tries to experiment with many different things in his life - mostly with <A href="projects">software</A> - but occasionally even <A href="book/fursuit-making.md">arts and crafts</A>. On other days I may also be something inbetween a fox, wolf and hyena, so watch out - I can bite! (just kidding :3 )</p>,
 
             <p>Since 4th grade primary school I started making small games in the Unity engine <i>(of which I haven't finished a single one, but more about that <A href="/book/unity-games.md">here</A>...)</i>. Later I professionally learnt computer science at a higher technical highschool (HTL) and am currently employed as a fulltime software engineer.</p>,
 

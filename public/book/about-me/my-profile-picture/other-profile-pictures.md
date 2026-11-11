@@ -12,7 +12,7 @@ I kept this picture for quite some time on all my main accounts, and still have 
 
 Moving forward I went a little crazy and took some funny pictures of myself using the Photo Booth App on my Mac with the integrated distortion effects. I found them quite fitting for my socials however and started to use (mainly) this one for my all my main accounts.
 
-I know it's probably not the best idea to use a picture of oneself on the internet, but who _actually_ cares these days?... Our faces are all over the internet either way - and _somewhere_ on this website exists even another (genuine) picture of me! ;)
+I know it's probably not the best idea to use a picture of oneself on the internet, but who _actually_ cares these days?... Our faces are all over the internet either way - heck, I put myself on the front page of this portfolio, so I guess I am not really in a position to complain about that ;)
 
 # The latest and Greatest
 

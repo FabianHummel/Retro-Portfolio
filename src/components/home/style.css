@@ -20,13 +20,13 @@ html {
 
 #background-images {
     @apply absolute inset-0 -z-10;
-    background-image: url("/img/home/Fabi Fursuit_subject.webp"), url("/img/home/Fabi Fursuit_background.webp");
-    --bg-x: 70%;
-    --bg-size: 50%;
+    background-image: url("/img/home/Subject.webp"), url("/img/home/Background.webp");
+    --bg-x: 100%;
+    --bg-size: 70%;
     background-position: calc(var(--bg-x) + var(--offset-x)) calc(30% + var(--offset-y)), calc(var(--bg-x) - var(--offset-x)) calc(30% - var(--offset-y));
     background-size: var(--bg-size);
     background-repeat: no-repeat;
-    mask: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.2) 15%, black 50%);
+    mask: linear-gradient(to right, transparent 0%, rgba(0,0,0,0.2) 15%, black 40%);
     mask-size: var(--bg-size) 100%;
     mask-position: var(--bg-x) 100%;
     mask-repeat: no-repeat;
@@ -35,22 +35,15 @@ html {
     scale: 1.1;
     transform-origin: top center;
 
-    @media (width < theme(--breakpoint-xl)) {
-        --bg-x: 90%;
-    }
-
     @media (width < theme(--breakpoint-lg)) {
-        --bg-x: 90%;
-        --bg-size: 70%;
-    }
-    
-    @media (width < theme(--breakpoint-md)) {
-        --bg-x: 100%;
+        --bg-x: 200%;
         --bg-size: 90%;
     }
 
     @media (width < theme(--breakpoint-sm)) {
         --bg-size: 130%;
+        --bg-x: 50%;
+        background-size: cover;
         mask: linear-gradient(to top, transparent 10%, rgba(0,0,0,0.1) 25%, black 60%);
     }
 }
