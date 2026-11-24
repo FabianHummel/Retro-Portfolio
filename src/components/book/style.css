@@ -122,7 +122,7 @@ article blockquote::before {
 }
 
 article :is(img, video, div.iframe-container) {
-    @apply border-none border-2 border-black dark:border-light;
+    @apply block border-none border-2 border-black dark:border-light;
 
     &.align {
         @apply my-[0.6rem];
@@ -142,6 +142,14 @@ article :is(img, video, div.iframe-container) {
 
     &.half {
         @apply max-md:w-full max-lg:w-[49%] max-xl:w-full xl:w-[49%];
+        
+        &.hide {
+            @apply max-md:hidden max-lg:block max-xl:hidden xl:block;
+        }
+        
+        &.show {
+            @apply max-md:block max-lg:hidden max-xl:block xl:hidden;
+        }
     }
 }
 

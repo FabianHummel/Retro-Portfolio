@@ -91,8 +91,8 @@ export function applyClasses(element: HTMLElement, queryParams: URLSearchParams)
         element.playsInline = true;
         element.controls = false;
     }
-
-    if (queryParams.get("size") === "half") element.classList.add("half");
+    
+    if (queryParams.get("class")) element.classList.add(...queryParams.get("class").split(","));
 }
 
 const Book: Component = () => {

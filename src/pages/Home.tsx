@@ -58,20 +58,20 @@ const Home: Component = () => {
     return <>
         <style>{homeStyle}</style>
 
-        <section id="home-section" class="relative sm:overflow-clip flex flex-col sm:justify-center items-start pl-4 sm:pl-10 md:pl-24 lg:pl-40 pt-12 sm:pt-52">
+        <section id="home-section" class="relative sm:overflow-clip flex flex-col sm:justify-center items-start pl-4 sm:pl-10 md:pl-24 lg:pl-42 xl:pl-60 pt-18 sm:pt-52">
             <div id="background-images" style={{
                 "--offset-x": depthX() + "px",
                 "--offset-y": depthY() + "px",
                 "animation-timeline": "--parallax"
             }} />
 
-            <h1 class="bg-white dark:bg-dark pr-4 max-sm:pl-4 sm:-mt-64 text-5xl! lg:text-7xl!">
+            <h1 class="bg-white dark:bg-dark pr-4 max-sm:pl-4 sm:-mt-64 text-5xl! lg:text-6xl! xl:text-7xl!">
                 <TypedText>
                     Hello visitor!
                 </TypedText>
             </h1>
 
-            <h1 class="bg-white dark:bg-dark pr-4 max-sm:pl-4 text-2xl! lg:text-4xl!">
+            <h1 class="bg-white dark:bg-dark pr-4 max-sm:pl-4 text-2xl! lg:text-4xl! mt-[-1px]">
                 <TypedText offset={1.5}>
                     This is my blog
                 </TypedText>

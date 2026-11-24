@@ -6,7 +6,6 @@ function MarkdownImageComponent(props: JSX.ImgHTMLAttributes<HTMLImageElement>) 
     let ref: HTMLImageElement & HTMLVideoElement;
 
     createEffect(() => {
-        ref.style.display = "block";
         if (props.src === "null") {
             ref.style.display = "none";
         }

@@ -1,8 +1,10 @@
 # Furring the Head
 
-![All the fur there is](furring-the-head/all-the-fur-there-is.webp?size=half&align=right&border)
+![All the fur there is](furring-the-head/all-the-fur-there-is.webp#desktop?class=half,hide&align=right&border)
 
 Now comes the fun part! I painstakingly cut out each individual pattern with a nail scissors and paid extra attention to not trim the shag. This step sounds very time consuming - _because it is_ - but time flies by quickly when I'm going full-focus or watching YouTube videos in the meantime.
+
+![All the fur there is](furring-the-head/all-the-fur-there-is.webp#mobile?class=half,show&align=right&border)
 
 After all the patterns were snipped out, I am now left with a **huge** pile of colored fur on my table waiting to be shaved and sewn together. I opted for hand sewing everything because I need to be a lot more precise than e.g. with the tail and machine sewing would produce a thick ridge along the seam that will be visible through the fur. With a blanket stitch however, all edges are directly connected without excess material, which should result in a completely flat assembly.
 
@@ -32,9 +34,11 @@ I got carried away big time, so much that I really didn't notice that I had alre
 
 ## Giving the fur a rough shave
 
-![Rough Shave](furring-the-head/rough-shave.webp?size=half&align=right&border)
+![Rough Shave](furring-the-head/rough-shave.webp#desktop?class=half,hide&align=right&border)
 
 I roughly shaved down the long shag with my mother's old clipper she used on trimming our poodle. Starting with 12mm, going shorter step by step until I reached somewhat around 3mm. Making multiple passes is key here, always brushing out the fur after each round. I used a typical hair comb for that, which was sufficient in my case.
+
+![Rough Shave](furring-the-head/rough-shave.webp#mobile?class=half,show&align=right&border)
 
 I did mess up once though and had to redo a piece. Everything else went super smooth though, which I honestly didn't expect, given I have never had a clipper in my hands.
 
@@ -52,8 +56,8 @@ I think the result turned out FIRE!!! 🔥🔥🔥
 
 No honestly, I am so proud of myself that the suit came out the way it did, especially because I have absolutely no prior experience in anything related to hand crafting something like this! Just look at it!
 
-![Final Suit](furring-the-head/final-suit.webp?size=half&align=left&border&style={"margin-right":"1%"})
+![Final Suit](furring-the-head/final-suit.webp?class=half&align=left&border&style={"margin-right":"1%"})
 
-![Public suiting at Traisenpark, St. Pölten](furring-the-head/public-suiting-traisenpark.webp?size=half&align=right&border&style={"margin-left":"1%"})
+![Public suiting at Traisenpark, St. Pölten](furring-the-head/public-suiting-traisenpark.webp?class=half&align=right&border&style={"margin-left":"1%"})
 
 &nbsp;

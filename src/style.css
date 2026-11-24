@@ -2,6 +2,8 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+@source inline("{max-,}{sm:,md:,lg:,xl:,}hidden!");
+
 @theme {
   /* --- FONTS --- */
   --font-main: "bitmirror", "sans-serif";

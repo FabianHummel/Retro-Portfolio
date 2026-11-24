@@ -1,6 +1,6 @@
 # Hate over social norms and minorities on the example of LGBTQ+ and Furry in particular
 
-<iframe src="//embed.gettyimages.com/embed/2284651656?et=IvzKcupwQNpDD9URzVZIkQ&tld=com&sig=KtH78G60-WQ8NpcPtIzLUrF8UABKKREwaPPveCr-i8k=&caption=true&ver=1&align=right&size=half" width="509" height="339" />
+<iframe src="//embed.gettyimages.com/embed/2284651656?et=IvzKcupwQNpDD9URzVZIkQ&tld=com&sig=KtH78G60-WQ8NpcPtIzLUrF8UABKKREwaPPveCr-i8k=&caption=true&ver=1&align=right&class=half" width="509" height="339" />
 
 ## Author's Notice
 

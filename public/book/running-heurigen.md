@@ -1,6 +1,6 @@
 # Running Heurigen
 
-![Running Heurigen](running-heurigen/bieber.webp?height=400px&align=right)
+![Running Heurigen](running-heurigen/bieber.webp?width=200px&align=right)
 
 > _Die Running Heurigen OG wird von drei begeisterten Gesellschaftern betrieben, die es sich zur Aufgabe gemacht haben, gegen das Problem mangelnder traditioneller Küche in Großstädten Österreichs anzukämpfen. Ganz nach dem Motto Qualität statt Quantität!_
 

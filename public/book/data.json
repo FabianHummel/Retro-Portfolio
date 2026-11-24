@@ -210,7 +210,12 @@
         "title": "Random Stuff"
     },
     "unity-games.md": {
-        "title": "Unity Games"
+        "title": "Unity Games",
+        "children": {
+            "count-it.md": {
+                "title": "Count It!"
+            }
+        }
     },
     "unpopular-opinions.md": {
         "title": "Unpopular Opinions",
@@ -308,6 +313,9 @@
             },
             "cost-overview.md": {
                 "title": "Cost Overview"
+            },
+            "diy-glass-cabinet.md": {
+                "title": "DIY Glass Cabinet"
             }
         }
     }
