@@ -32,7 +32,7 @@ export const Button: Component<ButtonProps> = (props) => {
                 )}
             >
                 <PixelImage
-                    class="inline mr-3"
+                    class="inline! mr-3"
                     src={props.direction > 0 ? `/img/book/Next.png` : `/img/book/Previous.png`}
                     darkSrc={props.direction > 0 ? `/img/book/Next Dark.png` : `/img/book/Previous Dark.png`}
                     w={5} h={5} scale={3} />
